@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexiQuest V2 - Super Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+</head>
+<body class="bg-slate-900 min-h-screen font-['Poppins'] flex items-center justify-center text-white p-4">
+
+    <div id="login-section" class="bg-slate-800 p-8 rounded-2xl shadow-2xl w-full max-w-md border-t-4 border-indigo-500 text-center">
+        <i class="fas fa-user-shield text-5xl text-indigo-500 mb-4"></i>
+        <h1 class="text-2xl font-black mb-2">SUPER ADMIN PUSAT</h1>
+        <p class="text-slate-400 text-sm mb-6">Pendaftaran Admin Sekolah / Guru</p>
+        
+        <input type="password" id="admin-pass" placeholder="Masukkan Kata Laluan" class="w-full p-4 mb-4 bg-slate-700 text-white rounded-xl outline-none text-center tracking-widest text-lg focus:ring-2 focus:ring-indigo-500">
+        <button onclick="checkPassword()" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-indigo-500/30">
+            LOG MASUK KAWALAN
+        </button>
+    </div>
+
+    <div id="admin-panel" class="hidden w-full max-w-2xl bg-slate-800 rounded-2xl shadow-2xl border-t-4 border-green-500 overflow-hidden">
+        
+        <div class="bg-slate-900 p-6 flex justify-between items-center border-b border-slate-700">
+            <div>
+                <h1 class="text-2xl font-black text-green-400"><i class="fas fa-server mr-2"></i> Pendaftaran Admin Sekolah</h1>
+                <p class="text-slate-400 text-sm mt-1">Daftarkan sekolah dan guru yang akan menguruskan murid.</p>
+            </div>
+            <button onclick="location.reload()" class="bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-4 py-2 rounded-lg text-sm font-bold transition-colors">
+                <i class="fas fa-sign-out-alt"></i> Keluar
+            </button>
+        </div>
+
+        <div class="p-8 space-y-5">
+            <div>
+                <label class="block text-sm font-bold text-slate-300 mb-2">1. Nama Sekolah</label>
+                <input id="school-name" type="text" class="w-full p-4 bg-slate-700 rounded-xl outline-none focus:ring-2 ring-green-500 uppercase" placeholder="Contoh: SK TAMAN SCIENTEX">
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-slate-300 mb-2">2. Nama Admin Sekolah (Guru)</label>
+                <input id="admin-name" type="text" class="w-full p-4 bg-slate-700 rounded-xl outline-none focus:ring-2 ring-green-500 uppercase" placeholder="Contoh: CIKGU ALIA">
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-slate-300 mb-2">3. Senarai Kelas (Pisahkan dengan koma)</label>
+                <input id="admin-classes" type="text" class="w-full p-4 bg-slate-700 rounded-xl outline-none focus:ring-2 ring-green-500 uppercase" placeholder="Contoh: 6 AMANAH, 6 BISTARI, 5 CEKAP">
+                <p class="text-xs text-slate-400 mt-2"><i class="fas fa-info-circle"></i> Kelas-kelas ini akan dipaparkan semasa guru mendaftarkan murid nanti.</p>
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-slate-300 mb-2">4. Passcode (Kata Laluan Guru)</label>
+                <input id="admin-passcode" type="text" class="w-full p-4 bg-slate-700 rounded-xl outline-none focus:ring-2 ring-green-500 font-mono text-lg tracking-widest" placeholder="Contoh: SCX2026">
+                <p class="text-xs text-slate-400 mt-2"><i class="fas fa-key"></i> Berikan passcode ini kepada guru berkenaan untuk mereka log masuk.</p>
+            </div>
+            
+            <button id="btn-save" onclick="saveSchoolAdmin()" class="w-full mt-6 py-4 bg-green-600 hover:bg-green-500 text-white font-black rounded-xl transition-all shadow-lg hover:shadow-green-500/30 text-lg">
+                <i class="fas fa-save mr-2"></i> DAFTARKAN SEKOLAH INI
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // FIREBASE CONFIGURATION (V2)
+        // ==========================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyDX6PNKeGLMEpyBtnxtvpmyGFyjFq09N5Y",
+            authDomain: "lexiquestv2.firebaseapp.com",
+            projectId: "lexiquestv2",
+            storageBucket: "lexiquestv2.firebasestorage.app",
+            messagingSenderId: "262850068996",
+            appId: "1:262850068996:web:64e28cf9757f2739ef6b51",
+            measurementId: "G-G4T1JCPH88",
+            databaseURL: "https://lexiquestv2-default-rtdb.asia-southeast1.firebasedatabase.app"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // 1. FUNGSI LOG MASUK SUPER ADMIN
+        function checkPassword() {
+            const pass = document.getElementById('admin-pass').value;
+            // TUKAR KATA LALUAN SUPER ADMIN DI SINI
+            if (pass === "lexiquest2026") {
+                document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('admin-panel').classList.remove('hidden');
+            } else {
+                alert("Kata laluan salah!");
+            }
+        }
+
+        // Membolehkan tekan "Enter" untuk login
+        document.getElementById("admin-pass").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                checkPassword();
+            }
+        });
+
+        // 2. FUNGSI SIMPAN DATA ADMIN SEKOLAH KE FIREBASE
+        async function saveSchoolAdmin() {
+            const school = document.getElementById('school-name').value.trim().toUpperCase();
+            const name = document.getElementById('admin-name').value.trim().toUpperCase();
+            const classesRaw = document.getElementById('admin-classes').value.trim().toUpperCase();
+            const passcode = document.getElementById('admin-passcode').value.trim();
+            const btn = document.getElementById('btn-save');
+
+            if(!school || !name || !classesRaw || !passcode) {
+                alert("Sila isi semua ruangan!");
+                return;
+            }
+
+            // Tukar senarai kelas kepada bentuk Array
+            const classesArray = classesRaw.split(',').map(c => c.trim()).filter(c => c !== "");
+
+            try {
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Mendaftarkan...';
+                btn.disabled = true;
+
+                // Gunakan Passcode sebagai Document ID untuk memudahkan carian masa login guru nanti
+                await db.collection("school_admins").doc(passcode).set({
+                    schoolName: school,
+                    adminName: name,
+                    classes: classesArray,
+                    passcode: passcode,
+                    createdAt: new Date()
+                });
+
+                alert(`✅ BERJAYA!\n\nSekolah: ${school}\nGuru: ${name}\nPasscode: ${passcode}\n\nSila berikan passcode ini kepada guru tersebut.`);
+                
+                // Reset borang
+                document.getElementById('school-name').value = '';
+                document.getElementById('admin-name').value = '';
+                document.getElementById('admin-classes').value = '';
+                document.getElementById('admin-passcode').value = '';
+                
+            } catch (error) {
+                console.error("Ralat:", error);
+                alert("Gagal menyimpan data: " + error.message);
+            } finally {
+                btn.innerHTML = '<i class="fas fa-save mr-2"></i> DAFTARKAN SEKOLAH INI';
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
