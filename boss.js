@@ -1,463 +1,597 @@
 // ==========================================
-// 🐉 LOGIK FIREBASE BOSS BATTLE + BONUS & AUDIO
+// 🐉 LELARAN BAHARU: BOSS BATTLE (RTDB + STREAK SYSTEM)
 // ==========================================
 
-let selectedBossAvatar = "";
-let bossTimerInterval;
-let bossTimeLeft = 10;
-let MAX_TIME = 15; 
-let bossPlayerHP = 100;
-
-let bossListenerUnsubscribe = null; 
-let liveRankingUnsubscribe = null;
+// --- PEMBOLEHUBAH SISTEM & FIREBASE ---
 let currentBossData = null; 
+let bossRtdbRef = firebase.database().ref('active_boss/current_boss'); // Guna RTDB!
+let liveBossListener = null;
 
-// --- PEMBOLEHUBAH BONUS ---
-let maxStreak = 0;
-let isDeadRecorded = false; // Elak hantar rekod mati berkali-kali
+// --- PEMBOLEHUBAH PERLAWANAN ---
+let bossPlayerHP = 100;
+let currentBossStreak = 0; // DIKEMAS KINI: Elak konflik dengan 3v3
+let hasUsedTimeFreeze = false;
+let passiveAttackInterval;
+
+// --- PEMBOLEHUBAH BUFF (STREAK) ---
+let isX2Damage = false;
+let isX3Damage = false;
+let isTimeFrozen = false;
+let isInvisible = false;
+let lifestealActive = false;
+
+// Timers
+let x2Timer, x3Timer, freezeTimer, invisibleTimer;
 
 // --- SISTEM AUDIO ---
-// Cikgu boleh letak fail mp3 dalam folder aset cikgu. Tukar laluan (path) di bawah jika berbeza.
-const audioBGM = new Audio('assets/audio/boss-bgm.mp3'); 
-audioBGM.loop = true;
+const audioBGM = new Audio('assets/audio/boss-bgm.mp3'); audioBGM.loop = true;
 const audioSlash = new Audio('assets/audio/slash.mp3');
 const audioOof = new Audio('assets/audio/hit.mp3');
 const audioWin = new Audio('assets/audio/win.mp3');
+const audioBuff = new Audio('assets/audio/powerup.mp3'); 
 
 // ==========================================
-// ⚙️ AUTO-LOAD KATEGORI
+// 📡 1. CCTV BOSS (RTDB LISTENER)
 // ==========================================
-document.addEventListener('DOMContentLoaded', () => {
-    const dropdown = document.getElementById('setup-boss-category');
-    if (dropdown && typeof gameData !== 'undefined') {
-        const categories = Object.keys(gameData);
-        categories.forEach(cat => {
-            let option = document.createElement('option');
-            option.value = cat; option.text = "📚 " + cat.toUpperCase();
-            dropdown.appendChild(option);
-        });
-    }
-});
-
-// ==========================================
-// 🛠️ SETUP ADMIN
-// ==========================================
-function selectBossImage(fileName, element) {
-    selectedBossAvatar = fileName;
-    document.querySelectorAll('.boss-thumbnail').forEach(thumb => {
-        thumb.classList.remove('border-red-500', 'shadow-[0_0_15px_rgba(239,68,68,0.6)]');
-        thumb.classList.add('border-transparent');
-    });
-    element.classList.remove('border-transparent');
-    element.classList.add('border-red-500', 'shadow-[0_0_15px_rgba(239,68,68,0.6)]');
-}
-
-async function activateBossEvent() {
-    const bossName = document.getElementById('setup-boss-name').value;
-    const bossHp = parseInt(document.getElementById('setup-boss-hp').value);
-    const timeLimit = parseInt(document.getElementById('setup-boss-time').value);
-    const bossStatus = document.getElementById('setup-boss-status').value;
-    const bossCategory = document.getElementById('setup-boss-category').value; 
-
-    if (!bossName || !bossHp || !timeLimit || selectedBossAvatar === "") return Swal.fire('Ralat', 'Sila lengkapkan borang & pilih gambar.', 'warning');
-
-    Swal.fire({ title: 'Menyiapkan Arena...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
-    try {
-        const bossDocRef = db.collection("ActiveBoss").doc("current_boss");
-
-        // --- KOD BAHARU: SAPU BERSIH REKOD LAMA SEBELUM MULA ---
-        const oldAttackers = await bossDocRef.collection("AttackerList").get();
-        const batch = db.batch();
-        oldAttackers.forEach(doc => batch.delete(doc.ref));
-        await batch.commit();
-        // -------------------------------------------------------
-
-        // Reset dokumen boss
-        await bossDocRef.set({
-            name: bossName, maxHp: bossHp, currentHp: bossHp, timeLimit: timeLimit, status: bossStatus,
-            avatar: selectedBossAvatar, category: bossCategory, 
-            firstDiePlayer: "", lastHitSlayer: "",
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        Swal.fire('Boss Diaktifkan! 🐉', 'Data & Radar berjaya di-reset.', 'success');
-    } catch (err) { Swal.fire('Ralat', err.message, 'error'); }
-}
-
-// ==========================================
-// ⚔️ CCTV BOSS UTAMA
-// ==========================================
-function listenToActiveBoss() {
-    bossListenerUnsubscribe = db.collection("ActiveBoss").doc("current_boss").onSnapshot((doc) => {
-        if (doc.exists) {
-            const data = doc.data();
-            currentBossData = data;
-            MAX_TIME = data.timeLimit || 15; 
-            const bossBtn = document.getElementById('boss-challenge-btn');
-
-            if (data.status === "ACTIVE" && data.currentHp > 0) {
-                if (bossBtn) bossBtn.classList.remove('hidden');
-                const hpBar = document.getElementById('boss-hp-bar');
-                const hpText = document.getElementById('boss-hp-text');
-                if (hpBar) hpBar.style.width = Math.max(0, (data.currentHp / data.maxHp) * 100) + "%";
-                if (hpText) hpText.innerText = `HP: ${Math.max(0, data.currentHp)} / ${data.maxHp}`;
-            } 
-            else if (data.status === "INACTIVE" || data.currentHp <= 0) {
-                if (bossBtn) bossBtn.classList.add('hidden');
-                const arenaOverlay = document.getElementById('boss-arena');
-                if (arenaOverlay && !arenaOverlay.classList.contains('hidden') && data.currentHp <= 0) {
-                    endBossBattle("🔥 BOSS TELAH TEWAS! 🔥");
-                }
+function initBossRadar() {
+    bossRtdbRef.on('value', (snapshot) => {
+        if (snapshot.exists()) {
+            currentBossData = snapshot.val();
+            updateBossRadarUI();
+            
+            // Periksa jika Boss disahkan mati (Final Blow)
+            if (currentBossData.currentHp <= 0 && currentBossData.status === "ACTIVE") {
+                handleBossDefeated(currentBossData.final_blow_player);
             }
+        } else {
+            // Tiada Boss bulan ini (Jun/Disember)
+            currentBossData = null;
+            document.getElementById('boss-challenge-btn').classList.add('hidden');
         }
     });
+	listenToLiveAttackers();
+}
+document.addEventListener('DOMContentLoaded', initBossRadar);
+
+function updateBossRadarUI() {
+    if (!currentBossData) return;
+
+    // Kira peratusan dan teks HP siap-siap
+    let hpPercent = Math.max(0, (currentBossData.currentHp / currentBossData.maxHp) * 100);
+    let hpString = `HP: ${Math.max(0, currentBossData.currentHp)} / ${currentBossData.maxHp}`;
+
+    // ------------------------------------------
+    // 1. KEMAS KINI UI DI BUTANG RADAR (LUAR)
+    // ------------------------------------------
+    const bossBtn = document.getElementById('boss-challenge-btn');
+    const radarBar = document.getElementById('radar-boss-hp-bar');
+    const radarText = document.getElementById('radar-boss-hp-text');
+
+    const isWeekend = true; // BYPASS SEMENTARA
+
+    if (currentBossData.status === "ACTIVE" && currentBossData.currentHp > 0 && isWeekend) {
+        if (bossBtn) bossBtn.classList.remove('hidden');
+        if (radarBar) radarBar.style.width = hpPercent + "%";
+        if (radarText) radarText.innerText = hpString;
+    } else {
+        if (bossBtn) bossBtn.classList.add('hidden');
+    }
+
+    // ------------------------------------------
+    // 2. KEMAS KINI UI DI DALAM ARENA (DALAM)
+    // ------------------------------------------
+    const arenaBar = document.getElementById('arena-boss-hp-bar');
+    const arenaText = document.getElementById('arena-boss-hp-text');
+
+    if (arenaBar) arenaBar.style.width = hpPercent + "%";
+    if (arenaText) arenaText.innerText = `${Math.max(0, currentBossData.currentHp)} / ${currentBossData.maxHp}`;
 }
 
 // ==========================================
-// 🚀 MAIN GAMEPLAY
+// 🛡️ 2. PINTU MASUK & POTONGAN KUOTA (ANTI-CHEAT)
 // ==========================================
-function startBossFight() {
-    if (!currentBossData) return alert("Tiada data boss.");
+async function attemptJoinBoss() {
+    if (!currentBossData || currentBossData.currentHp <= 0) {
+        return Swal.fire('Tamat', 'Boss telah ditewaskan atau arena ditutup!', 'info');
+    }
+
+    const todayDateStr = new Date().toISOString().split('T')[0]; 
     
-    // Reset Data Murid
+    if ((localPlayerData.level || 1) < 20) {
+        return Swal.fire('Akses Ditolak', 'Anda perlu mencapai Level 20 untuk menyertai Boss Battle!', 'error');
+    }
+
+    // if (localPlayerData.last_boss_attempt === todayDateStr) {
+       // return Swal.fire('Kuota Habis', 'Anda telah menggunakan tiket perlawanan hari ini. Sila cuba esok!', 'warning');
+    // }
+
+    // TERUS POTONG KUOTA
+    localPlayerData.last_boss_attempt = todayDateStr;
+    localStorage.setItem('currentPlayer', JSON.stringify(localPlayerData));
+    
+    await db.collection("players").where("name", "==", localPlayerData.name).get()
+        .then(snapshot => {
+            if(!snapshot.empty) db.collection("players").doc(snapshot.docs[0].id).update({ last_boss_attempt: todayDateStr });
+        });
+
+    startBossFight();
+}
+
+function startBossFight() {
+document.getElementById('boss-arena').classList.remove('hidden');
+    // Reset Data Pemain & Buff
     bossPlayerHP = 100;
-    currentStreak = 0; maxStreak = 0; isDeadRecorded = false;
-    updatebossPlayerHPUI();
+    currentBossStreak = 0; 
+    hasUsedTimeFreeze = false;
+    clearAllBuffs();
+    updatePlayerHPUI();
 
-    // Main Muzik!
-    audioBGM.currentTime = 0;
-    audioBGM.play().catch(e => console.log("Muzik perlukan klik pengguna", e));
+    // 🛡️ Pasang Gambar Avatar Boss
+    const bossAvatarElement = document.getElementById('battle-boss-avatar');
+    if (bossAvatarElement) {
+        bossAvatarElement.src = `assets/boss/${currentBossData.avatar}`; 
+    }
 
-    document.getElementById('battle-boss-avatar').src = `assets/boss/${currentBossData.avatar}`; 
+    // 🛡️ Pasang Nama Boss
+    const bossNameElement = document.getElementById('boss-name-ui'); 
+    if (bossNameElement) {
+        bossNameElement.innerText = currentBossData.name;
+    }
+    
+    // 🔥 PAKSA KEMAS KINI HP ARENA SERTA-MERTA SEBAIK MASUK
+    updateBossRadarUI();
+    
+    // Mainkan BGM dengan perlindungan ralat browser
+    audioBGM.currentTime = 0; 
+    audioBGM.play().catch(e => console.warn("Autoplay muzik disekat oleh pelayar web:", e));
+    
+    startPassiveAttack();
     generateBossQuestion();
-    startLiveRankingRadar(); // Hidupkan radar sidebar
 }
 
-function leaveBossFight() {
-    audioBGM.pause(); // Hentikan muzik
-    if (liveRankingUnsubscribe) liveRankingUnsubscribe(); // Tutup radar
-    if (typeof showScreen === 'function') showScreen('menu-screen');
+function startPassiveAttack() {
+    clearInterval(passiveAttackInterval);
+    passiveAttackInterval = setInterval(() => {
+        if (isTimeFrozen || isInvisible) return; 
+        
+        bossPlayerHP -= 2;
+        updatePlayerHPUI();
+        
+        if (typeof showDamageIndicator === 'function') {
+            showDamageIndicator("-2", "text-red-500", "boss-avatar"); 
+        }
+        
+        // Elakkan game crash jika audio hit.mp3 gagal dimuatkan
+        audioOof.play().catch(e => console.warn("Bunyi hit disekat/gagal:", e));
+
+        checkPlayerAlive();
+    }, 10000); 
 }
+
 
 function generateBossQuestion() {
-    clearInterval(bossTimerInterval); 
     const zone = document.getElementById('boss-answer-zone');
     const questionText = document.getElementById('boss-question-text');
     
-    let selectedCat = currentBossData.category;
-    const allCats = Object.keys(gameData);
-    if (!selectedCat || selectedCat === "RANDOM") selectedCat = allCats[Math.floor(Math.random() * allCats.length)];
+    // 1. Dapatkan kategori mata pelajaran Boss dari Firebase (default ke "BI" jika kosong)
+    let bossSubject = currentBossData.category || "BI"; 
+    
+    let sourceData = null;
+    let difficultyMap = null;
 
-    const questions = gameData[selectedCat];
+    // 2. Hubungkan Subjek Boss dengan File Data dan Peta Kesulitan (Difficulty Map)
+    switch(bossSubject.toUpperCase()) {
+        case "BI": 
+        case "ENGLISH":
+            sourceData = typeof gameData !== 'undefined' ? gameData : null; 
+            difficultyMap = englishCategoryDifficulty; 
+            break;
+        case "MT": 
+        case "MATH":
+            sourceData = typeof mathData !== 'undefined' ? mathData : null; 
+            difficultyMap = mathCategoryDifficulty; 
+            break;
+        case "SN": 
+        case "SCIENCE":
+            sourceData = typeof scienceData !== 'undefined' ? scienceData : null; 
+            difficultyMap = scienceCategoryDifficulty; 
+            break;
+        case "BM": 
+            sourceData = typeof malayLanguageData !== 'undefined' ? malayLanguageData : null; 
+            difficultyMap = bmCategoryDifficulty; 
+            break;
+        case "MZ": 
+        case "MUZIK":
+            sourceData = typeof pendidikanMuzikData !== 'undefined' ? pendidikanMuzikData : null; 
+            difficultyMap = muzikCategoryDifficulty; 
+            break;
+        case "PJK": 
+        case "KESIHATAN":
+            sourceData = typeof pjkData !== 'undefined' ? pjkData : null; 
+            difficultyMap = kesihatanCategoryDifficulty; 
+            break;
+        case "PM": 
+        case "MORAL":
+            sourceData = typeof moralData !== 'undefined' ? moralData : null; 
+            difficultyMap = moralCategoryDifficulty; 
+            break;
+        case "PSV": 
+            sourceData = typeof psvData !== 'undefined' ? psvData : null; 
+            difficultyMap = psvCategoryDifficulty; 
+            break;
+        case "RBT": 
+            sourceData = typeof rbtData !== 'undefined' ? rbtData : null; 
+            difficultyMap = rbtCategoryDifficulty; 
+            break;
+        case "SEJ": 
+        case "SEJARAH":
+            sourceData = typeof sejarahData !== 'undefined' ? sejarahData : null; 
+            difficultyMap = sejarahCategoryDifficulty; 
+            break;
+        default:
+            sourceData = typeof gameData !== 'undefined' ? gameData : null;
+            difficultyMap = englishCategoryDifficulty;
+    }
+
+    // 🛡️ Pengecekan Keamanan: Pastikan file data untuk subjek tersebut sudah dimuat
+    if (!sourceData || !difficultyMap) {
+        console.error(`Ralat: Data untuk subjek ${bossSubject} tidak dijumpai! Pastikan fail JS soalan dimuat di index.html.`);
+        if (questionText) questionText.innerText = "RALAT: Bank soalan tidak dijumpai.";
+        return;
+    }
+
+    // 3. Pilih tingkat kesulitan secara acak (Easy, Medium, atau Hard)
+    const difficulties = ['easy', 'medium', 'hard'];
+    const selectedDifficulty = difficulties[Math.floor(Math.random() * difficulties.length)];
+
+    // 4. Pilih sub-kategori (subtopik) berdasarkan tingkat kesulitan
+    const availableSubtopics = difficultyMap[selectedDifficulty];
+    const selectedSubtopic = availableSubtopics[Math.floor(Math.random() * availableSubtopics.length)];
+
+    // 5. Ambil daftar soal dari sub-kategori tersebut
+    let questions = sourceData[selectedSubtopic];
+
+    // 🛡️ Pengecekan Keamanan Tambahan
+    if (!questions || questions.length === 0) {
+        console.warn(`Amaran: Tiada soalan dalam kategori '${selectedSubtopic}'. Cuba fallback...`);
+        const fallbackKeys = Object.keys(sourceData);
+        if (fallbackKeys.length > 0) {
+            questions = sourceData[fallbackKeys[0]];
+        } else {
+            if (questionText) questionText.innerText = "RALAT: Tiada soalan tersedia.";
+            return;
+        }
+    }
+
+    // 6. Pilih 1 soal secara acak dari array tersebut
     const randomQ = questions[Math.floor(Math.random() * questions.length)];
     
-    // KOD DIBAIKI: Cari kunci soalan & jawapan tak kira apa ejaannya dalam data.js
-    const soalan = randomQ.q || randomQ.question || randomQ.soalan;
-    const jawapanBetul = randomQ.a || randomQ.answer || randomQ.jawapan || randomQ.correct;
+    // Tentukan Damage untuk Boss berdasarkan kesulitan soal
+    let baseDamage = selectedDifficulty === "hard" ? 10 : (selectedDifficulty === "easy" ? 5 : 7);
     
-    questionText.innerText = soalan;
-    zone.innerHTML = '';
-    const choices = randomQ.options || randomQ.choices || randomQ.pilihan || [];
-
-    if (choices.length > 0) {
-        zone.className = "grid grid-cols-2 gap-3 w-full";
-        choices.forEach(alt => {
-            const btn = document.createElement('button');
-            btn.className = "bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-2 rounded-xl shadow-md";
-            btn.innerText = alt;
-            btn.onclick = () => checkBossAnswer(alt, jawapanBetul); // Guna jawapanBetul
-            zone.appendChild(btn);
-        });
-    } else {
-        zone.className = "w-full flex flex-col gap-2";
-        zone.innerHTML = `
-            <input type="text" id="boss-text-input" class="border-2 p-3 rounded-xl text-center font-bold text-lg uppercase" autocomplete="off">
-            <button id="boss-submit-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl shadow-md">Serang! ⚔️</button>
-        `;
-        const inputField = document.getElementById('boss-text-input');
-        inputField.focus(); 
-        document.getElementById('boss-submit-btn').onclick = () => checkBossAnswer(inputField.value.trim(), jawapanBetul); // Guna jawapanBetul
+    // 7. Paparkan Soalan ke UI
+    if (questionText) {
+        // Paparkan soalan (Menyokong format .q atau .soalan)
+        questionText.innerText = randomQ.q || randomQ.soalan || "Soalan tiada teks?";
     }
-    startBossTimer();
+    
+    // 8. CIPTA KOTAK JAWAPAN (INPUT TEXT) DI DALAM BATTLE ZONE
+    if (zone) {
+        zone.innerHTML = ''; // Bersihkan zon lama
+        zone.className = "flex flex-col gap-3 w-full items-center"; // Set susunan layout
+
+        // Cipta elemen Input
+        const inputField = document.createElement('input');
+        inputField.type = "text";
+        inputField.id = "boss-answer-input";
+        inputField.placeholder = "Taip jawapan anda di sini...";
+        inputField.className = "w-full max-w-md px-4 py-3 border-2 border-blue-400 rounded-xl text-center text-black font-bold text-lg focus:outline-none focus:border-blue-600 shadow-md";
+        
+        // Cipta elemen Buthan Hantar (Submit)
+        const submitBtn = document.createElement('button');
+        submitBtn.className = "w-full max-w-md bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-xl shadow-md transform active:scale-95 transition-all text-lg";
+        submitBtn.innerText = "SERANG BOSS! ⚔️";
+
+        // Ambil jawapan yang betul (Menyokong format .a atau .jawapan)
+        const correctAns = randomQ.a || randomQ.jawapan;
+
+        // Fungsi hantar jawapan apabila klik butang
+        submitBtn.onclick = () => {
+            const userAns = inputField.value.trim();
+            if (userAns === "") return Swal.fire('Kosong', 'Sila taip jawapan sebelum menyerang!', 'warning');
+            
+            // Panggil fungsi semakan jawapan bawaan boss.js
+            checkBossAnswer(userAns, correctAns, baseDamage);
+        };
+
+        // Fungsi hantar jawapan apabila tekan butang "Enter" pada papan kekunci
+        inputField.onkeyup = (e) => {
+            if (e.key === 'Enter') {
+                submitBtn.click();
+            }
+        };
+
+        // Masukkan kotak input dan butang ke dalam UI
+        zone.appendChild(inputField);
+        zone.appendChild(submitBtn);
+
+        // Auto-focus pada kotak teks supaya murid boleh terus menaip tanpa perlu klik kotak
+        setTimeout(() => inputField.focus(), 100);
+    }
 }
 
-async function checkBossAnswer(chosen, correct) {
-    clearInterval(bossTimerInterval); 
 
+// ==========================================
+// ⚔️ 4. LOGIK TEMBAKAN & STREAK (BOOSTER)
+// ==========================================
+async function checkBossAnswer(chosen, correct, baseDamage) {
     if (String(chosen).toLowerCase() === String(correct).toLowerCase()) {
-        // ✅ BETUL
-        audioSlash.currentTime = 0; audioSlash.play(); // Bunyi serang
+        // ✅ JAWAPAN BETUL
+        if (typeof audioSlash !== 'undefined') audioSlash.currentTime = 0; 
+        if (typeof audioSlash !== 'undefined') audioSlash.play().catch(e => console.warn("Audio ditiadakan:", e));
         
-        // Kira Streak
-        currentStreak++;
-        if (currentStreak > maxStreak) maxStreak = currentStreak;
-
-        // Kira Damage & Syiling Serta-Merta
-        let baseDamage = bossTimeLeft < 1 ? 1 : bossTimeLeft; 
-        let playerLevel = localPlayerData.level || 1;         
-        let multiplier = 1.0 + (playerLevel * 0.1); 
-        let finalDamage = Math.round(baseDamage * multiplier); 
+        currentBossStreak++; 
+        console.log(`🔥 JAWAPAN BETUL! Streak Semasa: ${currentBossStreak}`);
         
-        localPlayerData.coins = parseInt(localPlayerData.coins || 0) + finalDamage;
-        localStorage.setItem('currentPlayer', JSON.stringify(localPlayerData));
-	syncCoinsToFirebase();
-        if (typeof updateUI === 'function') updateUI(); 
-        if (typeof savePlayerData === 'function') savePlayerData(); 
+        checkStreakBuffs(); 
 
-        showDamageIndicator("-" + finalDamage); 
-        const submitBtn = document.getElementById('boss-submit-btn');
-        if(submitBtn) submitBtn.innerText = "💥 BAM!";
+        if (lifestealActive && bossPlayerHP < 100) {
+            bossPlayerHP = Math.min(100, bossPlayerHP + 1);
+            updatePlayerHPUI();
+            console.log("💚 Lifesteal diaktifkan! HP Pemain bertambah +1");
+        }
 
-        await dealDamageToBoss(finalDamage); 
-        if (currentBossData.currentHp > 0) setTimeout(generateBossQuestion, 500);
+        let finalDamage = baseDamage;
+        if (isX3Damage) finalDamage *= 3;
+        else if (isX2Damage) finalDamage *= 2;
+        
+        console.log(`⚔️ Kerosakan (Damage): Asas ${baseDamage} -> Akhir ${finalDamage}`);
+        showDamageIndicator(finalDamage, "text-red-500", "battle-boss-avatar");
+
+        dealDamageToBossRTDB(finalDamage);
+        
+        // Pastikan fungsi ini wujud di tempat lain, jika tiada ia akan error
+        if (typeof syncRewardsToMainProfile === 'function') {
+            syncRewardsToMainProfile(finalDamage);
+        }
+
+        setTimeout(generateBossQuestion, 500);
 
     } else {
-        // ❌ SALAH
-        audioOof.currentTime = 0; audioOof.play();
-        currentStreak = 0; // Reset streak
-        bossPlayerHP -= 10;
-        updatebossPlayerHPUI();
-        alert(`❌ Tersasar! Kena serangan balas! (-10 HP)`);
+        // ❌ JAWAPAN SALAH
+        if (typeof audioOof !== 'undefined') audioOof.currentTime = 0; 
+        if (typeof audioOof !== 'undefined') audioOof.play().catch(e => console.warn("Audio ditiadakan:", e));
         
+        console.log("❌ JAWAPAN SALAH! Streak terbatal (kembali ke 0).");
+        currentBossStreak = 0; 
+        
+        if (!isInvisible) {
+            bossPlayerHP -= 5;
+            showDamageIndicator("-5 HP", "text-red-500", "player-avatar");
+        } else {
+            console.log("🛡️ Pemain KEBAL! Tiada kerosakan diterima.");
+            showDamageIndicator("KEBAL!", "text-blue-400", "player-avatar");
+        }
+        
+        updatePlayerHPUI();
         if(checkPlayerAlive()) setTimeout(generateBossQuestion, 500);
     }
 }
 
-function handleTimeout() {
-    audioOof.currentTime = 0; audioOof.play();
-    currentStreak = 0;
-    bossPlayerHP -= 20;
-    updatebossPlayerHPUI();
-    alert("⏳ Masa Tamat! Boss gigit awak! (-20 HP)");
-    if(checkPlayerAlive()) setTimeout(generateBossQuestion, 500);
-}
-
-function startBossTimer() {
-    bossTimeLeft = MAX_TIME;
-    const timerBar = document.getElementById('boss-timer-bar');
-    const timerText = document.getElementById('timer-text');
-    timerBar.style.width = '100%'; timerBar.className = "bg-blue-500 h-full transition-all duration-1000 ease-linear";
-    timerText.innerText = bossTimeLeft;
-
-    bossTimerInterval = setInterval(() => {
-        bossTimeLeft--;
-        timerText.innerText = bossTimeLeft;
-        timerBar.style.width = ((bossTimeLeft / MAX_TIME) * 100) + "%";
-        if(bossTimeLeft <= 3) timerBar.className = "bg-red-500 h-full transition-all duration-1000 ease-linear";
-
-        if (bossTimeLeft <= 0) { clearInterval(bossTimerInterval); handleTimeout(); }
-    }, 1000);
-}
-
-// ==========================================
-// 📡 DATABASE & LOGIK BONUS
-// ==========================================
-async function dealDamageToBoss(damageAmt) {
-    const playerName = localPlayerData.name;
-    const bossRef = db.collection("ActiveBoss").doc("current_boss");
+// --- LOGIK PENGURUSAN BUFF ---
+function checkStreakBuffs() {
+    console.log(`🔍 Menyemak Buff untuk Streak ke-${currentBossStreak}...`);
     
-    // Semak Last Hit
-    if (currentBossData.currentHp > 0 && (currentBossData.currentHp - damageAmt) <= 0) {
-        await bossRef.update({ lastHitSlayer: playerName });
+    if (currentBossStreak === 5) { 
+        console.log("🚀 MENGAKTIFKAN BUFF: X2 DAMAGE + LIFESTEAL");
+        activateBuff("X2 DAMAGE + LIFESTEAL", "text-yellow-400");
+        isX2Damage = true; lifestealActive = true;
+        clearTimeout(x2Timer);
+        x2Timer = setTimeout(() => { isX2Damage = false; lifestealActive = false; console.log("⏳ Buff X2 Tamat!"); }, 15000);
     }
-
-    // Kemaskini Damage & Rekod Streak
-    await bossRef.collection("AttackerList").doc(playerName).set({
-        name: playerName,
-        damage: firebase.firestore.FieldValue.increment(damageAmt),
-        maxStreak: maxStreak,
-        lastHitTime: firebase.firestore.FieldValue.serverTimestamp()
-    }, { merge: true });
-
-    // Tolak nyawa boss
-    await bossRef.update({ currentHp: firebase.firestore.FieldValue.increment(-damageAmt) });
+    else if (currentBossStreak === 8 && !hasUsedTimeFreeze) { 
+        console.log("🚀 MENGAKTIFKAN BUFF: TIME FREEZE (10s)");
+        activateBuff("TIME FREEZE (10s)", "text-blue-300");
+        hasUsedTimeFreeze = true; isTimeFrozen = true;
+        clearTimeout(freezeTimer);
+        freezeTimer = setTimeout(() => { isTimeFrozen = false; console.log("⏳ Time Freeze Tamat!"); }, 10000);
+    }
+    else if (currentBossStreak === 10) { 
+        console.log("🚀 MENGAKTIFKAN BUFF: X3 DAMAGE!");
+        activateBuff("X3 DAMAGE!", "text-red-400");
+        isX3Damage = true; isX2Damage = false; 
+        clearTimeout(x3Timer);
+        x3Timer = setTimeout(() => { isX3Damage = false; console.log("⏳ Buff X3 Tamat!"); }, 20000);
+    }
+    else if (currentBossStreak === 15) { 
+        console.log("🚀 MENGAKTIFKAN BUFF: INVISIBLE (30s)");
+        activateBuff("INVISIBLE (KEBAL 30s)!", "text-purple-400");
+        isInvisible = true;
+        clearTimeout(invisibleTimer);
+        invisibleTimer = setTimeout(() => { isInvisible = false; console.log("⏳ Kebal Tamat!"); }, 30000);
+    }
 }
 
-async function checkFirstDieLogic() {
-    if (!isDeadRecorded) {
-        isDeadRecorded = true;
-        const bossRef = db.collection("ActiveBoss").doc("current_boss");
-        const doc = await bossRef.get();
-        if (doc.exists && !doc.data().firstDiePlayer) {
-            await bossRef.update({ firstDiePlayer: localPlayerData.name }); // Sahkan dia yg pertama mati
+function activateBuff(name, colorClass) {
+    if (typeof audioBuff !== 'undefined') {
+        audioBuff.currentTime = 0; 
+        audioBuff.play().catch(e => console.warn("Audio Buff disekat:", e));
+    }
+    
+    const streakUi = document.getElementById('streak-indicator'); 
+    if (streakUi) {
+        streakUi.innerHTML = `<span class="font-black text-2xl drop-shadow-md ${colorClass} animate-bounce block text-center">${name}</span>`;
+        setTimeout(() => { streakUi.innerHTML = ""; }, 3000);
+    } else {
+        console.error("❌ RALAT HTML: 'streak-indicator' tidak dijumpai di skrin!");
+    }
+}
+
+function clearAllBuffs() {
+    isX2Damage = false; isX3Damage = false; isTimeFrozen = false; isInvisible = false; lifestealActive = false;
+    if (typeof x2Timer !== 'undefined') clearTimeout(x2Timer); 
+    if (typeof x3Timer !== 'undefined') clearTimeout(x3Timer); 
+    if (typeof freezeTimer !== 'undefined') clearTimeout(freezeTimer); 
+    if (typeof invisibleTimer !== 'undefined') clearTimeout(invisibleTimer);
+    
+    const streakUi = document.getElementById('streak-indicator'); 
+    if (streakUi) streakUi.innerHTML = "";
+    
+    console.log("🧹 Semua Buff telah dibersihkan.");
+}
+
+// ==========================================
+// 📡 5. PENGHANTARAN DATA (RTDB & FIRESTORE)
+// ==========================================
+function dealDamageToBossRTDB(amt) {
+    console.log("💥 Mula menyerang Boss! Kerosakan:", amt);
+    
+    // 🕵️‍♂️ Pengintip 1: Semak adakah data pemain wujud?
+    if (typeof localPlayerData === 'undefined' || !localPlayerData || !localPlayerData.name) {
+        console.error("❌ ERROR: localPlayerData.name tidak dijumpai! Serangan dibatalkan.");
+        return;
+    }
+    
+    const uid = localPlayerData.name; 
+    console.log("👤 Nama Penyerang (UID):", uid);
+    
+    let updates = {};
+    updates['currentHp'] = firebase.database.ServerValue.increment(-amt);
+    updates[`attackers/${uid}/name`] = localPlayerData.name;
+    updates[`attackers/${uid}/damage`] = firebase.database.ServerValue.increment(amt);
+
+    console.log("📤 Menghantar kemas kini ke Firebase RTDB...");
+    bossRtdbRef.update(updates).then(() => {
+        console.log("✅ Firebase RTDB Berjaya Dikemas kini!");
+        bossRtdbRef.once('value').then(snap => {
+            if (snap.val().currentHp <= 0 && snap.val().status === "ACTIVE") {
+                bossRtdbRef.update({ status: "DEFEATED", final_blow_player: localPlayerData.name });
+            }
+        });
+    }).catch((error) => {
+        console.error("❌ Firebase MENOLAK kemas kini:", error);
+    });
+}
+
+// ==========================================
+// 🏆 FUNGSI LIVE LEADERBOARD (TOP 10 ATTACKERS)
+// ==========================================
+function listenToLiveAttackers() {
+    // Pastikan rujukan Firebase wujud
+    if (!bossRtdbRef) return;
+
+    bossRtdbRef.child('attackers').on('value', (snapshot) => {
+        const data = snapshot.val();
+        const listContainer = document.getElementById('live-ranking-list');
+        
+        if (!listContainer) return; // Jika HTML tak wujud, abaikan
+        
+        // Bersihkan senarai lama dan buang teks "Memuatkan radar..."
+        listContainer.innerHTML = ''; 
+        
+        if (!data) {
+            listContainer.innerHTML = '<div class="text-center text-sm text-gray-500 mt-10">Belum ada serangan. Jadilah yang pertama!</div>';
+            return;
         }
+        
+        // Tukar objek data dari Firebase kepada Array supaya boleh disusun
+        const attackersArray = [];
+        for (let uid in data) {
+            attackersArray.push(data[uid]);
+        }
+        
+        // Susun Array dari damage paling tinggi ke paling rendah (Descending)
+        attackersArray.sort((a, b) => b.damage - a.damage);
+        
+        // Cipta dan masukkan elemen Top 10 ke dalam senarai HTML
+        attackersArray.slice(0, 10).forEach((player, index) => {
+            // Tentukan pingat jika Top 3
+            let medal = '';
+            if (index === 0) medal = '🥇';
+            else if (index === 1) medal = '🥈';
+            else if (index === 2) medal = '🥉';
+            else medal = `<span class="text-gray-500 text-xs mr-2">#${index + 1}</span>`;
+
+            // Bina kotak nama pemain
+            const div = document.createElement('div');
+            div.className = "flex justify-between items-center bg-white/60 p-3 rounded-xl mb-2 shadow-sm border border-orange-100 animate-fade-in";
+            div.innerHTML = `
+                <div class="flex items-center">
+                    <span class="mr-2">${medal}</span>
+                    <span class="font-bold text-gray-800 text-sm truncate max-w-[120px]">${player.name || 'Wira Misteri'}</span>
+                </div>
+                <span class="font-black text-red-600 text-sm">${player.damage || 0} ⚔️</span>
+            `;
+            listContainer.appendChild(div);
+        });
+    });
+}
+
+async function syncRewardsToMainProfile(amt) {
+    localPlayerData.coins = parseInt(localPlayerData.coins || 0) + amt;
+    localPlayerData.total_xp = parseInt(localPlayerData.total_xp || 0) + amt; 
+    localStorage.setItem('currentPlayer', JSON.stringify(localPlayerData));
+    
+    try {
+        const snapshot = await db.collection("players").where("name", "==", localPlayerData.name).get();
+        if (!snapshot.empty) {
+            await db.collection("players").doc(snapshot.docs[0].id).update({
+                coins: firebase.firestore.FieldValue.increment(amt),
+                total_xp: firebase.firestore.FieldValue.increment(amt)
+            });
+        }
+    } catch(err) { console.error("Gagal sync XP", err); }
+}
+
+// ==========================================
+// 💀 6. KEMATIAN & PENAMAT GAME
+// ==========================================
+function updatePlayerHPUI() {
+    // Kemas kini komponen teks HP pemain utama
+    const hpText = document.getElementById('player-hp-text');
+    if(hpText) hpText.innerText = bossPlayerHP; 
+    
+    // 💥 TAMBAHAN BARU: Paksa padam tulisan "memuatkan HP..." di skrin Boss
+    const bossPlayerHpText = document.getElementById('boss-player-hp-text');
+    if (bossPlayerHpText) {
+        bossPlayerHpText.innerText = `HP Anda: ${bossPlayerHP}/100`;
     }
 }
 
 function checkPlayerAlive() {
     if (bossPlayerHP <= 0) {
-        checkFirstDieLogic();
+        clearInterval(passiveAttackInterval);
         audioBGM.pause();
-        Swal.fire('💀 Misi Gagal', 'Anda telah tewas... Rehat dan cuba lagi!', 'error').then(() => { leaveBossFight(); });
+        Swal.fire('💀 Tewas', 'HP anda telah habis. Kumpul kekuatan dan cuba lagi minggu hadapan!', 'error')
+        .then(() => {
+            if (typeof showScreen === 'function') showScreen('menu-screen');
+        });
         return false;
     }
     return true;
 }
 
-// --- CCTV RADAR (LIVE TOP 10) ---
-function startLiveRankingRadar() {
-    if (liveRankingUnsubscribe) liveRankingUnsubscribe();
-    liveRankingUnsubscribe = db.collection("ActiveBoss").doc("current_boss")
-        .collection("AttackerList").orderBy("damage", "desc").limit(10)
-        .onSnapshot(snapshot => {
-            const listDiv = document.getElementById('live-ranking-list');
-            if (!listDiv) return;
-            listDiv.innerHTML = '';
-            let rank = 1;
-            snapshot.forEach(doc => {
-                const data = doc.data();
-                let isMe = data.name === localPlayerData.name ? 'border-2 border-green-500 bg-green-50' : 'bg-white';
-                listDiv.innerHTML += `
-                    <div class="flex justify-between items-center p-3 rounded-xl shadow-sm mb-2 ${isMe}">
-                        <div class="font-bold text-gray-800 text-sm truncate w-2/3">
-                            <span class="text-orange-500 mr-1">#${rank}</span> ${data.name}
-                        </div>
-                        <div class="text-red-600 font-black text-sm">${data.damage} 💥</div>
-                    </div>
-                `;
-                rank++;
-            });
-        });
-}
-
-// ==========================================
-// 🏆 PENAMAT: KIRAAN BONUS REWARD
-// ==========================================
-function updatebossPlayerHPUI() { document.getElementById('player-hp-text').innerText = bossPlayerHP; }
-function showDamageIndicator(val) {
-    const indicator = document.getElementById('damage-indicator');
-    indicator.innerText = val; indicator.classList.remove('hidden'); indicator.classList.add('animate-bounce'); 
-    setTimeout(() => { indicator.classList.add('hidden'); indicator.classList.remove('animate-bounce'); }, 1000);
-}
-
-function endBossBattle(titleText) {
-    clearInterval(bossTimerInterval);
+function handleBossDefeated(slayerName) {
+    clearInterval(passiveAttackInterval);
     audioBGM.pause(); 
-    audioWin.currentTime = 0; audioWin.play(); // Pasang lagu menang!
-    if (liveRankingUnsubscribe) liveRankingUnsubscribe();
+    audioWin.play();
+    
+    let isMe = (slayerName === localPlayerData.name);
+    let msg = isMe ? "ANDA TELAH MEMBERIKAN TETAKAN TERAKHIR (FINAL BLOW)!" : `Wira ${slayerName} telah memberikan Final Blow!`;
 
     Swal.fire({
-        icon: 'success', title: titleText, text: 'Mengira Markah & Habuan Bonus...',
-        confirmButtonText: 'Lihat Keputusan 🏆', allowOutsideClick: false
-    }).then((res) => { if (res.isConfirmed) calculateRewards(); });
-}
-
-async function calculateRewards() {
-    Swal.fire({ title: 'Menyemak Rekod...', didOpen: () => Swal.showLoading() });
-    try {
-        const bossDoc = await db.collection("ActiveBoss").doc("current_boss").get();
-        const bossData = bossDoc.data();
-        const slayer = bossData.lastHitSlayer || "-";
-        const firstBlood = bossData.firstDiePlayer || "-";
-
-        // Ambil semua untuk cari max streak
-        const snapshot = await db.collection("ActiveBoss").doc("current_boss").collection("AttackerList").orderBy("damage", "desc").get();
-        
-        let rankings = [];
-        let highestStreak = 0;
-        let streakMaster = "-";
-
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            rankings.push(data);
-            if (data.maxStreak > highestStreak) { highestStreak = data.maxStreak; streakMaster = data.name; }
-        });
-
-        // KIRA BONUS UNTUK DIRI SENDIRI SAHAJA
-        let myBonus = 0;
-        let myRank = rankings.findIndex(p => p.name === localPlayerData.name) + 1;
-        
-        // 1. Placement Bonus
-        if (myRank === 1) myBonus += 1000;
-        else if (myRank === 2) myBonus += 750;
-        else if (myRank === 3) myBonus += 500;
-        else if (myRank > 3) myBonus += 200;
-
-        // 2. Bonus Gelaran
-        if (slayer === localPlayerData.name) myBonus += 1000;
-        if (firstBlood === localPlayerData.name) myBonus += 50;
-        if (streakMaster === localPlayerData.name && highestStreak > 0) myBonus += 100;
-
-        // MASUKKAN BONUS KE DALAM AKAUN
-        if (myBonus > 0 && myRank > 0) {
-            localPlayerData.coins = parseInt(localPlayerData.coins || 0) + myBonus;
-            localStorage.setItem('currentPlayer', JSON.stringify(localPlayerData));
-            syncCoinsToFirebase(); // <--- TAMBAH BARIS INI
-            if (typeof updateUI === 'function') updateUI(); 
-        }
-
-        showBossResultsModal(rankings.slice(0, 10), slayer, firstBlood, streakMaster, highestStreak, myBonus);
-
-    } catch (err) { Swal.fire('Ralat', 'Gagal memuatkan rekod.', 'error'); }
-}
-
-function showBossResultsModal(top10, slayer, firstBlood, streakMaster, highestStreak, myBonus) {
-    let tableHTML = `
-        <div class="bg-blue-50 p-3 rounded-lg border border-blue-200 text-sm text-left mb-4 shadow-inner">
-            <div class="font-bold text-blue-800 mb-1">Gelaran Kehormat:</div>
-            <div>🗡️ <b>Last Hit Boss:</b> <span class="text-red-600">${slayer}</span></div>
-            <div>🔥 <b>Longest Streak:</b> <span class="text-orange-600">${streakMaster} (${highestStreak} Combo)</span></div>
-            <div>💀 <b>First Die:</b> <span class="text-gray-500">${firstBlood}</span></div>
-            <div class="mt-2 text-green-700 font-black text-center text-lg animate-pulse">
-                🎁 Anda menerima +${myBonus} Syiling Bonus!
-            </div>
-        </div>
-        <table class="w-full text-sm text-left text-gray-500 border border-gray-200">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-100">
-                <tr><th>#</th><th>Wira</th><th>Damage</th></tr>
-            </thead>
-            <tbody>
-    `;
-
-    top10.forEach((p, index) => {
-        let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : (index + 1);
-        let color = p.name === localPlayerData.name ? 'bg-yellow-100 font-bold text-gray-900' : 'bg-white';
-        tableHTML += `
-            <tr class="border-b ${color}">
-                <td class="px-2 py-2">${medal}</td>
-                <td class="px-2 py-2">${p.name}</td>
-                <td class="px-2 py-2 text-red-600 font-bold">${p.damage} 💥</td>
-            </tr>
-        `;
-    });
-
-    tableHTML += `</tbody></table>`;
-    Swal.fire({ title: '🏆 KEPUTUSAN PEPERANGAN 🏆', html: tableHTML, confirmButtonText: 'Tutup & Rehat', allowOutsideClick: false }).then(() => {
-        if (typeof showScreen === 'function') showScreen('menu-screen'); 
+        title: '🔥 BOSS TEWAS! 🔥',
+        html: `<p class="text-lg text-red-600 font-bold">${msg}</p><p class="mt-2 text-sm text-gray-500">Ganjaran akhir akan dikira pada hujung bulan. Arena kini ditutup.</p>`,
+        imageUrl: `assets/boss/${currentBossData.avatar}`,
+        imageWidth: 150,
+        confirmButtonText: 'Keluar Arena',
+        allowOutsideClick: false
+    }).then(() => {
+        if (typeof showScreen === 'function') showScreen('menu-screen');
     });
 }
 
-// ==========================================
-// 💰 FUNGSI SYNC SYILING KE FIREBASE (VERSI 3.0 - CARIAN NAMA)
-// ==========================================
-async function syncCoinsToFirebase() {
-    try {
-        // 1. Pastikan kita ada nama pemain untuk dicari
-        if (!localPlayerData || !localPlayerData.name) {
-            console.error("RALAT: Tiada rekod nama pemain dijumpai.");
-            if (typeof savePlayerData === 'function') savePlayerData(); // Guna fungsi lama cikgu sebagai backup
-            return;
-        }
-
-        console.log("Sedang mencari akaun Firebase untuk:", localPlayerData.name);
-
-        // 2. Arahkan Firebase cari dokumen yang ada nama ini
-        const snapshot = await db.collection("players").where("name", "==", localPlayerData.name).get();
-
-        if (snapshot.empty) {
-            console.error("❌ Gagal jumpa pemain bernama", localPlayerData.name, "di dalam Firebase.");
-            return;
-        }
-
-        // 3. Kita berjaya jumpa! Ambil ID dokumen yang sebenar (contoh: SK_ABANG_GESA...)
-        const documentId = snapshot.docs[0].id;
-
-        // 4. Update syiling ke dalam dokumen tersebut
-        await db.collection("players").doc(documentId).set({
-            coins: localPlayerData.coins
-        }, { merge: true }); 
-        
-        console.log("✅ Berjaya! Syiling (" + localPlayerData.coins + ") selamat dikunci pada ID:", documentId);
-    } catch (error) {
-        console.error("❌ Gagal simpan syiling ke Firebase:", error);
-    }
+// Visual Terapung
+function showDamageIndicator(text, colorClass, elementId) {
+    // Pastikan cikgu ada sediakan div khusus di sebelah avatar boss/murid
 }
