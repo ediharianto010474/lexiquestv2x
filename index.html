@@ -238,11 +238,11 @@
 ```
 </div>
 
-<button id="boss-challenge-btn" onclick="startBossFight(); showScreen('boss-arena');" class="hidden col-span-2 md:col-span-4 glass p-6 rounded-3xl hover:bg-red-50 transition-all group border-2 border-red-400">
+<button id="boss-challenge-btn" onclick="attemptJoinBoss(); showScreen('boss-arena');" class="hidden fixed bottom-24 left-6 z-50 glass p-6 rounded-3xl hover:bg-red-50 transition-all group border-2 border-red-400 shadow-2xl max-w-xs text-left">
         <div class="text-4xl mb-2 group-hover:scale-110 transition-transform animate-pulse">🐉</div>
-        <div class="font-bold text-red-700 text-xl">WARNING: BOSS APPEARED!</div>
-        <div class="text-sm text-gray-600 mt-1">Click to join the battle!</div>
-    </button>>
+        <div class="font-bold text-red-700 text-lg leading-tight uppercase tracking-wider">WARNING: BOSS APPEARED!</div>
+        <div class="text-xs text-gray-600 mt-1 font-medium">Titan Kalkulus sedang menyerang! Klik untuk menyertai pertempuran!</div>
+    </button>
             </div>
 	</div>
 
@@ -285,13 +285,36 @@
         </button>
     </div>
 
-    <div class="flex gap-4 mb-6">
+    <!-- BEKAS BUTANG DIKEMASKINI: Ditambah flex-col md:flex-row untuk sokongan skrin telefon -->
+    <div class="flex flex-col md:flex-row gap-4 mb-6">
         <button class="flex-1 bg-red-600 text-white py-3 rounded-xl font-black shadow-md border-b-4 border-red-800">1 VS 1 (PvP)</button>
         
-<button type="button" onclick="prosesMasukLobi3v3()" class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-black shadow-md border-b-4 border-purple-800 transform transition hover:scale-105 active:scale-95">
-    3 VS 3 (Lv 35+)
-</button>
+        <button type="button" onclick="prosesMasukLobi3v3()" class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-black shadow-md border-b-4 border-purple-800 transform transition hover:scale-105 active:scale-95">
+            3 VS 3 (Lv 35+)
+        </button>
+
+<div id="boss-challenge-btn" class="hidden flex-1 relative cursor-pointer hover:scale-105 transition-transform" onclick="attemptJoinBoss()">
+    
+    <div class="bg-purple-800 hover:bg-purple-900 text-white py-2 rounded-xl font-black shadow-md border-b-4 border-purple-950 flex flex-col items-center justify-center h-full">
+        
+        <div class="text-lg"><i class="fas fa-dragon mr-2 text-green-400"></i> LAWAN BOSS</div>
+        
+        <div class="w-full px-4 mt-1">
+            
+            <div class="w-full bg-gray-900 rounded-full h-2 shadow-inner border border-purple-700 overflow-hidden">
+                <div id="radar-boss-hp-bar" class="bg-gradient-to-r from-red-600 to-red-400 h-full rounded-full transition-all duration-300" style="width: 100%;"></div>
+            </div> <div id="radar-boss-hp-text" class="text-[10px] mt-1 text-purple-200 font-mono tracking-wider text-center">
+                HP: - / -
+            </div>
+            
+        </div>
     </div>
+    
+    <div class="absolute -top-3 -right-2 bg-yellow-400 text-black text-[10px] font-extrabold px-3 py-1 rounded-full shadow-lg border-2 border-white animate-bounce">
+        HARI INI!
+    </div>
+    
+</div>
 
     <div class="bg-white p-4 rounded-2xl shadow-inner min-h-[300px]">
         <h3 class="font-bold text-gray-700 mb-4 border-b pb-2">List of Potential Challengers</h3>
@@ -432,14 +455,18 @@
     </div>
 </div>
 
+<!-- ⚔️ ARENA BOSS BATTLE -->
 <div id="boss-arena" class="hidden animate-fade-in glass rounded-3xl p-6 max-w-5xl mx-auto relative overflow-hidden flex flex-col md:flex-row gap-6">
     
+    <!-- BAHAGIAN KIRI: PERTARUNGAN -->
     <div class="flex-1 relative">
         
+        <!-- Penunjuk Kerosakan (Damage) -->
         <div id="damage-indicator" class="hidden absolute top-1/3 left-1/2 transform -translate-x-1/2 text-red-600 font-black text-6xl drop-shadow-[0_0_10px_rgba(255,255,255,1)] z-50 pointer-events-none">
             -15
         </div>
 
+        <!-- Header Arena (Butang Lari & HP Pemain) -->
         <div class="flex justify-between items-center mb-6 border-b-2 border-gray-200/50 pb-4">
             <button onclick="leaveBossFight()" class="text-gray-600 hover:text-red-600 font-bold bg-white/30 px-4 py-2 rounded-xl transition-all">
                 <i class="fas fa-arrow-left"></i> Run Away
@@ -450,19 +477,31 @@
             </div>
         </div>
 
-<div class="bg-black/5 p-6 rounded-3xl border border-red-200/50 flex flex-col items-center mb-6 shadow-inner">
+        <!-- Kad Profil Boss -->
+        <!-- ⚠️ Saya tambah kelas 'relative' di sini supaya streak-indicator tidak lari posisinya -->
+        <div class="bg-black/5 p-6 rounded-3xl border border-red-200/50 flex flex-col items-center mb-6 shadow-inner relative">
+            
+            <!-- 🔥 INDIKATOR STREAK BOOSTER (Tempat teks kebal/damage x2 keluar) 🔥 -->
+            <div id="streak-indicator" class="absolute top-2 left-0 w-full h-10 flex items-center justify-center z-50 pointer-events-none"></div>
+
+            <h3 id="boss-name-ui" class="text-2xl font-black text-red-700 mb-2 uppercase tracking-widest drop-shadow-md text-center mt-4">
+                Mencari Boss...
+            </h3>
+
             <div class="relative w-full max-w-sm h-48 md:h-64 mb-6 flex justify-center items-center">
                 <img id="battle-boss-avatar" src="" alt="Boss" class="w-full h-full object-contain drop-shadow-[0_10px_10px_rgba(220,38,38,0.3)] animate-bounce-slow transform scale-110">
             </div>
 
+            <!-- Bar HP Boss (Dengan ID Arena) -->
             <div class="w-full bg-white h-8 rounded-full overflow-hidden border-2 border-gray-300 relative shadow-md">
-                <div id="boss-hp-bar" class="bg-gradient-to-r from-red-600 to-red-400 h-full transition-all duration-300 w-full"></div>
-                <div id="boss-hp-text" class="absolute inset-0 flex items-center justify-center text-gray-900 font-black text-sm">
+                <div id="arena-boss-hp-bar" class="bg-gradient-to-r from-red-600 to-red-400 h-full transition-all duration-300 w-full"></div>
+                <div id="arena-boss-hp-text" class="absolute inset-0 flex items-center justify-center text-gray-900 font-black text-sm">
                     Memuatkan HP...
                 </div>
             </div>
         </div>
 
+        <!-- Zon Soalan & Jawapan -->
         <div class="bg-white/70 backdrop-blur-md p-6 rounded-3xl shadow-xl border border-white flex flex-col items-center text-center">
             <div class="w-full bg-gray-200 h-3 rounded-full mb-3 overflow-hidden shadow-inner">
                 <div id="boss-timer-bar" class="bg-blue-500 h-full w-full"></div>
@@ -480,13 +519,14 @@
         </div>
     </div>
 
+    <!-- BAHAGIAN KANAN: LIVE TOP 10 RADAR -->
     <div class="w-full md:w-80 bg-white/80 backdrop-blur-md rounded-3xl p-5 border-2 border-orange-300 shadow-[0_0_15px_rgba(251,146,60,0.3)] flex flex-col">
         <h3 class="text-lg font-black text-orange-600 mb-4 text-center border-b-2 border-orange-200 pb-2 flex items-center justify-center gap-2">
             <i class="fas fa-fire animate-pulse"></i> LIVE TOP 10 
         </h3>
         
         <div id="live-ranking-list" class="flex-1 overflow-y-auto flex flex-col gap-2 pr-1 max-h-[500px]">
-            <div class="text-center text-sm text-gray-500 mt-10 animate-pulse">Memuatkan radar pertarungan...</div>
+            <div id="boss-radar-text" class="text-center text-sm text-gray-500 mt-10 animate-pulse">Memuatkan radar pertarungan...</div>
         </div>
     </div>
 
