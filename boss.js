@@ -28,7 +28,89 @@ const audioBGM = new Audio('assets/audio/boss-bgm.mp3'); audioBGM.loop = true;
 const audioSlash = new Audio('assets/audio/slash.mp3');
 const audioOof = new Audio('assets/audio/hit.mp3');
 const audioWin = new Audio('assets/audio/win.mp3');
-const audioBuff = new Audio('assets/audio/powerup.mp3'); 
+const audioBuff = new Audio('assets/audio/powerup.mp3');
+
+// ==========================================
+// 1. LOGIK PEMASA GLOBAL BATTLE (5 MINIT)
+// ==========================================
+let globalBattleInterval = null;
+let globalBattleTimeLeft = 300; // 300 saat = 5 minit
+
+function startGlobalBattleTimer() {
+    // Bersihkan sebarang interval lama jika bertindih
+    if (globalBattleInterval) clearInterval(globalBattleInterval);
+    
+    globalBattleTimeLeft = 300; // Set semula ke 5 minit
+    updateGlobalTimerUI();
+
+    globalBattleInterval = setInterval(() => {
+        globalBattleTimeLeft--;
+        updateGlobalTimerUI();
+
+        // Jika masa 5 minit habis
+        if (globalBattleTimeLeft <= 0) {
+            clearInterval(globalBattleInterval);
+            handleBossBattleTimeout();
+        }
+    }, 1000);
+}
+
+function stopGlobalBattleTimer() {
+    if (globalBattleInterval) {
+        clearInterval(globalBattleInterval);
+        globalBattleInterval = null;
+    }
+}
+
+function updateGlobalTimerUI() {
+    const timerElement = document.getElementById('global-battle-timer');
+    if (!timerElement) return;
+
+    const minutes = Math.floor(globalBattleTimeLeft / 60);
+    const seconds = globalBattleTimeLeft % 60;
+
+    // Format menjadi corak MM:SS (contoh: 04:09)
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(seconds).padStart(2, '0');
+
+    timerElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
+}
+
+function handleBossBattleTimeout() {
+    stopGlobalBattleTimer();
+    
+    Swal.fire({
+        title: '⚔️ MASA TAMAT!',
+        text: 'Masa 5 minit telah tamat! Boss berjaya mempertahankan kubunya!',
+        icon: 'error',
+        confirmButtonText: 'Kembali ke Menu'
+    }).then(() => {
+        leaveBossFight(); // Fungsi asal Cikgu untuk tutup skrin arena
+    });
+}
+
+// ==========================================
+// 🚪 FUNGSI UNTUK KELUAR / KEMBALI DARI BOSS BATTLE
+// ==========================================
+function leaveBossFight() {
+    // 1. Hentikan pemasa global 5 minit agar tidak berjalan di latar belakang
+    stopGlobalBattleTimer();
+
+    // 2. Sembunyikan paparan boss-arena dan tunjukkan kembali main-screen
+    // Nota: Jika Cikgu mempunyai fungsi global showScreen(), kita boleh gunakannya.
+    if (typeof showScreen === 'function') {
+        showScreen('menu-screen');
+    } else {
+        // Alternatif manual jika fungsi showScreen tidak digunakan untuk bahagian ini:
+        const bossArena = document.getElementById('boss-arena');
+        const mainScreen = document.getElementById('menu-screen');
+
+        if (bossArena) bossArena.classList.add('hidden');
+        if (mainScreen) mainScreen.classList.remove('hidden');
+    }
+
+    console.log("🚪 Pemain telah keluar dari Boss Arena. Pemasa dihentikan & skrin kembali ke menu-screen.");
+} 
 
 // ==========================================
 // 📡 1. CCTV BOSS (RTDB LISTENER)
@@ -67,9 +149,16 @@ function updateBossRadarUI() {
     const radarBar = document.getElementById('radar-boss-hp-bar');
     const radarText = document.getElementById('radar-boss-hp-text');
 
-    const isWeekend = true; // BYPASS SEMENTARA
+    // 🔥 LOGIK KAWALAN MASA & BULAN 🔥
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // 0 = Ahad, 6 = Sabtu
+    const currentMonth = today.getMonth(); // 5 = Jun, 11 = Disember (Index bermula dari 0)
 
-    if (currentBossData.status === "ACTIVE" && currentBossData.currentHp > 0 && isWeekend) {
+    const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
+    const isRestMonth = (currentMonth === 5 || currentMonth === 11);
+
+    // Paparkan butang jika: Boss Aktif + HP ada + Hujung Minggu + Bukan bulan rehat
+    if (currentBossData.status === "ACTIVE" && currentBossData.currentHp > 0 && isWeekend && !isRestMonth) {
         if (bossBtn) bossBtn.classList.remove('hidden');
         if (radarBar) radarBar.style.width = hpPercent + "%";
         if (radarText) radarText.innerText = hpString;
@@ -91,11 +180,27 @@ function updateBossRadarUI() {
 // 🛡️ 2. PINTU MASUK & POTONGAN KUOTA (ANTI-CHEAT)
 // ==========================================
 async function attemptJoinBoss() {
+    // 🔥 PENGESAHAN KESELAMATAN KEDUA: Logik Masa & Bulan 🔥
+    const today = new Date();
+    const dayOfWeek = today.getDay(); 
+    const currentMonth = today.getMonth(); 
+    
+    const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
+    const isRestMonth = (currentMonth === 5 || currentMonth === 11);
+
+    if (isRestMonth) {
+        return Swal.fire('Bulan Rehat', 'Tiada peperangan Boss pada bulan Jun dan Disember. Selamat bercuti wira!', 'info');
+    }
+
+    if (!isWeekend) {
+        return Swal.fire('Belum Masanya', 'Boss hanya muncul pada hari Sabtu dan Ahad sahaja!', 'warning');
+    }
+
     if (!currentBossData || currentBossData.currentHp <= 0) {
         return Swal.fire('Tamat', 'Boss telah ditewaskan atau arena ditutup!', 'info');
     }
 
-    const todayDateStr = new Date().toISOString().split('T')[0]; 
+    const todayDateStr = today.toISOString().split('T')[0]; 
     
     if ((localPlayerData.level || 1) < 20) {
         return Swal.fire('Akses Ditolak', 'Anda perlu mencapai Level 20 untuk menyertai Boss Battle!', 'error');
@@ -115,6 +220,8 @@ async function attemptJoinBoss() {
         });
 
     startBossFight();
+    startGlobalBattleTimer(); // Mula unduran 5 minit
+    updateActiveBoostersUI(); // Bersihkan rak status booster
 }
 
 function startBossFight() {
@@ -320,6 +427,67 @@ function generateBossQuestion() {
     }
 }
 
+// ==========================================
+// 2. LOGIK KESAN KILATAN ARENA (FLASH EFFECT)
+// ==========================================
+function triggerArenaFlash(type) {
+    const overlay = document.getElementById('arena-flash-overlay');
+    if (!overlay) return;
+
+    // Reset kelas asas dahulu
+    overlay.className = "absolute inset-0 z-40 pointer-events-none opacity-0 transition-all duration-100";
+
+    if (type === 'boss') {
+        // Kilatan merah pudar apabila pemain salah jawab / terkena serangan boss
+        overlay.classList.add('bg-red-600/30', 'opacity-100');
+    } else if (type === 'player') {
+        // Kilatan cyan pudar apabila pemain betul jawab / berjaya menembak boss
+        overlay.classList.add('bg-cyan-500/30', 'opacity-100');
+    }
+
+    // Padamkan kilatan semula selepas 200ms (sekelip mata)
+    setTimeout(() => {
+        overlay.classList.remove('opacity-100');
+        overlay.classList.add('opacity-0');
+    }, 200);
+}
+
+// ==========================================
+// 3. LOGIK RAK STATUS BOOSTER AKTIF
+// ==========================================
+function updateActiveBoostersUI(activeBoosters = []) {
+    const container = document.getElementById('active-boosters-container');
+    if (!container) return;
+
+    container.innerHTML = ''; // Kosongkan rak lencana lama
+
+    if (activeBoosters.length === 0) return; // Jika tiada booster, kekal kosong
+
+    activeBoosters.forEach(booster => {
+        const badge = document.createElement('div');
+        
+        let colorClass = 'bg-yellow-500';
+        let icon = '🚀';
+        
+        // Padankan warna & ikon mengikut jenis booster dalam pangkalan data Cikgu
+        if (booster.type === 'double_damage' || booster.type === 'rage') {
+            colorClass = 'bg-gradient-to-r from-orange-500 to-red-500';
+            icon = '🔥 ATK x2';
+        } else if (booster.type === 'shield' || booster.type === 'kebal') {
+            colorClass = 'bg-gradient-to-r from-blue-500 to-indigo-600';
+            icon = '🛡️ KEBAL';
+        } else if (booster.type === 'heal_regen') {
+            colorClass = 'bg-gradient-to-r from-green-500 to-emerald-600';
+            icon = '🧪 REGEN';
+        }
+
+        badge.className = `${colorClass} text-white text-[10px] font-black px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm border border-white/20 animate-pulse`;
+        badge.innerHTML = `<span>${icon}</span> <span>${booster.name || 'Booster'}</span>`;
+        
+        container.appendChild(badge);
+    });
+}
+
 
 // ==========================================
 // ⚔️ 4. LOGIK TEMBAKAN & STREAK (BOOSTER)
@@ -327,6 +495,10 @@ function generateBossQuestion() {
 async function checkBossAnswer(chosen, correct, baseDamage) {
     if (String(chosen).toLowerCase() === String(correct).toLowerCase()) {
         // ✅ JAWAPAN BETUL
+        
+        // 🔵 CETUSKAN KILATAN BIRU (Pemain menyerang Boss)
+        if (typeof triggerArenaFlash === 'function') triggerArenaFlash('player');
+        
         if (typeof audioSlash !== 'undefined') audioSlash.currentTime = 0; 
         if (typeof audioSlash !== 'undefined') audioSlash.play().catch(e => console.warn("Audio ditiadakan:", e));
         
@@ -359,6 +531,10 @@ async function checkBossAnswer(chosen, correct, baseDamage) {
 
     } else {
         // ❌ JAWAPAN SALAH
+        
+        // 🔴 CETUSKAN KILATAN MERAH (Boss menyerang Pemain)
+        if (typeof triggerArenaFlash === 'function') triggerArenaFlash('boss');
+        
         if (typeof audioOof !== 'undefined') audioOof.currentTime = 0; 
         if (typeof audioOof !== 'undefined') audioOof.play().catch(e => console.warn("Audio ditiadakan:", e));
         
