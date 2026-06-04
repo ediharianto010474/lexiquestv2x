@@ -72,45 +72,47 @@
     <i id="music-btn-icon" class="fas fa-volume-up text-green-400 text-xl w-6 h-6 text-center"></i>
 </button>
 
-        <div id="menu-screen" class="hidden animate-fade-in">
+<div id="menu-screen" class="hidden animate-fade-in">
             
-<div class="flex flex-wrap md:flex-nowrap justify-end items-center bg-transparent p-4 mb-4 w-full gap-6 md:gap-8">
-    
-    <div class="flex items-center gap-4">
-        <div id="dashboard-avatar-container" onclick="openProfile()" class="w-28 h-28 md:w-32 md:h-32 flex flex-shrink-0 items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-300 drop-shadow-[0_15px_15px_rgba(0,0,0,0.4)] text-6xl">
-</div>       
-        <div>
-            <h2 id="menu-player-name" class="text-xl font-black text-indigo-900 leading-none uppercase drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">Adventurer</h2>
-            <div class="flex gap-2 my-1">
-                 <span id="menu-player-level" class="text-[10px] font-bold text-green-600 bg-white/80 px-2 py-0.5 rounded-lg border border-green-100 shadow-sm">LVL 1</span>
-                 <span id="menu-player-class" class="text-[10px] font-bold text-indigo-600 bg-white/80 px-2 py-0.5 rounded-lg border border-indigo-100 shadow-sm">CLASS</span>
-                 <span id="header-active-title" class="text-[10px] font-bold text-purple-600 bg-white/80 px-2 py-0.5 rounded-lg border border-purple-100 shadow-sm">NOVICE</span>
-            </div>
-            
-            <div class="mt-2 w-48 md:w-56">
-                <div class="flex justify-between text-[10px] text-indigo-900 font-black uppercase mb-1 drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)]">
-                    <span id="xp-text">XP: 0 / 100</span>
-                    <span id="next-level-text">Explorer</span>
-                </div>
-                <div class="w-full bg-white/50 rounded-full h-2.5 border border-indigo-200/50 overflow-hidden backdrop-blur-sm">
-                    <div id="xp-bar-fill" class="bg-gradient-to-r from-yellow-400 to-orange-500 h-full rounded-full transition-all duration-1000 shadow-sm" style="width: 0%"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="flex flex-col items-end gap-3 flex-shrink-0">
-        <div class="bg-yellow-400 text-yellow-900 px-4 py-2 rounded-2xl font-bold shadow-[0_4px_0_0_#ca8a04] flex items-center gap-2 border border-yellow-200">
-            <span class="text-xl">💰</span>
-            <span id="user-coins" class="text-xl">0</span>
-        </div>
+    <div class="flex flex-wrap md:flex-nowrap justify-end items-center bg-transparent p-2 mb-2 w-full gap-4 md:gap-5">
         
-        <button onclick="logout()" class="text-[10px] font-black text-red-500 hover:text-red-700 uppercase tracking-widest transition-colors drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
-            Logout ➔
-        </button>
+        <div class="flex items-center gap-3">
+            <div id="dashboard-avatar-container" onclick="openProfile()" class="w-16 h-16 md:w-20 md:h-20 flex flex-shrink-0 items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-300 drop-shadow-[0_8px_8px_rgba(0,0,0,0.3)] text-4xl md:text-5xl">
+            </div>       
+            
+            <div>
+                <h2 id="menu-player-name" class="text-lg md:text-xl font-black text-indigo-900 leading-none uppercase drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">Adventurer</h2>
+                <div class="flex gap-1.5 my-1">
+                     <span id="menu-player-level" class="text-[9px] md:text-[10px] font-bold text-green-600 bg-white/80 px-1.5 py-0.5 rounded-md border border-green-100 shadow-sm">LVL 1</span>
+                     <span id="menu-player-class" class="text-[9px] md:text-[10px] font-bold text-indigo-600 bg-white/80 px-1.5 py-0.5 rounded-md border border-indigo-100 shadow-sm">CLASS</span>
+                     <span id="header-active-title" class="text-[9px] md:text-[10px] font-bold text-purple-600 bg-white/80 px-1.5 py-0.5 rounded-md border border-purple-100 shadow-sm">NOVICE</span>
+                </div>
+                
+                <div class="mt-1 w-40 md:w-48">
+                    <div class="flex justify-between text-[9px] text-indigo-900 font-black uppercase mb-0.5 drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)]">
+                        <span id="xp-text">XP: 0 / 100</span>
+                        <span id="next-level-text">Explorer</span>
+                    </div>
+                    <div class="w-full bg-white/50 rounded-full h-2 border border-indigo-200/50 overflow-hidden backdrop-blur-sm">
+                        <div id="xp-bar-fill" class="bg-gradient-to-r from-yellow-400 to-orange-500 h-full rounded-full transition-all duration-1000 shadow-sm" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-end gap-2 flex-shrink-0">
+            <div class="bg-yellow-400 text-yellow-900 px-3 py-1.5 rounded-xl font-bold shadow-[0_3px_0_0_#ca8a04] flex items-center gap-1.5 border border-yellow-200">
+                <span class="text-base md:text-lg">💰</span>
+                <span id="user-coins" class="text-base md:text-lg">0</span>
+            </div>
+            
+            <button onclick="logout()" class="text-[9px] md:text-[10px] font-black text-red-500 hover:text-red-700 uppercase tracking-widest transition-colors drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
+                Logout ➔
+            </button>
+        </div>
+
     </div>
 
-</div>
 
 <div id="dashboard-super-admin" class="grid grid-cols-2 md:grid-cols-4 gap-4 hidden">
                 <button onclick="openAdminPanel()" class="glass p-6 rounded-3xl hover:bg-purple-50 transition-all group border-2 border-purple-200">
@@ -155,43 +157,46 @@
                 </button>
             </div>
 
-<div id="dashboard-student" class="hidden flex flex-col items-center justify-center w-full gap-8 mt-6">
+<div id="dashboard-student" class="hidden flex flex-col items-center justify-center w-full gap-4 mt-3">
     
-<div class="flex flex-col items-center w-full max-w-lg z-20">
-    
-    <div class="flex justify-center z-30">
-        <button onclick="console.log('BUTANG PLAY DITEKAN'); openSubjectModal()" class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-b from-green-400 to-green-700 border-4 border-black/10 shadow-[inset_0_4px_6px_rgba(255,255,255,0.4),inset_0_-10px_15px_rgba(0,0,0,0.3),0_10px_15px_rgba(0,0,0,0.5)] hover:scale-105 active:scale-95 transition-all flex flex-col items-center justify-center group relative">
-            <i class="fas fa-play text-white text-3xl md:text-4xl drop-shadow-md mb-0.5"></i>
-            <span class="text-white font-black text-[10px] md:text-xs uppercase drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] tracking-wider">Play Game</span>
-        </button>
+    <div class="flex flex-col items-center w-full max-w-lg z-20">
+        
+        <!-- BUTANG PLAY -->
+        <div class="flex justify-center z-30">
+            <button onclick="console.log('BUTANG PLAY DITEKAN'); openSubjectModal()" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-b from-green-400 to-green-700 border-4 border-black/10 shadow-[inset_0_2px_4px_rgba(255,255,255,0.4),inset_0_-6px_10px_rgba(0,0,0,0.3),0_6px_10px_rgba(0,0,0,0.5)] hover:scale-105 active:scale-95 transition-all flex flex-col items-center justify-center group relative">
+                <i class="fas fa-play text-white text-xl md:text-2xl drop-shadow-md mb-0.5"></i>
+                <span class="text-white font-black text-[8px] md:text-[10px] uppercase drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.8)] tracking-wider">Play Game</span>
+            </button>
+        </div>
+
+        <!-- BUTANG RANKING & MEDAL -->
+        <div class="flex justify-center gap-3 md:gap-4 -mt-2 md:-mt-3 z-20">
+            <button onclick="showScreen('leaderboard-screen')" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-b from-blue-400 to-blue-700 border-4 border-black/10 shadow-[inset_0_2px_4px_rgba(255,255,255,0.4),inset_0_-6px_10px_rgba(0,0,0,0.3),0_6px_10px_rgba(0,0,0,0.5)] hover:scale-105 active:scale-95 transition-all flex flex-col items-center justify-center group">
+                <i class="fas fa-trophy text-white text-xl md:text-2xl drop-shadow-md mb-0.5"></i>
+                <span class="text-white font-black text-[8px] md:text-[10px] uppercase drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.8)] tracking-wider">Ranking</span>
+            </button>
+
+            <button onclick="showAchievementsScreen()" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-b from-yellow-300 to-yellow-600 border-4 border-black/10 shadow-[inset_0_2px_4px_rgba(255,255,255,0.4),inset_0_-6px_10px_rgba(0,0,0,0.3),0_6px_10px_rgba(0,0,0,0.5)] hover:scale-105 active:scale-95 transition-all flex flex-col items-center justify-center group relative">
+                <i class="fas fa-star text-white text-xl md:text-2xl drop-shadow-md mb-0.5"></i>
+                <span class="text-white font-black text-[8px] md:text-[10px] uppercase drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.8)] tracking-wider">Medal</span>
+            </button>
+        </div>
+
+        <!-- BUTANG SHOP & CHALLENGE ARENA -->
+        <div class="flex justify-center gap-6 md:gap-10 mt-1 md:mt-2 z-10">
+            <button onclick="showScreen('shop-screen'); switchShopTab('edu');" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-b from-orange-400 to-orange-700 border-4 border-black/10 shadow-[inset_0_2px_4px_rgba(255,255,255,0.4),inset_0_-6px_10px_rgba(0,0,0,0.3),0_6px_10px_rgba(0,0,0,0.5)] hover:scale-105 active:scale-95 transition-all flex flex-col items-center justify-center group">
+                <i class="fas fa-shopping-bag text-white text-xl md:text-2xl drop-shadow-md mb-0.5"></i>
+                <span class="text-white font-black text-[8px] md:text-[10px] uppercase drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.8)] tracking-wider">Shop</span>
+            </button>
+
+            <button onclick="checkChallengeEligibility()" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-b from-red-500 to-red-800 border-4 border-black/10 shadow-[inset_0_2px_4px_rgba(255,255,255,0.4),inset_0_-6px_10px_rgba(0,0,0,0.3),0_6px_10px_rgba(0,0,0,0.5)] hover:scale-105 active:scale-95 transition-all flex flex-col items-center justify-center group relative">
+                <i class="fas fa-swords text-white text-lg md:text-xl drop-shadow-md mb-0.5"></i>
+                <span class="text-white font-black text-[7px] md:text-[9px] uppercase drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.8)] tracking-wider text-center leading-tight">Challenge<br>Arena</span>
+                <span class="absolute -bottom-1 bg-yellow-400 text-yellow-900 text-[7px] md:text-[8px] font-black px-1.5 py-0.5 rounded-full shadow-md border border-white/50">Lvl 15+</span>
+            </button>
+        </div>
+
     </div>
-
-    <div class="flex justify-center gap-4 md:gap-6 -mt-3 md:-mt-4 z-20">
-        <button onclick="showScreen('leaderboard-screen')" class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-b from-blue-400 to-blue-700 border-4 border-black/10 shadow-[inset_0_4px_6px_rgba(255,255,255,0.4),inset_0_-10px_15px_rgba(0,0,0,0.3),0_10px_15px_rgba(0,0,0,0.5)] hover:scale-105 active:scale-95 transition-all flex flex-col items-center justify-center group">
-            <i class="fas fa-trophy text-white text-3xl md:text-4xl drop-shadow-md mb-0.5"></i>
-            <span class="text-white font-black text-[10px] md:text-xs uppercase drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] tracking-wider">Ranking</span>
-        </button>
-
-        <button onclick="showAchievementsScreen()" class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-b from-yellow-300 to-yellow-600 border-4 border-black/10 shadow-[inset_0_4px_6px_rgba(255,255,255,0.4),inset_0_-10px_15px_rgba(0,0,0,0.3),0_10px_15px_rgba(0,0,0,0.5)] hover:scale-105 active:scale-95 transition-all flex flex-col items-center justify-center group relative">
-            <i class="fas fa-star text-white text-3xl md:text-4xl drop-shadow-md mb-0.5"></i>
-            <span class="text-white font-black text-[10px] md:text-xs uppercase drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] tracking-wider">Medal</span>
-        </button>
-    </div>
-
-    <div class="flex justify-center gap-10 md:gap-16 mt-2 md:mt-3 z-10">
-        <button onclick="showScreen('shop-screen'); switchShopTab('edu');" class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-b from-orange-400 to-orange-700 border-4 border-black/10 shadow-[inset_0_4px_6px_rgba(255,255,255,0.4),inset_0_-10px_15px_rgba(0,0,0,0.3),0_10px_15px_rgba(0,0,0,0.5)] hover:scale-105 active:scale-95 transition-all flex flex-col items-center justify-center group">
-            <i class="fas fa-shopping-bag text-white text-3xl md:text-4xl drop-shadow-md mb-0.5"></i>
-            <span class="text-white font-black text-[10px] md:text-xs uppercase drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] tracking-wider">Shop</span>
-        </button>
-
-        <button onclick="checkChallengeEligibility()" class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-b from-red-500 to-red-800 border-4 border-black/10 shadow-[inset_0_4px_6px_rgba(255,255,255,0.4),inset_0_-10px_15px_rgba(0,0,0,0.3),0_10px_15px_rgba(0,0,0,0.5)] hover:scale-105 active:scale-95 transition-all flex flex-col items-center justify-center group relative">
-            <i class="fas fa-swords text-white text-2.5xl md:text-3.5xl drop-shadow-md mb-0.5"></i>
-            <span class="text-white font-black text-[9px] md:text-[11px] uppercase drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] tracking-wider text-center leading-tight">Challenge<br>Arena</span>
-            <span class="absolute -bottom-2 bg-yellow-400 text-yellow-900 text-[8px] md:text-[9px] font-black px-2 py-0.5 rounded-full shadow-md border border-white/50">Lvl 15+</span>
-        </button>
-    </div>
-
-</div>
 
 
 <div class="w-full max-w-lg mt-4 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg border border-indigo-200/30 flex flex-col overflow-hidden z-10">
@@ -274,21 +279,20 @@
                 </div>
                   </div>
 
-<div id="challenge-lobby-screen" class="hidden animate-fade-in glass rounded-3xl p-8 max-w-4xl mx-auto shadow-2xl">
-    <div class="flex justify-between items-center mb-6 border-b pb-4">
+<div id="challenge-lobby-screen" class="hidden animate-fade-in glass rounded-3xl p-5 md:p-6 max-w-4xl mx-auto shadow-2xl">
+    <div class="flex justify-between items-center mb-4 border-b pb-3 gap-4">
         <div>
-            <h2 class="text-3xl font-black text-red-600"><i class="fas fa-fire-alt mr-2"></i> Challenge Arena</h2>
-            <p class="text-gray-600 font-bold">PVP (Level 15 and and other requirements) / 3 vs 3 (Level 35 and and other requirements) </p>
+            <!-- Saiz tajuk diturunkan sedikit pada skrin mudah alih (text-2xl) -->
+            <h2 class="text-2xl md:text-3xl font-black text-red-600"><i class="fas fa-fire-alt mr-1 md:mr-2"></i> Challenge Arena</h2>
+            <p class="text-xs md:text-sm text-gray-600 font-bold mt-0.5">PVP (Level 15 and other requirements) / 3 vs 3 (Level 35 and other requirements)</p>
         </div>
-        <button onclick="showScreen('menu-screen')" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-xl font-bold transition-colors">
-            <i class="fas fa-arrow-left mr-2"></i> Back
+        <!-- Padding butang digosok sedikit supaya lebih kompak -->
+        <button onclick="showScreen('menu-screen')" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3.5 py-1.5 md:px-4 md:py-2 rounded-xl font-bold text-sm md:text-base transition-colors flex-shrink-0">
+            <i class="fas fa-arrow-left mr-1 md:mr-2"></i> Back
         </button>
     </div>
 
-    <!-- BEKAS BUTANG DIKEMASKINI: Ditambah flex-col md:flex-row untuk sokongan skrin telefon -->
-    <div class="flex flex-col md:flex-row gap-4 mb-6">
-        <button class="flex-1 bg-red-600 text-white py-3 rounded-xl font-black shadow-md border-b-4 border-red-800">1 VS 1 (PvP)</button>
-        
+      
         <button type="button" onclick="prosesMasukLobi3v3()" class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-black shadow-md border-b-4 border-purple-800 transform transition hover:scale-105 active:scale-95">
             3 VS 3 (Lv 35+)
         </button>
@@ -458,62 +462,65 @@
     </div>
 </div>
 
-<!-- ⚔️ ARENA BOSS BATTLE -->
-<div id="boss-arena" class="hidden animate-fade-in glass rounded-3xl p-6 max-w-5xl mx-auto relative overflow-hidden flex flex-col md:flex-row gap-6">
+<div id="boss-arena" class="hidden animate-fade-in glass rounded-3xl p-4 max-w-5xl mx-auto relative overflow-hidden flex flex-col md:flex-row gap-4 shadow-[0_0_40px_rgba(0,0,0,0.2)]">
     
-    <!-- BAHAGIAN KIRI: PERTARUNGAN -->
-    <div class="flex-1 relative">
+    <div id="arena-flash-overlay" class="absolute inset-0 z-40 pointer-events-none opacity-0 transition-opacity duration-200"></div>
+
+    <div class="flex-1 relative z-10 flex flex-col">
         
-        <!-- Penunjuk Kerosakan (Damage) -->
         <div id="damage-indicator" class="hidden absolute top-1/3 left-1/2 transform -translate-x-1/2 text-red-600 font-black text-6xl drop-shadow-[0_0_10px_rgba(255,255,255,1)] z-50 pointer-events-none">
             -15
         </div>
 
-        <!-- Header Arena (Butang Lari & HP Pemain) -->
-        <div class="flex justify-between items-center mb-6 border-b-2 border-gray-200/50 pb-4">
-            <button onclick="leaveBossFight()" class="text-gray-600 hover:text-red-600 font-bold bg-white/30 px-4 py-2 rounded-xl transition-all">
-                <i class="fas fa-arrow-left"></i> Run Away
+        <div class="flex justify-between items-center mb-3 border-b-2 border-gray-200/50 pb-2">
+            <button onclick="leaveBossFight()" class="text-gray-600 hover:text-red-600 font-bold bg-white/30 px-3 py-1.5 rounded-xl transition-all text-sm">
+                <i class="fas fa-arrow-left"></i> Lari
             </button>
-            <h2 class="text-2xl font-black text-red-700 animate-pulse hidden md:block">BOSS BATTLE</h2>
-            <div class="text-green-700 font-bold text-lg bg-white/50 px-4 py-2 rounded-xl shadow-sm border border-green-200">
+            
+            <div class="flex flex-col items-center">
+                <h2 class="text-xl font-black text-red-700 animate-pulse hidden md:block leading-none">BOSS BATTLE</h2>
+                <div class="text-sm font-bold text-red-600 bg-red-100 px-4 py-0.5 rounded-full mt-1 border border-red-200 shadow-sm flex items-center gap-1">
+                    <i class="fas fa-clock"></i> <span id="global-battle-timer">05:00</span>
+                </div>
+            </div>
+
+            <div class="text-green-700 font-bold text-sm bg-white/50 px-3 py-1.5 rounded-xl shadow-sm border border-green-200">
                 <i class="fas fa-heart text-red-500 animate-pulse mr-1"></i> HP Anda: <span id="player-hp-text">100</span>
             </div>
         </div>
 
-        <!-- Kad Profil Boss -->
-        <!-- ⚠️ Saya tambah kelas 'relative' di sini supaya streak-indicator tidak lari posisinya -->
-        <div class="bg-black/5 p-6 rounded-3xl border border-red-200/50 flex flex-col items-center mb-6 shadow-inner relative">
+        <div class="bg-black/5 p-4 rounded-3xl border border-red-200/50 flex flex-col items-center mb-3 shadow-inner relative">
             
-            <!-- 🔥 INDIKATOR STREAK BOOSTER (Tempat teks kebal/damage x2 keluar) 🔥 -->
-            <div id="streak-indicator" class="absolute top-2 left-0 w-full h-10 flex items-center justify-center z-50 pointer-events-none"></div>
+            <div id="streak-indicator" class="absolute top-2 left-0 w-full h-8 flex items-center justify-center z-50 pointer-events-none"></div>
 
-            <h3 id="boss-name-ui" class="text-2xl font-black text-red-700 mb-2 uppercase tracking-widest drop-shadow-md text-center mt-4">
+            <h3 id="boss-name-ui" class="text-xl font-black text-red-700 mb-1 uppercase tracking-widest drop-shadow-md text-center mt-2">
                 Mencari Boss...
             </h3>
 
-            <div class="relative w-full max-w-sm h-48 md:h-64 mb-6 flex justify-center items-center">
-                <img id="battle-boss-avatar" src="" alt="Boss" class="w-full h-full object-contain drop-shadow-[0_10px_10px_rgba(220,38,38,0.3)] animate-bounce-slow transform scale-110">
+            <div class="relative w-full max-w-sm h-32 md:h-40 mb-3 flex justify-center items-center">
+                <img id="battle-boss-avatar" src="" alt="Boss" class="w-full h-full object-contain drop-shadow-[0_10px_10px_rgba(220,38,38,0.3)] animate-bounce-slow transform scale-105">
             </div>
 
-            <!-- Bar HP Boss (Dengan ID Arena) -->
-            <div class="w-full bg-white h-8 rounded-full overflow-hidden border-2 border-gray-300 relative shadow-md">
+            <div class="w-full bg-white h-6 rounded-full overflow-hidden border-2 border-gray-300 relative shadow-md mb-2">
                 <div id="arena-boss-hp-bar" class="bg-gradient-to-r from-red-600 to-red-400 h-full transition-all duration-300 w-full"></div>
-                <div id="arena-boss-hp-text" class="absolute inset-0 flex items-center justify-center text-gray-900 font-black text-sm">
+                <div id="arena-boss-hp-text" class="absolute inset-0 flex items-center justify-center text-gray-900 font-black text-xs">
                     Memuatkan HP...
                 </div>
             </div>
+
+            <div id="active-boosters-container" class="flex flex-wrap justify-center gap-2 w-full min-h-[24px]">
+                </div>
         </div>
 
-        <!-- Zon Soalan & Jawapan -->
-        <div class="bg-white/70 backdrop-blur-md p-6 rounded-3xl shadow-xl border border-white flex flex-col items-center text-center">
-            <div class="w-full bg-gray-200 h-3 rounded-full mb-3 overflow-hidden shadow-inner">
+        <div class="bg-white/70 backdrop-blur-md p-4 rounded-3xl shadow-xl border border-white flex flex-col items-center text-center flex-1 justify-center">
+            <div class="w-full bg-gray-200 h-2 rounded-full mb-2 overflow-hidden shadow-inner">
                 <div id="boss-timer-bar" class="bg-blue-500 h-full w-full"></div>
             </div>
-            <div class="text-gray-600 font-bold mb-6 text-sm">
-                Masa: <span id="timer-text" class="text-red-600 text-xl font-black">15</span>s
+            <div class="text-gray-600 font-bold mb-3 text-xs">
+                Masa Jawab: <span id="timer-text" class="text-red-600 text-lg font-black">15</span>s
             </div>
 
-            <h2 id="boss-question-text" class="text-xl md:text-3xl font-black text-gray-800 mb-8 leading-tight">
+            <h2 id="boss-question-text" class="text-lg md:text-2xl font-black text-gray-800 mb-4 leading-tight">
                 Menjana serangan...
             </h2>
 
@@ -522,13 +529,12 @@
         </div>
     </div>
 
-    <!-- BAHAGIAN KANAN: LIVE TOP 10 RADAR -->
-    <div class="w-full md:w-80 bg-white/80 backdrop-blur-md rounded-3xl p-5 border-2 border-orange-300 shadow-[0_0_15px_rgba(251,146,60,0.3)] flex flex-col">
-        <h3 class="text-lg font-black text-orange-600 mb-4 text-center border-b-2 border-orange-200 pb-2 flex items-center justify-center gap-2">
+    <div class="w-full md:w-72 bg-white/80 backdrop-blur-md rounded-3xl p-4 border-2 border-orange-300 shadow-[0_0_15px_rgba(251,146,60,0.3)] flex flex-col z-10">
+        <h3 class="text-base font-black text-orange-600 mb-3 text-center border-b-2 border-orange-200 pb-2 flex items-center justify-center gap-2">
             <i class="fas fa-fire animate-pulse"></i> LIVE TOP 10 
         </h3>
         
-        <div id="live-ranking-list" class="flex-1 overflow-y-auto flex flex-col gap-2 pr-1 max-h-[500px]">
+        <div id="live-ranking-list" class="flex-1 overflow-y-auto flex flex-col gap-2 pr-1 max-h-[400px]">
             <div id="boss-radar-text" class="text-center text-sm text-gray-500 mt-10 animate-pulse">Memuatkan radar pertarungan...</div>
         </div>
     </div>
@@ -1265,81 +1271,82 @@ window.showScreen = function(screenId) {
 
         <button onclick="closeSubjectModal()" class="absolute top-4 right-5 text-gray-400 hover:text-red-500 text-3xl"><i class="fas fa-times"></i></button>
 
-<div id="subject-grid">
-    <h2 class="text-3xl font-black text-indigo-800 mb-6 text-center border-b-2 border-indigo-100 pb-4">Choose Subject 📚</h2>
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<div id="subject-grid" class="w-full max-w-4xl mx-auto px-2">
+    <h2 class="text-xl md:text-2xl font-black text-indigo-800 mb-3 text-center border-b-2 border-indigo-100 pb-2">Choose Subject 📚</h2>
+    
+    <div class="grid grid-cols-3 md:grid-cols-4 gap-2 md:gap-3">
 
-        <button onclick="showEnglishCategories()" class="bg-gradient-to-br from-blue-500 to-indigo-600 p-6 rounded-2xl text-white font-bold hover:scale-105 transition-transform shadow-lg flex flex-col items-center gap-3 border-4 border-indigo-300">
-            <span class="text-5xl">🇬🇧</span>
-            <span class="text-lg">English</span>
-            <span class="text-xs bg-white text-indigo-700 px-2 py-1 rounded-full animate-pulse">Available</span>
+        <button onclick="showEnglishCategories()" class="bg-gradient-to-br from-blue-500 to-indigo-600 p-2.5 md:p-3 rounded-xl text-white font-bold hover:scale-105 transition-transform shadow-md flex flex-col items-center gap-1 md:gap-1.5 border-2 md:border-4 border-indigo-300">
+            <span class="text-2xl md:text-3xl">🇬🇧</span>
+            <span class="text-xs md:text-sm text-center leading-tight">English</span>
+            <span class="text-[9px] bg-white text-indigo-700 px-1.5 py-0.5 rounded-md animate-pulse font-medium">Available</span>
         </button>
 
-        <button onclick="openScienceCategories()" class="bg-gradient-to-br from-teal-500 to-emerald-600 p-6 rounded-2xl text-white font-bold hover:scale-105 transition-transform shadow-lg flex flex-col items-center gap-3 border-4 border-teal-300 relative">
-            <span class="text-4xl">🔬</span>
-            <span class="text-sm text-center">Science</span>
-	    <span class="text-xs bg-white text-orange-700 px-2 py-1 rounded-full animate-pulse">Available</span>
+        <button onclick="openScienceCategories()" class="bg-gradient-to-br from-teal-500 to-emerald-600 p-2.5 md:p-3 rounded-xl text-white font-bold hover:scale-105 transition-transform shadow-md flex flex-col items-center gap-1 md:gap-1.5 border-2 md:border-4 border-teal-300 relative">
+            <span class="text-2xl md:text-3xl">🔬</span>
+            <span class="text-xs md:text-sm text-center leading-tight">Science</span>
+            <span class="text-[9px] bg-white text-orange-700 px-1.5 py-0.5 rounded-md animate-pulse font-medium">Available</span>
         </button>
 
-<button onclick="showMathCategories()" class="bg-gradient-to-br from-orange-400 to-red-500 p-6 rounded-2xl text-white font-bold hover:scale-105 transition-transform shadow-lg flex flex-col items-center gap-3 border-4 border-orange-300 relative w-full">
-            <span class="text-5xl">🔢</span>
-            <span class="text-lg">Mathematics</span>
-            <span class="text-xs bg-white text-orange-700 px-2 py-1 rounded-full animate-pulse">Available</span>
+        <button onclick="showMathCategories()" class="bg-gradient-to-br from-orange-400 to-red-500 p-2.5 md:p-3 rounded-xl text-white font-bold hover:scale-105 transition-transform shadow-md flex flex-col items-center gap-1 md:gap-1.5 border-2 md:border-4 border-orange-300 relative">
+            <span class="text-2xl md:text-3xl">🔢</span>
+            <span class="text-xs md:text-sm text-center leading-tight">Mathematics</span>
+            <span class="text-[9px] bg-white text-orange-700 px-1.5 py-0.5 rounded-md animate-pulse font-medium">Available</span>
         </button>
 
-<button onclick="openBmCategories()" class="bg-gradient-to-br from-red-500 via-red-600 to-red-700 p-6 rounded-2xl text-white font-bold hover:scale-105 transition-transform shadow-lg flex flex-col items-center gap-3 border-4 border-red-300 relative">
-    <span class="text-4xl">🇲🇾</span>
-    <span class="text-sm text-center">Bahasa Melayu</span>
-    <span class="text-xs bg-white text-red-700 px-2 py-1 rounded-full animate-pulse">Available</span>
-</button>
-
-        <button onclick="comingSoonAlert('Pend. Agama Islam')" class="bg-gray-100 p-6 rounded-2xl text-gray-400 font-bold hover:bg-gray-200 transition-colors shadow-inner flex flex-col items-center gap-3 relative border-2 border-gray-200">
-            <span class="absolute top-3 right-3 text-red-400 text-xl"><i class="fas fa-lock"></i></span>
-            <span class="text-4xl opacity-50">🕌</span>
-            <span class="text-sm text-center">Pend. Agama Islam</span>
+        <button onclick="openBmCategories()" class="bg-gradient-to-br from-red-500 via-red-600 to-red-700 p-2.5 md:p-3 rounded-xl text-white font-bold hover:scale-105 transition-transform shadow-md flex flex-col items-center gap-1 md:gap-1.5 border-2 md:border-4 border-red-300 relative">
+            <span class="text-2xl md:text-3xl">🇲🇾</span>
+            <span class="text-xs md:text-sm text-center leading-tight">Bahasa Melayu</span>
+            <span class="text-[9px] bg-white text-red-700 px-1.5 py-0.5 rounded-md animate-pulse font-medium">Available</span>
         </button>
 
-        <button onclick="comingSoonAlert('Bahasa Arab')" class="bg-gray-100 p-6 rounded-2xl text-gray-400 font-bold hover:bg-gray-200 transition-colors shadow-inner flex flex-col items-center gap-3 relative border-2 border-gray-200">
-            <span class="absolute top-3 right-3 text-red-400 text-xl"><i class="fas fa-lock"></i></span>
-            <span class="text-4xl opacity-50">🇸🇦</span>
-            <span class="text-sm text-center">Bahasa Arab</span>
+        <button onclick="comingSoonAlert('Pend. Agama Islam')" class="bg-gray-100 p-2.5 md:p-3 rounded-xl text-gray-400 font-bold hover:bg-gray-200 transition-colors shadow-inner flex flex-col items-center gap-1 md:gap-1.5 relative border border-gray-200">
+            <span class="absolute top-1.5 right-1.5 text-red-400 text-[10px] md:text-xs"><i class="fas fa-lock"></i></span>
+            <span class="text-2xl md:text-3xl opacity-50">🕌</span>
+            <span class="text-xs md:text-sm text-center leading-tight">Pend. Agama Islam</span>
         </button>
 
-<button onclick="openMuzikCategories()" class="bg-gradient-to-br from-fuchsia-500 to-purple-600 p-6 rounded-2xl text-white font-bold hover:scale-105 transition-transform shadow-lg flex flex-col items-center gap-3 border-4 border-fuchsia-300 relative">
-    <span class="text-4xl">🎵</span>
-    <span class="text-sm text-center">Pend. Muzik</span>
-    <span class="text-xs bg-white text-fuchsia-700 px-2 py-1 rounded-full animate-pulse">Available</span>
-</button>
+        <button onclick="comingSoonAlert('Bahasa Arab')" class="bg-gray-100 p-2.5 md:p-3 rounded-xl text-gray-400 font-bold hover:bg-gray-200 transition-colors shadow-inner flex flex-col items-center gap-1 md:gap-1.5 relative border border-gray-200">
+            <span class="absolute top-1.5 right-1.5 text-red-400 text-[10px] md:text-xs"><i class="fas fa-lock"></i></span>
+            <span class="text-2xl md:text-3xl opacity-50">🇸🇦</span>
+            <span class="text-xs md:text-sm text-center leading-tight">Bahasa Arab</span>
+        </button>
 
-<button onclick="openKesihatanCategories()" class="bg-gradient-to-br from-rose-400 to-red-500 p-6 rounded-2xl text-white font-bold hover:scale-105 transition-transform shadow-lg flex flex-col items-center gap-3 border-4 border-rose-300 relative">
-    <span class="text-4xl">🩺</span>
-    <span class="text-sm text-center">Pend. Kesihatan</span>
-    <span class="text-xs bg-white text-rose-700 px-2 py-1 rounded-full animate-pulse">Available</span>
-</button>
+        <button onclick="openMuzikCategories()" class="bg-gradient-to-br from-fuchsia-500 to-purple-600 p-2.5 md:p-3 rounded-xl text-white font-bold hover:scale-105 transition-transform shadow-md flex flex-col items-center gap-1 md:gap-1.5 border-2 md:border-4 border-fuchsia-300 relative">
+            <span class="text-2xl md:text-3xl">🎵</span>
+            <span class="text-xs md:text-sm text-center leading-tight">Pend. Muzik</span>
+            <span class="text-[9px] bg-white text-fuchsia-700 px-1.5 py-0.5 rounded-md animate-pulse font-medium">Available</span>
+        </button>
 
-<button onclick="openMoralCategories()" class="bg-gradient-to-br from-emerald-400 to-teal-600 p-6 rounded-2xl text-white font-bold hover:scale-105 transition-transform shadow-lg flex flex-col items-center gap-3 border-4 border-emerald-300 relative">
-    <span class="text-4xl">🤝</span>
-    <span class="text-sm text-center">Pend. Moral</span>
-    <span class="text-xs bg-white text-teal-700 px-2 py-1 rounded-full animate-pulse">Available</span>
-</button>
+        <button onclick="openKesihatanCategories()" class="bg-gradient-to-br from-rose-400 to-red-500 p-2.5 md:p-3 rounded-xl text-white font-bold hover:scale-105 transition-transform shadow-md flex flex-col items-center gap-1 md:gap-1.5 border-2 md:border-4 border-rose-300 relative">
+            <span class="text-2xl md:text-3xl">🩺</span>
+            <span class="text-xs md:text-sm text-center leading-tight">Pend. Kesihatan</span>
+            <span class="text-[9px] bg-white text-rose-700 px-1.5 py-0.5 rounded-md animate-pulse font-medium">Available</span>
+        </button>
 
-<button onclick="openSejarahCategories()" class="bg-gradient-to-br from-amber-600 to-amber-800 p-6 rounded-2xl text-white font-bold hover:scale-105 transition-transform shadow-lg flex flex-col items-center gap-3 border-4 border-amber-400 relative">
-    <span class="text-4xl">⏳</span>
-    <span class="text-sm text-center">Sejarah</span>
-    <span class="text-xs bg-white text-amber-700 px-2 py-1 rounded-full animate-pulse">Available</span>
-</button>
+        <button onclick="openMoralCategories()" class="bg-gradient-to-br from-emerald-400 to-teal-600 p-2.5 md:p-3 rounded-xl text-white font-bold hover:scale-105 transition-transform shadow-md flex flex-col items-center gap-1 md:gap-1.5 border-2 md:border-4 border-emerald-300 relative">
+            <span class="text-2xl md:text-3xl">🤝</span>
+            <span class="text-xs md:text-sm text-center leading-tight">Pend. Moral</span>
+            <span class="text-[9px] bg-white text-teal-700 px-1.5 py-0.5 rounded-md animate-pulse font-medium">Available</span>
+        </button>
 
-<button onclick="openPsvCategories()" class="bg-gradient-to-br from-purple-500 to-pink-600 p-6 rounded-2xl text-white font-bold hover:scale-105 transition-transform shadow-lg flex flex-col items-center gap-3 border-4 border-purple-300 relative">
-    <span class="text-4xl">🎨</span>
-    <span class="text-sm text-center">Seni Visual</span>
-    <span class="text-xs bg-white text-purple-700 px-2 py-1 rounded-full animate-pulse">Available</span>
-</button>
+        <button onclick="openSejarahCategories()" class="bg-gradient-to-br from-amber-600 to-amber-800 p-2.5 md:p-3 rounded-xl text-white font-bold hover:scale-105 transition-transform shadow-md flex flex-col items-center gap-1 md:gap-1.5 border-2 md:border-4 border-amber-400 relative">
+            <span class="text-2xl md:text-3xl">⏳</span>
+            <span class="text-xs md:text-sm text-center leading-tight">Sejarah</span>
+            <span class="text-[9px] bg-white text-amber-700 px-1.5 py-0.5 rounded-md animate-pulse font-medium">Available</span>
+        </button>
 
-<button onclick="showRbtCategories()" class="bg-gradient-to-br from-cyan-500 to-blue-600 p-6 rounded-2xl text-white font-bold hover:scale-105 transition-transform shadow-lg flex flex-col items-center gap-3 border-4 border-cyan-300 relative">
-    <span class="text-4xl">⚙️</span>
-    <span class="text-sm text-center">RBT</span>
-    <span class="text-xs bg-white text-cyan-700 px-2 py-1 rounded-full animate-pulse">Available</span>
-</button>
+        <button onclick="openPsvCategories()" class="bg-gradient-to-br from-purple-500 to-pink-600 p-2.5 md:p-3 rounded-xl text-white font-bold hover:scale-105 transition-transform shadow-md flex flex-col items-center gap-1 md:gap-1.5 border-2 md:border-4 border-purple-300 relative">
+            <span class="text-2xl md:text-3xl">🎨</span>
+            <span class="text-xs md:text-sm text-center leading-tight">Seni Visual</span>
+            <span class="text-[9px] bg-white text-purple-700 px-1.5 py-0.5 rounded-md animate-pulse font-medium">Available</span>
+        </button>
+
+        <button onclick="showRbtCategories()" class="bg-gradient-to-br from-cyan-500 to-blue-600 p-2.5 md:p-3 rounded-xl text-white font-bold hover:scale-105 transition-transform shadow-md flex flex-col items-center gap-1 md:gap-1.5 border-2 md:border-4 border-cyan-300 relative">
+            <span class="text-2xl md:text-3xl">⚙️</span>
+            <span class="text-xs md:text-sm text-center leading-tight">RBT</span>
+            <span class="text-[9px] bg-white text-cyan-700 px-1.5 py-0.5 rounded-md animate-pulse font-medium">Available</span>
+        </button>
 
     </div>
 </div>
