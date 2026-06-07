@@ -111,6 +111,11 @@ function triggerGameHooks() {
     
     checkLevelRewardsOnLogin();
     if (typeof playBgMusic === 'function') playBgMusic();
+
+    // 👇 TAMBAH DI SINI: Panggil fungsi semak hadiah
+    if (typeof checkPendingNotifications === 'function') {
+        checkPendingNotifications();
+    }
 }
 
 // ==========================================

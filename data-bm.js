@@ -55,7 +55,7 @@ const malayLanguageData = {
         {"q": "Kata ganti nama tunjuk 'ini' digunakan untuk benda yang berada di kedudukan ___.", "a": "dekat"},
         {"q": "Kata ganti nama tunjuk 'itu' digunakan untuk benda yang berada di kedudukan ___.", "a": "jauh"},
         {"q": "Tukar perkataan 'tupai' menjadi kata nama khas dengan menambah kata panggilan haiwan: ___ Tupai.", "a": "Sang"},
-        {"q": "Apakah jenis ganti nama bagi perkataan 'mereka'?", "a": "kata ganti diri ketiga"}
+        {"q": "Apakah jenis ganti nama bagi perkataan 'mereka'? (Kata ganti diri ___________", "a": "kata ganti diri ketiga"}
     ],
 
     // 🟢 TAHAP MUDAH (+1 XP) - KATEGORI 2: KATA KERJA (50 SOALAN)

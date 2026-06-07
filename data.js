@@ -1008,71 +1008,71 @@ const avatars = {
     bm: {
         id: 'avatar_bm',
         levels: [
-            { level: 5, name: 'Pujangga Cilik', price: 10000, img: 'babybm.png', icon: 'fas fa-pen-nib text-red-500 drop-shadow-md text-xl', desc: 'Mulai mengenali keindahan tatabahasa dan kesantunan bahasa ibunda sejak dini.' },
-            { level: 10, name: 'Sasterawan Agung', price: 20000, img: 'bmlvl10.png', icon: 'fas fa-feather-alt fa-beat legendary-avatar text-red-500 drop-shadow-lg text-2xl', desc: 'Menguasai keindahan bahasa dan keagungan sastera Melayu sepenuhnya.' }
+            { level: 5, name: 'Pujangga Cilik', price: 10000, img: 'babybm.webp', icon: 'fas fa-pen-nib text-red-500 drop-shadow-md text-xl', desc: 'Mulai mengenali keindahan tatabahasa dan kesantunan bahasa ibunda sejak dini.' },
+            { level: 10, name: 'Sasterawan Agung', price: 20000, img: 'bmlvl10.webp', icon: 'fas fa-feather-alt fa-beat legendary-avatar text-red-500 drop-shadow-lg text-2xl', desc: 'Menguasai keindahan bahasa dan keagungan sastera Melayu sepenuhnya.' }
         ]
     },
     bi: {
         id: 'avatar_bi',
         levels: [
-            { level: 5, name: 'English Explorer Cilik', price: 10000, img: 'babyeng.png', icon: 'fas fa-book text-blue-500 drop-shadow-md text-xl', desc: 'Langkah awal menguasai bahasa dunia dengan penuh ceria dan rasa percaya diri!' },
-            { level: 10, name: 'English Grandmaster', price: 20000, img: 'bilvl10.png', icon: 'fas fa-globe-americas fa-bounce legendary-avatar text-blue-500 drop-shadow-lg text-2xl', desc: 'Masteri mutlak dalam bahasa global dan komunikasi antarabangsa.' }
+            { level: 5, name: 'English Explorer Cilik', price: 10000, img: 'babyeng.webp', icon: 'fas fa-book text-blue-500 drop-shadow-md text-xl', desc: 'Langkah awal menguasai bahasa dunia dengan penuh ceria dan rasa percaya diri!' },
+            { level: 10, name: 'English Grandmaster', price: 20000, img: 'bilvl10.webp', icon: 'fas fa-globe-americas fa-bounce legendary-avatar text-blue-500 drop-shadow-lg text-2xl', desc: 'Masteri mutlak dalam bahasa global dan komunikasi antarabangsa.' }
         ]
     },
     mt: {
         id: 'avatar_mt',
         levels: [
-            { level: 5, name: 'Celik Nombor', price: 10000, img: 'babymt.png', icon: 'fas fa-calculator text-green-500 drop-shadow-md text-xl', desc: 'Pakar kalkulator kecil yang pantas menyelesaikan tantangan angka dan berhitung dasar.' },
-            { level: 10, name: 'Mathematician Supreme', price: 20000, img: 'mtlvl10.png', icon: 'fas fa-calculator fa-pulse legendary-avatar text-purple-500 drop-shadow-lg text-2xl', desc: 'Menyelesaikan formula paling rumit di alam semesta dengan sekelip mata.' }
+            { level: 5, name: 'Celik Nombor', price: 10000, img: 'babymt.webp', icon: 'fas fa-calculator text-green-500 drop-shadow-md text-xl', desc: 'Pakar kalkulator kecil yang pantas menyelesaikan tantangan angka dan berhitung dasar.' },
+            { level: 10, name: 'Mathematician Supreme', price: 20000, img: 'mtlvl10.webp', icon: 'fas fa-calculator fa-pulse legendary-avatar text-purple-500 drop-shadow-lg text-2xl', desc: 'Menyelesaikan formula paling rumit di alam semesta dengan sekelip mata.' }
         ]
     },
     sn: {
         id: 'avatar_sn',
         levels: [
-            { level: 5, name: 'Saintis Cilik', price: 10000, img: 'babysn.png', icon: 'fas fa-flask text-purple-500 drop-shadow-md text-xl', desc: 'Penuh dengan rasa ingin tahu, bersiap menjelajahi misteri alam dan sains kehidupan.' },
-            { level: 10, name: 'Saintis Terulung', price: 20000, img: 'snlvl10.png', icon: 'fas fa-atom fa-spin legendary-avatar text-green-400 drop-shadow-lg text-2xl', desc: 'Membongkar rahsia sains, fizik, dan misteri kosmos demi masa depan.' }
+            { level: 5, name: 'Saintis Cilik', price: 10000, img: 'babysn.webp', icon: 'fas fa-flask text-purple-500 drop-shadow-md text-xl', desc: 'Penuh dengan rasa ingin tahu, bersiap menjelajahi misteri alam dan sains kehidupan.' },
+            { level: 10, name: 'Saintis Terulung', price: 20000, img: 'snlvl10.webp', icon: 'fas fa-atom fa-spin legendary-avatar text-green-400 drop-shadow-lg text-2xl', desc: 'Membongkar rahsia sains, fizik, dan misteri kosmos demi masa depan.' }
         ]
     },
     mz: {
         id: 'avatar_mz',
         levels: [
-            { level: 5, name: 'Melodi Cilik', price: 10000, img: 'babymz.png', icon: 'fas fa-music text-indigo-500 drop-shadow-md text-xl', desc: 'Menari mengikut ritme ceria dan mulai menciptakan harmoni musik yang unik.' },
-            { level: 10, name: 'Maestro Muzik', price: 20000, img: 'mzlvl10.png', icon: 'fas fa-music fa-bounce legendary-avatar text-pink-500 drop-shadow-lg text-2xl', desc: 'Mencipta simfoni agung yang menggetarkan jiwa dan mengharmonikan dunia.' }
+            { level: 5, name: 'Melodi Cilik', price: 10000, img: 'babymz.webp', icon: 'fas fa-music text-indigo-500 drop-shadow-md text-xl', desc: 'Menari mengikut ritme ceria dan mulai menciptakan harmoni musik yang unik.' },
+            { level: 10, name: 'Maestro Muzik', price: 20000, img: 'mzlvl10.webp', icon: 'fas fa-music fa-bounce legendary-avatar text-pink-500 drop-shadow-lg text-2xl', desc: 'Mencipta simfoni agung yang menggetarkan jiwa dan mengharmonikan dunia.' }
         ]
     },
     pj: {
         id: 'avatar_pj',
         levels: [
-            { level: 5, name: 'Wira Cergas', price: 10000, img: 'babypj.png', icon: 'fas fa-running text-orange-500 drop-shadow-md text-xl', desc: 'Sentiasa aktif, lincah, menjaga kesehatan diri dan siap menghadapi tantangan fisik.' },
-            { level: 10, name: 'Atlit Legenda', price: 20000, img: 'pjlvl10.png', icon: 'fas fa-running fa-beat legendary-avatar text-orange-500 drop-shadow-lg text-2xl', desc: 'Mencapai kemuncak kecergasan fizikal dan semangat kesukanan tertinggi.' }
+            { level: 5, name: 'Wira Cergas', price: 10000, img: 'babypj.webp', icon: 'fas fa-running text-orange-500 drop-shadow-md text-xl', desc: 'Sentiasa aktif, lincah, menjaga kesehatan diri dan siap menghadapi tantangan fisik.' },
+            { level: 10, name: 'Atlit Legenda', price: 20000, img: 'pjlvl10.webp', icon: 'fas fa-running fa-beat legendary-avatar text-orange-500 drop-shadow-lg text-2xl', desc: 'Mencapai kemuncak kecergasan fizikal dan semangat kesukanan tertinggi.' }
         ]
     },
     pm: {
         id: 'avatar_pm',
         levels: [
-            { level: 5, name: 'Tunas Berbudi', price: 10000, img: 'babypm.png', icon: 'fas fa-heart text-pink-500 drop-shadow-md text-xl', desc: 'Mengamalkan nilai-nilai murni, integritas, dan kebaikan dalam setiap langkah petualangan.' },
-            { level: 10, name: 'Suri Teladan Sejati', price: 20000, img: 'pmlvl10.png', icon: 'fas fa-heart fa-beat legendary-avatar text-emerald-500 drop-shadow-lg text-2xl', desc: 'Simbol keperibadian mulia, etika, dan nilai murni yang menerangi masyarakat.' }
+            { level: 5, name: 'Tunas Berbudi', price: 10000, img: 'babypm.webp', icon: 'fas fa-heart text-pink-500 drop-shadow-md text-xl', desc: 'Mengamalkan nilai-nilai murni, integritas, dan kebaikan dalam setiap langkah petualangan.' },
+            { level: 10, name: 'Suri Teladan Sejati', price: 20000, img: 'pmlvl10.webp', icon: 'fas fa-heart fa-beat legendary-avatar text-emerald-500 drop-shadow-lg text-2xl', desc: 'Simbol keperibadian mulia, etika, dan nilai murni yang menerangi masyarakat.' }
         ]
     },
     psv: {
         id: 'avatar_psv',
         levels: [
-            { level: 5, name: 'Pelukis Cerdik', price: 10000, img: 'babypsv.png', icon: 'fas fa-palette text-yellow-500 drop-shadow-md text-xl', desc: 'Mencurahkan imajinasi kreatif tanpa batas melalui warna dan lakaran yang menggemaskan.' },
-            { level: 10, name: 'Pelukis Legenda', price: 20000, img: 'psvlvl10.png', icon: 'fas fa-palette fa-shake legendary-avatar text-teal-400 drop-shadow-lg text-2xl', desc: 'Menghembus nafas kehidupan ke dalam kanvas dengan kreativiti tanpa sempadan.' }
+            { level: 5, name: 'Pelukis Cerdik', price: 10000, img: 'babypsv.webp', icon: 'fas fa-palette text-yellow-500 drop-shadow-md text-xl', desc: 'Mencurahkan imajinasi kreatif tanpa batas melalui warna dan lakaran yang menggemaskan.' },
+            { level: 10, name: 'Pelukis Legenda', price: 20000, img: 'psvlvl10.webp', icon: 'fas fa-palette fa-shake legendary-avatar text-teal-400 drop-shadow-lg text-2xl', desc: 'Menghembus nafas kehidupan ke dalam kanvas dengan kreativiti tanpa sempadan.' }
         ]
     },
     rbt: {
         id: 'avatar_rbt',
         levels: [
-            { level: 5, name: 'Inovator Muda', price: 10000, img: 'babyrbt.png', icon: 'fas fa-tools text-gray-500 drop-shadow-md text-xl', desc: 'Tangan kreatif yang suka merancang, membangun, dan mencoba teknologi-teknologi baru.' },
-            { level: 10, name: 'Adiwira Inovasi', price: 20000, img: 'rbtlvl10.png', icon: 'fas fa-tools fa-bounce legendary-avatar text-cyan-600 drop-shadow-lg text-2xl', desc: 'Pelopor teknologi, reka bentuk, dan kejuruteraan praktikal masa hadapan.' }
+            { level: 5, name: 'Inovator Muda', price: 10000, img: 'babyrbt.webp', icon: 'fas fa-tools text-gray-500 drop-shadow-md text-xl', desc: 'Tangan kreatif yang suka merancang, membangun, dan mencoba teknologi-teknologi baru.' },
+            { level: 10, name: 'Adiwira Inovasi', price: 20000, img: 'rbtlvl10.webp', icon: 'fas fa-tools fa-bounce legendary-avatar text-cyan-600 drop-shadow-lg text-2xl', desc: 'Pelopor teknologi, reka bentuk, dan kejuruteraan praktikal masa hadapan.' }
         ]
     },
     sj: {
         id: 'avatar_sj',
         levels: [
-            { level: 5, name: 'Pengembara Masa Cilik', price: 10000, img: 'babysj.png', icon: 'fas fa-hourglass-start text-amber-500 drop-shadow-md text-xl', desc: 'Mulai meneroka kisah-kisah hebat dan mengambil pengajaran berharga dari sejarah masa lalu.' },
-            { level: 10, name: 'Sejarawan Ulung', price: 20000, img: 'sjlvl10.png', icon: 'fas fa-scroll fa-pulse legendary-avatar text-amber-600 drop-shadow-lg text-2xl', desc: 'Penjaga garis masa lampau, memelihara iktibar, asal-usul, dan warisan bangsa.' }
+            { level: 5, name: 'Pengembara Masa Cilik', price: 10000, img: 'babysj.webp', icon: 'fas fa-hourglass-start text-amber-500 drop-shadow-md text-xl', desc: 'Mulai meneroka kisah-kisah hebat dan mengambil pengajaran berharga dari sejarah masa lalu.' },
+            { level: 10, name: 'Sejarawan Ulung', price: 20000, img: 'sjlvl10.webp', icon: 'fas fa-scroll fa-pulse legendary-avatar text-amber-600 drop-shadow-lg text-2xl', desc: 'Penjaga garis masa lampau, memelihara iktibar, asal-usul, dan warisan bangsa.' }
         ]
     },
     'ulti-boy': {
@@ -1082,7 +1082,7 @@ const avatars = {
                 level: 100, 
                 name: 'Ultimate Edu Master',
                 price: 100000, 
-                img: 'ulti-boy.png', 
+                img: 'ulti-boy.webp', 
                 icon: 'fas fa-book fa-pulse legendary-avatar text-blue-600 drop-shadow-lg text-2xl',
                 desc: 'Master of All!'
             }
@@ -1095,7 +1095,7 @@ const avatars = {
                 level: 100, 
                 name: 'Ultimate Edu Goddess ',
                 price: 100000, 
-                img: 'ulti-girl.png', 
+                img: 'ulti-girl.webp', 
                 icon: 'fas fa-book fa-pulse legendary-avatar text-blue-600 drop-shadow-lg text-2xl',
                 desc: 'Master of All!'
             }
@@ -1108,7 +1108,7 @@ school: {
                 level: 10, 
                 name: 'Modern School Chancellor', 
                 price: 15000, 
-                img: 'modern-school-lvl10.png', 
+                img: 'modern-school-lvl10.webp', 
                 icon: 'fas fa-crown fa-beat legendary-avatar text-yellow-600 drop-shadow-lg text-2xl', 
                 desc: 'Pemerintah tertinggi empayar ilmu!' 
             }
@@ -1118,7 +1118,7 @@ school: {
         id: 'avatar_edu', maxLevel: 100, theme: 'Academic Excellence',
         levels: [
             { 
-                level: 10, name: 'Edu Grandmaster', price: 15000, img: 'edu-lvl10.png', 
+                level: 10, name: 'Edu Grandmaster', price: 15000, img: 'edu-lvl10.webp', 
                 icon: 'fas fa-university fa-beat legendary-avatar text-indigo-500 drop-shadow-lg text-2xl', 
                 desc: 'Puncak tertinggi pencapaian akademik!' 
             }
@@ -1128,7 +1128,7 @@ school: {
         id: 'avatar_stem', maxLevel: 100,
         levels: [
             { 
-                level: 10, name: 'STEM Architect', price: 15000, img: 'stem-lvl10.png', 
+                level: 10, name: 'STEM Architect', price: 15000, img: 'stem-lvl10.webp', 
                 icon: 'fas fa-rocket fa-spin legendary-avatar text-purple-500 drop-shadow-lg text-2xl', 
                 desc: 'Arkitek masa depan dunia teknologi!' 
             }
@@ -1138,7 +1138,7 @@ school: {
         id: 'avatar_kampung', maxLevel: 100,
         levels: [
             { 
-                level: 10, name: 'Tokoh Warisan', price: 15000, img: 'kampung-lvl10.png', 
+                level: 10, name: 'Tokoh Warisan', price: 15000, img: 'kampung-lvl10.webp', 
                 icon: 'fas fa-home fa-beat legendary-avatar text-emerald-500 drop-shadow-lg text-2xl', 
                 desc: 'Lagenda hidup tradisi turun-temurun!' 
             }
@@ -1148,7 +1148,7 @@ school: {
         id: 'avatar_muslimah', maxLevel: 100, theme: 'Grace & Virtue',
         levels: [
             { 
-                level: 10, name: 'Eternal Grace', price: 15000, img: 'muslimah-lvl10.png', 
+                level: 10, name: 'Eternal Grace', price: 15000, img: 'muslimah-lvl10.webp', 
                 icon: 'fas fa-dove fa-beat legendary-avatar text-rose-500 drop-shadow-lg text-2xl', 
                 desc: 'Simbol keanggunan dan kecekalan abadi!' 
             }
@@ -1170,7 +1170,7 @@ school: {
                 level: 10, 
                 name: 'Nanotech Bard', 
                 price: 3000, 
-                img: 'avatar_leviathan.png',
+                img: 'avatar_leviathan.webp',
                 icon: 'fas fa-water fa-beat legendary-avatar text-blue-500 drop-shadow-lg text-2xl', 
                 desc: 'An unstoppable wave of knowledge!' 
             },
@@ -1179,7 +1179,7 @@ school: {
                 level: 50, 
                 name: 'Supreme Nanotech Prime', 
                 price: 30000, 
-                img: 'avatar_leviathan50.png',
+                img: 'avatar_leviathan50.webp',
                 icon: 'fas fa-water fa-spin text-yellow-500 drop-shadow-lg text-3xl', 
                 desc: 'Exclusive Guardian for reaching Level 50!' 
             },
@@ -1188,7 +1188,7 @@ school: {
                 level: 100, 
                 name: 'God-Tier Nanotech Bard', 
                 price: 300000, 
-                img: 'avatar_leviathan100.png', 
+                img: 'avatar_leviathan100.webp', 
                 icon: 'fas fa-water fa-beat text-red-500 drop-shadow-2xl text-4xl', 
                 desc: 'Mythical Guardian for the ultimate Level 100 player!' 
             }
@@ -1210,7 +1210,7 @@ school: {
                 level: 10, 
                 name: 'Cosmic Narrator', 
                 price: 3000, 
-                img: 'avatar_unicorn.png',
+                img: 'avatar_unicorn.webp',
                 icon: 'fas fa-horse-head fa-beat legendary-avatar text-pink-500 drop-shadow-lg text-2xl', 
                 desc: 'The most beautiful magic in literature!' 
             },
@@ -1219,7 +1219,7 @@ school: {
                 level: 50, 
                 name: 'Supreme Cosmic Prime', 
                 price: 30000, 
-                img: 'avatar_unicorn50.png',
+                img: 'avatar_unicorn50.webp',
                 icon: 'fas fa-horse-head fa-spin text-yellow-500 drop-shadow-lg text-3xl', 
                 desc: 'Exclusive Guardian for reaching Level 50!' 
             },
@@ -1228,7 +1228,7 @@ school: {
                 level: 100, 
                 name: 'God-Tier Cosmic Narrator', 
                 price: 300000, 
-                img: 'avatar_unicorn100.png', 
+                img: 'avatar_unicorn100.webp', 
                 icon: 'fas fa-horse-head fa-beat text-red-500 drop-shadow-2xl text-4xl', 
                 desc: 'Mythical Guardian for the ultimate Level 100 player!' 
             }
@@ -1250,7 +1250,7 @@ school: {
                 level: 10, 
                 name: 'Cyber Etymologist', 
                 price: 3000, 
-                img: 'avatar_golem.png',
+                img: 'avatar_golem.webp',
                 icon: 'fas fa-mountain fa-shake legendary-avatar text-gray-900 drop-shadow-lg text-2xl', 
                 desc: 'The Unshakeable Earth Shaker!' 
             },
@@ -1259,7 +1259,7 @@ school: {
                 level: 50, 
                 name: 'Supreme Cyber Prime', 
                 price: 30000, 
-                img: 'avatar_golem50.png',
+                img: 'avatar_golem50.webp',
                 icon: 'fas fa-mountain fa-spin text-yellow-500 drop-shadow-lg text-3xl', 
                 desc: 'Exclusive Guardian for reaching Level 50!' 
             },
@@ -1268,7 +1268,7 @@ school: {
                 level: 100, 
                 name: 'God-Tier Cyber Etymologist', 
                 price: 300000, 
-                img: 'avatar_golem100.png', 
+                img: 'avatar_golem100.webp', 
                 icon: 'fas fa-mountain fa-beat text-red-500 drop-shadow-2xl text-4xl', 
                 desc: 'Mythical Guardian for the ultimate Level 100 player!' 
             }
@@ -1290,7 +1290,7 @@ school: {
                 level: 10, 
                 name: 'Bionic Botanist & Grammarian', 
                 price: 3000, 
-                img: 'avatar_fairy.png',
+                img: 'avatar_fairy.webp',
                 icon: 'fas fa-tree fa-beat legendary-avatar text-green-500 drop-shadow-lg text-2xl', 
                 desc: 'The Queen of Global Connections!' 
             },
@@ -1299,7 +1299,7 @@ school: {
                 level: 50, 
                 name: 'Supreme Botanist Prime', 
                 price: 30000, 
-                img: 'avatar_fairy50.png',
+                img: 'avatar_fairy50.webp',
                 icon: 'fas fa-tree fa-spin text-yellow-500 drop-shadow-lg text-3xl', 
                 desc: 'Exclusive Guardian for reaching Level 50!' 
             },
@@ -1308,7 +1308,7 @@ school: {
                 level: 100, 
                 name: 'God-Tier Bionic Botanist', 
                 price: 300000, 
-                img: 'avatar_fairy100.png', 
+                img: 'avatar_fairy100.webp', 
                 icon: 'fas fa-tree fa-beat text-red-500 drop-shadow-2xl text-4xl', 
                 desc: 'Mythical Guardian for the ultimate Level 100 player!' 
             }
@@ -1330,7 +1330,7 @@ school: {
                 level: 10, 
                 name: 'Aether Historian', 
                 price: 3000, 
-                img: 'avatar_lion.png',
+                img: 'avatar_lion.webp',
                 icon: 'fas fa-crown fa-beat legendary-avatar text-yellow-400 drop-shadow-lg text-2xl', 
                 desc: 'The Absolute King of the Stage!' 
             },
@@ -1339,7 +1339,7 @@ school: {
                 level: 50, 
                 name: 'Supreme Aether Prime', 
                 price: 30000, 
-                img: 'avatar_lion50.png',
+                img: 'avatar_lion50.webp',
                 icon: 'fas fa-crown fa-spin text-yellow-500 drop-shadow-lg text-3xl', 
                 desc: 'Exclusive Guardian for reaching Level 50!' 
             },
@@ -1348,7 +1348,7 @@ school: {
                 level: 100, 
                 name: 'God-Tier Aether Historian', 
                 price: 300000, 
-                img: 'avatar_lion100.png', 
+                img: 'avatar_lion100.webp', 
                 icon: 'fas fa-crown fa-beat text-red-500 drop-shadow-2xl text-4xl', 
                 desc: 'Mythical Guardian for the ultimate Level 100 player!' 
             }

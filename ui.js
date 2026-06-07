@@ -356,8 +356,8 @@ function applyTitleStyle(titleName) {
     
     if (!displayHeader && !displayProfile) return;
 
-    // Cari dari Achievements
-    const ach = (typeof achievementsData !== 'undefined') ? achievementsData.find(a => a.name === titleName) : null;
+    // Cari dari Achievements (Guna titleReward supaya sepadan dengan dropdown)
+    const ach = (typeof achievementsData !== 'undefined') ? achievementsData.find(a => (a.titleReward || a.name) === titleName) : null;
     
     // Cari dari Ranks
     const ranksArray = (typeof LEVEL_RANKS !== 'undefined') ? LEVEL_RANKS : [];
@@ -369,6 +369,9 @@ function applyTitleStyle(titleName) {
         el.style = "";     
         
         if (ach) {
+            // Tukar tier kepada huruf kecil sebagai langkah keselamatan (case-insensitive)
+            const tier = ach.tier ? ach.tier.toLowerCase() : '';
+
             if (ach.id === 'ach_16') {
                 el.classList.add('title-king');
                 el.innerHTML = `👑 ${titleName}`;
@@ -378,15 +381,19 @@ function applyTitleStyle(titleName) {
             } else if (ach.id === 'ach_08') {
                 el.classList.add('title-master');
                 el.innerHTML = `🔥 ${titleName}`;
-            } else if (ach.tier === 'legendary') {
+            } else if (tier === 'legendary') {
                 el.classList.add('title-legendary'); 
                 el.innerHTML = `🏆 ${titleName}`;
-            } else if (ach.tier === 'epic') {
+            } else if (tier === 'epic') {
                 el.classList.add('title-epic');
                 el.innerHTML = `✨ ${titleName}`;
-            } else if (ach.tier === 'rare') {
+            } else if (tier === 'rare') {
                 el.classList.add('title-rare');
                 el.innerHTML = `⭐ ${titleName}`;
+            } else if (tier === 'common') {
+                // Blok kemaskini untuk COMMON (Warna hijau lembut & ikon perisai)
+                el.classList.add('text-green-600', 'font-bold', 'text-[10px]');
+                el.innerHTML = `🛡️ ${titleName}`;
             } else {
                 el.classList.add('text-gray-500', 'text-[10px]');
                 el.innerHTML = `📜 ${titleName}`;

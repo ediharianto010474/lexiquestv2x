@@ -107,6 +107,7 @@ function checkAndUnlockAchievements() {
                 if (localPlayerData.hasPlayedEarly) conditionMet = true;
                 break;
             case "weekend_play":
+            case "play_weekend":
                 if (localPlayerData.hasPlayedWeekend) conditionMet = true;
                 break;
             case "merdeka_day":
@@ -122,7 +123,7 @@ function checkAndUnlockAchievements() {
             case "first_login":
                 if ((Number(localPlayerData.loginCount) || 0) >= 1) conditionMet = true;
                 break;
-case "rank":
+            case "rank":
             case "leaderboard_rank": 
                 const cRank = Number(localPlayerData.currentRank) || 999;
                 const bRank = Number(localPlayerData.bestRank) || 999;
@@ -135,13 +136,13 @@ case "rank":
             case "tie_challenge":
                 if (localPlayerData.lastGameResult === 'tie') conditionMet = true;
                 break;
-            case "comeback_win": // 🔥 KEMASKINI: Ikut trackers.js
+            case "comeback_win":
                 if (localPlayerData.hasDoneComeback) conditionMet = true;
                 break;
-            case "narrow_win": // 🔥 KEMASKINI: Ikut trackers.js
+            case "narrow_win":
                 if (localPlayerData.hasDoneNarrowWin) conditionMet = true;
                 break;
-            case "revenge_win": // 🔥 KEMASKINI: Ikut trackers.js
+            case "revenge_win":
                 if (localPlayerData.hasDoneRevenge) conditionMet = true;
                 break;
             case "hidden_secret":
@@ -149,6 +150,12 @@ case "rank":
                 break;
             case "all_standard_avatars":
                 if ((Number(localPlayerData.unlockedAvatarsCount) || 0) >= 10) conditionMet = true;
+                break;
+            case "category_perfect":
+                // Menyemak jika markah tertinggi kategori tertentu mencapai markah penuh (>= 50)
+                if (localPlayerData.games && localPlayerData.games[target] && (Number(localPlayerData.games[target].highScore) || 0) >= 50) {
+                    conditionMet = true;
+                }
                 break;
         }
 
@@ -171,11 +178,11 @@ case "rank":
 }
 
 // ==========================================
-// FUNGSI MELUKIS SENARAI LENCANA DI SKRIN (DIKEMASKINI)
+// FUNGSI MELUKIS SENARAI LENCANA DI SKRIN
 // ==========================================
 function renderAchievements() {
     const listContainer = document.getElementById('achievements-list');
-    const statsContainer = document.getElementById('achievements-stats'); // Ambil elemen 0/0
+    const statsContainer = document.getElementById('achievements-stats'); 
     
     if (!listContainer) return;
     
@@ -185,15 +192,14 @@ function renderAchievements() {
     const playerAchievements = localPlayerData.achievements || [];
     const playerInventory = localPlayerData.inventory || [];
 
-    let unlockedCount = 0; // Pembolehubah untuk kira jumlah unlock
+    let unlockedCount = 0; 
 
     // 1. PAPARKAN PENCAPAIAN (ACHIEVEMENTS)
     allAchievements.forEach(ach => {
-        // Semak sama ada dalam achievements ATAU dalam inventory (sebab ada yang dibeli di kedai)
         const isUnlocked = playerAchievements.includes(ach.id) || playerInventory.includes(ach.id);
         
         if (isUnlocked) {
-            unlockedCount++; // Tambah +1 jika dijumpai
+            unlockedCount++; 
         }
 
         const card = document.createElement('div');
@@ -201,8 +207,13 @@ function renderAchievements() {
             isUnlocked ? 'bg-white border-yellow-400 shadow-md scale-105' : 'bg-gray-100 border-gray-300 opacity-60'
         }`;
 
-        card.innerHTML = `
-            <div class="text-4xl mb-2">${isUnlocked ? '🏆' : '🔒'}</div>
+card.innerHTML = `
+            <div class="mb-2 flex justify-center">
+                ${isUnlocked 
+                    ? `<img src="${ach.image}" alt="${ach.name}" class="w-16 h-16 object-contain drop-shadow-md">` 
+                    : `<div class="w-16 h-16 flex items-center justify-center bg-gray-200 rounded-full text-3xl">🔒</div>`
+                }
+            </div>
             <h3 class="font-bold text-sm ${isUnlocked ? 'text-gray-800' : 'text-gray-500'}">${ach.name}</h3>
             <p class="text-xs text-gray-500 mt-1">${ach.description}</p>
             ${isUnlocked ? `<span class="mt-2 text-[10px] bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-bold">UNLOCKED</span>` : ''}
@@ -211,18 +222,16 @@ function renderAchievements() {
     });
 
     // 2. PAPARKAN LENCANA KEDAI (SHOP BADGES)
-    // Mencari item jenis 'game' dalam inventory (ID bermula 'gb_')
     const shopBadges = playerInventory.filter(id => id.startsWith('gb_'));
     if (shopBadges.length > 0) {
         shopBadges.forEach(badgeId => {
-            // Cari data lencana daripada SHOP_DATA (dalam data.js)
             let badgeData = null;
             if (typeof SHOP_DATA !== 'undefined' && SHOP_DATA.badges) {
                 badgeData = SHOP_DATA.badges.find(b => b.id === badgeId);
             }
 
             if (badgeData) {
-                unlockedCount++; // Tambah +1 untuk lencana Collector Item yang dibeli
+                unlockedCount++; 
 
                 const card = document.createElement('div');
                 card.className = "p-4 rounded-xl border-2 bg-gradient-to-br from-indigo-50 to-white border-indigo-400 shadow-md flex flex-col items-center text-center";
@@ -236,7 +245,7 @@ function renderAchievements() {
         });
     }
 
-    // 3. KEMASKINI TEKS STATISTIK (0/0 KEPADA JUMLAH SEBENAR)
+    // 3. KEMASKINI TEKS STATISTIK (JUMLAH SEBENAR)
     if (statsContainer) {
         const totalCount = allAchievements.length + (typeof SHOP_DATA !== 'undefined' && SHOP_DATA.badges ? SHOP_DATA.badges.length : 0);
         statsContainer.innerText = `${unlockedCount} / ${totalCount}`;
@@ -264,12 +273,9 @@ function trackGamePlay(gameType, score) {
     localPlayerData.gamesPlayedToday = (Number(localPlayerData.gamesPlayedToday) || 0) + 1;
     localPlayerData.totalScore = (Number(localPlayerData.totalScore) || 0) + score;
     
-    if (score >= 50) { // Andaian 50 adalah perfect score
+    if (score >= 50) { // Andaian markah penuh/perfect score ialah 50
         localPlayerData.perfectScores = (Number(localPlayerData.perfectScores) || 0) + 1;
     }
-
-function trackGamePlay(gameType, score) {
-    // ... (kod bahagian atas yang sedia ada) ...
 
     // REKOD MURID MAIN HUJUNG MINGGU
     const todayDay = new Date().getDay();
@@ -280,8 +286,7 @@ function trackGamePlay(gameType, score) {
     // 1. Semak lencana (Logik Tempatan)
     checkAndUnlockAchievements();
 
-    // 2. 🔥 TAMBAH INI: SIMPAN KE FIRESTORE 🔥
-    // Kita panggil fungsi simpanan supaya field 'hasPlayedWeekend' muncul di Firestore
+    // 2. SIMPAN DATA KE FIRESTORE
     if (typeof saveCloudPlayerData === 'function') {
         saveCloudPlayerData();
     } else if (typeof syncDataToFirestore === 'function') {
@@ -321,5 +326,4 @@ function trackLoginStreak() {
         localPlayerData.lastLoginDate = today;
         localPlayerData.loginCount = (Number(localPlayerData.loginCount) || 0) + 1;
     }
-}
 }

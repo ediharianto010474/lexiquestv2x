@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LexiQuest 2.0 - Firebase Edition</title>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     
@@ -19,7 +21,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-cover bg-center bg-fixed bg-no-repeat min-h-screen font-['Poppins']" style="background-image: url('assets/bg.png');"> 
+<body class="bg-cover bg-center bg-fixed bg-no-repeat min-h-screen font-['Poppins']" style="background-image: url('assets/bg.webp');"> 
         
 <div id="auth-screen" class="mt-28 p-2 md:p-6 text-center animate-fade-in max-w-md mx-auto relative flex flex-col justify-center items-center overflow-hidden bg-transparent">
     
@@ -389,23 +391,38 @@
         </button>
     </div>
 
-    <div class="flex gap-2 mb-6 border-b-2 border-indigo-100 pb-3 overflow-x-auto">
-        <button id="tab-btn-edu" onclick="switchShopTab('edu')" class="shop-tab-btn px-5 py-2 bg-indigo-600 text-white font-bold rounded-xl whitespace-nowrap shadow-sm transition-all">
-            📚 Edu Shop
-        </button>
-        <button id="tab-btn-avatar" onclick="switchShopTab('avatar')" class="shop-tab-btn px-5 py-2 bg-gray-200 text-gray-500 hover:bg-gray-300 font-bold rounded-xl whitespace-nowrap transition-all">
-            👤 Avatar
-        </button>
-        <button id="tab-btn-badge" onclick="switchShopTab('badge')" class="shop-tab-btn px-5 py-2 bg-gray-200 text-gray-500 hover:bg-gray-300 font-bold rounded-xl whitespace-nowrap transition-all">
-            🏅 Badges
-        </button>
-    </div>
+<div class="flex gap-2 mb-6 border-b-2 border-indigo-100 pb-3 overflow-x-auto">
+    <button id="tab-btn-edu" onclick="switchShopTab('edu')" class="shop-tab-btn px-5 py-2 bg-indigo-600 text-white font-bold rounded-xl whitespace-nowrap shadow-sm transition-all">
+        📚 Edu Shop
+    </button>
+    
+    <button id="tab-btn-gift" onclick="switchShopTab('gift')" class="shop-tab-btn px-5 py-2 bg-gray-200 text-gray-500 hover:bg-gray-300 font-bold rounded-xl whitespace-nowrap transition-all">
+        🎁 Gift Shop
+    </button>
+    
+    <button id="tab-btn-avatar" onclick="switchShopTab('avatar')" class="shop-tab-btn px-5 py-2 bg-gray-200 text-gray-500 hover:bg-gray-300 font-bold rounded-xl whitespace-nowrap transition-all">
+        👤 Avatar
+    </button>
+    
+    <button id="tab-btn-badge" onclick="switchShopTab('badge')" class="shop-tab-btn px-5 py-2 bg-gray-200 text-gray-500 hover:bg-gray-300 font-bold rounded-xl whitespace-nowrap transition-all">
+        🏅 Badges
+    </button>
+</div>
 
-    <div id="shop-content-edu" class="shop-section">
+<div id="shop-content-edu" class="shop-section">
         <div id="edu-shop-items" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div class="text-center col-span-full py-10 text-gray-500">
                 <i class="fas fa-spinner fa-spin text-3xl mb-2 text-indigo-600"></i>
-                <p>Loading items...</p>
+                <p>Loading Edu Shop items...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="shop-content-gift" class="shop-section hidden">
+        <div id="gift-shop-items" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="text-center col-span-full py-10 text-gray-500">
+                <i class="fas fa-spinner fa-spin text-3xl mb-2 text-indigo-600"></i>
+                <p>Loading Gift Shop items...</p>
             </div>
         </div>
     </div>
@@ -421,11 +438,11 @@
     <div id="shop-content-badge" class="shop-section hidden">
         <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 mt-2">
             <div class="flex flex-col items-center justify-center mb-8 text-center">
-                <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500 uppercase tracking-wider">
+                <h2 class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500 uppercase tracking-wider">
                     <i class="fas fa-medal mr-2 text-yellow-500"></i> Achievements Badge
                 </h2>
                 <p class="text-gray-500 mt-2 max-w-2xl">
-                    Show your skills! Fullfill all challenges to unlock all achievements and collect all badges.
+                    Show your skills! Fulfill all challenges to unlock all achievements and collect all badges.
                 </p>
             </div>
 
@@ -438,28 +455,34 @@
         </div>
     </div>
 
-</div>
+</div> ```
 
 
-</div> <div id="achievements-screen" class="hidden animate-fade-in glass rounded-3xl p-8 max-w-4xl mx-auto shadow-2xl">
-    <div class="flex justify-between items-center mb-6 border-b-2 border-pink-100 pb-4">
+<div id="achievements-screen" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-[95%] max-w-3xl max-h-[85vh] flex flex-col animate-fade-in glass rounded-3xl p-5 md:p-6 shadow-2xl">
+    
+    <div class="flex justify-between items-center mb-3 border-b-2 border-pink-100 pb-3 shrink-0">
         <div>
-            <h2 class="text-3xl font-black text-pink-600 flex items-center gap-3">
-                <i class="fas fa-medal text-yellow-500 drop-shadow-md"></i> Badges Collection
+            <h2 class="text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500 uppercase tracking-wider">
+                <i class="fas fa-medal mr-2 text-yellow-500"></i> Achievements Badge
             </h2>
-            <p class="text-gray-500 text-sm mt-1">Complete challenge to collect badges and coins!</p>
+            <p class="text-gray-500 mt-1 text-xs md:text-sm max-w-xl">
+                Show your skills! Fulfill all challenges to unlock all achievements and collect all badges.
+            </p>
         </div>
-        <button onclick="closeAchievementsScreen()" class="text-gray-400 hover:text-red-500 transition-colors">
-            <i class="fas fa-times-circle text-3xl"></i>
+        <button onclick="closeAchievementsScreen()" class="text-gray-400 hover:text-red-500 transition-colors ml-4">
+            <i class="fas fa-times-circle text-2xl md:text-3xl"></i>
         </button>
     </div>
 
-    <div class="bg-pink-50 text-pink-700 px-4 py-2 rounded-xl font-bold text-sm inline-block mb-6 shadow-inner border border-pink-100">
-        <i class="fas fa-trophy mr-1"></i> Achievements: <span id="achievements-stats">0 / 0</span>
+    <div class="shrink-0 mb-4">
+        <div class="bg-pink-50 text-pink-700 px-4 py-2 rounded-xl font-bold text-xs md:text-sm inline-block shadow-inner border border-pink-100">
+            <i class="fas fa-trophy mr-1"></i> Achievements: <span id="achievements-stats">0 / 0</span>
+        </div>
     </div>
 
-    <div id="achievements-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+    <div id="achievements-list" class="flex-1 overflow-y-auto pr-2 custom-scrollbar grid grid-cols-1 sm:grid-cols-2 gap-3">
     </div>
+
 </div>
 
 <div id="boss-arena" class="hidden animate-fade-in glass rounded-3xl p-4 max-w-5xl mx-auto relative overflow-hidden flex flex-col md:flex-row gap-4 shadow-[0_0_40px_rgba(0,0,0,0.2)]">
@@ -613,20 +636,20 @@
         <div class="mb-4">
             <label class="block text-red-800 font-bold mb-2">Pilih Guardian/Boss:</label>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="boss-selection-grid">
-                <div onclick="selectBossImage('cogwheel-sage.png', this)" class="boss-thumbnail cursor-pointer border-4 border-transparent rounded-xl overflow-hidden hover:scale-105 transition-transform bg-white shadow-sm relative">
-                    <img src="assets/boss/cogwheel-sage.png" class="w-full h-24 object-contain p-2">
+                <div onclick="selectBossImage('cogwheel-sage.webp', this)" class="boss-thumbnail cursor-pointer border-4 border-transparent rounded-xl overflow-hidden hover:scale-105 transition-transform bg-white shadow-sm relative">
+                    <img src="assets/boss/cogwheel-sage.webp" class="w-full h-24 object-contain p-2">
                     <div class="bg-gray-800 text-white text-center text-[10px] py-1 font-bold">Cogwheel Sage</div>
                 </div>
-                <div onclick="selectBossImage('cosmic-currator.png', this)" class="boss-thumbnail cursor-pointer border-4 border-transparent rounded-xl overflow-hidden hover:scale-105 transition-transform bg-white shadow-sm relative">
-                    <img src="assets/boss/cosmic-currator.png" class="w-full h-24 object-contain p-2">
+                <div onclick="selectBossImage('cosmic-currator.webp', this)" class="boss-thumbnail cursor-pointer border-4 border-transparent rounded-xl overflow-hidden hover:scale-105 transition-transform bg-white shadow-sm relative">
+                    <img src="assets/boss/cosmic-currator.webp" class="w-full h-24 object-contain p-2">
                     <div class="bg-gray-800 text-white text-center text-[10px] py-1 font-bold">Cosmic Curator</div>
                 </div>
-                <div onclick="selectBossImage('living-archive.png', this)" class="boss-thumbnail cursor-pointer border-4 border-transparent rounded-xl overflow-hidden hover:scale-105 transition-transform bg-white shadow-sm relative">
-                    <img src="assets/boss/living-archive.png" class="w-full h-24 object-contain p-2">
+                <div onclick="selectBossImage('living-archive.webp', this)" class="boss-thumbnail cursor-pointer border-4 border-transparent rounded-xl overflow-hidden hover:scale-105 transition-transform bg-white shadow-sm relative">
+                    <img src="assets/boss/living-archive.webp" class="w-full h-24 object-contain p-2">
                     <div class="bg-gray-800 text-white text-center text-[10px] py-1 font-bold">Living Archive</div>
                 </div>
-                <div onclick="selectBossImage('golden-astromancer.png', this)" class="boss-thumbnail cursor-pointer border-4 border-transparent rounded-xl overflow-hidden hover:scale-105 transition-transform bg-white shadow-sm relative">
-                    <img src="assets/boss/golden-astromancer.png" class="w-full h-24 object-contain p-2">
+                <div onclick="selectBossImage('golden-astromancer.webp', this)" class="boss-thumbnail cursor-pointer border-4 border-transparent rounded-xl overflow-hidden hover:scale-105 transition-transform bg-white shadow-sm relative">
+                    <img src="assets/boss/golden-astromancer.webp" class="w-full h-24 object-contain p-2">
                     <div class="bg-gray-800 text-white text-center text-[10px] py-1 font-bold">Golden Astromancer</div>
                 </div>
             </div>
@@ -2132,49 +2155,62 @@ window.showScreen = function(screenId) {
         </script>
 
 
-<div id="profile-screen" class="hidden fixed inset-0 bg-indigo-900/90 backdrop-blur-md z-50 flex flex-col items-center justify-center p-6">
-    <div class="bg-white w-full max-w-md max-h-[85vh] flex flex-col rounded-3xl shadow-2xl overflow-hidden relative border-4 border-white">
-        <button onclick="closeProfile()" class="absolute top-4 right-4 w-10 h-10 bg-indigo-700/50 hover:bg-red-500 text-white rounded-xl flex items-center justify-center transition-all z-20">
+<div id="profile-screen" class="hidden fixed inset-0 bg-indigo-900/90 backdrop-blur-md z-[99999] flex flex-col items-center justify-center p-4 sm:p-6">
+    
+    <div class="bg-white w-full max-w-4xl max-h-[90vh] flex flex-col md:flex-row rounded-3xl shadow-2xl overflow-hidden relative border-4 border-white">
+        
+        <button onclick="closeProfile()" class="absolute top-4 right-4 w-10 h-10 bg-gray-100 hover:bg-red-500 text-gray-500 hover:text-white rounded-xl flex items-center justify-center transition-all z-20 shadow-sm">
             ✕
         </button>
 
-        <div class="overflow-y-auto flex-1 custom-scrollbar">
-            <div class="bg-indigo-600 p-8 pt-10 text-center shrink-0">
-                <div id="profile-avatar-container" class="w-28 h-28 mx-auto flex items-center justify-center text-5xl mb-4 overflow-visible relative drop-shadow-2xl">
+        <div class="w-full md:w-2/5 bg-indigo-600 p-8 flex flex-col justify-between shrink-0 h-auto md:h-full">
+            
+            <div class="text-center mt-4">
+                <div id="profile-avatar-container" class="w-32 h-32 mx-auto flex items-center justify-center text-6xl mb-4 overflow-visible relative drop-shadow-2xl">
                     👤
                 </div>
 
-                <h2 id="profile-name" class="text-white text-2xl font-black uppercase tracking-tight">Student Name</h2>
-                <div id="profile-active-title" class="inline-block mt-2 px-4 py-1 bg-indigo-800/50 rounded-full text-indigo-100 text-xs font-bold tracking-widest uppercase">
+                <h2 id="profile-name" class="text-white text-3xl font-black uppercase tracking-tight line-clamp-1">Student Name</h2>
+                <div id="profile-active-title" class="inline-block mt-3 px-5 py-1.5 bg-indigo-800/60 rounded-full text-indigo-100 text-xs font-bold tracking-widest uppercase shadow-inner">
                     Novice
                 </div>
             </div>
 
-            <div class="p-6 pb-4">
-                <div class="mb-6">
-                    <label class="block text-gray-400 text-[10px] font-black uppercase mb-2 tracking-widest text-center">Lencana Koleksi</label>
-                    <div id="profile-badges-container" class="flex flex-wrap gap-2 justify-center bg-gray-50 p-4 rounded-2xl border-2 border-dashed border-gray-200 min-h-[60px]">
-                    </div>
-                </div>
-
-                <label class="block text-gray-400 text-[10px] font-black uppercase mb-2 tracking-widest">Select Your Title</label>
-                <div class="relative">
-                    <select id="title-selector" class="w-full p-4 bg-gray-50 border-2 border-gray-100 rounded-2xl text-gray-700 font-bold focus:border-indigo-500 focus:ring-0 transition-all appearance-none">
+            <div class="mt-8 bg-white/10 p-5 rounded-2xl border border-white/20 backdrop-blur-sm">
+                <label class="block text-indigo-100 text-[10px] font-black uppercase mb-2 tracking-widest text-center">Select Your Title</label>
+                
+                <div class="relative mb-4">
+                    <select id="title-selector" class="w-full p-4 bg-indigo-50 border-2 border-indigo-200 rounded-xl text-indigo-900 font-bold focus:border-indigo-400 focus:ring-0 transition-all appearance-none cursor-pointer">
                         <option value="">-- Loading Titles... --</option>
                     </select>
-                    <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
+                    <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-indigo-400">
                         <i class="fas fa-chevron-down"></i>
                     </div>
                 </div>
-            </div>
 
-        </div> <div class="p-4 bg-white border-t-2 border-gray-100 shrink-0 z-10">
-            <button onclick="saveEquippedTitle()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-black py-4 rounded-2xl shadow-lg shadow-indigo-200 transition-all active:scale-95">
-                EQUIP TITLE
-            </button>
+                <button onclick="saveEquippedTitle()" class="w-full bg-white hover:bg-indigo-50 text-indigo-700 font-black py-4 rounded-xl shadow-lg transition-all active:scale-95 border-b-4 border-indigo-200">
+                    EQUIP TITLE
+                </button>
+            </div>
         </div>
 
-    </div> <button onclick="closeProfile()" class="mt-8 text-indigo-200 font-bold hover:text-white transition-colors shrink-0">
+        <div class="w-full md:w-3/5 bg-white p-8 flex flex-col h-[50vh] md:h-auto">
+            
+            <div class="mb-4 shrink-0">
+                <h3 class="text-gray-800 text-2xl font-black uppercase tracking-tight">Pencapaian</h3>
+                <label class="block text-gray-400 text-[10px] font-black uppercase mt-1 tracking-widest">Koleksi Lencana Saya</label>
+            </div>
+
+            <div class="flex-1 overflow-y-auto custom-scrollbar pr-2">
+                <div id="profile-badges-container" class="grid grid-cols-3 sm:grid-cols-4 gap-4 bg-gray-50 p-5 rounded-2xl border-2 border-dashed border-gray-200 min-h-[250px] items-start content-start">
+                    </div>
+            </div>
+            
+        </div>
+
+    </div> 
+
+    <button onclick="closeProfile()" class="mt-8 text-indigo-200 font-bold hover:text-white transition-colors shrink-0 tracking-widest text-sm">
         ← BACK TO DASHBOARD
     </button>
 </div>

@@ -2129,7 +2129,7 @@ function prosesBattleAnalysis(roomData) {
         let avatarHTML = '';
         if (p.avatar && p.avatar.startsWith('img|')) {
             const pathFail = p.avatar.replace('img|', ''); // Buang perkataan 'img|'
-            avatarHTML = `<img src="${pathFail}" class="w-full h-auto max-h-16 object-contain" alt="Avatar" onerror="this.src='assets/avatars/default.png';">`;
+            avatarHTML = `<img src="${pathFail}" class="w-full h-auto max-h-16 object-contain" alt="Avatar" onerror="this.src='assets/avatars/default.webp';">`;
         } else {
             avatarHTML = `<i class="fas fa-${p.avatar || 'user-ninja'} text-3xl ${p.team === 'A' ? 'text-emerald-400' : 'text-purple-400'}"></i>`;
         }
