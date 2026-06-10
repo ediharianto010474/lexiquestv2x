@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexiQuest V2 - Borang Langganan Sekolah</title>
+    <!-- Tailwind CSS CDN (Sesuai dengan stack admin.html anda) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Custom scrollbar untuk elemen textarea/list */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen py-10 px-4 flex flex-col items-center justify-center">
+
+    <div class="max-w-4xl w-full bg-slate-800 rounded-2xl shadow-2xl border border-slate-700/50 overflow-hidden backdrop-blur-sm">
+        
+        <!-- Header Banner -->
+        <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-8 text-center relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+            <div class="absolute -left-10 -bottom-10 w-40 h-40 bg-black/20 rounded-full blur-2xl"></div>
+            
+            <!-- Logo Section - Modified to use logolq.webp -->
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl mb-4 border border-white/20 shadow-inner overflow-hidden">
+                <img src="assets/logolq.webp" alt="Logo LexiQuest V2" class="max-w-full max-h-full object-contain">
+            </div>
+            
+            <h1 class="text-3xl font-extrabold tracking-tight bg-clip-text text-white">Borang Langganan Berpakej</h1>
+            <p class="text-indigo-100 mt-2 text-sm md:text-base max-w-xl mx-auto font-light">
+                Sertai revolusi e-sukan pendidikan bersama <span class="font-semibold text-amber-300">LexiQuest V2</span>. Isikan butiran sekolah anda untuk menjana akses penuh.
+            </p>
+        </div>
+
+        <!-- Main Grid Layout -->
+        <div class="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Kiri: Info Pembayaran Manual (4 Kolum) -->
+            <div class="lg:col-span-5 space-y-6">
+                <!-- Langkah Langganan -->
+                <div class="bg-slate-800/50 p-5 rounded-xl border border-slate-700 space-y-4">
+                    <h3 class="text-md font-semibold text-indigo-400 flex items-center gap-2">
+                        <i class="fas fa-info-circle"></i> Langkah Mudah
+                    </h3>
+                    <ul class="space-y-3 text-xs text-slate-300">
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-5 h-5 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold">1</span>
+                            <span>Pilih <b>Tier Pakej</b> & <b>Tempoh</b> yang sesuai dengan bajet sekolah.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-5 h-5 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold">2</span>
+                            <span>Lakukan pindahan wang (manual transfer) ke akaun di bawah.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-5 h-5 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold">3</span>
+                            <span>Isi borang ini & muat naik bukti pembayaran (Resit).</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-5 h-5 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold">4</span>
+                            <span>Super Admin akan hantar <b>Passcode</b> terus ke WhatsApp anda!</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Info Akaun Bank -->
+                <div class="bg-slate-800/80 p-5 rounded-xl border border-slate-700 bg-gradient-to-b from-slate-800 to-slate-900/50 shadow-inner">
+                    <h3 class="text-sm font-semibold text-slate-400 tracking-wider uppercase mb-3">Maklumat Akaun Bank</h3>
+                    <div class="space-y-3 text-sm">
+                        <div>
+                            <span class="text-xs text-slate-400 block">Nama Bank</span>
+                            <span class="font-medium text-slate-200">MAYBANK BERHAD</span>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block">Nombor Akaun</span>
+                            <div class="flex items-center justify-between bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800 mt-1">
+                                <span class="font-mono font-bold text-amber-400 tracking-wider">164012345678</span>
+                                <button type="button" onclick="navigator.clipboard.writeText('164012345678'); alert('No akaun disalin!');" class="text-xs text-slate-400 hover:text-indigo-400 transition">
+                                    <i class="far fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block">Nama Penerima</span>
+                            <span class="font-medium text-slate-200">LEXIQUEST ENTERPRISE</span>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block">Rujukan Pemindahan</span>
+                            <span class="text-xs text-indigo-300 italic">[Nama Sekolah Anda]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Widget Live Kalkulator Harga -->
+                <div class="bg-indigo-950/40 p-5 rounded-xl border border-indigo-500/30 text-center">
+                    <span class="text-xs uppercase tracking-widest text-indigo-300 font-semibold">Jumlah Perlu Dibayar</span>
+                    <div class="text-3xl font-black text-white mt-1" id="price-display">RM 0.00</div>
+                    <p class="text-[11px] text-slate-400 mt-2" id="tier-desc-display">Sila pilih pakej dan tempoh akses di sebelah.</p>
+                </div>
+            </div>
+
+            <!-- Kanan: Form Pendaftaran (7 Kolum) -->
+            <form id="subscriptionForm" class="lg:col-span-7 space-y-5">
+                
+                <!-- Bahagian 1: Maklumat Admin & Sekolah -->
+                <div class="space-y-4">
+                    <h2 class="text-sm font-bold tracking-wide uppercase text-indigo-400 border-b border-slate-700 pb-1 flex items-center gap-2">
+                        <i class="fas fa-school text-xs"></i> 1. Profil Hubungan & Sekolah
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-1">Nama Guru / Admin <span class="text-red-500">*</span></label>
+                            <input type="text" id="adminName" required placeholder="Contoh: Cikgu Ahmad Fauzi" 
+                                class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-1">No. Telefon WhatsApp <span class="text-red-500">*</span></label>
+                            <input type="tel" id="adminPhone" required placeholder="Contoh: 0123456789" 
+                                class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition">
+                            <span class="text-[10px] text-slate-400 mt-1 block">Sila pastikan aktif untuk menerima Passcode via WhatsApp.</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">Nama Penuh Sekolah <span class="text-red-500">*</span></label>
+                        <input type="text" id="schoolName" required placeholder="Contoh: SK Seri Bintang Utara" 
+                            class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">Senarai Kelas <span class="text-red-500">*</span></label>
+                        <textarea id="classesList" required rows="2" placeholder="Contoh: 4 Cerdik, 4 Bijak, 5 Gemilang (Asingkan dengan koma)" 
+                            class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition resize-none"></textarea>
+                    </div>
+                </div>
+
+                <!-- Bahagian 2: Pilihan Pakej & Tempoh -->
+                <div class="space-y-4 pt-2">
+                    <h2 class="text-sm font-bold tracking-wide uppercase text-indigo-400 border-b border-slate-700 pb-1 flex items-center gap-2">
+                        <i class="fas fa-layer-group text-xs"></i> 2. Pilihan Pelan Akses
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-1">Tier Saiz Sekolah <span class="text-red-500">*</span></label>
+                            <select id="packageTier" required onchange="calculatePrice()"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition cursor-pointer">
+                                <option value="" disabled selected>-- Pilih Saiz --</option>
+                                <option value="CITRA">Pakej Citra (Maks 150 Murid)</option>
+                                <option value="PERDANA">Pakej Perdana (Maks 600 Murid)</option>
+                                <option value="MEGA">Pakej Mega (Tanpa Had Murid)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-1">Tempoh Langganan <span class="text-red-500">*</span></label>
+                            <select id="duration" required onchange="calculatePrice()"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition cursor-pointer">
+                                <option value="" disabled selected>-- Pilih Tempoh --</option>
+                                <option value="3">Akses 3 Bulan (Pecutan Akhir)</option>
+                                <option value="6">Akses 6 Bulan (Separuh Penggal)</option>
+                                <option value="12">Akses 1 Tahun (Sesi Penuh - Terbaik)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bahagian 3: Muat Naik Bukti Bayaran -->
+                <div class="space-y-4 pt-2">
+                    <h2 class="text-sm font-bold tracking-wide uppercase text-indigo-400 border-b border-slate-700 pb-1 flex items-center gap-2">
+                        <i class="fas fa-receipt text-xs"></i> 3. Pengesahan Bayaran
+                    </h2>
+                    
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">Muat Naik Resit (PDF / Format Gambar) <span class="text-red-500">*</span></label>
+                        <div class="relative border-2 border-dashed border-slate-700 hover:border-indigo-500 rounded-xl p-4 text-center transition bg-slate-900/50 cursor-pointer group">
+                            <input type="file" id="receiptFile" required accept="image/*,application/pdf"
+                                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+                            <div class="space-y-1">
+                                <i class="fas fa-cloud-upload-alt text-2xl text-slate-500 group-hover:text-indigo-400 transition mb-1"></i>
+                                <p class="text-xs font-medium text-slate-300" id="file-name-display">Klik atau seret fail resit ke sini</p>
+                                <p class="text-[10px] text-slate-500">Maksimum saiz: 5MB (PDF, PNG, JPG)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Butang Submit Hantar Borang -->
+                <div class="pt-4">
+                    <button type="submit" id="btnSubmit"
+                        class="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg hover:from-indigo-500 hover:to-pink-500 transition transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-purple-500 flex items-center justify-center gap-2 tracking-wide text-sm">
+                        <i class="fas fa-paper-plane"></i> HANTAR PERMOHONAN LANGGANAN
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+        
+        <!-- Footer -->
+        <div class="bg-slate-900/60 px-6 py-4 border-t border-slate-700/50 flex flex-col md:flex-row items-center justify-between text-[11px] text-slate-400 gap-2">
+            <span>&copy; 2026 LexiQuest V2 Ecosystem. All Rights Reserved.</span>
+            <div class="flex items-center gap-4">
+                <span><i class="fas fa-shield-alt text-indigo-400"></i> Secure Node Connection</span>
+                <span><i class="fas fa-bolt text-amber-400"></i> Manual Verifier Powered</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SCRIPT LOGIK MATRIKS HARGA & COMPONENT INTERACTION -->
+    <script>
+        // Matriks Harga Berdasarkan Jadual Perbincangan
+        const PRICING_MATRIX = {
+            'CITRA': { '3': 150, '6': 250, '12': 400, 'desc': 'Pakej Citra (Had Maks 150 murid)' },
+            'PERDANA': { '3': 350, '6': 600, '12': 1000, 'desc': 'Pakej Perdana (Had Maks 600 murid)' },
+            'MEGA': { '3': 600, '6': 1000, '12': 1600, 'desc': 'Pakej Mega (Akses Tanpa Had murid)' }
+        };
+
+        // Fungsi Live Update Harga & Deskripsi
+        function calculatePrice() {
+            const tier = document.getElementById('packageTier').value;
+            const duration = document.getElementById('duration').value;
+            const priceDisplay = document.getElementById('price-display');
+            const descDisplay = document.getElementById('tier-desc-display');
+
+            if (tier && duration) {
+                const totalAmount = PRICING_MATRIX[tier][duration];
+                priceDisplay.innerText = `RM ${totalAmount}.00`;
+                
+                let textTempoh = duration == '12' ? '1 Tahun (Sesi Penuh)' : `${duration} Bulan`;
+                descDisplay.innerHTML = `<span class="text-indigo-300 font-medium">${PRICING_MATRIX[tier]['desc']}</span> untuk tempoh <span class="text-pink-400 font-medium">${textTempoh}</span>.`;
+            } else {
+                priceDisplay.innerText = "RM 0.00";
+                descDisplay.innerText = "Sila pilih pakej dan tempoh akses di sebelah.";
+            }
+        }
+
+        // Paparan Nama Fail yang Dipilih
+        document.getElementById('receiptFile').addEventListener('change', function(e) {
+            const fileNameDisplay = document.getElementById('file-name-display');
+            if (e.target.files.length > 0) {
+                fileNameDisplay.innerHTML = `<i class="fas fa-file-invoice text-emerald-400 mr-1"></i> <span class="text-emerald-400 font-medium">${e.target.files[0].name}</span>`;
+            } else {
+                fileNameDisplay.innerText = "Klik atau seret fail resit ke sini";
+            }
+        });
+
+        // Simulasi Penyimpanan Firebase (Hanya Mockup/Struktur Logik untuk rujukan pembangun)
+        document.getElementById('subscriptionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('btnSubmit');
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fas fa-spinner animate-spin"></i> MEMPROSES PERMOHONAN...`;
+
+            // Simulasi Berjaya (Nanti sambung Firebase Storage & Firestore di sini)
+            setTimeout(() => {
+                alert("✨ Permohonan Berjaya Dihantar!\n\nData anda telah dimasukkan ke dalam pangkalan data menunggu kelulusan. Sila tunggu respon daripada Super Admin melalui WhatsApp.");
+                document.getElementById('subscriptionForm').reset();
+                document.getElementById('file-name-display').innerText = "Klik atau seret fail resit ke sini";
+                calculatePrice();
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fas fa-paper-plane"></i> HANTAR PERMOHONAN LANGGANAN`;
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
