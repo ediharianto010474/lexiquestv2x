@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEXI QUEST V2 - Ultimate Live Stream Penonton Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap');
+        .font-cyber { font-family: 'Orbitron', sans-serif; }
+        .font-ui { font-family: 'Rajdhani', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-ui p-3 md:p-4 min-h-screen flex flex-col bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-purple-950/10 to-slate-950">
+
+    <div class="max-w-5xl mx-auto w-full flex-1 flex flex-col">
+        
+        <div class="text-center mb-4 relative shrink-0">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
+            
+            <div class="absolute top-1 right-1 z-20">
+                <button onclick="bukaSenaraiLobi()" class="px-3 py-1.5 bg-slate-900/80 hover:bg-amber-500 hover:text-slate-950 border border-slate-800 hover:border-amber-400 text-slate-300 text-[10px] md:text-xs font-bold font-cyber rounded-xl transition-all shadow-lg flex items-center gap-2">
+                    <i class="fas fa-list-ul"></i> LOBI AKTIF
+                </button>
+            </div>
+
+            <h1 class="text-2xl md:text-3xl font-black font-cyber tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300 drop-shadow-[0_2px_10px_rgba(245,158,11,0.3)] mt-3">
+                <i class="fas fa-broadcast-tower mr-2 text-rose-500 animate-pulse text-xl"></i> LEXI QUEST ARENA V2
+            </h1>
+            <p class="text-slate-400 tracking-widest text-[10px] md:text-xs uppercase font-bold mt-1">
+                FASA ARENA: <span id="status-bilik" class="text-emerald-400 px-2 py-0.5 bg-emerald-950/60 border border-emerald-500/30 rounded-md font-cyber inline-block animate-pulse">MENGHUBUNG...</span>
+            </p>
+        </div>
+
+        <div class="flex-1 flex flex-col justify-center">
+            
+            <div id="skrin-waiting" class="hidden text-center py-6 bg-slate-900/60 border border-slate-800 rounded-3xl p-4 shadow-xl max-w-3xl mx-auto w-full">
+                <div class="inline-flex items-center justify-center w-14 h-14 bg-amber-500/10 border-2 border-amber-500 rounded-full mb-3 animate-bounce relative">
+                    <i class="fas fa-users text-2xl text-amber-400"></i>
+                </div>
+                <h2 class="text-xl font-cyber font-bold text-amber-400">MENUNGGU PEMAIN MASUK</h2>
+                <p class="text-slate-400 text-sm max-w-md mx-auto mt-1">Sila bersedia di peranti masing-masing sebelum draf bermula.</p>
+                
+                <div class="grid grid-cols-2 gap-4 mt-6 text-left w-full">
+                    <div class="p-4 bg-cyan-950/20 border border-cyan-800/30 rounded-xl">
+                        <h3 id="wait-team-a" class="font-cyber font-bold text-lg text-cyan-400 truncate text-center mb-3">PASUKAN A</h3>
+                        <div id="list-wait-a" class="space-y-2"></div>
+                    </div>
+                    <div class="p-4 bg-orange-950/20 border border-orange-800/30 rounded-xl">
+                        <h3 id="wait-team-b" class="font-cyber font-bold text-lg text-orange-400 truncate text-center mb-3">PASUKAN B</h3>
+                        <div id="list-wait-b" class="space-y-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="skrin-draft" class="hidden space-y-4 max-w-4xl mx-auto w-full">
+                <div class="text-center bg-slate-900/80 border border-slate-800 p-3 rounded-xl relative overflow-hidden">
+                    <h2 class="text-lg font-cyber font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-rose-400">FASA PEMILIHAN & SEKATAN SUBJEK</h2>
+                </div>
+                <div class="bg-slate-900/40 border border-slate-800/80 p-4 rounded-2xl">
+                    <h3 class="text-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 font-cyber">Pilihan Subjek Tersedia</h3>
+                    <div id="pool-subjek-container" class="grid grid-cols-4 md:grid-cols-6 gap-3 justify-center"></div>
+                </div>
+            </div>
+
+            <div id="skrin-battle" class="hidden space-y-4 w-full">
+                <div class="grid grid-cols-3 gap-4 bg-slate-900/80 backdrop-blur-md border border-slate-800 p-4 rounded-2xl shadow-xl items-center">
+                    <div class="text-center">
+                        <h2 id="nama-team-a" class="text-xl font-black font-cyber text-cyan-400 truncate uppercase">PASUKAN A</h2>
+                        <div id="skor-team-a" class="text-5xl md:text-6xl font-black font-cyber mt-1 text-cyan-300 drop-shadow-[0_0_10px_rgba(6,182,212,0.4)]">0</div>
+                    </div>
+                    <div class="text-center flex items-center justify-center">
+                        <div class="w-12 h-12 rounded-full bg-slate-950 border-2 border-slate-700 flex items-center justify-center shadow-lg">
+                            <span class="font-cyber font-black text-lg bg-gradient-to-br from-amber-400 to-rose-600 text-transparent bg-clip-text">VS</span>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h2 id="nama-team-b" class="text-xl font-black font-cyber text-orange-400 truncate uppercase">PASUKAN B</h2>
+                        <div id="skor-team-b" class="text-5xl md:text-6xl font-black font-cyber mt-1 text-orange-300 drop-shadow-[0_0_10px_rgba(249,115,22,0.4)]">0</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 md:gap-6">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2 border-l-4 border-cyan-500 pl-2 py-1 bg-cyan-950/20 rounded-r-lg mb-2">
+                            <i class="fas fa-shield-halved text-cyan-400 text-sm"></i>
+                            <h3 class="font-bold text-cyan-400 uppercase font-cyber text-xs">Formasi Biru</h3>
+                        </div>
+                        <div id="container-cards-team-a" class="space-y-2"></div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2 border-l-4 border-orange-500 pl-2 py-1 bg-orange-950/20 rounded-r-lg mb-2">
+                            <i class="fas fa-bolt text-orange-400 text-sm"></i>
+                            <h3 class="font-bold text-orange-400 uppercase font-cyber text-xs">Formasi Oren</h3>
+                        </div>
+                        <div id="container-cards-team-b" class="space-y-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="skrin-analysis" class="hidden flex-col gap-4 w-full">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto w-full">
+                    
+                    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-amber-500/30 p-5 rounded-3xl shadow-[0_0_30px_rgba(245,158,11,0.1)] flex flex-col justify-center items-center text-center">
+                        <i class="fas fa-crown text-4xl text-transparent bg-clip-text bg-gradient-to-b from-amber-300 to-orange-500 mb-2"></i>
+                        <h2 class="text-xl font-cyber font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500">PERLAWANAN TAMAT</h2>
+                        
+                        <div class="mt-4 w-full p-3 bg-slate-950/60 border border-slate-800/80 rounded-2xl">
+                            <span class="text-[10px] uppercase tracking-widest text-slate-500 font-bold font-cyber">Pemenang Mutlak</span>
+                            <h3 id="pemenang-perlawanan" class="text-2xl md:text-3xl font-cyber font-black text-white mt-1 truncate">-</h3>
+                            <div class="flex justify-around mt-3 border-t border-slate-800 pt-2 text-sm font-cyber">
+                                <div class="text-cyan-400">Skor A: <span id="final-skor-a" class="font-bold text-xl text-white">0</span></div>
+                                <div class="text-orange-400">Skor B: <span id="final-skor-b" class="font-bold text-xl text-white">0</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="kad-mvp-container" class="bg-gradient-to-br from-amber-500/10 via-slate-900 to-amber-500/5 border border-amber-500/40 rounded-3xl p-5 flex-col justify-center items-center text-center hidden">
+                        <div class="flex items-center gap-2 text-amber-400 font-bold text-[10px] uppercase tracking-widest font-cyber mb-2">
+                            <i class="fas fa-star animate-spin"></i> ANUGERAH MVP <i class="fas fa-star animate-spin"></i>
+                        </div>
+                        <img id="analysis-mvp-avatar" src="" class="w-16 h-16 rounded-xl border-2 border-amber-400 object-contain bg-slate-900 p-0.5 shadow-lg">
+                        <h4 id="analysis-mvp-nama" class="text-xl md:text-2xl font-cyber font-black text-amber-300 mt-2 uppercase truncate w-full">-</h4>
+                        <p id="analysis-mvp-info" class="text-[11px] text-slate-400 mt-1 font-cyber">Mata Kejayaan Tertinggi</p>
+                    </div>
+
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-4 shadow-xl max-w-5xl mx-auto w-full">
+                    <h3 class="text-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 font-cyber"><i class="fas fa-medal mr-2 text-purple-400"></i>Anugerah Khas Perlawanan</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 justify-center" id="container-extra-titles"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="modal-lobi" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-2xl shadow-2xl p-5 relative overflow-hidden flex flex-col max-h-[80vh]">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-3">
+                <h3 class="font-cyber font-bold text-md text-amber-400"><i class="fas fa-gamepad mr-2"></i> LOBI DIKESAN</h3>
+                <button onclick="tutupSenaraiLobi()" class="text-slate-400 hover:text-rose-500 text-lg transition-colors"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="senarai-lobi-kontainer" class="space-y-2 overflow-y-auto pr-1 flex-1"></div>
+        </div>
+    </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDX6PNKeGLMEpyBtnxtvpmyGFyjFq09N5Y",
+            authDomain: "lexiquestv2.firebaseapp.com",
+            projectId: "lexiquestv2",
+            storageBucket: "lexiquestv2.firebasestorage.app",
+            messagingSenderId: "262850068996",
+            appId: "1:262850068996:web:64e28cf9757f2739ef6b51",
+            databaseURL: "https://lexiquestv2-default-rtdb.asia-southeast1.firebasedatabase.app"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const rtdb = firebase.database();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const lobiId = urlParams.get('id') || "-OuZXdCXT9Ow_TulX8ed";
+
+        function sediaAsasPaparanBattle() {
+            document.getElementById('container-cards-team-a').innerHTML = ['A1', 'A2', 'A3'].map(slot => binaHtmlKad(slot, 'cyan')).join('');
+            document.getElementById('container-cards-team-b').innerHTML = ['B1', 'B2', 'B3'].map(slot => binaHtmlKad(slot, 'orange')).join('');
+        }
+
+        function binaHtmlKad(slotId, warnaTema) {
+            return `
+                <div id="card-${slotId.toLowerCase()}" class="flex items-center justify-between bg-slate-900/60 border border-slate-800/80 rounded-xl p-2.5 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 bottom-0 w-1 bg-slate-700" id="side-bar-${slotId.toLowerCase()}"></div>
+                    <div class="flex items-center gap-3 z-10 pl-2">
+                        <div class="relative">
+                            <img id="avatar-${slotId.toLowerCase()}" src="https://ui-avatars.com/api/?name=${slotId}&background=334155" class="w-10 h-10 rounded-xl border border-slate-700 object-contain bg-slate-900 p-0.5">
+                            <span class="absolute -top-1.5 -left-1.5 bg-slate-800 text-slate-400 text-[8px] font-cyber px-1 py-0.5 rounded-md border border-slate-700">${slotId}</span>
+                        </div>
+                        <div class="text-left">
+                            <h4 id="nama-${slotId.toLowerCase()}" class="font-bold text-white text-xs tracking-wide uppercase font-cyber truncate max-w-[120px]">Menunggu...</h4>
+                            <div id="badge-subjek-${slotId.toLowerCase()}" class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-950/60 border border-slate-800 text-[9px] text-slate-400 mt-1">
+                                <span id="icon-subjek-${slotId.toLowerCase()}">⏳</span>
+                                <span id="nama-subjek-${slotId.toLowerCase()}" class="truncate max-w-[80px]">Sedia</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right z-10 bg-slate-950/40 px-2.5 py-1 rounded-lg border border-slate-800/50 min-w-[50px]">
+                        <div id="skor-${slotId.toLowerCase()}" class="text-xl font-black font-cyber text-slate-400 font-mono">0</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function tukarSkrinPaparan(statusSemasa) {
+            const status = statusSemasa ? statusSemasa.toLowerCase().trim() : 'waiting';
+            document.getElementById('skrin-waiting').classList.add('hidden');
+            document.getElementById('skrin-draft').classList.add('hidden');
+            document.getElementById('skrin-battle').classList.add('hidden');
+            document.getElementById('skrin-analysis').classList.add('hidden');
+
+            // Set flex layout untuk Analysis sahaja
+            document.getElementById('skrin-analysis').classList.remove('flex');
+
+            if (status === 'waiting' || status === 'join' || status === 'lobby') {
+                document.getElementById('skrin-waiting').classList.remove('hidden');
+            } else if (status === 'banning' || status === 'picking' || status === 'draft') {
+                document.getElementById('skrin-draft').classList.remove('hidden');
+            } else if (status === 'battle' || status === 'playing' || status === 'start') {
+                document.getElementById('skrin-battle').classList.remove('hidden');
+            } else if (status === 'battle_analysis' || status === 'analysis' || status === 'end') {
+                document.getElementById('skrin-analysis').classList.remove('hidden');
+                document.getElementById('skrin-analysis').classList.add('flex'); // Paksa flex
+            } else {
+                document.getElementById('skrin-waiting').classList.remove('hidden');
+            }
+        }
+
+        sediaAsasPaparanBattle();
+
+        if (lobiId) {
+            rtdb.ref('arena_lobbies/' + lobiId).on('value', (snapshot) => {
+                try {
+                    const lobi = snapshot.val();
+                    if (!lobi) {
+                        document.getElementById('status-bilik').innerText = "BILIK TIADA";
+                        return;
+                    }
+
+                    document.getElementById('status-bilik').innerText = lobi.status ? lobi.status.toUpperCase() : "WAITING";
+                    tukarSkrinPaparan(lobi.status);
+
+                    const teamA = lobi.teamA || {};
+                    const teamB = lobi.teamB || {};
+                    const nameA = lobi.teamAName || "PASUKAN A";
+                    const nameB = lobi.teamBName || "PASUKAN B";
+
+                    document.getElementById('wait-team-a').innerText = nameA.toUpperCase();
+                    document.getElementById('wait-team-b').innerText = nameB.toUpperCase();
+
+                    const bersihkanAvatarUrl = (url, name) => {
+                        if (!url) return `https://ui-avatars.com/api/?name=${name || 'P'}&background=1e293b&color=fff`;
+                        return url.replace(/\|/g, '/').replace(/%7C/gi, '/').replace('img/', '');
+                    };
+
+                    const janaWaitingListHtml = (teamObj, slots, themeColor) => {
+                        return slots.map(s => {
+                            const p = teamObj[s];
+                            if (p && p.name) {
+                                const avatarClean = bersihkanAvatarUrl(p.avatar, p.name);
+                                return `
+                                    <div class="flex items-center gap-3 py-1.5 px-3 bg-slate-950/40 border border-slate-800/50 rounded-lg">
+                                        <img src="${avatarClean}" class="w-8 h-8 rounded-xl border border-${themeColor}-500 object-contain bg-slate-900 p-0.5">
+                                        <div>
+                                            <span class="font-bold text-white font-cyber text-xs truncate max-w-[120px] block">${p.name}</span>
+                                            <div class="text-[9px] text-slate-500 font-cyber uppercase tracking-wider">SLOT ${s}</div>
+                                        </div>
+                                    </div>`;
+                            } else {
+                                return `
+                                    <div class="flex items-center gap-3 py-1.5 px-3 border border-dashed border-slate-800/80 rounded-lg opacity-40">
+                                        <div class="w-8 h-8 rounded-xl border border-dashed border-slate-700 bg-slate-900/50 flex items-center justify-center font-cyber font-bold text-slate-600 text-xs">?</div>
+                                        <span class="text-[10px] italic uppercase text-slate-600 font-cyber">Kosong</span>
+                                    </div>`;
+                            }
+                        }).join('');
+                    };
+
+                    document.getElementById('list-wait-a').innerHTML = janaWaitingListHtml(teamA, ['A1','A2','A3'], 'cyan');
+                    document.getElementById('list-wait-b').innerHTML = janaWaitingListHtml(teamB, ['B1','B2','B3'], 'orange');
+
+                    // BANNING POOL
+                    const poolContainer = document.getElementById('pool-subjek-container');
+                    if (lobi.banningPool) {
+                        const poolArray = Array.isArray(lobi.banningPool) ? lobi.banningPool : Object.values(lobi.banningPool);
+                        poolContainer.innerHTML = poolArray.map(subjek => {
+                            if (!subjek) return ''; 
+                            const isBanned = subjek.banned === true; 
+                            return `
+                                <div class="flex flex-col items-center p-2 rounded-xl bg-slate-950/80 border ${isBanned ? 'border-rose-900/50 opacity-30 line-through' : 'border-slate-800'} text-center shadow">
+                                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br ${subjek.color || 'from-slate-700 to-slate-800'} flex items-center justify-center text-sm border border-white/10">
+                                        ${subjek.icon || '📚'}
+                                    </div>
+                                    <span class="text-[9px] font-bold mt-1.5 tracking-wide truncate w-full uppercase font-cyber">${subjek.name || 'UMUM'}</span>
+                                </div>`;
+                        }).join('');
+                    }
+
+                    // UPDATE BATTLE SCORE
+                    document.getElementById('nama-team-a').innerText = nameA;
+                    document.getElementById('nama-team-b').innerText = nameB;
+
+                    const totalA = (teamA.A1?.points || 0) + (teamA.A2?.points || 0) + (teamA.A3?.points || 0);
+                    const totalB = (teamB.B1?.points || 0) + (teamB.B2?.points || 0) + (teamB.B3?.points || 0);
+                    document.getElementById('skor-team-a').innerText = totalA;
+                    document.getElementById('skor-team-b').innerText = totalB;
+
+                    ['A1', 'A2', 'A3'].forEach(s => kemaskiniKadPemain('teamA', s, teamA[s], lobi));
+                    ['B1', 'B2', 'B3'].forEach(s => kemaskiniKadPemain('teamB', s, teamB[s], lobi));
+
+                    // =========================================================
+                    // ⭐ PENGIRAAN GELARAN KHAS (ANALYSIS)
+                    // =========================================================
+                    document.getElementById('final-skor-a').innerText = totalA;
+                    document.getElementById('final-skor-b').innerText = totalB;
+                    
+                    if (totalA > totalB) {
+                        document.getElementById('pemenang-perlawanan').innerText = nameA.toUpperCase();
+                        document.getElementById('pemenang-perlawanan').className = "text-2xl md:text-3xl font-cyber font-black text-cyan-400 mt-1 truncate";
+                    } else if (totalB > totalA) {
+                        document.getElementById('pemenang-perlawanan').innerText = nameB.toUpperCase();
+                        document.getElementById('pemenang-perlawanan').className = "text-2xl md:text-3xl font-cyber font-black text-orange-400 mt-1 truncate";
+                    } else {
+                        document.getElementById('pemenang-perlawanan').innerText = "SERI (DRAW)";
+                        document.getElementById('pemenang-perlawanan').className = "text-2xl md:text-3xl font-cyber font-black text-slate-400 mt-1 truncate";
+                    }
+
+                    let semuaPemainList = [];
+                    ['A1','A2','A3'].forEach(s => { if(teamA[s] && teamA[s].name) semuaPemainList.push({ slot: s, name: teamA[s].name, mata: teamA[s].points || 0, streak: teamA[s].streak || 0, boosterGuna: teamA[s].boosterGuna || 0, boosterKena: teamA[s].boosterKena || 0, avatar: teamA[s].avatar }); });
+                    ['B1','B2','B3'].forEach(s => { if(teamB[s] && teamB[s].name) semuaPemainList.push({ slot: s, name: teamB[s].name, mata: teamB[s].points || 0, streak: teamB[s].streak || 0, boosterGuna: teamB[s].boosterGuna || 0, boosterKena: teamB[s].boosterKena || 0, avatar: teamB[s].avatar }); });
+
+                    if (semuaPemainList.length > 0) {
+                        const pemainBerMata = [...semuaPemainList].filter(p => p.mata > 0).sort((a, b) => b.mata - a.mata);
+                        const pemainRank1 = pemainBerMata[0];
+                        const pemainRank2 = pemainBerMata[1];
+                        const pemainRank3 = pemainBerMata[2];
+
+                        const maxBoosterGuna = Math.max(...semuaPemainList.map(p => p.boosterGuna), 1);
+                        const maxBoosterKena = Math.max(...semuaPemainList.map(p => p.boosterKena), 1);
+
+                        let skorMVPTertinggi = -1;
+                        let slotMVP = null;
+                        semuaPemainList.forEach(p => {
+                            let skorKombinasi = p.mata + p.streak + p.boosterGuna;
+                            if (skorKombinasi > skorMVPTertinggi && skorKombinasi > 0) { skorMVPTertinggi = skorKombinasi; slotMVP = p.slot; }
+                        });
+
+                        let anugerahKhasResult = { mvp: null, collector: null, supporter: null, lifeguard: null, artillery: null, glamour: null, pawns: [] };
+
+                        semuaPemainList.forEach(p => {
+                            let cleanAv = bersihkanAvatarUrl(p.avatar, p.name);
+                            let pData = { name: p.name, slot: p.slot, avatar: cleanAv, mata: p.mata };
+
+                            if (p.slot === slotMVP) { anugerahKhasResult.mvp = pData; }
+                            else if (pemainRank1 && p.slot === pemainRank1.slot) { anugerahKhasResult.collector = pData; }
+                            else if (pemainRank2 && p.slot === pemainRank2.slot) { anugerahKhasResult.supporter = pData; }
+                            else if (pemainRank3 && p.slot === pemainRank3.slot) { anugerahKhasResult.lifeguard = pData; }
+                            else if (p.boosterGuna === maxBoosterGuna && p.boosterGuna > 0) { anugerahKhasResult.artillery = pData; }
+                            else if (p.boosterKena === maxBoosterKena && p.boosterKena > 0) { anugerahKhasResult.glamour = pData; }
+                            else { anugerahKhasResult.pawns.push(pData); }
+                        });
+
+                        if(anugerahKhasResult.mvp) {
+                            document.getElementById('kad-mvp-container').style.display = 'flex';
+                            document.getElementById('analysis-mvp-avatar').src = anugerahKhasResult.mvp.avatar;
+                            document.getElementById('analysis-mvp-nama').innerText = anugerahKhasResult.mvp.name;
+                            document.getElementById('analysis-mvp-info').innerText = `Slot ${anugerahKhasResult.mvp.slot} • Nilai Kombo (${anugerahKhasResult.mvp.mata} PTS)`;
+                        }
+
+                        const extraContainer = document.getElementById('container-extra-titles');
+                        extraContainer.innerHTML = ''; 
+
+                        const susunanKadGanjaran = [
+                            { data: anugerahKhasResult.collector, title: "💎 COLLECTOR", icon: "fas fa-gem", color: "from-emerald-600 to-emerald-800" },
+                            { data: anugerahKhasResult.supporter, title: "🛡️ SUPPORTER", icon: "fas fa-handshake", color: "from-blue-600 to-blue-800" },
+                            { data: anugerahKhasResult.lifeguard, title: "⛑️ LIFE GUARD", icon: "fas fa-shield-halved", color: "from-teal-600 to-teal-800" },
+                            { data: anugerahKhasResult.artillery, title: "💣 ARTILLERY", icon: "fas fa-rocket", color: "from-orange-600 to-orange-800" },
+                            { data: anugerahKhasResult.glamour, title: "💅 GLAMOUR", icon: "fas fa-star", color: "from-pink-600 to-pink-800" }
+                        ];
+
+                        susunanKadGanjaran.forEach(kad => {
+                            if(kad.data) {
+                                extraContainer.innerHTML += `
+                                    <div class="flex flex-col items-center p-3 rounded-2xl bg-slate-950/70 border border-slate-800 text-center shadow shadow-black">
+                                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br ${kad.color} flex items-center justify-center text-sm text-white border border-white/10"><i class="${kad.icon}"></i></div>
+                                        <span class="text-[9px] font-bold mt-1.5 font-cyber tracking-wide text-amber-400 uppercase">${kad.title}</span>
+                                        <img src="${kad.data.avatar}" class="w-10 h-10 rounded-xl border border-slate-700 object-contain mt-2 bg-slate-900 p-0.5">
+                                        <h4 class="font-bold text-white text-[10px] font-cyber truncate w-full mt-1.5 uppercase">${kad.data.name}</h4>
+                                        <div class="text-[8px] text-slate-500 font-cyber uppercase tracking-tight mt-0.5">SLOT ${kad.data.slot} • ${kad.data.mata} PTS</div>
+                                    </div>`;
+                            }
+                        });
+
+                        anugerahKhasResult.pawns.forEach(pawn => {
+                            extraContainer.innerHTML += `
+                                <div class="flex flex-col items-center p-3 rounded-2xl bg-slate-950/40 border border-slate-800/60 text-center opacity-70">
+                                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center text-sm text-slate-400 border border-white/5"><i class="fas fa-chess-pawn"></i></div>
+                                    <span class="text-[9px] font-bold mt-1.5 font-cyber tracking-wide text-slate-400 uppercase">♟️ PAWN</span>
+                                    <img src="${pawn.avatar}" class="w-10 h-10 rounded-xl border border-slate-800 object-contain mt-2 bg-slate-900 p-0.5">
+                                    <h4 class="font-bold text-slate-400 text-[10px] font-cyber truncate w-full mt-1.5 uppercase">${pawn.name}</h4>
+                                    <div class="text-[8px] text-slate-600 font-cyber uppercase tracking-tight mt-0.5">SLOT ${pawn.slot} • ${pawn.mata} PTS</div>
+                                </div>`;
+                        });
+                    }
+
+                } catch (error) {
+                    console.error("Ralat Stream:", error);
+                }
+            });
+        }
+
+        function kemaskiniKadPemain(teamKey, slotKey, playerData, lobi) {
+            const prefix = slotKey.toLowerCase();
+            const isTeamA = teamKey === 'teamA';
+            const cardEl = document.getElementById(`card-${prefix}`);
+            const sideBarEl = document.getElementById(`side-bar-${prefix}`);
+            const avatarEl = document.getElementById(`avatar-${prefix}`);
+            const nameEl = document.getElementById(`nama-${prefix}`);
+            const badgeSubjekEl = document.getElementById(`badge-subjek-${prefix}`);
+            const iconSubjekEl = document.getElementById(`icon-subjek-${prefix}`);
+            const nameSubjekEl = document.getElementById(`nama-subjek-${prefix}`);
+            const skorEl = document.getElementById(`skor-${prefix}`);
+
+            if (!cardEl) return;
+
+            if (playerData && playerData.name) {
+                nameEl.innerText = playerData.name;
+                const skorLama = parseInt(skorEl.innerText) || 0;
+                const skorBaru = playerData.points || 0;
+                skorEl.innerText = skorBaru;
+
+                if (skorBaru > skorLama) {
+                    skorEl.classList.add('scale-125', 'text-amber-400');
+                    cardEl.classList.add('translate-x-1', 'border-amber-500/50');
+                    setTimeout(() => {
+                        skorEl.classList.remove('scale-125', 'text-amber-400');
+                        cardEl.classList.remove('translate-x-1', 'border-amber-500/50');
+                    }, 500);
+                } else {
+                    skorEl.className = `text-xl font-black font-cyber ${isTeamA ? 'text-cyan-400' : 'text-orange-400'} font-mono`;
+                }
+
+                let rawAvatar = playerData.avatar || `https://ui-avatars.com/api/?name=${playerData.name}&background=random`;
+                avatarEl.src = rawAvatar.replace(/\|/g, '/').replace(/%7C/gi, '/').replace('img/', '');
+                // FIX AVATAR CSS DI SINI JUGA
+                avatarEl.className = `w-10 h-10 rounded-xl border ${isTeamA ? 'border-cyan-500' : 'border-orange-500'} object-contain bg-slate-900 p-0.5`;
+
+                const subjekPemain = lobi.picks && lobi.picks[teamKey] && lobi.picks[teamKey][slotKey] ? lobi.picks[teamKey][slotKey] : null;
+                if (subjekPemain) {
+                    iconSubjekEl.innerText = subjekPemain.icon || '📚';
+                    nameSubjekEl.innerText = subjekPemain.name || 'UMUM';
+                    badgeSubjekEl.className = `inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-gradient-to-r ${subjekPemain.color || 'from-slate-800 to-slate-900'} text-[9px] font-bold text-white border border-white/10 mt-1`;
+                    cardEl.className = `flex items-center justify-between bg-slate-900 border ${isTeamA ? 'border-cyan-500/40' : 'border-orange-500/40'} rounded-xl p-2.5 relative overflow-hidden`;
+                    sideBarEl.className = `absolute top-0 left-0 bottom-0 w-1.5 bg-gradient-to-b ${subjekPemain.color || 'from-slate-500 to-slate-600'}`;
+                } else {
+                    iconSubjekEl.innerText = '⏳';
+                    nameSubjekEl.innerText = 'Menunggu Draf...';
+                    badgeSubjekEl.className = `inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-950/60 border border-slate-800 text-[9px] text-slate-400 mt-1`;
+                    cardEl.className = `flex items-center justify-between bg-slate-900/40 border border-dashed ${isTeamA ? 'border-cyan-500/20' : 'border-orange-500/20'} rounded-xl p-2.5 relative overflow-hidden`;
+                    sideBarEl.className = `absolute top-0 left-0 bottom-0 w-1 ${isTeamA ? 'bg-cyan-500/40' : 'bg-orange-500/40'}`;
+                }
+            } else {
+                nameEl.innerText = 'SLOT KOSONG';
+                iconSubjekEl.innerText = '❌';
+                nameSubjekEl.innerText = 'Tiada';
+                skorEl.innerText = '0';
+                skorEl.className = 'text-xl font-black font-cyber text-slate-700 font-mono';
+                avatarEl.src = `https://ui-avatars.com/api/?name=%2B&background=1e293b&color=475569`;
+                badgeSubjekEl.className = `inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-transparent border border-slate-800/40 text-[9px] text-slate-600 mt-1`;
+                cardEl.className = `flex items-center justify-between bg-slate-950/20 border border-dashed border-slate-800 rounded-xl p-2.5 opacity-40 relative overflow-hidden`;
+                sideBarEl.className = `absolute top-0 left-0 bottom-0 w-1 bg-slate-800`;
+            }
+        }
+
+        function bukaSenaraiLobi() {
+            document.getElementById('modal-lobi').classList.remove('hidden');
+            const container = document.getElementById('senarai-lobi-kontainer');
+            container.innerHTML = '<div class="text-center py-6 text-slate-400 text-sm"><i class="fas fa-spinner animate-spin mr-2"></i> Mengimbas lobi...</div>';
+
+            rtdb.ref('arena_lobbies').once('value').then((snapshot) => {
+                const semuaLobi = snapshot.val();
+                container.innerHTML = '';
+                if (!semuaLobi) {
+                    container.innerHTML = '<div class="text-center py-6 text-rose-400 text-sm font-black font-cyber">TIADA LOBI AKTIF</div>';
+                    return;
+                }
+                Object.keys(semuaLobi).forEach(id => {
+                    const lobi = semuaLobi[id];
+                    const status = lobi.status ? lobi.status.toUpperCase().trim() : 'WAITING';
+                    
+                    let warnaStatus = "bg-slate-800 text-slate-400 border-slate-700";
+                    if (status === 'WAITING' || status === 'LOBBY' || status === 'JOIN') warnaStatus = "bg-emerald-950/80 text-emerald-400 border border-emerald-500/30";
+                    if (status === 'BANNING' || status === 'PICKING' || status === 'DRAFT') warnaStatus = "bg-purple-950/80 text-purple-400 border border-purple-500/30";
+                    if (status === 'BATTLE' || status === 'PLAYING' || status === 'START') warnaStatus = "bg-rose-950/80 text-rose-400 border border-rose-500/30 animate-pulse";
+                    if (status === 'ANALYSIS' || status === 'END') warnaStatus = "bg-amber-950/80 text-amber-400 border border-amber-500/30";
+
+                    container.innerHTML += `
+                        <div class="flex items-center justify-between p-2.5 bg-slate-950 border border-slate-800/80 rounded-xl">
+                            <div class="text-left truncate mr-2 flex-1">
+                                <div class="font-cyber font-black text-xs text-white uppercase truncate">${lobi.teamAName || 'Pasukan A'} vs ${lobi.teamBName || 'Pasukan B'}</div>
+                            </div>
+                            <div class="flex flex-col items-end gap-1">
+                                <span class="text-[8px] font-cyber font-black px-1.5 py-0.5 rounded ${warnaStatus}">${status}</span>
+                                <a href="penonton.html?id=${id}" class="px-2 py-1 bg-amber-500 text-slate-950 font-black font-cyber text-[9px] rounded-md shadow">PANTAU</a>
+                            </div>
+                        </div>`;
+                });
+            });
+        }
+        function tutupSenaraiLobi() { document.getElementById('modal-lobi').classList.add('hidden'); }
+    </script>
+</body>
+</html>
