@@ -14,35 +14,43 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
-</head>
-<body class="bg-slate-900 min-h-screen font-['Poppins'] flex items-center justify-center text-white p-4">
 
-    <div id="login-section" class="bg-slate-800 p-8 rounded-2xl shadow-2xl w-full max-w-md border-t-4 border-indigo-500 text-center">
-  <div class="inline-flex items-center justify-center w-24 h-24 bg-white/5 backdrop-blur-md rounded-xl mb-3 border border-white/10 shadow-inner overflow-hidden">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="bg-slate-900 min-h-screen flex items-center justify-center text-white p-4">
+
+    <div id="login-section" class="bg-slate-800 p-8 rounded-2xl shadow-2xl w-full max-w-md border-t-4 border-indigo-500 text-center transition-all duration-300">
+        <div class="inline-flex items-center justify-center w-24 h-24 bg-white/5 backdrop-blur-md rounded-xl mb-3 border border-white/10 shadow-inner overflow-hidden">
             <img src="assets/logolq.webp" alt="Logo LexiQuest V2" class="max-w-full max-h-full object-contain">
         </div>        
-	<h1 class="text-2xl font-black mb-2">SUPER ADMIN PUSAT</h1>
-        <p class="text-slate-400 text-sm mb-6">Pendaftaran Admin Sekolah / Guru</p>
+        <h1 class="text-2xl font-black mb-2">SUPER ADMIN PUSAT</h1>
+        <p class="text-slate-400 text-sm mb-6">Panel Kawalan Model Komersial B2B</p>
         
-        <input type="password" id="admin-pass" placeholder="Masukkan Kata Laluan" class="w-full p-4 mb-4 bg-slate-700 text-white rounded-xl outline-none text-center tracking-widest text-lg focus:ring-2 focus:ring-indigo-500">
+        <input type="password" id="admin-pass" placeholder="Masukkan Kata Laluan" class="w-full p-4 mb-4 bg-slate-700 text-white rounded-xl outline-none text-center tracking-widest text-lg focus:ring-2 focus:ring-indigo-500 transition">
         <button onclick="checkPassword()" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-indigo-500/30">
             LOG MASUK KAWALAN
         </button>
     </div>
 
-    <div id="admin-panel" class="hidden w-full max-w-4xl bg-slate-800 rounded-2xl shadow-2xl border-t-4 border-green-500 overflow-hidden">
+    <div id="admin-panel" class="hidden w-full max-w-6xl mx-auto transition-all duration-500">
         
-        <div class="bg-slate-900 p-6 flex justify-between items-center border-b border-slate-700">
+        <div class="bg-slate-800 p-6 rounded-2xl border-t-4 border-green-500 shadow-xl mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
                 <h1 class="text-2xl font-black text-green-400"><i class="fas fa-server mr-2"></i> Panel Kawalan Super Admin</h1>
-                <p class="text-slate-400 text-sm mt-1">Pengurusan sistem pangkalan data dan pendaftaran sekolah.</p>
+                <p class="text-slate-400 text-sm mt-1">Pengurusan Langganan B2B & Penyelenggaraan Sistem.</p>
             </div>
-           <button onclick="window.location.href='https://ediharianto010474.github.io/lexiquestv2'" class="bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-4 py-2 rounded-lg text-sm font-bold transition-colors">
-    <i class="fas fa-sign-out-alt"></i> Keluar
-</button>
+            <button onclick="window.location.href='https://ediharianto010474.github.io/lexiquestv2'" class="bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-colors flex items-center gap-2 shadow">
+                <i class="fas fa-sign-out-alt"></i> Keluar
+            </button>
         </div>
 
-        <div id="housekeeping-banner" class="hidden bg-amber-500/20 border-l-4 border-amber-500 p-4 mx-6 mt-6 rounded-xl flex items-center justify-between text-amber-300 dynamic-banner animate-pulse">
+        <div id="housekeeping-banner" class="hidden bg-amber-500/20 border-l-4 border-amber-500 p-4 mb-6 rounded-xl flex items-center justify-between text-amber-300 dynamic-banner animate-pulse">
             <div class="flex items-center space-x-3">
                 <i class="fas fa-exclamation-triangle text-2xl"></i>
                 <div>
@@ -53,65 +61,91 @@
             <span class="text-xs bg-amber-500 text-slate-900 px-2 py-1 rounded font-bold">KRITIKAL</span>
         </div>
 
-        <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            <div class="space-y-4 bg-slate-900/50 p-5 rounded-xl border border-slate-700">
-                <h2 class="text-lg font-bold text-slate-200 border-b border-slate-700 pb-2"><i class="fas fa-school mr-2 text-green-400"></i> Pendaftaran Guru Baru</h2>
-                <div>
-                    <label class="block text-xs font-bold text-slate-400 mb-1">Nama Sekolah</label>
-                    <input id="school-name" type="text" class="w-full p-3 bg-slate-700 rounded-xl outline-none focus:ring-2 ring-green-500 uppercase text-sm" placeholder="Contoh: SK TAMAN SCIENTEX">
+            <div class="lg:col-span-2 space-y-6">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
+                    <div class="flex items-center justify-between mb-4 border-b border-slate-700 pb-3">
+                        <h2 class="text-lg font-bold text-slate-200"><i class="fas fa-clipboard-check text-green-400 mr-2"></i> Permohonan Menunggu Kelulusan</h2>
+                        <button onclick="loadPendingSubscriptions()" class="bg-slate-700 hover:bg-slate-600 text-slate-300 py-1.5 px-3 rounded-lg text-xs font-semibold flex items-center gap-1 transition">
+                            <i class="fas fa-sync-alt"></i> Segarkan
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto bg-slate-900 rounded-xl border border-slate-700">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-800/80 text-slate-400 uppercase text-xs tracking-wider border-b border-slate-700">
+                                    <th class="p-4 font-bold">Tarikh</th>
+                                    <th class="p-4 font-bold">Maklumat Sekolah</th>
+                                    <th class="p-4 font-bold">Pakej Langganan</th>
+                                    <th class="p-4 font-bold">Resit</th>
+                                    <th class="p-4 font-bold text-center">Tindakan</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pending-table-body">
+                                </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-400 mb-1">Nama Admin Sekolah (Guru)</label>
-                    <input id="admin-name" type="text" class="w-full p-3 bg-slate-700 rounded-xl outline-none focus:ring-2 ring-green-500 uppercase text-sm" placeholder="Contoh: CIKGU ALIA">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-400 mb-1">Senarai Kelas (Pisahkan dengan koma)</label>
-                    <input id="admin-classes" type="text" class="w-full p-3 bg-slate-700 rounded-xl outline-none focus:ring-2 ring-green-500 uppercase text-sm" placeholder="Contoh: 6 AMANAH, 6 BISTARI">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-400 mb-1">Passcode (Kata Laluan Guru)</label>
-                    <input id="admin-passcode" type="text" class="w-full p-3 bg-slate-700 rounded-xl outline-none focus:ring-2 ring-green-500 font-mono text-sm tracking-widest" placeholder="Contoh: SCX2026">
-                </div>
-                <button id="btn-save" onclick="saveSchoolAdmin()" class="w-full py-3 bg-green-600 hover:bg-green-500 text-white font-black rounded-xl transition-all text-sm shadow-md">
-                    <i class="fas fa-save mr-2"></i> DAFTARKAN SEKOLAH INI
-                </button>
             </div>
 
-            <div class="space-y-4 bg-slate-900/50 p-5 rounded-xl border border-slate-700 flex flex-col justify-between">
-                <div>
-                    <h2 class="text-lg font-bold text-slate-200 border-b border-slate-700 pb-2"><i class="fas fa-broom mr-2 text-indigo-400"></i> Penyelenggaraan Sistem</h2>
-                    <p class="text-xs text-slate-400 mt-2">Membersihkan pangkalan data secara manual untuk mengekalkan kelajuan aplikasi LEXI QUEST.</p>
-                    
-                    <div class="mt-4 space-y-2 bg-slate-800 p-4 rounded-xl text-xs border border-slate-700">
-                        <div class="flex justify-between">
-                            <span class="text-slate-400">Pembersihan Terakhir:</span>
-                            <span id="txt-last-clean" class="font-bold text-indigo-400">Sedang menyemak...</span>
+            <div class="space-y-6 flex flex-col h-full">
+                
+                <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 shadow-xl text-xs text-slate-400">
+                    <div class="font-bold text-slate-300 uppercase tracking-wider text-xs mb-2 border-b border-slate-700 pb-2">
+                        <i class="fas fa-info-circle text-indigo-400 mr-1"></i> Matriks Had Kuota Murid
+                    </div>
+                    <div class="space-y-2 mt-3">
+                        <div class="flex justify-between items-center bg-slate-900/50 p-2.5 rounded border border-slate-700/60">
+                            <span class="font-bold text-cyan-400">🏆 CITRA</span>
+                            <span class="text-slate-200 font-mono">Maks 150</span>
                         </div>
-                        <div class="flex justify-between">
-                            <span class="text-slate-400">Jumlah Log Aktif (game_records):</span>
-                            <span id="txt-total-logs" class="font-bold text-indigo-400">Sedang mengira...</span>
+                        <div class="flex justify-between items-center bg-slate-900/50 p-2.5 rounded border border-slate-700/60">
+                            <span class="font-bold text-amber-400">🔥 PERDANA</span>
+                            <span class="text-slate-200 font-mono">Maks 600</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-slate-900/50 p-2.5 rounded border border-slate-700/60">
+                            <span class="font-bold text-purple-400">⚡ MEGA</span>
+                            <span class="text-slate-200 font-mono">Tanpa Had</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl flex-grow flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-200 border-b border-slate-700 pb-2"><i class="fas fa-broom mr-2 text-indigo-400"></i> Penyelenggaraan Sistem</h2>
+                        
+                        <div class="mt-4 space-y-2 bg-slate-900 p-4 rounded-xl text-xs border border-slate-700">
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Pembersihan Terakhir:</span>
+                                <span id="txt-last-clean" class="font-bold text-indigo-400">Sedang menyemak...</span>
+                            </div>
+                            <div class="flex justify-between mt-1">
+                                <span class="text-slate-400">Status Logs & RTDB:</span>
+                                <span id="txt-total-logs" class="font-bold text-emerald-400">Sedia Dicuci</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 text-[11px] text-slate-400 space-y-1">
+                            <p><i class="fas fa-check-circle text-emerald-400 mr-1"></i> Memadam <span class="text-slate-200">game_records</span> berusia > 30 hari.</p>
+                            <p><i class="fas fa-check-circle text-emerald-400 mr-1"></i> Membatalkan tuntutan <span class="text-slate-200">claims pending</span> > 14 hari.</p>
+                            <p><i class="fas fa-check-circle text-emerald-400 mr-1"></i> Memadam bilik <span class="text-slate-200">challenges</span> tergantung di RTDB.</p>
                         </div>
                     </div>
 
-                    <div class="mt-4 text-[11px] text-slate-400 space-y-1">
-                        <p><i class="fas fa-check-circle text-emerald-400 mr-1"></i> Memadam <span class="text-slate-200">game_records</span> berusia > 30 hari.</p>
-                        <p><i class="fas fa-check-circle text-emerald-400 mr-1"></i> Membatalkan tuntutan <span class="text-slate-200">claims pending</span> > 14 hari & pulangkan koin.</p>
-                        <p><i class="fas fa-check-circle text-emerald-400 mr-1"></i> Memadam bilik PvP tergantung (<span class="text-slate-200">challenges</span>) di RTDB.</p>
-                    </div>
+                    <button id="btn-housekeeping" onclick="runHousekeeping()" class="w-full mt-6 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-black rounded-xl transition-all shadow-lg text-sm flex items-center justify-center space-x-2">
+                        <i class="fas fa-magic"></i> <span>JALANKAN HOUSEKEEPING</span>
+                    </button>
                 </div>
-
-                <button id="btn-housekeeping" onclick="runHousekeeping()" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-black rounded-xl transition-all shadow-lg text-sm flex items-center justify-center space-x-2">
-                    <i class="fas fa-magic"></i> <span>JALANKAN HOUSEKEEPING NOW</span>
-                </button>
+                
             </div>
-
         </div>
     </div>
 
     <script>
         // ==========================================
-        // FIREBASE CONFIGURATION (V2)
+        // FIREBASE CONFIGURATION (V2) - ORIGINAL
         // ==========================================
         const firebaseConfig = {
             apiKey: "AIzaSyDX6PNKeGLMEpyBtnxtvpmyGFyjFq09N5Y",
@@ -123,21 +157,28 @@
             measurementId: "G-G4T1JCPH88",
             databaseURL: "https://lexiquestv2-default-rtdb.asia-southeast1.firebasedatabase.app"
         };
-        firebase.initializeApp(firebaseConfig);
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
         const db = firebase.firestore();
-        const rtdb = firebase.database(); // DITAMBAH: Inisialisasi Realtime Database
+        const rtdb = firebase.database();
 
-        // 1. FUNGSI LOG MASUK SUPER ADMIN
+        // ==========================================
+        // 1. PENGURUSAN LOGIN KAWALAN
+        // ==========================================
+        window.onload = function() {
+            if (sessionStorage.getItem("superAdminAuth") === "true") {
+                showPanel();
+            }
+        };
+
         function checkPassword() {
             const pass = document.getElementById('admin-pass').value;
             if (pass === "lexiquest2026") {
-                document.getElementById('login-section').classList.add('hidden');
-                document.getElementById('admin-panel').classList.remove('hidden');
-                
-                // DITAMBAH: Jalankan semakan housekeeping sebaik sahaja berjaya login
-                checkDynamicHousekeeping();
+                sessionStorage.setItem("superAdminAuth", "true");
+                showPanel();
             } else {
-                alert("Kata laluan salah!");
+                alert("🔒 Kata laluan salah! Akses dinafikan.");
             }
         }
 
@@ -148,53 +189,165 @@
             }
         });
 
-        // 2. FUNGSI SIMPAN DATA ADMIN SEKOLAH (Asal)
-        async function saveSchoolAdmin() {
-            const school = document.getElementById('school-name').value.trim().toUpperCase();
-            const name = document.getElementById('admin-name').value.trim().toUpperCase();
-            const classesRaw = document.getElementById('admin-classes').value.trim().toUpperCase();
-            const passcode = document.getElementById('admin-passcode').value.trim();
-            const btn = document.getElementById('btn-save');
+        function showPanel() {
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('admin-panel').classList.remove('hidden');
+            document.body.classList.remove("flex", "items-center", "justify-center");
+            document.body.classList.add("block", "bg-slate-900", "p-6");
+            
+            checkDynamicHousekeeping();
+            loadPendingSubscriptions();
+        }
 
-            if(!school || !name || !classesRaw || !passcode) {
-                alert("Sila isi semua ruangan!");
-                return;
-            }
-
-            const classesArray = classesRaw.split(',').map(c => c.trim()).filter(c => c !== "");
+        // ==========================================
+        // 2. FUNGSI MUAT TURUN JADUAL LANGGANAN
+        // ==========================================
+        async function loadPendingSubscriptions() {
+            const tableBody = document.getElementById("pending-table-body");
+            tableBody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-400"><i class="fas fa-spinner fa-spin text-2xl mb-2 block"></i> Memuatkan data...</td></tr>`;
 
             try {
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Mendaftarkan...';
-                btn.disabled = true;
+                const snapshot = await db.collection("pending_subscriptions").orderBy("createdAt", "desc").get();
+                tableBody.innerHTML = "";
 
-                await db.collection("school_admins").doc(passcode).set({
-                    schoolName: school,
-                    adminName: name,
-                    classes: classesArray,
-                    passcode: passcode,
-                    createdAt: new Date()
+                if (snapshot.empty) {
+                    tableBody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-400"><i class="fas fa-inbox text-3xl mb-2 block text-slate-600"></i>Tiada permohonan baharu.</td></tr>`;
+                    return;
+                }
+
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const docId = doc.id;
+
+                    // Tarikh format
+                    let dateStr = "N/A";
+                    if (data.createdAt) {
+                        const d = data.createdAt.toDate();
+                        dateStr = d.toLocaleDateString('ms-MY');
+                    }
+
+                    // Tentukan warna Pakej
+                    let tierColor = 'text-cyan-400';
+                    if(data.tier === 'PERDANA') tierColor = 'text-amber-400';
+                    if(data.tier === 'MEGA') tierColor = 'text-purple-400';
+
+                    // Butang Audit Resit
+                    let receiptBtn = `<span class="text-slate-600 text-xs italic">Tiada</span>`;
+                    if (data.receiptUrl) {
+                        receiptBtn = `<a href="${data.receiptUrl}" target="_blank" class="bg-blue-600/20 text-blue-400 hover:bg-blue-600 hover:text-white px-3 py-1 rounded transition text-xs font-bold border border-blue-600/30"><i class="fas fa-file-invoice mr-1"></i> LIHAT</a>`;
+                    }
+
+                    const tr = document.createElement("tr");
+                    tr.className = "border-b border-slate-700/50 hover:bg-slate-800/60 transition text-sm text-slate-300";
+                    tr.innerHTML = `
+                        <td class="p-4 whitespace-nowrap">${dateStr}</td>
+                        <td class="p-4">
+                            <div class="font-bold text-white uppercase">${data.schoolName || 'N/A'}</div>
+                            <div class="text-xs text-slate-400 mt-1"><i class="fas fa-user-tie mr-1"></i> ${data.teacherName || 'N/A'}</div>
+                            <div class="text-xs text-emerald-400 mt-0.5"><i class="fab fa-whatsapp mr-1"></i> ${data.teacherPhone || 'N/A'}</div>
+                        </td>
+                        <td class="p-4">
+                            <div class="font-black ${tierColor} tracking-wider">${(data.tier || 'CITRA').toUpperCase()}</div>
+                            <div class="text-xs text-slate-400 mt-1"><i class="far fa-clock mr-1"></i> ${data.duration || 3} Bulan</div>
+                        </td>
+                        <td class="p-4">${receiptBtn}</td>
+                        <td class="p-4 text-center whitespace-nowrap">
+                            <button onclick="approveSubscription('${docId}', '${escapeStr(data.schoolName)}', '${escapeStr(data.teacherName)}', '${escapeStr(data.teacherPhone)}', '${data.tier || 'CITRA'}', ${data.duration || 3})" class="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-3 rounded-lg text-xs shadow-md transition mr-1">
+                                <i class="fas fa-check"></i> LULUS
+                            </button>
+                            <button onclick="rejectSubscription('${docId}', '${escapeStr(data.schoolName)}')" class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-3 rounded-lg text-xs shadow-md transition">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </td>
+                    `;
+                    tableBody.appendChild(tr);
                 });
 
-                alert(`✅ BERJAYA!\n\nSekolah: ${school}\nGuru: ${name}\nPasscode: ${passcode}\n\nSila berikan passcode ini kepada guru tersebut.`);
-                
-                document.getElementById('school-name').value = '';
-                document.getElementById('admin-name').value = '';
-                document.getElementById('admin-classes').value = '';
-                document.getElementById('admin-passcode').value = '';
-                
             } catch (error) {
-                console.error("Ralat:", error);
-                alert("Gagal menyimpan data: " + error.message);
-            } finally {
-                btn.innerHTML = '<i class="fas fa-save mr-2"></i> DAFTARKAN SEKOLAH INI';
-                btn.disabled = false;
+                console.error("Ralat load data:", error);
+                tableBody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-red-400">Ralat: ${error.message}</td></tr>`;
             }
         }
 
-// =========================================================================
-        // KEMAS KINI: SISTEM HOUSEKEEPING BERASASKAN MASA (30 HARI)
-        // =========================================================================
-        
+        function escapeStr(str) {
+            return str ? str.replace(/'/g, "\\'").replace(/"/g, '&quot;') : '';
+        }
+
+        // ==========================================
+        // 3. FUNGSI KELULUSAN (GENERATE PASSCODE & WHATSAPP)
+        // ==========================================
+        async function approveSubscription(docId, schoolName, teacherName, teacherPhone, tier, durationMonths) {
+            if (!confirm(`Sahkan kelulusan untuk ${schoolName}?`)) return;
+
+            try {
+                // Tentukan Had Murid
+                let maxStudents = 150;
+                let tierUpper = tier.toUpperCase();
+                if (tierUpper === "PERDANA") maxStudents = 600;
+                else if (tierUpper === "MEGA") maxStudents = 999999;
+
+                // Kira Expiry Date
+                const expiryDate = new Date();
+                expiryDate.setMonth(expiryDate.getMonth() + parseInt(durationMonths));
+
+                // Jana Passcode (LQ-XXXX)
+                const passcodeRawak = `LQ-${Math.floor(1000 + Math.random() * 9000)}`;
+
+                // Simpan ke school_admins
+                await db.collection("school_admins").doc(passcodeRawak).set({
+                    schoolName: schoolName.toUpperCase(),
+                    adminName: teacherName.toUpperCase(),
+                    passcode: passcodeRawak,
+                    subscription_tier: tierUpper,
+                    max_students_allowed: maxStudents,
+                    duration_months: parseInt(durationMonths),
+                    expiry_date: expiryDate,
+                    status: "active",
+                    approvedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                // Padam dari pending_subscriptions
+                await db.collection("pending_subscriptions").doc(docId).delete();
+
+                // Format Nombor WhatsApp & URL
+                let cleanPhone = teacherPhone.replace(/[^0-9]/g, '');
+                if (cleanPhone.startsWith('0')) cleanPhone = '6' + cleanPhone;
+                else if (!cleanPhone.startsWith('60') && cleanPhone.startsWith('1')) cleanPhone = '60' + cleanPhone;
+
+                const limitText = maxStudents === 999999 ? 'Tanpa Had' : `${maxStudents} Murid`;
+                const dDate = expiryDate.toLocaleDateString('ms-MY');
+
+                const msg = `Tahniah Cikgu *${teacherName.toUpperCase()}*! 👋\n\n` +
+                            `Langganan LexiQuest V2 untuk *${schoolName.toUpperCase()}* telah *DILULUSKAN*. ✨\n\n` +
+                            `📋 *MAKLUMAT PAKEJ:*\n` +
+                            `• Pakej: *${tierUpper}*\n` +
+                            `• Had Kuota: ${limitText}\n` +
+                            `• Tarikh Luput: ${dDate}\n\n` +
+                            `🔐 *PASSCODE GURU:*\n` +
+                            `👉 *${passcodeRawak}*\n\n` +
+                            `Sila log masuk di portal \`school-admin.html\` menggunakan passcode ini untuk mendaftar murid. Terima kasih! 🚀`;
+
+                window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+                loadPendingSubscriptions();
+
+            } catch (error) {
+                alert("Ralat kelulusan: " + error.message);
+            }
+        }
+
+        async function rejectSubscription(docId, schoolName) {
+            if (!confirm(`Padam permohonan dari ${schoolName}?`)) return;
+            try {
+                await db.collection("pending_subscriptions").doc(docId).delete();
+                loadPendingSubscriptions();
+            } catch (error) {
+                alert("Gagal memadam: " + error.message);
+            }
+        }
+
+        // ==========================================
+        // 4. SISTEM HOUSEKEEPING BERASASKAN MASA (30 HARI) - ORIGINAL
+        // ==========================================
         async function checkDynamicHousekeeping() {
             const banner = document.getElementById('housekeeping-banner');
             const reasonTxt = document.getElementById('housekeeping-reason');
@@ -202,7 +355,6 @@
             const txtTotalLogs = document.getElementById('txt-total-logs');
             
             try {
-                // Ambil data tarikh pembersihan terakhir dari Firestore
                 const configDoc = await db.collection("system_settings").doc("admin_config").get();
                 let lastCleanDate = null;
                 let diffDays = 0;
@@ -216,43 +368,36 @@
                     diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                 } else {
                     txtLastClean.innerText = "Tiada Rekod Sejarah";
-                    diffDays = 999; // Tetapkan nilai tinggi jika belum pernah dicuci langsung
+                    diffDays = 999; 
                 }
 
-                // Disebabkan Compat SDK tidak menyokong count(), kita letakkan info statik
-                txtTotalLogs.innerText = "(Tidak dikira atas faktor penjimatan kos)";
-
-                // TUKAR DI SINI: Had limit masa dinaikkan ke 30 hari
+                txtTotalLogs.innerText = "(Faktor penjimatan kos bacan)";
                 const MAX_DAYS = 30; 
 
-                // Proses Penilaian Syarat (Hanya guna parameter MASA)
                 if (diffDays >= MAX_DAYS) {
                     banner.classList.remove('hidden');
                     reasonTxt.innerText = `Sistem sudah tidak dibersihkan selama ${diffDays} hari (Had maksimum: ${MAX_DAYS} hari).`;
                 } else {
-                    banner.classList.add('hidden'); // Sistem selamat dan lancar
+                    banner.classList.add('hidden'); 
                 }
 
             } catch (error) {
                 console.error("Ralat semakan housekeeping:", error);
-                txtLastClean.innerText = "Gagal disemak";
-                txtTotalLogs.innerText = "Gagal disemak";
             }
         }
 
-        // FUNGSI UTAMA UNTUK MEMBERSIHKAN DATA (EKSEKUSI MANUAL)
         async function runHousekeeping() {
             const btn = document.getElementById('btn-housekeeping');
             
-            if (!confirm("Adakah anda pasti mahu menjalankan proses pembersihan pangkalan data sekarang?\n\nProses ini mungkin mengambil masa beberapa saat.")) {
+            if (!confirm("Adakah anda pasti mahu menjalankan proses pembersihan pangkalan data sekarang?")) {
                 return;
             }
 
             try {
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>MEMBERSIHKAN SISTEM...</span>';
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>MEMBERSIHKAN...</span>';
                 btn.disabled = true;
 
-                // --- PROSES 1: Padam game_records yang berusia lebih 30 hari ---
+                // --- PROSES 1: Padam game_records > 30 hari ---
                 const thirtyDaysAgo = new Date();
                 thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
                 
@@ -267,8 +412,7 @@
                         batch.delete(doc.ref);
                         counter++;
                         recordsDeleted++;
-                        
-                        if (counter === 500) { // Limit batch Firestore adalah 500
+                        if (counter === 500) { 
                             batch.commit();
                             batch = db.batch();
                             counter = 0;
@@ -277,7 +421,7 @@
                     if (counter > 0) await batch.commit();
                 }
 
-                // --- PROSES 2: Batal Claims Pending > 14 hari & Pulangkan Koin ---
+                // --- PROSES 2: Batal Claims Pending > 14 hari ---
                 const fourteenDaysAgo = new Date();
                 fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14);
 
@@ -291,32 +435,24 @@
                 if (!expiredClaimsSnapshot.empty) {
                     for (const claimDoc of expiredClaimsSnapshot.docs) {
                         const claimData = claimDoc.data();
-                        const playerId = claimData.player_id;
-                        const coinsRefund = claimData.coins_spent;
-                        const itemId = claimData.item_id;
-
-                        // 1. Kembalikan koin kepada player
-                        if (playerId && coinsRefund) {
-                            await db.collection("players").doc(playerId).update({
-                                coins: firebase.firestore.FieldValue.increment(coinsRefund)
+                        
+                        if (claimData.player_id && claimData.coins_spent) {
+                            await db.collection("players").doc(claimData.player_id).update({
+                                coins: firebase.firestore.FieldValue.increment(claimData.coins_spent)
                             });
                         }
-
-                        // 2. Kembalikan stok barang ke eduItems
-                        if (itemId) {
-                            await db.collection("eduItems").doc(itemId).update({
+                        if (claimData.item_id) {
+                            await db.collection("eduItems").doc(claimData.item_id).update({
                                 stock: firebase.firestore.FieldValue.increment(1)
                             });
                         }
-
-                        // 3. Kemas kini status tuntutan kepada dibatalkan
                         await claimDoc.ref.update({ status: "cancelled_by_housekeeping" });
                         claimsCancelled++;
                     }
                 }
 
-                // --- PROSES 3: Bersihkan Bilik PvP Terbantung di RTDB ---
-                const thirtyMinsAgo = Date.now() - (30 * 60 * 1000); // 30 minit lepas
+                // --- PROSES 3: Bersihkan RTDB (challenges) ---
+                const thirtyMinsAgo = Date.now() - (30 * 60 * 1000);
                 const challengesRef = rtdb.ref('challenges');
                 const rtdbSnapshot = await challengesRef.once('value');
                 let rtdbDeleted = 0;
@@ -326,33 +462,29 @@
                     rtdbSnapshot.forEach((child) => {
                         const data = child.val();
                         if (data.created_at && data.created_at < thirtyMinsAgo) {
-                            updates[child.key] = null; // Menghapus node
+                            updates[child.key] = null; 
                             rtdbDeleted++;
                         }
                     });
                     if (rtdbDeleted > 0) await challengesRef.update(updates);
                 }
 
-                // --- PROSES 4: Kemas kini tarikh pembersihan terakhir ---
+                // --- PROSES 4: Kemas kini tarikh ---
                 await db.collection("system_settings").doc("admin_config").set({
                     last_housekeeping_date: new Date()
                 }, { merge: true });
 
-                // Selesai & Paparkan Laporan Penyelenggaraan
-                alert(`✨ PEMBERSIHAN BERJAYA FINISHED!\n\n` +
-                      `1. Log Game Dipadam: ${recordsDeleted} rekod\n` +
-                      `2. Tuntutan Kedai Expired Dibatalkan: ${claimsCancelled} kes\n` +
-                      `3. Bilik PvP Hantu Di-reset: ${rtdbDeleted} bilik\n\n` +
-                      `Sistem LEXI QUEST kini kembali ringan dan optimum!`);
+                alert(`✨ PEMBERSIHAN SELESAI!\n\n` +
+                      `1. Log Game Dipadam: ${recordsDeleted}\n` +
+                      `2. Tuntutan Batal: ${claimsCancelled}\n` +
+                      `3. Bilik PvP Reset: ${rtdbDeleted}`);
 
-                // Segarkan semula status paparan banner
                 await checkDynamicHousekeeping();
 
             } catch (error) {
-                console.error("Ralat semasa housekeeping:", error);
                 alert("Gagal menjalankan housekeeping: " + error.message);
             } finally {
-                btn.innerHTML = '<i class="fas fa-magic"></i> <span>JALANKAN HOUSEKEEPING NOW</span>';
+                btn.innerHTML = '<i class="fas fa-magic"></i> <span>JALANKAN HOUSEKEEPING</span>';
                 btn.disabled = false;
             }
         }
