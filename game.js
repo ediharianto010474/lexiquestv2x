@@ -224,6 +224,7 @@ function keluarLobi3v3() {
 
 let pemantauLobi = null; // Menyimpan sambungan real-time
 let lobiAktifSemasa = null; // Menyimpan ID bilik jika pemain masuk bilik
+let selectedLobbyId = null; // KUNCI: Menyimpan ID lobi yang dipilih pengguna
 
 // 1. FUNGSI MEMANTAU SENARAI LOBI SECARA REAL-TIME (RADAR) RTDB
 function mulaPantauSenaraiLobi() {
@@ -245,6 +246,8 @@ function mulaPantauSenaraiLobi() {
                     <p class="text-sm">Jadilah yang pertama mencipta ruang pertempuran!</p>
                 </div>
             `;
+            // Sembunyikan kembali tombol jika lobi tiba-tiba kosong
+            selesaiPilihLobi();
             return;
         }
 
@@ -269,9 +272,9 @@ function mulaPantauSenaraiLobi() {
             // Tentukan warna status
             const warnaStatus = lobi.status === 'menunggu' ? 'text-emerald-400' : 'text-red-400';
             
-            // Bina HTML untuk setiap kotak lobi
+            // KEMAS KINI DI SINI: Ditambah id="lobi-${lobiId}" dan class "lobi-item"
             const kotakLobi = `
-                <div class="bg-slate-700/50 hover:bg-slate-700 border border-slate-600 rounded-xl p-4 cursor-pointer transition-all flex items-center justify-between"
+                <div id="lobi-${lobiId}" class="lobi-item bg-slate-700/50 hover:bg-slate-700 border border-slate-600 rounded-xl p-4 cursor-pointer transition-all flex items-center justify-between"
                      onclick="pilihLobi('${lobiId}', '${lobi.status}')">
                     <div>
                         <h4 class="text-white font-bold text-lg">Bilik: ${lobi.hostName}</h4>
@@ -288,9 +291,36 @@ function mulaPantauSenaraiLobi() {
             `;
             listContainer.innerHTML += kotakLobi;
         });
+
+        // Mengekalkan highlight jika Firebase memperbarui data secara real-time
+        if (selectedLobbyId) {
+            const lobiDipilih = document.getElementById(`lobi-${selectedLobbyId}`);
+            if (lobiDipilih) {
+                lobiDipilih.classList.remove('border-slate-600', 'bg-slate-700/50');
+                lobiDipilih.classList.add('border-amber-500', 'bg-slate-700');
+            }
+        }
+
     }, (error) => {
         console.error("Ralat radar lobi:", error);
     });
+}
+
+// Fungsi reset untuk menyembunyikan tombol jika tiada lobi terpilih
+function selesaiPilihLobi() {
+    selectedLobbyId = null;
+    document.getElementById('btn-watch-battle').classList.add('hidden');
+    document.getElementById('btn-join-lobby').classList.add('hidden');
+}
+
+// Fungsi aksi untuk tombol WATCH BATTLE
+function tontonLobi() {
+    if (!selectedLobbyId) {
+        alert("Sila pilih satu lobi dari senarai terlebih dahulu!");
+        return;
+    }
+    // Membuka tab baru langsung ke penonton.html dengan parameter ID lobi
+    window.open(`penonton.html?id=${selectedLobbyId}`, '_blank');
 }
 
 // 2. FUNGSI UNTUK MENCIPTA LOBI BAHARU (RTDB)
@@ -338,22 +368,49 @@ function bukaPaparanBilik() {
     // (Nota: Nanti kita akan buat sistem pantau siapa yang masuk ke Slot A/B di sini)
 }
 
-// 4. KLIK PADA LOBI UNTUK MUNCULKAN BUTANG JOIN / WATCH
+// KLIK PADA LOBI UNTUK MUNCULKAN BUTANG (VERSI GABUNGAN TERAKHIR)
 function pilihLobi(id, status) {
-    // Sembunyikan semua butang pintar dulu
-    document.getElementById('btn-join-lobby').classList.add('hidden');
-    document.getElementById('btn-watch-battle').classList.add('hidden');
+    console.log("=========================================");
+    console.log("🎯 FUNGSI pilihLobi UTAMA BERJALAN! ID:", id, "| Status:", status);
     
-    // Munculkan butang ikut keadaan
-    if (status === 'menunggu') {
-        document.getElementById('btn-join-lobby').classList.remove('hidden');
-        // Setkan onclick untuk JOIN
-        document.getElementById('btn-join-lobby').onclick = () => { Swal.fire('Info', 'Fungsi JOIN bilik sedang dibina!', 'info'); };
-    } else if (status === 'bertempur') {
-        document.getElementById('btn-watch-battle').classList.remove('hidden');
-        document.getElementById('btn-watch-battle').onclick = () => { Swal.fire('Info', 'Fungsi TONTON bilik sedang dibina!', 'info'); };
+    selectedLobbyId = id;
+    
+    // 1. Serlahkan (Highlight) kotak lobi
+    const lobiDipilih = document.getElementById(`lobi-${id}`);
+    if (lobiDipilih) {
+        document.querySelectorAll('.lobi-item').forEach(item => {
+            item.classList.remove('border-amber-500', 'bg-slate-700');
+            item.classList.add('border-slate-600', 'bg-slate-700/50');
+        });
+        lobiDipilih.classList.remove('border-slate-600', 'bg-slate-700/50');
+        lobiDipilih.classList.add('border-amber-500', 'bg-slate-700');
     }
+    
+    // 2. Ambil elemen butang dari HTML
+    const btnJoin = document.getElementById('btn-join-lobby');
+    const btnWatch = document.getElementById('btn-watch-battle');
+    
+    // 3. Reset (Sembunyikan JOIN dahulu)
+    if (btnJoin) btnJoin.classList.add('hidden');
+    
+    // 4. 🔥 BUTANG WATCH SENTIASA MUNCUL 🔥
+    if (btnWatch) {
+        btnWatch.classList.remove('hidden');
+        btnWatch.onclick = tontonLobi; 
+        console.log("✅ Butang WATCH berjaya dihidupkan!");
+    }
+    
+    // 5. Butang JOIN hanya muncul jika lobi sedang 'menunggu'
+    if (status === 'menunggu' && btnJoin) {
+        btnJoin.classList.remove('hidden');
+        // Kita masukkan fungsi asal dari FASA 3 anda ke sini!
+        btnJoin.onclick = () => masukBilik(id); 
+        console.log("✅ Butang JOIN sedia untuk digunakan!");
+    }
+    console.log("=========================================");
 }
+
+window.pilihLobi = pilihLobi;
 
 // ==========================================
 // 🔥 FASA 3: FUNGSI DALAM BILIK (LIVE SYNC & JOIN)
@@ -361,20 +418,6 @@ function pilihLobi(id, status) {
 
 let pemantauBilik = null; // Untuk memastikan skrin "live"
 let timerBanningAktif = false; // KOD BARU: Untuk elak popup bertindih
-
-// Kemas kini butang JOIN dari jadual senarai lobi
-function pilihLobi(id, status) {
-    document.getElementById('btn-join-lobby').classList.add('hidden');
-    document.getElementById('btn-watch-battle').classList.add('hidden');
-    
-    if (status === 'menunggu') {
-        document.getElementById('btn-join-lobby').classList.remove('hidden');
-        // Bila butang JOIN ditekan, masuk ke bilik tersebut
-        document.getElementById('btn-join-lobby').onclick = () => masukBilik(id);
-    } else if (status === 'bertempur') {
-        document.getElementById('btn-watch-battle').classList.remove('hidden');
-    }
-}
 
 // FUNGSI 1: MASUK BILIK & HIDUPKAN "LIVE SYNC" (SUIS PAPARAN RTDB)
 function masukBilik(lobiId) {
@@ -810,6 +853,9 @@ function kembaliKeSenaraiLobi() {
     const lobbyListView = document.getElementById('lobby-list-view');
     const lobbyRoomView = document.getElementById('lobby-room-view');
     const banningView = document.getElementById('banning-view');
+    
+    // 🔥 KOD BARU: Dapatkan elemen butang KEMBALI
+    const btnBack = document.getElementById('btn-back-lobby'); 
 
     // 2. Sembunyikan Bilik Lobi dan Skrin Banning
     if (lobbyRoomView) {
@@ -823,6 +869,11 @@ function kembaliKeSenaraiLobi() {
     if (lobbyListView) {
         lobbyListView.classList.remove('hidden');
         lobbyListView.classList.add('block');
+    }
+
+    // 4. 🔥 KOD BARU: Munculkan semula butang <-- KEMBALI
+    if (btnBack) {
+        btnBack.classList.remove('hidden');
     }
 }
 
