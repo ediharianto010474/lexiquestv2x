@@ -11,7 +11,6 @@
     
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-storage-compat.js"></script>
 
     <style>
         body { font-family: 'Poppins', sans-serif; }
@@ -56,11 +55,11 @@
                         </li>
                         <li class="flex gap-3">
                             <span class="flex-shrink-0 w-5 h-5 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold">3</span>
-                            <span>Isi borang ini & muat naik bukti pembayaran (Resit).</span>
+                            <span>Isi borang ini dan sistem akan membawa anda terus ke WhatsApp kami.</span>
                         </li>
                         <li class="flex gap-3">
-                            <span class="flex-shrink-0 w-5 h-5 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold">4</span>
-                            <span>Super Admin akan hantar <b>Passcode</b> terus ke WhatsApp anda!</span>
+                            <span class="flex-shrink-0 w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold"><i class="fas fa-star text-[10px]"></i></span>
+                            <span class="text-amber-200">Hantar gambar resit bayaran di dalam perbualan WhatsApp tersebut.</span>
                         </li>
                     </ul>
                 </div>
@@ -162,28 +161,25 @@
                 </div>
 
                 <div class="space-y-4 pt-2">
-                    <h2 class="text-sm font-bold tracking-wide uppercase text-indigo-400 border-b border-slate-700 pb-1 flex items-center gap-2">
-                        <i class="fas fa-receipt text-xs"></i> 3. Pengesahan Bayaran
+                    <h2 class="text-sm font-bold tracking-wide uppercase text-emerald-400 border-b border-slate-700 pb-1 flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-xs"></i> 3. Hantar Resit & Pengesahan
                     </h2>
                     
-                    <div>
-                        <label class="block text-xs font-medium text-slate-300 mb-1">Muat Naik Resit (PDF / Gambar) <span class="text-red-500">*</span></label>
-                        <div class="relative border-2 border-dashed border-slate-700 hover:border-indigo-500 rounded-xl p-4 text-center transition bg-slate-900/50 cursor-pointer group">
-                            <input type="file" id="receiptFile" required accept="image/*,application/pdf"
-                                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
-                            <div class="space-y-1">
-                                <i class="fas fa-cloud-upload-alt text-2xl text-slate-500 group-hover:text-indigo-400 transition mb-1"></i>
-                                <p class="text-xs font-medium text-slate-300" id="file-name-display">Klik atau seret fail resit ke sini</p>
-                                <p class="text-[10px] text-slate-500">Maksimum saiz: 5MB</p>
-                            </div>
+                    <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-4 flex items-center gap-4">
+                        <div class="bg-emerald-500/20 p-3 rounded-full text-emerald-400">
+                            <i class="fas fa-paperclip text-2xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-semibold text-slate-200">Sistem WhatsApp Automatik</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Selepas menekan butang hantar, sistem akan menghalakan anda ke aplikasi WhatsApp kami. <strong class="text-emerald-300">Sila lampirkan (attach) gambar resit anda di dalam chat tersebut.</strong></p>
                         </div>
                     </div>
                 </div>
 
                 <div class="pt-4">
                     <button type="submit" id="btnSubmit"
-                        class="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg hover:from-indigo-500 hover:to-pink-500 transition transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-purple-500 flex items-center justify-center gap-2 tracking-wide text-sm">
-                        <i class="fas fa-paper-plane"></i> HANTAR PERMOHONAN LANGGANAN
+                        class="w-full bg-gradient-to-r from-emerald-600 to-teal-500 text-white font-bold py-3 px-4 rounded-xl shadow-lg hover:from-emerald-500 hover:to-teal-400 transition transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 flex items-center justify-center gap-2 tracking-wide text-sm">
+                        <i class="fab fa-whatsapp text-lg"></i> HANTAR KE WHATSAPP ADMIN
                     </button>
                 </div>
 
@@ -197,7 +193,6 @@
             apiKey: "AIzaSyDX6PNKeGLMEpyBtnxtvpmyGFyjFq09N5Y",
             authDomain: "lexiquestv2.firebaseapp.com",
             projectId: "lexiquestv2",
-            storageBucket: "lexiquestv2.firebasestorage.app",
             messagingSenderId: "262850068996",
             appId: "1:262850068996:web:64e28cf9757f2739ef6b51"
         };
@@ -207,7 +202,6 @@
             firebase.initializeApp(firebaseConfig);
         }
         const db = firebase.firestore();
-        const storage = firebase.storage();
 
         // 2. Kalkulator Harga (Visual Sahaja)
         const PRICING_MATRIX = {
@@ -233,30 +227,13 @@
             }
         }
 
-        // Paparan Fail
-        document.getElementById('receiptFile').addEventListener('change', function(e) {
-            const fileNameDisplay = document.getElementById('file-name-display');
-            if (e.target.files.length > 0) {
-                fileNameDisplay.innerHTML = `<i class="fas fa-file-invoice text-emerald-400 mr-1"></i> <span class="text-emerald-400 font-medium">${e.target.files[0].name}</span>`;
-            } else {
-                fileNameDisplay.innerText = "Klik atau seret fail resit ke sini";
-            }
-        });
-
-        // 3. Logik Hantar ke Firebase Storage & Firestore
+        // 3. Logik Hantar ke Firestore & Buka WhatsApp Automatik
         document.getElementById('subscriptionForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const btn = document.getElementById('btnSubmit');
-            const fileInput = document.getElementById('receiptFile').files[0];
-            
-            if (!fileInput) {
-                alert("Sila muat naik resit bayaran terlebih dahulu.");
-                return;
-            }
-
             btn.disabled = true;
-            btn.innerHTML = `<i class="fas fa-spinner animate-spin"></i> MEMUAT NAIK DATA...`;
+            btn.innerHTML = `<i class="fas fa-spinner animate-spin"></i> MEMPROSES DATA...`;
 
             try {
                 // A. Ambil nilai borang
@@ -267,15 +244,8 @@
                 const tier = document.getElementById('packageTier').value;
                 const duration = document.getElementById('duration').value;
 
-                // B. Upload Gambar Resit ke Firebase Storage
-                const fileExt = fileInput.name.split('.').pop();
-                const uniqueFilename = `receipts/resit_${Date.now()}_${Math.floor(Math.random()*1000)}.${fileExt}`;
-                const storageRef = storage.ref().child(uniqueFilename);
-                
-                const uploadTask = await storageRef.put(fileInput);
-                const receiptUrl = await uploadTask.ref.getDownloadURL();
-
-                // C. Simpan Maklumat ke Firestore (Koleksi: pending_subscriptions)
+                // B. Simpan Maklumat ke Firestore (Koleksi: pending_subscriptions)
+                // Kita abaikan field receiptUrl supaya ia tidak wajib, admin semak terus di WA
                 await db.collection("pending_subscriptions").add({
                     teacherName: adminName,
                     teacherPhone: adminPhone,
@@ -283,16 +253,36 @@
                     schoolCode: schoolCode,
                     tier: tier,
                     duration: parseInt(duration),
-                    receiptUrl: receiptUrl,
+                    receiptMethod: "WhatsApp", 
                     status: "pending",
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
 
-                alert("✨ Permohonan Berjaya Dihantar!\n\nData dan resit anda telah direkodkan. Sila tunggu kelulusan daripada Super Admin melalui WhatsApp.");
+                // C. PENETAPAN NOMBOR SUPER ADMIN & MESEJ WHATSAPP
+                // -------------------------------------------------------------
+                // PENTING: GANTIKAN "60123456789" DI BAWAH KEPADA NOMBOR ANDA.
+                // Mesti bermula dengan kod negara '60' dan tiada jarak/tanda '+'.
+                // -------------------------------------------------------------
+                const superAdminPhone = "601123456789"; 
+
+                const mesejWA = `Salam Admin LexiQuest V2, saya ingin memohon kelulusan langganan sekolah.\n\n` +
+                                `📋 *MAKLUMAT LANGGANAN:*\n` +
+                                `Nama Guru: ${adminName}\n` +
+                                `No. Telefon: ${adminPhone}\n` +
+                                `Sekolah: ${schoolName}\n` +
+                                `Kod: ${schoolCode}\n` +
+                                `Pakej: ${tier} (${duration} Bulan)\n\n` +
+                                `*(SILA LAMPIRKAN GAMBAR RESIT BAYARAN ANDA DI SINI)*`;
+                
+                const urlWhatsApp = `https://wa.me/${superAdminPhone}?text=${encodeURIComponent(mesejWA)}`;
+
+                alert("✨ Permohonan Berjaya Direkodkan!\n\nSistem kini akan membawa anda ke aplikasi WhatsApp.\n\nSILA PASTIKAN ANDA MELAMPIRKAN GAMBAR RESIT BAYARAN DI DALAM CHAT WHATSAPP TERSEBUT.");
+                
+                // Buka tab WhatsApp
+                window.open(urlWhatsApp, '_blank');
                 
                 // D. Reset Borang
                 document.getElementById('subscriptionForm').reset();
-                document.getElementById('file-name-display').innerText = "Klik atau seret fail resit ke sini";
                 calculatePrice();
 
             } catch (error) {
@@ -300,7 +290,7 @@
                 alert("Ralat semasa menghantar borang: " + error.message);
             } finally {
                 btn.disabled = false;
-                btn.innerHTML = `<i class="fas fa-paper-plane"></i> HANTAR PERMOHONAN LANGGANAN`;
+                btn.innerHTML = `<i class="fab fa-whatsapp text-lg"></i> HANTAR KE WHATSAPP ADMIN`;
             }
         });
     </script>
