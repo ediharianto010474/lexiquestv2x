@@ -804,20 +804,25 @@ async function loadAdminOrders(selectedStudent = 'all') {
     if (selectedStudent === 'all_refresh' || adminAllClaimsData.length === 0) {
         container.innerHTML = `<div class="text-center py-10"><i class="fas fa-spinner fa-spin text-3xl text-indigo-600"></i><p class="mt-2 text-gray-500">Memuat turun data tuntutan aktif...</p></div>`;
         try {
-            const snapshot = await db.collection("claims").orderBy("timestamp", "desc").get();
+            // 🔴 KEMASKINI DI SINI: Tambah tapisan sekolah
+            const snapshot = await db.collection("claims")
+                .where("school", "==", currentSchoolData.schoolName)
+                .orderBy("timestamp", "desc")
+                .get();
+                
             adminAllClaimsData = [];
             snapshot.forEach(doc => {
                 adminAllClaimsData.push({ id: doc.id, ...doc.data() });
             });
         } catch (e) {
             console.error("Gagal memuatkan data tuntutan admin:", e);
-            container.innerHTML = "<p class='text-center text-red-500'>Gagal memuatkan data dari Firebase.</p>";
+            container.innerHTML = "<p class='text-center text-red-500'>Gagal memuatkan data dari Firebase. Sila semak Console (F12) untuk ralat Index.</p>";
             return;
         }
     }
 
     if (adminAllClaimsData.length === 0) {
-        container.innerHTML = "<p class='text-center py-10 text-gray-400'>Tiada rekod kod tuntutan ditemui setakat ini.</p>";
+        container.innerHTML = "<p class='text-center py-10 text-gray-400'>Tiada rekod kod tuntutan ditemui setakat ini untuk sekolah ini.</p>";
         return;
     }
 
@@ -938,7 +943,11 @@ async function loadAdminInventory() {
     container.innerHTML = `<div class="text-center py-10"><i class="fas fa-spinner fa-spin text-3xl text-indigo-600"></i><p>Memuatkan stor Firestore...</p></div>`;
 
     try {
-        const snapshot = await db.collection("eduItems").get();
+        // 🔴 KEMASKINI DI SINI: Tambah tapisan sekolah
+        const snapshot = await db.collection("eduItems")
+            .where("school", "==", currentSchoolData.schoolName)
+            .get();
+            
         adminInventoryData = [];
         snapshot.forEach(doc => adminInventoryData.push(doc.data()));
 
@@ -957,7 +966,7 @@ async function loadAdminInventory() {
                     <tbody class="text-sm">`;
 
         if(adminInventoryData.length === 0){
-             html += `<tr><td colspan="5" class="p-4 text-center text-gray-500">Tiada barang dijumpai.</td></tr>`;
+             html += `<tr><td colspan="5" class="p-4 text-center text-gray-500">Tiada barang dijumpai untuk sekolah ini.</td></tr>`;
         } else {
             adminInventoryData.forEach(item => {
                 const badgeColor = item.category === 'gift' ? 'bg-pink-100 text-pink-600' : 'bg-blue-100 text-blue-600';
@@ -986,6 +995,7 @@ async function loadAdminInventory() {
         container.innerHTML = html + "</tbody></table></div>";
     } catch (e) {
         container.innerHTML = "<p class='text-center text-red-500'>Gagal memuatkan inventori.</p>";
+        console.error("Ralat inventori:", e);
     }
 }
 
