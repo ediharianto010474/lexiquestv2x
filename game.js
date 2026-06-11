@@ -2260,7 +2260,8 @@ function prosesBattleAnalysis(roomData) {
  */
 function kembaliKeLobiUtama() {
     console.log("[UI] Butang kembali ke lobi ditekan.");
-    
+
+   
     // 1. PAKSA TUTUP SKRIN BATTLE ANALYSIS
     const analysisScreen = document.getElementById('screen-battle-analysis');
     if (analysisScreen) {
@@ -3038,12 +3039,29 @@ function timeUp() {
 }
 
 
+// ==========================================
+// KEMASKINI: PENGIRAAN MASTERY UNTUK SEMUA SUBJEK
+// ==========================================
 function updateCategoryProgress() {
     const userScores = localPlayerData.games || {};
     let totalMastered = Object.keys(userScores).filter(cat => {
         let sc = typeof userScores[cat] === 'object' ? userScores[cat].score : parseInt(userScores[cat]) || 0;
-        let tq = typeof gameData !== 'undefined' && gameData[cat] ? gameData[cat].length : -1;
-        return sc > 0 && sc === tq;
+        
+        // 🛠️ FIX: Cari jumlah soalan dalam SEMUA fail pangkalan data subjek
+        let tq = -1;
+        if (typeof gameData !== 'undefined' && gameData[cat]) tq = gameData[cat].length; // English
+        else if (typeof mathData !== 'undefined' && mathData[cat]) tq = mathData[cat].length;
+        else if (typeof scienceData !== 'undefined' && scienceData[cat]) tq = scienceData[cat].length;
+        else if (typeof bmData !== 'undefined' && bmData[cat]) tq = bmData[cat].length;
+        else if (typeof sejarahData !== 'undefined' && sejarahData[cat]) tq = sejarahData[cat].length;
+        else if (typeof pjkData !== 'undefined' && pjkData[cat]) tq = pjkData[cat].length;
+        else if (typeof muzikData !== 'undefined' && muzikData[cat]) tq = muzikData[cat].length;
+        else if (typeof moralData !== 'undefined' && moralData[cat]) tq = moralData[cat].length;
+        else if (typeof psvData !== 'undefined' && psvData[cat]) tq = psvData[cat].length;
+        else if (typeof rbtData !== 'undefined' && rbtData[cat]) tq = rbtData[cat].length;
+
+        // Semak jika markah sama dengan jumlah soalan (Sempurna)
+        return sc > 0 && sc === tq; 
     }).length;
     
     const masteryElement = document.getElementById('mastery-count');
@@ -3364,24 +3382,22 @@ window.startMic = function(btnElement) {
   };
 
 // ==========================================
-// 3. PENGIRAAN MARKAH (END GAME)
+// 3. PENGIRAAN MARKAH (END GAME) - VERSI DIKEMASKINI
 // ==========================================
 function endGame() {
     // 1. Hentikan masa (jika ia masih berjalan)
     if (typeof currentTimer !== 'undefined') clearInterval(currentTimer);
 
     // ==========================================
-    // 🟢 (TAMBAHAN KOD STATUS PVP) KEMAS KINI STATUS FIREBASE KE "IDLE"
+    // 🟢 KEMAS KINI STATUS FIREBASE KE "IDLE"
     // ==========================================
     if (typeof studentInfo !== 'undefined' && studentInfo.name) {
-        // Guna docId yang betul: Sekolah_Kelas_Nama
         const docId = `${studentInfo.school}_${studentInfo.class}_${studentInfo.name}`.replace(/\s+/g, '_');
         db.collection("players").doc(docId).set({
             isOnline: true,
             currentStatus: "idle"
         }, { merge: true }).catch(e => console.log("Gagal kemaskini status idle:", e));
     }
-    // ==========================================
 
     let score = 0;
     const inputs = document.querySelectorAll('.game-input');
@@ -3396,22 +3412,18 @@ function endGame() {
 
     // 2. Semak setiap jawapan murid
     inputs.forEach(input => {
-        input.disabled = true; // Kunci kotak supaya tak boleh diubah lagi
+        input.disabled = true; // Kunci kotak
         
-        // Ambil jawapan murid dan jawapan sebenar
         const userAnswer = input.value.trim().toLowerCase();
-        
-        // POTONG JAWAPAN MENGGUNAKAN "|" UNTUK MENJADI SENARAI
         const correctAnswersList = input.getAttribute('data-answer').trim().toLowerCase().split("|");
 
-        // SEMAK JIKA JAWAPAN MURID ADA DALAM SENARAI
         if (correctAnswersList.includes(userAnswer) && userAnswer !== "") {
-            // Jika BETUL: Warna hijau
+            // BETUL
             score++;
             input.classList.remove('bg-gray-50', 'border-gray-200');
             input.classList.add('bg-green-100', 'border-green-500', 'text-green-800', 'font-bold');
         } else {
-            // Jika SALAH / KOSONG: Warna merah dan tunjuk jawapan sebenar
+            // SALAH / KOSONG
             input.classList.remove('bg-gray-50', 'border-gray-200');
             input.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
             
@@ -3426,87 +3438,86 @@ function endGame() {
     // 3. Kira peratus markah
     const percentage = Math.round((score / totalQuestions) * 100);
 
-// ==========================================
+    // ==========================================
     // LOGIK SIMPAN MARKAH, XP & KOIN 💰
     // ==========================================
     
-    // 1. Tentukan pengganda (multiplier) berdasarkan tahap kesukaran
-    let multiplier = 1; // Default: Easy (1 betul = 1 mata)
-    
+    // Himpunkan semua tahap kesukaran merentas SEMUA subjek baharu
+    const allMedium = [
+        ...(typeof mathCategoryDifficulty !== 'undefined' ? mathCategoryDifficulty.medium : []),
+        ...(typeof englishCategoryDifficulty !== 'undefined' ? englishCategoryDifficulty.medium : []),
+        ...(typeof scienceCategoryDifficulty !== 'undefined' ? scienceCategoryDifficulty.medium : []),
+        ...(typeof bmCategoryDifficulty !== 'undefined' ? bmCategoryDifficulty.medium : []),
+        ...(typeof sejarahCategoryDifficulty !== 'undefined' ? sejarahCategoryDifficulty.medium : []),
+        ...(typeof kesihatanCategoryDifficulty !== 'undefined' ? kesihatanCategoryDifficulty.medium : []),
+        ...(typeof muzikCategoryDifficulty !== 'undefined' ? muzikCategoryDifficulty.medium : []),
+        ...(typeof moralCategoryDifficulty !== 'undefined' ? moralCategoryDifficulty.medium : []),
+        ...(typeof psvCategoryDifficulty !== 'undefined' ? psvCategoryDifficulty.medium : []),
+        ...(typeof rbtCategoryDifficulty !== 'undefined' ? rbtCategoryDifficulty.medium : [])
+    ];
+
+    const allHard = [
+        ...(typeof mathCategoryDifficulty !== 'undefined' ? mathCategoryDifficulty.hard : []),
+        ...(typeof englishCategoryDifficulty !== 'undefined' ? englishCategoryDifficulty.hard : []),
+        ...(typeof scienceCategoryDifficulty !== 'undefined' ? scienceCategoryDifficulty.hard : []),
+        ...(typeof bmCategoryDifficulty !== 'undefined' ? bmCategoryDifficulty.hard : []),
+        ...(typeof sejarahCategoryDifficulty !== 'undefined' ? sejarahCategoryDifficulty.hard : []),
+        ...(typeof kesihatanCategoryDifficulty !== 'undefined' ? kesihatanCategoryDifficulty.hard : []),
+        ...(typeof muzikCategoryDifficulty !== 'undefined' ? muzikCategoryDifficulty.hard : []),
+        ...(typeof moralCategoryDifficulty !== 'undefined' ? moralCategoryDifficulty.hard : []),
+        ...(typeof psvCategoryDifficulty !== 'undefined' ? psvCategoryDifficulty.hard : []),
+        ...(typeof rbtCategoryDifficulty !== 'undefined' ? rbtCategoryDifficulty.hard : [])
+    ];
+
+    // Tentukan pengganda (multiplier)
+    let multiplier = 1; // Default: Easy
     if (currentGameType) {
-        // Semak dalam senarai MEDIUM (English, Math, Science)
-        if (englishCategoryDifficulty.medium.includes(currentGameType) || 
-            mathCategoryDifficulty.medium.includes(currentGameType) || 
-            scienceCategoryDifficulty.medium.includes(currentGameType)) {
-            multiplier = 2; // Medium
-        } 
-        // Semak dalam senarai HARD (English, Math, Science)
-        else if (englishCategoryDifficulty.hard.includes(currentGameType) || 
-                 mathCategoryDifficulty.hard.includes(currentGameType) || 
-                 scienceCategoryDifficulty.hard.includes(currentGameType)) {
-            multiplier = 3; // Hard
-        }
+        if (allMedium.includes(currentGameType)) multiplier = 2;
+        else if (allHard.includes(currentGameType)) multiplier = 3;
     }
 
-    // 2. Kira jumlah XP dan Koin yang dimenangi
+    // Kira XP dan Koin
     let pointsEarned = score * multiplier; 
-    let coinsEarned = score * 2 * multiplier; // Formula koin
+    let coinsEarned = score * 2 * multiplier; 
     
     if (typeof localPlayerData !== 'undefined') {
-        // Tambah mata ke totalScore (XP)
         localPlayerData.totalScore = (parseInt(localPlayerData.totalScore) || 0) + pointsEarned;
-        
-        // 💰 TAMBAH KOIN KE DALAM PANGKALAN DATA
         localPlayerData.coins = (parseInt(localPlayerData.coins) || 0) + coinsEarned;
 
-        // ==========================================
-        // 🔥 TAMBAHAN MULTI-LEADERBOARD: SIMPAN XP MENGIKUT SUBJEK (KUMULATIF) 🔥
-        // ==========================================
+        // 🔥 MULTI-LEADERBOARD: SIMPAN XP MENGIKUT SUBJEK
         let currentType = (typeof currentGameType !== 'undefined' && currentGameType !== "") ? currentGameType.toLowerCase() : "";
 
-        // Pemetaan Dinamik: Menggabungkan semua tahap (easy, medium, hard) bagi setiap subjek
+        // Pemetaan Dinamik Subjek (Kalis Ralat: Pastikan object wujud sebelum spread)
         const senaraiSubjekMaju = [
-            { field: 'score_matematik', label: 'Matematik', list: [...mathCategoryDifficulty.easy, ...mathCategoryDifficulty.medium, ...mathCategoryDifficulty.hard] },
-            { field: 'score_english',   label: 'English',   list: [...englishCategoryDifficulty.easy, ...englishCategoryDifficulty.medium, ...englishCategoryDifficulty.hard] },
-            { field: 'score_sains',     label: 'Sains',     list: [...scienceCategoryDifficulty.easy, ...scienceCategoryDifficulty.medium, ...scienceCategoryDifficulty.hard] },
-            { field: 'score_bm',        label: 'Bahasa Melayu', list: [...bmCategoryDifficulty.easy, ...bmCategoryDifficulty.medium, ...bmCategoryDifficulty.hard] },
-            { field: 'score_sejarah',   label: 'Sejarah',   list: [...sejarahCategoryDifficulty.easy, ...sejarahCategoryDifficulty.medium, ...sejarahCategoryDifficulty.hard] },
-            { field: 'score_pjk',       label: 'PJK',       list: [...kesihatanCategoryDifficulty.easy, ...kesihatanCategoryDifficulty.medium, ...kesihatanCategoryDifficulty.hard] },
-            { field: 'score_muzik',     label: 'Pendidikan Muzik', list: [...muzikCategoryDifficulty.easy, ...muzikCategoryDifficulty.medium, ...muzikCategoryDifficulty.hard] },
-            { field: 'score_moral',     label: 'Pendidikan Moral', list: [...moralCategoryDifficulty.easy, ...moralCategoryDifficulty.medium, ...moralCategoryDifficulty.hard] },
-            { field: 'score_psv',       label: 'Seni Visual (PSV)', list: [...psvCategoryDifficulty.easy, ...psvCategoryDifficulty.medium, ...psvCategoryDifficulty.hard] },
-            { field: 'score_rbt',       label: 'RBT',       list: [...rbtCategoryDifficulty.easy, ...rbtCategoryDifficulty.medium, ...rbtCategoryDifficulty.hard] }
+            { field: 'score_matematik', label: 'Matematik', list: typeof mathCategoryDifficulty !== 'undefined' ? [...mathCategoryDifficulty.easy, ...mathCategoryDifficulty.medium, ...mathCategoryDifficulty.hard] : [] },
+            { field: 'score_english',   label: 'English',   list: typeof englishCategoryDifficulty !== 'undefined' ? [...englishCategoryDifficulty.easy, ...englishCategoryDifficulty.medium, ...englishCategoryDifficulty.hard] : [] },
+            { field: 'score_sains',     label: 'Sains',     list: typeof scienceCategoryDifficulty !== 'undefined' ? [...scienceCategoryDifficulty.easy, ...scienceCategoryDifficulty.medium, ...scienceCategoryDifficulty.hard] : [] },
+            { field: 'score_bm',        label: 'BM',        list: typeof bmCategoryDifficulty !== 'undefined' ? [...bmCategoryDifficulty.easy, ...bmCategoryDifficulty.medium, ...bmCategoryDifficulty.hard] : [] },
+            { field: 'score_sejarah',   label: 'Sejarah',   list: typeof sejarahCategoryDifficulty !== 'undefined' ? [...sejarahCategoryDifficulty.easy, ...sejarahCategoryDifficulty.medium, ...sejarahCategoryDifficulty.hard] : [] },
+            { field: 'score_pjk',       label: 'PJK',       list: typeof kesihatanCategoryDifficulty !== 'undefined' ? [...kesihatanCategoryDifficulty.easy, ...kesihatanCategoryDifficulty.medium, ...kesihatanCategoryDifficulty.hard] : [] },
+            { field: 'score_muzik',     label: 'Muzik',     list: typeof muzikCategoryDifficulty !== 'undefined' ? [...muzikCategoryDifficulty.easy, ...muzikCategoryDifficulty.medium, ...muzikCategoryDifficulty.hard] : [] },
+            { field: 'score_moral',     label: 'Moral',     list: typeof moralCategoryDifficulty !== 'undefined' ? [...moralCategoryDifficulty.easy, ...moralCategoryDifficulty.medium, ...moralCategoryDifficulty.hard] : [] },
+            { field: 'score_psv',       label: 'PSV',       list: typeof psvCategoryDifficulty !== 'undefined' ? [...psvCategoryDifficulty.easy, ...psvCategoryDifficulty.medium, ...psvCategoryDifficulty.hard] : [] },
+            { field: 'score_rbt',       label: 'RBT',       list: typeof rbtCategoryDifficulty !== 'undefined' ? [...rbtCategoryDifficulty.easy, ...rbtCategoryDifficulty.medium, ...rbtCategoryDifficulty.hard] : [] }
         ];
 
-        // Cari subjek mana yang mengandungi kategori permainan semasa
         let padananSubjek = senaraiSubjekMaju.find(subjek => subjek.list.includes(currentType));
 
         if (padananSubjek) {
-            // Masukkan markah ke dalam field subjek yang sepadan
             localPlayerData[padananSubjek.field] = (parseInt(localPlayerData[padananSubjek.field]) || 0) + pointsEarned;
-            console.log(`➕ Tambah ${pointsEarned} XP ${padananSubjek.label}. Keseluruhan ${padananSubjek.label}: ${localPlayerData[padananSubjek.field]}`);
+            console.log(`➕ Tambah ${pointsEarned} XP ${padananSubjek.label}. Jumlah: ${localPlayerData[padananSubjek.field]}`);
         } else {
-            // Pasif / Fallback keselamatan: Jika tiada padanan, anggap ia English
             localPlayerData.score_english = (parseInt(localPlayerData.score_english) || 0) + pointsEarned;
-            console.log(`⚠️ Kategori tidak dijumpai dalam senarai utama. Fallback: Tambah ${pointsEarned} XP English.`);
+            console.log(`⚠️ Fallback: Tambah ${pointsEarned} XP English.`);
         }
 
-// 🔥 WAJIB LETAK DI SINI: Supaya Firebase dapat markah TERKINI yang baru dicampur di atas 🔥
-        if (typeof saveCloudPlayerData === 'function') {
-            saveCloudPlayerData();
-        }
-        // ==========================================
-
-        // 🔥 TAMBAH KOD INI DI SINI (SEBELUM SAVE) 🔥
+        // Hujung minggu checker
         const todayDay = new Date().getDay();
-        if (todayDay === 0 || todayDay === 6) { // 0 = Ahad, 6 = Sabtu
+        if (todayDay === 0 || todayDay === 6) {
             localPlayerData.hasPlayedWeekend = true;
-            console.log("Hujung minggu dikesan! hasPlayedWeekend ditetapkan ke true.");
         }
         
-        // ==========================================
-        // 🎥 CCTV TRACKER: REKOD TAMAT GAME & KOIN
-        // ==========================================
+        // 🎥 CCTV TRACKER
         if (window.Trackers) {
             let isPerfect = (score === totalQuestions && totalQuestions > 0); 
             let catNameForTracker = (typeof currentGameType !== 'undefined' && currentGameType !== "") ? currentGameType : "unknown_game";
@@ -3514,12 +3525,8 @@ function endGame() {
             Trackers.rekodKoinDapat(coinsEarned); 
         }
 
-        // ==========================================
-        // 🏆 SIMPAN MARKAH TERTINGGI KATEGORI (UNTUK UI KAD BINTANG/LOCK SAHAJA)
-        // ==========================================
-        if (!localPlayerData.games) {
-            localPlayerData.games = {}; 
-        }
+        // 🏆 SIMPAN MARKAH TERTINGGI (HIGH SCORE) KATEGORI
+        if (!localPlayerData.games) localPlayerData.games = {}; 
         
         let catName = (typeof currentGameType !== 'undefined' && currentGameType !== "") ? currentGameType : "missing";
         let currentBest = localPlayerData.games[catName] || 0;
@@ -3530,44 +3537,31 @@ function endGame() {
             currentBest = parseInt(currentBest) || 0;
         }
 
-        // HANYA update jika score baru LEBIH TINGGI (High Score)
         if (score > currentBest) {
             localPlayerData.games[catName] = score;
             console.log(`⭐ Markah tertinggi baru untuk ${catName}: ${score}`);
         }
-        // ==========================================
         
-        // Simpan semua kemaskini ke LocalStorage peranti
+        // Simpan & Hantar Data
         localStorage.setItem('currentPlayer', JSON.stringify(localPlayerData));
-        
-        // Hantar data terbaru ke Firestore (Cloud)
-        if (typeof saveCloudPlayerData === 'function') {
-            saveCloudPlayerData();
-        }
-
-        // Kemaskini paparan XP bar, Syiling, dan lain-lain UI
+        if (typeof saveCloudPlayerData === 'function') saveCloudPlayerData();
         if (typeof updateUI === 'function') updateUI();
     }
 
-    // ==========================================
-    // 🎯 TUGASAN BARU: SIMPAN REKOD BUKU LOG KE FIREBASE
-    // ==========================================
+    // 🎯 REKOD BUKU LOG KE FIREBASE
     try {
-        let currentDifficulty = "Easy";
-        if (multiplier === 2) currentDifficulty = "Medium";
-        if (multiplier === 3) currentDifficulty = "Hard";
-        
+        let currentDifficulty = multiplier === 3 ? "Hard" : (multiplier === 2 ? "Medium" : "Easy");
         let gameCategoryName = (typeof currentGameType !== 'undefined') ? currentGameType : "Latihan";
         
         if (typeof saveGameRecord === 'function') {
             saveGameRecord(gameCategoryName, currentDifficulty, score, totalQuestions);
-            checkAndUnlockLevels();
+            if (typeof checkAndUnlockLevels === 'function') checkAndUnlockLevels();
         }
     } catch (error) {
         console.error("Ralat memanggil saveGameRecord:", error);
     }
 
-    // 4. Paparkan keputusan menggunakan tetingkap pop-up
+    // 4. Paparkan pop-up keputusan
     Swal.fire({
         icon: percentage >= 50 ? 'success' : 'error',
         title: 'Permainan Tamat! 🏁',
@@ -3576,7 +3570,7 @@ function endGame() {
         confirmButtonColor: '#4f46e5',
         allowOutsideClick: false
     }).then(() => {
-        // 5. Kembali ke paparan asal selepas murid menekan butang "Kembali"
+        // 5. Kembali ke paparan asal
         const gameArena = document.getElementById('game-arena');
         const menuScreen = document.getElementById('menu-screen');
         const finalScoreScreen = document.getElementById('final-score');
@@ -3585,10 +3579,7 @@ function endGame() {
         if (finalScoreScreen) finalScoreScreen.classList.add('hidden');
         if (menuScreen) menuScreen.classList.remove('hidden');
 
-        // 🎵 TAMBAH BARIS INI: Mainkan semula muzik apabila kembali ke menu 🎵
         if (typeof playBgMusic === 'function') playBgMusic();
-        
-        // Jika ada fungsi untuk kembalikan paparan kategori subjek
         if (typeof backToSubjects === 'function') backToSubjects();
     });
 }
@@ -4631,27 +4622,38 @@ function endPvPMatch() {
     localPlayerData.coins = (localPlayerData.coins || 0) + coinReward;
     localPlayerData.totalScore = (localPlayerData.totalScore || 0) + xpReward;
 
-    // 🔴 4. SIMPAN KEPUTUSAN & GANJARAN KE FIREBASE
-    const today = new Date().toISOString().split('T')[0];
-    const docId = `${studentInfo.school}_${studentInfo.class}_${studentInfo.name}`.replace(/\s+/g, '_');
-    
-    db.collection("players").doc(docId).get().then(doc => {
-        let data = doc.exists ? doc.data() : {};
-        let newCount = (data.lastPvPDate === today) ? (data.pvpCountToday || 0) + 1 : 1;
+// 🔴 4. SIMPAN KEPUTUSAN & GANJARAN KE FIREBASE (VERSI OPTIMUM & JAYAHED COINS)
+const today = new Date().toISOString().split('T')[0];
+const docId = `${studentInfo.school}_${studentInfo.class}_${studentInfo.name}`.replace(/\s+/g, '_');
 
-        db.collection("players").doc(docId).set({
-            coins: localPlayerData.coins,
-            totalScore: localPlayerData.totalScore,
-            lastPvPDate: today,
-            pvpCountToday: newCount
-        }, { merge: true })
-        .then(() => {
-            console.log("💰 [PvP] Ganjaran disimpan dengan selamat!");
-            if (typeof updateUI === "function") updateUI(); 
-        }).catch(error => {
-            console.error("❌ Ralat menyimpan ganjaran PvP:", error);
-        });
-    });
+// Sediakan objek kemas kini
+let updateData = {
+    coins: localPlayerData.coins,
+    totalScore: localPlayerData.totalScore,
+    currentStatus: "idle" // 🟢 Sekali gus kemas kini status ke idle di sini!
+};
+
+// Logik had harian pvpCountToday tanpa perlu .get() dahulu
+if (localPlayerData.lastPvPDate === today) {
+    // Jika hari ini hari yang sama, tambah 1 menggunakan increment tempatan atau Firebase
+    localPlayerData.pvpCountToday = (localPlayerData.pvpCountToday || 0) + 1;
+    updateData.pvpCountToday = firebase.firestore.FieldValue.increment(1);
+} else {
+    // Jika hari baharu, reset kaunter ke 1
+    localPlayerData.lastPvPDate = today;
+    localPlayerData.pvpCountToday = 1;
+    updateData.lastPvPDate = today;
+    updateData.pvpCountToday = 1;
+}
+
+// Terus hantar UPDATE (Jimat 100% kos operasi BACA/READ!)
+db.collection("players").doc(docId).update(updateData)
+.then(() => {
+    console.log("💰 [PvP] Ganjaran disimpan & Status menjadi IDLE!");
+    if (typeof updateUI === "function") updateUI(); 
+}).catch(error => {
+    console.error("❌ Ralat menyimpan ganjaran PvP:", error);
+});
 
     // 5. PAPARKAN KEPUTUSAN KEPADA MURID
     let titleText = result === "menang" ? "Tahniah, Anda Menang! 🏆" : (result === "kalah" ? "Anda Tewas! 💔" : "Seri! 🤝");
