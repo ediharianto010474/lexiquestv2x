@@ -1043,7 +1043,10 @@ async function submitItemForm() {
         stock: parseInt(document.getElementById('admin-item-stock').value) || 0,
         category: document.getElementById('admin-item-category').value, // edu / gift
         icon: document.getElementById('admin-item-icon').value.trim(),
-        desc: document.getElementById('admin-item-desc').value.trim()
+        desc: document.getElementById('admin-item-desc').value.trim(),
+        
+        // 🔴 WAJIB TAMBAH BARIS INI: Supaya barang diikat pada sekolah yang sedang log masuk
+        school: currentSchoolData.schoolName
     };
 
     if (!itemId || !itemData.name) {
