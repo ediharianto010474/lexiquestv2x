@@ -205,50 +205,48 @@
     </div>
 
 
-<div class="w-full max-w-lg mt-4 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg border border-indigo-200/30 flex flex-col overflow-hidden z-10">
-    <div class="bg-indigo-600/80 px-4 py-2 flex items-center justify-between shadow-sm backdrop-blur-sm">
+<div class="fixed bottom-4 left-4 w-64 bg-slate-900/75 backdrop-blur-lg rounded-xl shadow-2xl border border-white/10 flex flex-col overflow-hidden z-50 transition-all">
+    
+    <div class="bg-indigo-600/60 px-3 py-1.5 flex items-center justify-between border-b border-white/5">
         <div class="flex items-center gap-2">
-            <span class="relative flex h-2.5 w-2.5">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-400"></span>
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
             </span>
-            <span class="text-xs font-black text-white uppercase tracking-widest drop-shadow-[0_1px_1px_rgba(0,0,0,0.3)]">Pemain Dalam Talian</span>
+            <span class="text-[10px] font-black text-white uppercase tracking-wider drop-shadow-md">Dalam Talian</span>
         </div>
-        <span class="text-xs font-bold text-indigo-100 bg-indigo-500/50 px-3 py-1 rounded-full" id="active-players-count">5</span>
+        <span class="text-[10px] font-black text-indigo-200 bg-slate-950/40 px-2 py-0.5 rounded-md" id="active-players-count">5</span>
     </div>
     
-    <div id="dashboard-active-players-list" class="p-3 overflow-y-auto custom-scroll max-h-[140px] bg-transparent grid grid-cols-2 gap-2">
+    <div id="dashboard-active-players-list" class="p-2 overflow-y-auto custom-scroll max-h-[160px] bg-transparent flex flex-col gap-1.5">
         
-        <div class="flex items-center gap-2 bg-white/50 backdrop-blur-xs p-2 rounded-xl border border-white/20 shadow-sm hover:bg-white/70 transition-colors">
-            <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-sm flex-shrink-0 shadow-inner">👤</div>
-            <div class="flex flex-col min-w-0">
-                <span class="text-xs font-black text-indigo-950 truncate leading-tight drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)]">Ahmad Sufian</span>
-                <span class="text-[9px] text-red-600 font-bold leading-tight mt-0.5">Lvl 12</span>
+        <div class="flex items-center gap-2 bg-white/5 p-1.5 rounded-lg border border-white/5 hover:bg-white/10 transition-colors">
+            <div class="w-7 h-7 bg-indigo-950 text-xs rounded-full flex items-center justify-center flex-shrink-0 shadow-inner border border-white/10">👤</div>
+            <div class="flex flex-col min-w-0 leading-none">
+                <span class="text-xs font-bold text-white truncate drop-shadow-sm">Ahmad Sufian</span>
+                <span class="text-[9px] text-green-400 font-extrabold mt-0.5">LVL 12</span>
             </div>
         </div>
 
-        <div class="flex items-center gap-2 bg-white/50 backdrop-blur-xs p-2 rounded-xl border border-white/20 shadow-sm hover:bg-white/70 transition-colors">
-            <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-sm flex-shrink-0 shadow-inner">👤</div>
-            <div class="flex flex-col min-w-0">
-                <span class="text-xs font-black text-indigo-950 truncate leading-tight drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)]">Siti Norhaliza</span>
-                <span class="text-[9px] text-red-600 font-bold leading-tight mt-0.5">Lvl 8</span>
+        <div class="flex items-center gap-2 bg-white/5 p-1.5 rounded-lg border border-white/5 hover:bg-white/10 transition-colors">
+            <div class="w-7 h-7 bg-indigo-950 text-xs rounded-full flex items-center justify-center flex-shrink-0 shadow-inner border border-white/10">👤</div>
+            <div class="flex flex-col min-w-0 leading-none">
+                <span class="text-xs font-bold text-white truncate drop-shadow-sm">Siti Norhaliza</span>
+                <span class="text-[9px] text-green-400 font-extrabold mt-0.5">LVL 8</span>
             </div>
         </div>
 
-        <div class="flex items-center gap-2 bg-white/50 backdrop-blur-xs p-2 rounded-xl border border-white/20 shadow-sm hover:bg-white/70 transition-colors">
-            <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-sm flex-shrink-0 shadow-inner">👤</div>
-            <div class="flex flex-col min-w-0">
-                <span class="text-xs font-black text-indigo-950 truncate leading-tight drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)]">Zul Ariffin</span>
-                <span class="text-[9px] text-red-600 font-bold leading-tight mt-0.5">Lvl 15</span>
+        <div class="flex items-center gap-2 bg-white/5 p-1.5 rounded-lg border border-white/5 hover:bg-white/10 transition-colors">
+            <div class="w-7 h-7 bg-indigo-950 text-xs rounded-full flex items-center justify-center flex-shrink-0 shadow-inner border border-white/10">👤</div>
+            <div class="flex flex-col min-w-0 leading-none">
+                <span class="text-xs font-bold text-white truncate drop-shadow-sm">Zul Ariffin</span>
+                <span class="text-[9px] text-green-400 font-extrabold mt-0.5">LVL 15</span>
             </div>
         </div>
 
     </div>
 </div>
-
-```
-</div>
-
+	
 <button id="boss-challenge-btn" onclick="attemptJoinBoss(); showScreen('boss-arena');" class="hidden fixed bottom-24 left-6 z-50 glass p-6 rounded-3xl hover:bg-red-50 transition-all group border-2 border-red-400 shadow-2xl max-w-xs text-left">
         <div class="text-4xl mb-2 group-hover:scale-110 transition-transform animate-pulse">🐉</div>
         <div class="font-bold text-red-700 text-lg leading-tight uppercase tracking-wider">WARNING: BOSS APPEARED!</div>
