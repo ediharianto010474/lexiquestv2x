@@ -325,6 +325,7 @@ function tontonLobi() {
 
 // 2. FUNGSI UNTUK MENCIPTA LOBI BAHARU (RTDB)
 async function ciptaLobiBaharu() {
+isGanjaranDisimpan = false;
     Swal.fire({
         title: 'Mencipta Bilik...',
         allowOutsideClick: false,
@@ -1356,7 +1357,8 @@ let currentStreak = 0;
 let longestStreak = 0;
 let myBoostersUsed = 0;
 let myBoostersReceived = 0;
-let bakiSoalanMudahPaksaan = 0; 
+let bakiSoalanMudahPaksaan = 0;
+let isGanjaranDisimpan = false;
 
 // =========================================================================
 // 1. FUNGSI: KEMASKINI UI PROFIL & SUBJEK DARI FIREBASE (VERSI PENUH 6 PEMAIN)
@@ -2304,7 +2306,15 @@ function kembaliKeLobiUtama() {
 /**
  * Menyimpan ganjaran Coins dan XP terus ke pangkalan data beserta Console Log
  */
+// 🔴 1. TAMBAHKAN PEMBOLEHBAH/FLAG INI DI BAGIAN PALING ATAS (Luar Fungsi/Global)
 async function simpanGanjaranKeDatabase(uid, earnedCoins, earnedXp, subjectKey = null) {
+    
+    // 🔴 2. SEKATAN KESELAMATAN: Jika sudah disimpan, langsung batalkan fungsi!
+    if (isGanjaranDisimpan) {
+        console.warn("⚠️ Amaran: Ganjaran sudah disimpan sebelumnya. Menghalang duplikasi penulisan ke Firestore.");
+        return;
+    }
+
     console.log("====== 🔥 MULA PROSES SIMPAN GANJARAN 🔥 ======");
     console.log("1. Data diterima dari perlawanan:", { UID: uid, Koin: earnedCoins, XP: earnedXp });
     console.log("2. studentInfo semasa:", typeof studentInfo !== 'undefined' ? studentInfo : "KOSONG/RALAT!");
@@ -2317,18 +2327,21 @@ async function simpanGanjaranKeDatabase(uid, earnedCoins, earnedXp, subjectKey =
             return;
         }
 
-        // 2. Bina ID Dokumen mengikut format auth.js cikgu
+        // 2. KUNCI STATUS: Set menjadi true sesegera mungkin agar panggilan bertindih tidak dapat lolos
+        isGanjaranDisimpan = true;
+
+        // 3. Bina ID Dokumen mengikut format auth.js cikgu
         const docId = `${studentInfo.school}_${studentInfo.class}_${studentInfo.name}`.replace(/\s+/g, '_');
         console.log(`3. Sasaran Firestore: Koleksi [players] -> Dokumen [${docId}]`);
 
-        // 3. Sediakan data untuk ditambah
+        // 4. Sediakan data untuk ditambah
         const updateData = {
             coins: firebase.firestore.FieldValue.increment(earnedCoins),
             totalScore: firebase.firestore.FieldValue.increment(earnedXp),
             lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
         };
 
-        // 4. Deteksi Subjek (Sokongan 10 Subjek)
+        // 5. Deteksi Subjek (Sokongan 10 Subjek)
         let subKey = subjectKey;
         if (!subKey && typeof currentSubject !== 'undefined' && currentSubject) {
             subKey = currentSubject === "math" ? "score_matematik" : "score_" + currentSubject;
@@ -2341,45 +2354,23 @@ async function simpanGanjaranKeDatabase(uid, earnedCoins, earnedXp, subjectKey =
 
         console.log("5. Data yang akan dihantar ke Firestore:", updateData);
 
-        // 5. Hantar ke Firestore guna SET + MERGE (Sangat penting supaya tak ralat jika dokumen tiada)
+        // 6. Hantar ke Firestore guna SET + MERGE 
         await db.collection("players").doc(docId).set(updateData, { merge: true });
         
         console.log(`✅ [FIRESTORE SUCCESS] Ganjaran selamat dimasukkan ke database!`);
 
-        // 6. Kemas kini data lokal & gerakkan UI
+        // 7. Kemas kini data lokal & gerakkan UI
         if (typeof kemasKiniDataLokal === 'function') {
             console.log("6. Memanggil fungsi kemasKiniDataLokal() untuk ubah paparan UI...");
             kemasKiniDataLokal(earnedCoins, earnedXp, subKey);
         }
 
     } catch (error) {
+        // 🔴 3. JIKA GAGAL: Reset kembali menjadi false supaya pemain bisa mencoba menyimpan ulang jika ada ralat rangkaian
+        isGanjaranDisimpan = false;
         console.error("❌ [FIRESTORE ERROR] Ralat sewaktu menyimpan ganjaran:", error);
     }
     console.log("=========================================");
-}
-
-/**
- * Fungsi sokongan untuk kemas kini memori lokal & terus mengubah UI skrin
- */
-function kemasKiniDataLokal(earnedCoins, earnedXp, subKey) {
-    if (typeof localPlayerData !== 'undefined' && localPlayerData) {
-        // Tambah nilai ke pembolehubah global LexiQuest V2
-        localPlayerData.coins = (parseInt(localPlayerData.coins) || 0) + earnedCoins;
-        localPlayerData.totalScore = (parseInt(localPlayerData.totalScore) || 0) + earnedXp;
-        
-        // Kemas kini skor subjek spesifik dalam memori lokal
-        if (subKey && localPlayerData[subKey] !== undefined) {
-            localPlayerData[subKey] = (parseInt(localPlayerData[subKey]) || 0) + earnedXp;
-        }
-        
-        // Paksa UI di lobi kemas kini angka koin dan status tahap baharu
-        if (typeof updateUI === 'function') updateUI();
-        if (typeof showDashboardBasedOnRole === 'function') showDashboardBasedOnRole();
-        
-        console.log("%c[LOKAL] Memori localPlayerData & UI berjaya dikemas kini!", 'color: #3b82f6;');
-    } else {
-        console.warn("⚠️ Amaran: localPlayerData tidak ditemui dalam memori.");
-    }
 }
 
 // ==========================================
@@ -2721,6 +2712,7 @@ function giveXP(category, correctCount) {
 // 1. SISTEM KUIZ & MEMORI PERMAINAN
 // ==========================================
 function initGame(type) {
+isGanjaranDisimpan = false;
     if (typeof pauseBgMusic === 'function') pauseBgMusic();
     if (!type) return; 
     const safeType = type.toUpperCase(); 
@@ -3063,6 +3055,7 @@ function updateCategoryProgress() {
 // ==========================================
 
 window.leaderboardDataTemp = []; 
+window.lastLeaderboardFetch = 0; // Pembolehubah baru untuk menjejak masa
 
 async function loadLeaderboard() {
     document.getElementById('menu-screen').classList.add('hidden');
@@ -3076,6 +3069,18 @@ async function loadLeaderboard() {
     const mySchool = infoPemain ? infoPemain.school : "";
 
     if (lbSchoolName) lbSchoolName.innerText = `School: ${mySchool || 'Global'}`;
+
+    // 🛡️ GATEKEEPER CACHE (PENTING!) 🛡️
+    // Jika data pernah ditarik kurang daripada 3 minit yang lepas (180,000 milisaat)
+    // dan tatasusunan (array) tidak kosong, KITA GUNA DATA LAMA!
+    const currentTime = Date.now();
+    const cacheValidTime = 3 * 60 * 1000; // 3 minit
+    
+    if (window.leaderboardDataTemp.length > 0 && (currentTime - window.lastLeaderboardFetch) < cacheValidTime) {
+        console.log("Leaderboard: Menggunakan data dari cache lokal (Menjimatkan Reads!)");
+        renderLeaderboardData('all');
+        return; // BERHENTI DI SINI. Jangan panggil Firebase!
+    }
     
     if (listContainer) {
         listContainer.innerHTML = `
@@ -3101,10 +3106,14 @@ async function loadLeaderboard() {
         window.leaderboardDataTemp = [];
         snapshot.forEach(doc => {
             const data = doc.data();
-            if (data.class !== "ADMIN") { 
+            // Hanya tarik jika pemain bukan ADMIN dan pernah bermain (totalScore > 0)
+            if (data.class !== "ADMIN" && data.totalScore && data.totalScore > 0) { 
                 window.leaderboardDataTemp.push(data);
             }
         });
+
+        // Kemaskini masa terakhir kita tarik data dari Firebase
+        window.lastLeaderboardFetch = currentTime;
 
         renderLeaderboardData('all');
 
@@ -4364,6 +4373,7 @@ function startChallengeListener(myName) {
 // C. MULA PERLAWANAN PVP (COUNTDOWN & ARENA)
 // ==========================================
 function startPvPMatch(challengeId, challengeData) {
+isGanjaranDisimpan = false;
     if (typeof playBgMusic === 'function') playBgMusic('pvp');
     console.log("⚔️ Mempersiapkan Arena PvP untuk cabaran:", challengeId);
     
@@ -4571,9 +4581,13 @@ function setupPvPLogic(challengeId, data) {
 }
 
 // ==========================================
-// F. TAMAT PERLAWANAN & GANJARAN (TIERS)
+// F. TAMAT PERLAWANAN & GANJARAN (TIERS) - VERSI SELAMAT
 // ==========================================
 function endPvPMatch() {
+    // 🛡️ GATEKEEPER PVP: Sekat jika ganjaran perlawanan ini sudah/sedang diproses!
+    if (isGanjaranPvPDisimpan) return;
+    isGanjaranPvPDisimpan = true; // 🔒 KUNCI PINTU SERTA-MERTA
+
     // Hentikan pemasa jika masih berjalan
     if (window.pvpTimerInterval) clearInterval(window.pvpTimerInterval);
 
@@ -4617,25 +4631,7 @@ function endPvPMatch() {
     localPlayerData.coins = (localPlayerData.coins || 0) + coinReward;
     localPlayerData.totalScore = (localPlayerData.totalScore || 0) + xpReward;
 
-    // ==========================================
-    // 🎥 CCTV TRACKER: REKOD KEPUTUSAN CABARAN
-    // ==========================================
-    //if (window.Trackers) {
-    //    let trackerStatus = 'tie';
-    //    if (result === "menang") trackerStatus = 'win';
-    //    if (result === "kalah") trackerStatus = 'lose';
-        
-    //    let isNarrowWin = false;
-        // Jika menang dan beza markah cuma 1, ia adalah Menang Tipis (Narrow Win)!
-    //    if (result === "menang" && (myScore - oppScore === 1)) {
-    //        isNarrowWin = true;
-    //   }
-
-    //    Trackers.rekodKeputusanCabaran(trackerStatus, isNarrowWin, false, false);
-    //    Trackers.rekodKoinDapat(coinReward); // Rekod jumlah keseluruhan syiling
-    //}
-
-    // 🔴 4. SIMPAN TERUS KE FIREBASE DENGAN ID YANG BETUL
+    // 🔴 4. SIMPAN KEPUTUSAN & GANJARAN KE FIREBASE
     const today = new Date().toISOString().split('T')[0];
     const docId = `${studentInfo.school}_${studentInfo.class}_${studentInfo.name}`.replace(/\s+/g, '_');
     
@@ -4650,10 +4646,10 @@ function endPvPMatch() {
             pvpCountToday: newCount
         }, { merge: true })
         .then(() => {
-            console.log("💰 Ganjaran PvP dan rekod harian telah diselamatkan ke pangkalan data!");
-            if (typeof updateUI === "function") updateUI(); // Kemaskini UI di penjuru atas terus
+            console.log("💰 [PvP] Ganjaran disimpan dengan selamat!");
+            if (typeof updateUI === "function") updateUI(); 
         }).catch(error => {
-            console.error("❌ Ralat menyimpan ganjaran:", error);
+            console.error("❌ Ralat menyimpan ganjaran PvP:", error);
         });
     });
 
@@ -4682,13 +4678,15 @@ function endPvPMatch() {
             document.getElementById('challenge-lobby-screen').classList.remove('hidden');
         }
 
-	// 🎵 TAMBAH BARIS INI: Mainkan semula muzik apabila kembali ke Lobi PvP 🎵
+        // 🎵 Mainkan semula muzik apabila kembali ke Lobi PvP
         if (typeof playBgMusic === 'function') playBgMusic();
 
-        // 🟢 KEMBALIKAN STATUS KE IDLE DENGAN ID YANG BETUL
+        // 🟢 KEMBALIKAN STATUS KE IDLE (Selamat & hanya dipanggil 1 kali selepas klik)
         db.collection("players").doc(docId).update({
             currentStatus: "idle"
-        }).catch(e => console.log("Ralat update status:", e));
+        }).then(() => {
+            console.log("🟢 Status pemain dikembalikan ke IDLE.");
+        }).catch(e => console.log("Ralat update status idle:", e));
     });
 }
 
