@@ -21,9 +21,9 @@ const rtdb = firebase.database();
 // ==========================================
 window.onload = async () => {
     await loadSchoolsDropdown();
-    const savedName = localStorage.getItem('playerName');
-    const savedClass = localStorage.getItem('playerClass');
-    const savedSchool = localStorage.getItem('playerSchool');
+    const savedName = sessionStorage.getItem('playerName');
+    const savedClass = sessionStorage.getItem('playerClass');
+    const savedSchool = sessionStorage.getItem('playerSchool');
 
     if (savedName && savedClass && savedSchool) {
         studentInfo = { 
@@ -222,9 +222,9 @@ async function loginStudent() {
 }
 
 function finalizeLogin() {
-    localStorage.setItem('playerName', studentInfo.name);
-    localStorage.setItem('playerClass', studentInfo.class);
-    localStorage.setItem('playerSchool', studentInfo.school);
+    sessionStorage.setItem('playerName', studentInfo.name);
+    sessionStorage.setItem('playerClass', studentInfo.class);
+    sessionStorage.setItem('playerSchool', studentInfo.school);
     
     document.getElementById('auth-screen')?.classList.add('hidden');
     document.getElementById('login-screen')?.classList.add('hidden');
@@ -387,10 +387,13 @@ function updateUI() {
 }
 
 async function logout() {
-    // Tukar status jadi offline sebelum keluar
+    // 1. Tukar status jadi offline sebelum keluar
     await setMyOnlineStatus(false); 
     
-    localStorage.clear();
+    // 2. Kosongkan semua memori sesi sessionStorage
+    sessionStorage.clear();
+    
+    // 3. Muat semula halaman untuk kembali ke skrin log masuk
     location.reload();
 }
 
@@ -868,7 +871,7 @@ async function deleteAccount(docId) {
 }
 
 // ==========================================
-// 12. FUNGSI PEMAIN AKTIF (REAL-TIME FIRESTORE) & KEMASKINI STATUS PVP
+// 12. FUNGSI PEMAIN AKTIF (PENGASINGAN KOLEKSI - ANTI-READS LEAK)
 // ==========================================
 async function setMyOnlineStatus(status) {
     // 1. CARI DATA PEMAIN DENGAN SELAMAT (Elak ReferenceError)
@@ -879,32 +882,45 @@ async function setMyOnlineStatus(status) {
         player = localPlayerData;
     }
 
-    // 2. Pastikan data murid ada dan Firebase (db) wujud
     if (!player || typeof db === 'undefined') return;
-    
-    // 3. Elakkan Game Master/Admin dari masuk senarai
     if (player.name === "SUPER ADMIN" || player.class === "ADMIN") return;
 
     try {
         const docId = `${player.school}_${player.class}_${player.name}`.replace(/\s+/g, '_');
-        const userRef = db.collection('players').doc(docId);
         
-        // Sediakan data untuk dikemaskini
+        // 🔴 KEMASKINI 1: Kemaskini status utama di 'players' untuk PVP (Tanpa listener)
+        const userRef = db.collection('players').doc(docId);
         let updateData = {
             isOnline: status,
             lastActive: firebase.firestore.FieldValue.serverTimestamp()
         };
-
-        // 🔥 TAMBAHAN KHAS PVP: Jika offline, tukar status PvP kepada 'offline'
         if (status === false) {
             updateData.currentStatus = "offline";
         } else {
-            // Jika online balik, jadikan 'idle' supaya boleh dicabar semula
             updateData.currentStatus = "idle";
         }
+        userRef.set(updateData, { merge: true }).catch(e => console.error(e));
 
-        // Guna .set({ ... }, { merge: true }) lebih selamat jika data murid belum wujud di koleksi 'players'
-        await userRef.set(updateData, { merge: true });
+        // 🟢 KEMASKINI 2: Sediakan mini-dokumen untuk senarai 'Online' (Koleksi Baharu!)
+        const onlineRef = db.collection('online_status').doc(docId);
+        let currentLvl = typeof calculateLevel === "function" ? calculateLevel(Number(localPlayerData.totalScore) || 0) : (localPlayerData.level || 1);
+        let currentAvatar = typeof localPlayerData !== 'undefined' ? (localPlayerData.activeAvatar || "👤") : "👤";
+        
+        if (status === true) {
+            // Tulis dokumen ringan jika online
+            await onlineRef.set({
+                name: player.name,
+                school: player.school,
+                level: currentLvl,
+                avatar: currentAvatar,
+                isOnline: true,
+                lastActive: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        } else {
+            // Padam dari memori Firebase jika offline (Jimat Ruang!)
+            await onlineRef.delete();
+        }
+
     } catch (error) {
         console.log("Ralat kemaskini status online:", error);
     }
@@ -913,7 +929,6 @@ async function setMyOnlineStatus(status) {
 let unreadChats = []; 
 
 function listenForNotifications() {
-    // 🔥 Guna typeof untuk elak ReferenceError!
     if (typeof studentInfo === 'undefined' || !studentInfo || !studentInfo.name) return;
 
     db.collection('chats')
@@ -923,29 +938,21 @@ function listenForNotifications() {
           
           snapshot.forEach(doc => {
               const data = doc.data();
-              // Jika ada pengirim dan ia bukan diri kita sendiri
               if (data.lastSender && data.lastSender !== studentInfo.name) {
                   unreadChats.push(data.lastSender);
               }
           });
           
-          // Debugging: Buka "Inspect Element > Console" untuk lihat radar ini berfungsi
           console.log("Mesej belum dibaca dari:", unreadChats);
-          
-          // Paksa senarai 'Active Players' dilukis semula dengan kemaskini status kita
-          if (typeof setMyOnlineStatus === "function") {
-              setMyOnlineStatus(true); 
-          }
+          // 🛑 KEMASKINI: Tiada lagi panggilan setMyOnlineStatus(true) di sini!
+          // Loop Reads dari notifikasi telah ditutup sepenuhnya.
       });
 }
 
 // ==========================================
 // 🔥 TAMBAHAN: AUTO-DETECT BROWSER BUKA / TUTUP 🔥
 // ==========================================
-
-// Paksa sistem beritahu Firestore kita sedang online bila web dibuka
 window.addEventListener('load', () => {
-    // Beri masa 2 saat untuk pastikan data profil siap dibaca
     setTimeout(() => {
         if (typeof setMyOnlineStatus === 'function') {
             setMyOnlineStatus(true);
@@ -954,7 +961,6 @@ window.addEventListener('load', () => {
     }, 2000);
 });
 
-// Beritahu Firestore kita offline BILA tab browser ditutup atau direfresh
 window.addEventListener('beforeunload', () => {
     if (typeof setMyOnlineStatus === 'function') {
         setMyOnlineStatus(false);
@@ -964,7 +970,8 @@ window.addEventListener('beforeunload', () => {
 function listenToActivePlayers() {
     if (typeof db === 'undefined' || !studentInfo) return;
 
-    db.collection('players')
+    // 🟢 KEMASKINI 3: Pantau koleksi 'online_status', BUKAN 'players'
+    db.collection('online_status')
       .where('school', '==', studentInfo.school)
       .where('isOnline', '==', true)
       .onSnapshot((snapshot) => {
@@ -980,71 +987,56 @@ function listenToActivePlayers() {
           snapshot.forEach((doc) => {
               const player = doc.data();
               
-              // 1. Tapis ADMIN SEBENAR sahaja
-              if (player.name && player.name.toUpperCase() === "SUPER ADMIN") return;
-              if (player.class && player.class.toUpperCase() === "ADMIN") return;
-              
-              // 2. Tapis Diri Sendiri (supaya tak nampak nama sendiri dalam senarai)
               if (player.name === studentInfo.name) return; 
 
-              // 3. Tapis Masa (Heartbeat - buang Ghost Status jika lebih 15 minit)
               if (player.lastActive) {
                   const lastActiveDate = player.lastActive.toDate(); 
                   const diffMinutes = (now - lastActiveDate) / (1000 * 60);
                   if (diffMinutes > 15) return; 
               }
 
-              // LULUS TAPISAN - Mula kira pemain
               activeCount++;
 
-              let avatarData = player.activeAvatar || "fas fa-user";
               let miniAvatar = '';
-
-              if (avatarData.icon) {
-                  miniAvatar = `<i class="${avatarData.icon} text-gray-500"></i>`;
-              } else if (typeof avatarData === 'string' && avatarData.startsWith('img|')) {
-                  let url = avatarData.replace('img|', '');
-                  miniAvatar = `<img src="${url}" class="w-full h-full object-contain">`;
-              } else if (typeof avatarData === 'string' && avatarData.startsWith('icon|')) {
-                  let icon = avatarData.replace('icon|', '');
-                  miniAvatar = `<i class="${icon} text-gray-500"></i>`;
+              let avData = player.avatar;
+              if (typeof avData === 'object' && avData !== null && avData.icon) {
+                  miniAvatar = `<i class="${avData.icon} text-white"></i>`;
+              } else if (typeof avData === 'string' && avData.startsWith('img|')) {
+                  miniAvatar = `<img src="${avData.replace('img|', '')}" class="w-full h-full object-contain">`;
+              } else if (typeof avData === 'string' && avData.startsWith('icon|')) {
+                  miniAvatar = `<i class="${avData.replace('icon|', '')} text-white"></i>`;
               } else {
-                  miniAvatar = `<i class="fas fa-user text-gray-500"></i>`;
+                  miniAvatar = `<span class="text-white">${avData || '👤'}</span>`;
               }
 
-              // ==========================================
-              // SEMAK STATUS NOTIFIKASI MESEJ BAHARU
-              // ==========================================
               const isUnread = typeof unreadChats !== 'undefined' && unreadChats.includes(player.name);
 
+              // 🟢 KEMASKINI 4: Rekabentuk UI Transparent Kompak (Gaya Mobile Legends)
               const playerHtml = `
-                  <div class="flex items-center gap-3 bg-white p-2 rounded-xl border ${isUnread ? 'border-red-400 bg-red-50' : 'border-gray-100'} shadow-sm hover:border-indigo-200 transition-colors cursor-pointer relative" onclick="openChatWith('${player.name}')">
+                  <div class="flex items-center gap-2 bg-transparent p-1 rounded hover:bg-black/20 transition-colors cursor-pointer relative" onclick="openChatWith('${player.name}')">
+                      ${isUnread ? '<span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-white animate-pulse z-10 shadow-sm"></span>' : ''}
                       
-                      ${isUnread ? '<span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white animate-pulse z-10 shadow-sm"></span>' : ''}
-
-                      <div class="w-8 h-8 bg-indigo-50 rounded-full flex items-center justify-center text-sm flex-shrink-0 overflow-visible relative drop-shadow-sm">
+                      <div class="w-5 h-5 bg-black/60 text-[8px] rounded-full flex items-center justify-center flex-shrink-0 border ${isUnread ? 'border-red-400' : 'border-white/10'} shadow-inner">
                           ${miniAvatar}
                       </div>
                       
-                      <div class="flex flex-col min-w-0">
-                          <span class="text-[11px] font-black ${isUnread ? 'text-red-700' : 'text-gray-800'} truncate leading-tight">${player.name || "Unknown"}</span>
-                          <span class="text-[9px] ${isUnread ? 'text-red-500' : 'text-gray-500'} font-bold leading-tight mt-0.5">Lvl ${player.level || 1}</span>
+                      <div class="flex flex-col min-w-0 leading-tight">
+                          <span class="text-[9px] font-bold ${isUnread ? 'text-red-400' : 'text-white'} truncate drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] tracking-wide">${player.name || "Unknown"}</span>
+                          <span class="text-[7px] text-green-400 font-extrabold drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">LVL ${player.level || 1}</span>
                       </div>
-
-                      ${isUnread ? '<span class="ml-auto text-[9px] font-black text-red-500 animate-bounce tracking-widest">NEW!</span>' : ''}
+                      ${isUnread ? '<span class="ml-auto text-[7px] font-black text-red-500 animate-bounce tracking-widest drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">NEW!</span>' : ''}
                   </div>
               `;
               container.insertAdjacentHTML('beforeend', playerHtml);
           });
 
-          // Kemaskini lencana bilangan pemain hijau
           countBadge.innerText = activeCount;
 
           if (activeCount === 0) {
               container.innerHTML = `
-                <div class="flex flex-col items-center justify-center py-6 opacity-50">
-                    <i class="fas fa-ghost text-2xl text-gray-400 mb-2"></i>
-                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Sunyi sepi...</span>
+                <div class="flex flex-col items-center justify-center py-4 opacity-50">
+                    <i class="fas fa-ghost text-lg text-white mb-1 drop-shadow-md"></i>
+                    <span class="text-[8px] font-bold text-white uppercase tracking-widest drop-shadow-md">Sunyi sepi...</span>
                 </div>`;
           }
       });
