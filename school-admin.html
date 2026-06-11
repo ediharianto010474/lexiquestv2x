@@ -11,17 +11,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     
-    <!-- SweetAlert2 (Diperlukan oleh shop.js) -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-slate-900 min-h-screen font-['Poppins'] flex items-center justify-center text-white p-4">
 
-    <!-- BAHAGIAN LOG MASUK -->
-  <div id="login-section" class="bg-slate-800 p-8 rounded-2xl shadow-2xl w-full max-w-md border-t-4 border-blue-500 text-center">
+    <div id="login-section" class="bg-slate-800 p-8 rounded-2xl shadow-2xl w-full max-w-md border-t-4 border-blue-500 text-center">
         <div class="inline-flex items-center justify-center w-24 h-24 bg-white/5 backdrop-blur-md rounded-xl mb-3 border border-white/10 shadow-inner overflow-hidden">
             <img src="assets/logolq.webp" alt="Logo LexiQuest V2" class="max-w-full max-h-full object-contain">
         </div>
@@ -34,12 +31,8 @@
         </button>
     </div> 
 
-
-
-    <!-- BAHAGIAN PAPAN PEMUKA (DASHBOARD) -->
     <div id="dashboard-section" class="hidden w-full max-w-5xl bg-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
         
-        <!-- PANEL TEPI (SIDEBAR NAVIGATION) -->
         <div class="bg-slate-900 p-8 md:w-1/3 border-b md:border-b-0 md:border-r border-slate-700 flex flex-col justify-between">
             <div>
                 <h2 class="text-blue-400 font-bold text-sm tracking-widest mb-1">SEKOLAH</h2>
@@ -47,7 +40,6 @@
                 <h2 class="text-blue-400 font-bold text-sm tracking-widest mb-1">PENGURUS</h2>
                 <p id="display-admin" class="text-lg font-bold uppercase"></p>
 
-                <!-- Menu Navigasi Guru -->
                 <nav class="mt-8 space-y-2">
                     <button onclick="switchMainMenu('registration')" id="nav-reg" class="w-full text-left px-4 py-3 bg-blue-600 rounded-xl font-bold transition-all shadow-md">
                         <i class="fas fa-users w-6"></i> Pendaftaran
@@ -63,7 +55,6 @@
 </button>
         </div>
 
-        <!-- 1. KANDUNGAN: PENDAFTARAN MURID -->
         <div id="section-registration" class="p-8 md:w-2/3">
             <h3 class="text-2xl font-black mb-6 border-b border-slate-700 pb-4"><i class="fas fa-user-plus mr-2 text-blue-500"></i> Pendaftaran Murid</h3>
             
@@ -72,7 +63,6 @@
                 <button onclick="switchTab('csv')" id="tab-csv" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg font-bold text-sm">Muat Naik CSV</button>
             </div>
 
-            <!-- Daftar Manual -->
             <div id="panel-manual" class="space-y-4">
                 <div>
                     <label class="block text-sm text-slate-400 mb-1">Nama Penuh Murid</label>
@@ -93,7 +83,6 @@
                 </button>
             </div>
 
-            <!-- Daftar CSV -->
             <div id="panel-csv" class="hidden space-y-4">
                 <div class="bg-slate-700/50 p-4 rounded-xl border border-slate-600 text-sm text-slate-300">
                     <p class="font-bold text-white mb-2"><i class="fas fa-info-circle text-blue-400"></i> Format Fail CSV Mesti Tepat:</p>
@@ -110,7 +99,6 @@
             </div>
         </div>
 
-        <!-- 2. KANDUNGAN: PENGURUSAN KEDAI (DARI SHOP.JS) -->
         <div id="section-shop" class="hidden p-8 md:w-2/3 flex flex-col h-full max-h-screen">
             <h3 class="text-2xl font-black mb-6 border-b border-slate-700 pb-4">
                 <i class="fas fa-store mr-2 text-indigo-400"></i> Pengurusan Kedai
@@ -125,7 +113,6 @@
                 </button>
             </div>
 
-            <!-- Kontena Injeksi untuk shop.js -->
             <div id="admin-content" class="bg-slate-100 text-slate-800 p-4 rounded-xl flex-grow overflow-y-auto">
                 <p class="text-slate-500 text-center py-10 font-medium">Sila pilih tab menu di atas untuk memuatkan pangkalan data.</p>
             </div>
@@ -133,7 +120,6 @@
 
     </div>
 
-    <!-- MODAL URUS BARANG KEDAI (TERSEMBUNYI) -->
     <div id="admin-item-modal" class="hidden fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
         <div class="bg-white text-slate-800 rounded-3xl p-6 w-full max-w-lg shadow-2xl">
             <h3 class="text-xl font-bold mb-4 border-b pb-3"><i class="fas fa-box-open text-indigo-600 mr-2"></i> Urus Barangan Kedai</h3>
@@ -199,7 +185,6 @@
         </div>
     </div>
 
-    <!-- Muatkan fail ekosistem kedai -->
     <script src="shop.js"></script>
 
     <script>
@@ -254,11 +239,21 @@
 
             const classSelect = document.getElementById('student-class');
             classSelect.innerHTML = ''; 
-            currentSchoolData.classes.forEach(c => {
+            
+            // 🔴 KEMASKINI DI SINI: Pelindung untuk sekolah yang belum ada data kelas
+            const senaraiKelas = currentSchoolData.classes || [];
+            if (senaraiKelas.length === 0) {
                 const option = document.createElement('option');
-                option.value = c; option.innerText = c;
+                option.value = ""; 
+                option.innerText = "-- Tiada Kelas Didaftarkan --";
                 classSelect.appendChild(option);
-            });
+            } else {
+                senaraiKelas.forEach(c => {
+                    const option = document.createElement('option');
+                    option.value = c; option.innerText = c;
+                    classSelect.appendChild(option);
+                });
+            }
         }
 
         // FUNGSI NAVIGASI MENU UTAMA (SIDEBAR)
@@ -317,13 +312,15 @@
             }
         }
 
-        // (Fungsi daftar murid kekal sama...)
         async function registerSingleStudent() {
             const name = document.getElementById('student-name').value.trim().toUpperCase();
             const className = document.getElementById('student-class').value;
             const passcode = document.getElementById('student-passcode').value.trim();
 
             if (!name || !passcode) return Swal.fire('Peringatan', 'Sila isi nama dan passcode!', 'warning');
+            
+            // Halang pendaftaran jika sekolah belum ada kelas
+            if (!className) return Swal.fire('Ralat', 'Tiada kelas didaftarkan untuk sekolah ini. Sila hubungi Super Admin untuk menambah kelas.', 'error');
 
             const docId = `${currentSchoolData.schoolName}_${className}_${name}`.replace(/\s+/g, '_');
 
