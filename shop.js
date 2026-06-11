@@ -65,6 +65,14 @@ function switchShopTab(tabName) {
 }
 
 // ==========================================
+// 🛒 VARIABLE CACHE KEDAI (TAMBAH DI LUAR FUNGSI)
+// ==========================================
+let shopCacheTemp = {
+    dataPenuh: [],
+    masaTarikanTerakhir: 0
+};
+
+// ==========================================
 // 🛍️ 2. PAPARAN KEDAI (EDU SHOP & GIFT SHOP)
 // ==========================================
 async function loadShopInventory(kategoriPilihan = 'edu') {
@@ -74,6 +82,17 @@ async function loadShopInventory(kategoriPilihan = 'edu') {
     
     if (!container) return;
 
+    const currentTime = Date.now();
+    const cacheValidTime = 5 * 60 * 1000; // Cache tahan 5 minit
+
+    // 🛡️ GATEKEEPER CACHE 🛡️
+    // Jika data dah ada dan belum expired, LUKIS TERUS DARI CACHE (0 Reads!)
+    if (shopCacheTemp.dataPenuh.length > 0 && (currentTime - shopCacheTemp.masaTarikanTerakhir) < cacheValidTime) {
+        console.log(`Kedai: Lukis ${kategoriPilihan} dari Cache (Zero Reads)`);
+        renderInventoryHTML(kategoriPilihan, container);
+        return; // HENTIKAN proses. Jangan panggil Firebase!
+    }
+
     container.innerHTML = `
         <div class="text-center col-span-full py-10 text-gray-500">
             <i class="fas fa-spinner fa-spin text-3xl mb-2 text-indigo-600"></i>
@@ -81,61 +100,80 @@ async function loadShopInventory(kategoriPilihan = 'edu') {
         </div>`;
 
     try {
-        // Tarik barang berdasarkan label kategori ("edu" atau "gift")
-        const snapshot = await db.collection("eduItems").where("category", "==", kategoriPilihan).get();
+        // 🔥 KITA TARIK SEMUA BARANG SEKALIGUS (BUANG .where("category")) 🔥
+        const snapshot = await db.collection("eduItems").get();
         
-        if (snapshot.empty) {
-            container.innerHTML = `
-                <div class="text-center col-span-full py-10 text-gray-400">
-                    <i class="fas fa-box-open text-5xl mb-3 text-gray-300"></i>
-                    <h3 class="font-bold text-lg">Kedai Masih Kosong</h3>
-                </div>`;
-            return;
-        }
-
-        let html = "";
+        // Kosongkan cache lama
+        shopCacheTemp.dataPenuh = [];
+        
         snapshot.forEach(doc => {
-            const item = doc.data();
-            const isOutOfStock = item.stock <= 0;
-            
-            // Tentukan fungsi butang (Edu beli untuk sendiri, Gift automatik popup pilih nama kawan)
-            const actionClick = kategoriPilihan === 'gift' 
-                ? `processShopPurchase('${item.id}', '${item.name}', ${item.price}, 'gift')`
-                : `processShopPurchase('${item.id}', '${item.name}', ${item.price}, 'self')`;
-
-            html += `
-            <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 flex flex-col items-center text-center relative overflow-hidden hover:shadow-md transition-shadow">
-                ${isOutOfStock ? `<div class="absolute top-3 right-[-25px] bg-red-500 text-white text-[10px] font-black px-8 py-1.5 rotate-45">HABIS</div>` : ''}
-                
-                <div class="w-14 h-14 bg-indigo-50 text-indigo-500 rounded-full flex items-center justify-center text-2xl mb-2">
-                    <i class="${item.icon || 'fas fa-gift'}"></i>
-                </div>
-                <h4 class="font-bold text-gray-800 text-xs mb-1">${item.name}</h4>
-                <p class="text-[9px] text-gray-400 mb-3 h-8 overflow-hidden">${item.desc || ''}</p>
-                
-                <div class="w-full flex justify-between items-center mt-auto pt-2 border-t">
-                    <div class="font-black text-yellow-600 flex items-center gap-1 text-xs">
-                        <i class="fas fa-coins"></i> ${item.price}
-                    </div>
-                    <span class="text-[9px] font-bold px-2 py-0.5 rounded ${isOutOfStock ? 'bg-red-50 text-red-500' : 'bg-green-50 text-green-600'}">
-                        Stok: ${item.stock}
-                    </span>
-                </div>
-
-                <button 
-                    onclick="${actionClick}" 
-                    class="mt-3 w-full py-2 rounded-xl font-bold text-xs transition-all ${isOutOfStock ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-md'}"
-                    ${isOutOfStock ? 'disabled' : ''}>
-                    ${isOutOfStock ? 'STOK KOSONG' : (kategoriPilihan === 'gift' ? '🎁 HADIAHKAN RAKAN' : '🛍️ BELI SEKARANG')}
-                </button>
-            </div>`;
+            shopCacheTemp.dataPenuh.push(doc.data());
         });
-        
-        container.innerHTML = html;
+
+        // Kemaskini masa tarikan
+        shopCacheTemp.masaTarikanTerakhir = currentTime;
+
+        // Panggil fungsi melukis HTML
+        renderInventoryHTML(kategoriPilihan, container);
+
     } catch (e) {
         console.error("Ralat load kedai:", e);
         container.innerHTML = `<p class="text-center col-span-full py-10 text-red-500">Gagal memuatkan kedai.</p>`;
     }
+}
+
+// 🎨 FUNGSI MELUKIS HTML (DIPISAHKAN SUPAYA BOLEH DIPANGGIL OLEH CACHE)
+function renderInventoryHTML(kategoriPilihan, container) {
+    // Tapis barang dari ARRAY CACHE, BUKAN dari Firebase
+    const itemsToDisplay = shopCacheTemp.dataPenuh.filter(item => item.category === kategoriPilihan);
+
+    if (itemsToDisplay.length === 0) {
+        container.innerHTML = `
+            <div class="text-center col-span-full py-10 text-gray-400">
+                <i class="fas fa-box-open text-5xl mb-3 text-gray-300"></i>
+                <h3 class="font-bold text-lg">Kedai Masih Kosong</h3>
+            </div>`;
+        return;
+    }
+
+    let html = "";
+    itemsToDisplay.forEach(item => {
+        const isOutOfStock = item.stock <= 0;
+        
+        // Tentukan fungsi butang
+        const actionClick = kategoriPilihan === 'gift' 
+            ? `processShopPurchase('${item.id}', '${item.name}', ${item.price}, 'gift')`
+            : `processShopPurchase('${item.id}', '${item.name}', ${item.price}, 'self')`;
+
+        html += `
+        <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 flex flex-col items-center text-center relative overflow-hidden hover:shadow-md transition-shadow">
+            ${isOutOfStock ? `<div class="absolute top-3 right-[-25px] bg-red-500 text-white text-[10px] font-black px-8 py-1.5 rotate-45">HABIS</div>` : ''}
+            
+            <div class="w-14 h-14 bg-indigo-50 text-indigo-500 rounded-full flex items-center justify-center text-2xl mb-2">
+                <i class="${item.icon || 'fas fa-gift'}"></i>
+            </div>
+            <h4 class="font-bold text-gray-800 text-xs mb-1">${item.name}</h4>
+            <p class="text-[9px] text-gray-400 mb-3 h-8 overflow-hidden">${item.desc || ''}</p>
+            
+            <div class="w-full flex justify-between items-center mt-auto pt-2 border-t">
+                <div class="font-black text-yellow-600 flex items-center gap-1 text-xs">
+                    <i class="fas fa-coins"></i> ${item.price}
+                </div>
+                <span class="text-[9px] font-bold px-2 py-0.5 rounded ${isOutOfStock ? 'bg-red-50 text-red-500' : 'bg-green-50 text-green-600'}">
+                    Stok: ${item.stock}
+                </span>
+            </div>
+
+            <button 
+                onclick="${actionClick}" 
+                class="mt-3 w-full py-2 rounded-xl font-bold text-xs transition-all ${isOutOfStock ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-md'}"
+                ${isOutOfStock ? 'disabled' : ''}>
+                ${isOutOfStock ? 'STOK KOSONG' : (kategoriPilihan === 'gift' ? '🎁 HADIAHKAN RAKAN' : '🛍️ BELI SEKARANG')}
+            </button>
+        </div>`;
+    });
+    
+    container.innerHTML = html;
 }
 
 // ==========================================
