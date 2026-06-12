@@ -25,7 +25,7 @@
         <h1 class="text-2xl font-black mb-2">PORTAL GURU</h1>
         <p class="text-slate-400 text-sm mb-6">Sila masukkan Passcode Sekolah anda</p>
 
-        <input type="password" id="teacher-pass" placeholder="Contoh: SCX2026" class="w-full p-4 mb-4 bg-slate-700 text-white rounded-xl outline-none text-center tracking-widest text-lg font-mono focus:ring-2 focus:ring-blue-500">
+        <input type="password" id="teacher-pass" placeholder="Contoh: LQ-1234" class="w-full p-4 mb-4 bg-slate-700 text-white rounded-xl outline-none text-center tracking-widest text-lg font-mono focus:ring-2 focus:ring-blue-500">
         <button id="btn-login" onclick="loginTeacher()" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-blue-500/30">
             MASUK
         </button>
@@ -35,12 +35,19 @@
         
         <div class="bg-slate-900 p-8 md:w-1/3 border-b md:border-b-0 md:border-r border-slate-700 flex flex-col justify-between">
             <div>
-                <h2 class="text-blue-400 font-bold text-sm tracking-widest mb-1">SEKOLAH</h2>
-                <p id="display-school" class="text-xl font-black mb-6 uppercase"></p>
-                <h2 class="text-blue-400 font-bold text-sm tracking-widest mb-1">PENGURUS</h2>
-                <p id="display-admin" class="text-lg font-bold uppercase"></p>
+                <h2 class="text-blue-400 font-bold text-xs tracking-widest mb-1">SEKOLAH</h2>
+                <p id="display-school" class="text-lg font-black mb-4 uppercase leading-tight"></p>
+                
+                <h2 class="text-blue-400 font-bold text-xs tracking-widest mb-1">PENGURUS</h2>
+                <p id="display-admin" class="text-base font-bold uppercase mb-4"></p>
 
-                <nav class="mt-8 space-y-2">
+                <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700">
+                    <h2 class="text-blue-400 font-bold text-[10px] tracking-widest mb-1">STATUS LANGGANAN</h2>
+                    <p id="display-subscription" class="text-sm font-bold text-emerald-400"></p>
+                    <p id="display-expiry" class="text-xs text-slate-400 mt-1"><i class="fas fa-clock mr-1"></i> Memuatkan...</p>
+                </div>
+
+                <nav class="mt-6 space-y-2">
                     <button onclick="switchMainMenu('registration')" id="nav-reg" class="w-full text-left px-4 py-3 bg-blue-600 rounded-xl font-bold transition-all shadow-md">
                         <i class="fas fa-users w-6"></i> Pendaftaran
                     </button>
@@ -50,9 +57,9 @@
                 </nav>
             </div>
             
-            <button onclick="window.location.href='https://ediharianto010474.github.io/lexiquestv2'" class="mt-8 bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white px-4 py-3 rounded-xl text-sm font-bold transition-colors w-full border border-red-500/20">
-    <i class="fas fa-sign-out-alt mr-2"></i> Log Keluar
-</button>
+            <button onclick="logoutTeacher()" class="mt-8 bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white px-4 py-3 rounded-xl text-sm font-bold transition-colors w-full border border-red-500/20">
+                <i class="fas fa-sign-out-alt mr-2"></i> Log Keluar
+            </button>
         </div>
 
         <div id="section-registration" class="p-8 md:w-2/3">
@@ -154,23 +161,23 @@
                         </select>
                     </div>
                     <div class="w-1/2">
-    <label class="block text-xs font-bold text-slate-500 mb-1">Ikon Barang</label>
-    <select id="admin-item-icon" class="w-full p-2.5 bg-slate-100 border border-slate-200 rounded-xl outline-none text-sm focus:ring-2 focus:ring-indigo-400 cursor-pointer">
-        <option value="fas fa-box">📦 Kotak (Lalai/Default)</option>
-        <option value="fas fa-pen">🖊️ Pen / Pensel</option>
-        <option value="fas fa-eraser">🧽 Pemadam</option>
-        <option value="fas fa-ruler">📏 Pembaris / Set Geometri</option>
-        <option value="fas fa-book">📚 Buku</option>
-        <option value="fas fa-palette">🎨 Warna Air / Seni</option>
-        <option value="fas fa-sticky-note">📝 Sticky Note / Kertas</option>
-        <option value="fas fa-gift">🎁 Kotak Hadiah</option>
-        <option value="fas fa-key">🔑 Keychain (Kunci)</option>
-        <option value="fas fa-bookmark">🔖 Bookmark</option>
-        <option value="fas fa-id-card">💳 Kad / ID</option>
-        <option value="fas fa-ticket-alt">🎫 Tiket / Pas Keluar</option>
-        <option value="fas fa-star">⭐ Bintang</option>
-    </select>
-</div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">Ikon Barang</label>
+                        <select id="admin-item-icon" class="w-full p-2.5 bg-slate-100 border border-slate-200 rounded-xl outline-none text-sm focus:ring-2 focus:ring-indigo-400 cursor-pointer">
+                            <option value="fas fa-box">📦 Kotak (Lalai/Default)</option>
+                            <option value="fas fa-pen">🖊️ Pen / Pensel</option>
+                            <option value="fas fa-eraser">🧽 Pemadam</option>
+                            <option value="fas fa-ruler">📏 Pembaris / Set Geometri</option>
+                            <option value="fas fa-book">📚 Buku</option>
+                            <option value="fas fa-palette">🎨 Warna Air / Seni</option>
+                            <option value="fas fa-sticky-note">📝 Sticky Note / Kertas</option>
+                            <option value="fas fa-gift">🎁 Kotak Hadiah</option>
+                            <option value="fas fa-key">🔑 Keychain (Kunci)</option>
+                            <option value="fas fa-bookmark">🔖 Bookmark</option>
+                            <option value="fas fa-id-card">💳 Kad / ID</option>
+                            <option value="fas fa-ticket-alt">🎫 Tiket / Pas Keluar</option>
+                            <option value="fas fa-star">⭐ Bintang</option>
+                        </select>
+                    </div>
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-500 mb-1">Penerangan Ringkas</label>
@@ -198,7 +205,7 @@
             measurementId: "G-G4T1JCPH88",
             databaseURL: "https://lexiquestv2-default-rtdb.asia-southeast1.firebasedatabase.app"
         };
-        // Semak sama ada Firebase sudah diinisialisasi (mengelakkan konflik dengan shop.js)
+        
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
@@ -210,6 +217,9 @@
             if (event.key === "Enter") loginTeacher();
         });
 
+        // ==========================================
+        // 1. FUNGSI LOG MASUK (KEMASKINI PENGIKTIRAFAN KAEDAH 2)
+        // ==========================================
         async function loginTeacher() {
             const pass = document.getElementById('teacher-pass').value.trim();
             const btn = document.getElementById('btn-login');
@@ -218,29 +228,96 @@
             try {
                 btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyemak...';
                 const docRef = await db.collection("school_admins").doc(pass).get();
+                
                 if (docRef.exists) {
                     currentSchoolData = docRef.data();
+
+                    // -------------------------------------------------------------
+                    // LOGIK PENGIKTIRAFAN LANGGANAN & SEMAKAN TAMAT TEMPOH
+                    // -------------------------------------------------------------
+                    const now = new Date();
+                    
+                    // SITUASI A: Log Masuk Pertama Kali (Belum diaktifkan)
+                    if (!currentSchoolData.activation_date) {
+                        const durationVal = currentSchoolData.duration_value || 3; 
+                        const durationType = currentSchoolData.duration_type || 'months'; 
+                        
+                        let expiryDate = new Date();
+                        if (durationType === 'days') {
+                            expiryDate.setDate(expiryDate.getDate() + durationVal); // Pakej Demo 5 Hari
+                        } else {
+                            expiryDate.setMonth(expiryDate.getMonth() + durationVal); // Pakej Biasa 3/6/12 Bulan
+                        }
+
+                        // Simpan tarikh mula dan luput ke pangkalan data
+                        await db.collection("school_admins").doc(pass).update({
+                            activation_date: now,
+                            expiry_date: expiryDate
+                        });
+
+                        // Kemas kini profil sementara di pelayar (tanpa perlu reload page)
+                        currentSchoolData.activation_date = firebase.firestore.Timestamp.fromDate(now);
+                        currentSchoolData.expiry_date = firebase.firestore.Timestamp.fromDate(expiryDate);
+
+                        let tempohTeks = durationType === 'days' ? `${durationVal} Hari` : `${durationVal} Bulan`;
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Sistem Diaktifkan!',
+                            text: `Akaun sekolah anda telah berjaya diaktifkan hari ini. Langganan ${currentSchoolData.subscription_tier} untuk ${tempohTeks} bermula sekarang!`,
+                            confirmButtonColor: '#2563eb'
+                        });
+                        
+                    } else {
+                        // SITUASI B: Akaun Sudah Aktif - Semak jika sudah tamat tempoh
+                        const expiry = currentSchoolData.expiry_date.toDate();
+                        if (now > expiry) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Akaun Tamat Tempoh',
+                                html: `Harap maaf, akses untuk sekolah ini telah tamat pada <br><b>${expiry.toLocaleDateString('ms-MY')}</b>.<br><br>Sila hubungi admin LexiQuest untuk pembaharuan.`,
+                                confirmButtonColor: '#d33'
+                            });
+                            btn.innerHTML = 'MASUK';
+                            return; // Halang akses seterusnya
+                        }
+                    }
+
+                    // Jika lulus semua, terus paparkan papan pemuka
                     setupDashboard();
+
                 } else {
-                    Swal.fire('Gagal', 'Passcode tidak dijumpai.', 'error');
+                    Swal.fire('Gagal', 'Passcode tidak sah atau tidak dijumpai.', 'error');
                 }
             } catch (error) {
                 Swal.fire('Ralat Rangkaian', error.message, 'error');
             } finally {
-                btn.innerHTML = 'MASUK';
+                if (btn.innerHTML !== 'MASUK') {
+                    btn.innerHTML = 'MASUK';
+                }
             }
         }
 
+        // ==========================================
+        // 2. PAPARAN PAPAN PEMUKA
+        // ==========================================
         function setupDashboard() {
             document.getElementById('login-section').classList.add('hidden');
             document.getElementById('dashboard-section').classList.remove('hidden');
             document.getElementById('display-school').innerText = currentSchoolData.schoolName;
             document.getElementById('display-admin').innerText = currentSchoolData.adminName;
 
+            // Memaparkan status pakej langganan dan tarikh luput
+            const subTier = currentSchoolData.subscription_tier || "CITRA";
+            document.getElementById('display-subscription').innerText = `PAKEJ ${subTier.toUpperCase()}`;
+            
+            if (currentSchoolData.expiry_date) {
+                const tarikhTamat = currentSchoolData.expiry_date.toDate();
+                document.getElementById('display-expiry').innerHTML = `<i class="fas fa-clock mr-1 text-slate-500"></i> Tamat Pada: <b>${tarikhTamat.toLocaleDateString('ms-MY')}</b>`;
+            }
+
             const classSelect = document.getElementById('student-class');
             classSelect.innerHTML = ''; 
             
-            // 🔴 KEMASKINI DI SINI: Pelindung untuk sekolah yang belum ada data kelas
             const senaraiKelas = currentSchoolData.classes || [];
             if (senaraiKelas.length === 0) {
                 const option = document.createElement('option');
@@ -256,14 +333,20 @@
             }
         }
 
-        // FUNGSI NAVIGASI MENU UTAMA (SIDEBAR)
+        function logoutTeacher() {
+            currentSchoolData = null; // Cuci memori semasa
+            window.location.href = 'https://ediharianto010474.github.io/lexiquestv2';
+        }
+
+        // ==========================================
+        // 3. FUNGSI NAVIGASI GUI 
+        // ==========================================
         function switchMainMenu(menuName) {
             const secReg = document.getElementById('section-registration');
             const secShop = document.getElementById('section-shop');
             const navReg = document.getElementById('nav-reg');
             const navShop = document.getElementById('nav-shop');
 
-            // Reset gaya butang sidebar
             navReg.className = 'w-full text-left px-4 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl text-slate-300 font-bold transition-all';
             navShop.className = 'w-full text-left px-4 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl text-slate-300 font-bold transition-all';
 
@@ -276,13 +359,11 @@
                 secShop.classList.remove('hidden');
                 navShop.className = 'w-full text-left px-4 py-3 bg-indigo-600 text-white rounded-xl font-bold transition-all shadow-md';
                 
-                // Automatik panggil fungsi dari shop.js apabila dibuka
                 loadAdminOrders();
                 setActiveShopTab('orders');
             }
         }
 
-        // FUNGSI NAVIGASI TAB DI DALAM PENGURUSAN KEDAI
         function setActiveShopTab(tabName) {
             const tabOrders = document.getElementById('tab-orders');
             const tabInventory = document.getElementById('tab-inventory');
@@ -297,7 +378,6 @@
             }
         }
 
-        // FUNGSI NAVIGASI TAB PENDAFTARAN MURID
         function switchTab(tab) {
             if (tab === 'manual') {
                 document.getElementById('panel-manual').classList.remove('hidden');
@@ -312,14 +392,15 @@
             }
         }
 
+        // ==========================================
+        // 4. LOGIK PENDAFTARAN MURID (MANUAL & CSV)
+        // ==========================================
         async function registerSingleStudent() {
             const name = document.getElementById('student-name').value.trim().toUpperCase();
             const className = document.getElementById('student-class').value;
             const passcode = document.getElementById('student-passcode').value.trim();
 
             if (!name || !passcode) return Swal.fire('Peringatan', 'Sila isi nama dan passcode!', 'warning');
-            
-            // Halang pendaftaran jika sekolah belum ada kelas
             if (!className) return Swal.fire('Ralat', 'Tiada kelas didaftarkan untuk sekolah ini. Sila hubungi Super Admin untuk menambah kelas.', 'error');
 
             const docId = `${currentSchoolData.schoolName}_${className}_${name}`.replace(/\s+/g, '_');
