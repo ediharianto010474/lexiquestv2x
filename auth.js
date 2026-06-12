@@ -1169,24 +1169,37 @@ function toggleQuickChat(forceState) {
     }
 }
 
-// Papar senarai Kategori (Greetings, Social, dll)
-function showQuickChatCategories() {
+// Papar ayat sebenar di dalam kategori yang dipilih (Dikemas kini untuk Multibahasa)
+function showQuickChatMessages(category) {
     const list = document.getElementById('quick-chat-list');
     const title = document.getElementById('quick-chat-title');
     const backBtn = document.getElementById('quick-chat-back');
 
-    title.innerText = "KATEGORI MESEJ";
-    backBtn.classList.add('hidden');
+    title.innerText = category.toUpperCase();
+    backBtn.classList.remove('hidden');
     list.innerHTML = '';
 
-    // Gelung baca dari objek quickChatData
-    for (let category in quickChatData) {
+    const messages = quickChatData[category];
+    messages.forEach(msgObj => {
         const btn = document.createElement('button');
-        btn.className = "text-left text-xs font-bold text-gray-700 bg-gray-50 hover:bg-indigo-50 p-2.5 rounded-lg border border-gray-100 hover:border-indigo-200 transition-colors shadow-sm active:scale-[0.98]";
-        btn.innerText = category;
-        btn.onclick = () => showQuickChatMessages(category);
+        // Kita guna flex-col supaya ayat tersusun ke bawah seperti senarai
+        btn.className = "text-left flex flex-col gap-0.5 w-full bg-white hover:bg-green-50 p-2.5 rounded-lg border border-gray-100 hover:border-green-300 transition-colors shadow-sm active:scale-[0.98] mb-2";
+        
+        // Paparan 4 Bahasa di dalam menu pop-up butang
+        btn.innerHTML = `
+            <span class="text-[12px] font-bold text-gray-800">${msgObj.en}</span>
+            <span class="text-[10px] font-medium text-gray-500 border-t border-gray-100 pt-1 mt-1">🇲🇾 ${msgObj.ms}</span>
+            <span class="text-[10px] font-medium text-blue-600">🇨🇳 ${msgObj.zh}</span>
+            <span class="text-[10px] font-medium text-red-500">🇯🇵 ${msgObj.ja}</span>
+        `;
+
+        // Gabungkan kesemua bahasa menggunakan "line break (\n)" untuk dihantar ke Firebase
+        const combinedMessage = `${msgObj.en}\n🇲🇾 ${msgObj.ms}\n🇨🇳 ${msgObj.zh}\n🇯🇵 ${msgObj.ja}`;
+
+        // Apabila mesej ditekan, ia menghantar kesemua 4 bahasa kepada rakan
+        btn.onclick = () => sendQuickMessage(combinedMessage); 
         list.appendChild(btn);
-    }
+    });
 }
 
 // Papar ayat sebenar di dalam kategori yang dipilih
