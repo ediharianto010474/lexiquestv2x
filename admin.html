@@ -45,7 +45,7 @@
                 <h1 class="text-2xl font-black text-green-400"><i class="fas fa-server mr-2"></i> Panel Kawalan Super Admin</h1>
                 <p class="text-slate-400 text-sm mt-1">Pengurusan Langganan B2B & Penyelenggaraan Sistem.</p>
             </div>
-            <button onclick="window.location.href='https://ediharianto010474.github.io/lexiquestv2'" class="bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-colors flex items-center gap-2 shadow">
+            <button onclick="logoutSuperAdmin()" class="bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-colors flex items-center gap-2 shadow">
                 <i class="fas fa-sign-out-alt"></i> Keluar
             </button>
         </div>
@@ -199,6 +199,12 @@
             loadPendingSubscriptions();
         }
 
+        // FUNGSI KELUAR SUPER ADMIN (PADAM SESI)
+        function logoutSuperAdmin() {
+            sessionStorage.removeItem("superAdminAuth");
+            window.location.href = 'https://ediharianto010474.github.io/lexiquestv2';
+        }
+
         // ==========================================
         // 2. FUNGSI MUAT TURUN JADUAL LANGGANAN
         // ==========================================
@@ -230,6 +236,10 @@
                     let tierColor = 'text-cyan-400';
                     if(data.tier === 'PERDANA') tierColor = 'text-amber-400';
                     if(data.tier === 'MEGA') tierColor = 'text-purple-400';
+                    if(data.tier === 'DEMO') tierColor = 'text-emerald-400';
+
+                    // Teks Durasi (Tentukan Hari atau Bulan)
+                    let textDurasi = data.tier === "DEMO" ? `${data.duration} Hari` : `${data.duration} Bulan`;
 
                     // Butang Audit Resit
                     let receiptBtn = `<span class="text-slate-600 text-xs italic">Tiada</span>`;
@@ -248,7 +258,7 @@
                         </td>
                         <td class="p-4">
                             <div class="font-black ${tierColor} tracking-wider">${(data.tier || 'CITRA').toUpperCase()}</div>
-                            <div class="text-xs text-slate-400 mt-1"><i class="far fa-clock mr-1"></i> ${data.duration || 3} Bulan</div>
+                            <div class="text-xs text-slate-400 mt-1"><i class="far fa-clock mr-1"></i> ${textDurasi}</div>
                         </td>
                         <td class="p-4">${receiptBtn}</td>
                         <td class="p-4 text-center whitespace-nowrap">
@@ -274,34 +284,35 @@
         }
 
         // ==========================================
-        // 3. FUNGSI KELULUSAN (GENERATE PASSCODE & WHATSAPP)
+        // 3. FUNGSI KELULUSAN (GENERATE PASSCODE & WHATSAPP) - KAEDAH 2
         // ==========================================
-        async function approveSubscription(docId, schoolName, teacherName, teacherPhone, tier, durationMonths) {
+        async function approveSubscription(docId, schoolName, teacherName, teacherPhone, tier, durationVal) {
             if (!confirm(`Sahkan kelulusan untuk ${schoolName}?`)) return;
 
             try {
-                // Tentukan Had Murid
+                // Tentukan Had Murid dan Jenis Tempoh (Hari/Bulan)
                 let maxStudents = 150;
                 let tierUpper = tier.toUpperCase();
-                if (tierUpper === "PERDANA") maxStudents = 600;
-                else if (tierUpper === "MEGA") maxStudents = 999999;
+                let durationType = "months";
 
-                // Kira Expiry Date
-                const expiryDate = new Date();
-                expiryDate.setMonth(expiryDate.getMonth() + parseInt(durationMonths));
+                if (tierUpper === "PERDANA") { maxStudents = 600; }
+                else if (tierUpper === "MEGA") { maxStudents = 999999; }
+                else if (tierUpper === "DEMO") { maxStudents = 150; durationType = "days"; }
 
                 // Jana Passcode (LQ-XXXX)
                 const passcodeRawak = `LQ-${Math.floor(1000 + Math.random() * 9000)}`;
 
-                // Simpan ke school_admins
+                // 🌟 KAEDAH 2: Simpan tempoh, TAPI activation_date & expiry_date = null (Dikira semasa Login)
                 await db.collection("school_admins").doc(passcodeRawak).set({
                     schoolName: schoolName.toUpperCase(),
                     adminName: teacherName.toUpperCase(),
                     passcode: passcodeRawak,
                     subscription_tier: tierUpper,
                     max_students_allowed: maxStudents,
-                    duration_months: parseInt(durationMonths),
-                    expiry_date: expiryDate,
+                    duration_value: parseInt(durationVal),
+                    duration_type: durationType,
+                    activation_date: null, // Dikunci semasa log masuk pertama
+                    expiry_date: null,     // Dikunci semasa log masuk pertama
                     status: "active",
                     approvedAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
@@ -315,17 +326,18 @@
                 else if (!cleanPhone.startsWith('60') && cleanPhone.startsWith('1')) cleanPhone = '60' + cleanPhone;
 
                 const limitText = maxStudents === 999999 ? 'Tanpa Had' : `${maxStudents} Murid`;
-                const dDate = expiryDate.toLocaleDateString('ms-MY');
+                const textDurasi = durationType === "days" ? `${durationVal} Hari` : `${durationVal} Bulan`;
 
                 const msg = `Tahniah Cikgu *${teacherName.toUpperCase()}*! 👋\n\n` +
                             `Langganan LexiQuest V2 untuk *${schoolName.toUpperCase()}* telah *DILULUSKAN*. ✨\n\n` +
                             `📋 *MAKLUMAT PAKEJ:*\n` +
                             `• Pakej: *${tierUpper}*\n` +
+                            `• Tempoh: ${textDurasi}\n` +
                             `• Had Kuota: ${limitText}\n` +
-                            `• Tarikh Luput: ${dDate}\n\n` +
+                            `• Tarikh Mula: *(Akan dikira pada hari log masuk pertama anda)*\n\n` +
                             `🔐 *PASSCODE GURU:*\n` +
                             `👉 *${passcodeRawak}*\n\n` +
-                            `Sila log masuk di portal \`school-admin.html\` menggunakan passcode ini untuk mendaftar murid. Terima kasih! 🚀`;
+                            `Sila log masuk di portal *Admin Sekolah* menggunakan passcode ini untuk mula mengaktifkan sistem dan mendaftar murid. Terima kasih! 🚀`;
 
                 window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank');
                 loadPendingSubscriptions();
@@ -346,7 +358,7 @@
         }
 
         // ==========================================
-        // 4. SISTEM HOUSEKEEPING BERASASKAN MASA (30 HARI) - ORIGINAL
+        // 4. SISTEM HOUSEKEEPING BERASASKAN MASA (30 HARI)
         // ==========================================
         async function checkDynamicHousekeeping() {
             const banner = document.getElementById('housekeeping-banner');
