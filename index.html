@@ -2247,52 +2247,6 @@ window.showScreen = function(screenId) {
     </div>
 </div>
 
-<div id="edu-checkout-modal" class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm p-4">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate__animated animate__zoomIn animate__faster">
-        
-        <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-4 text-white flex justify-between items-center">
-            <h3 class="text-xl font-bold"><i class="fas fa-shopping-cart mr-2"></i> Borang Pesanan</h3>
-            <button onclick="closeEduCheckout()" class="hover:text-red-200 transition-colors">
-                <i class="fas fa-times text-2xl"></i>
-            </button>
-        </div>
-
-        <div class="p-6 space-y-4">
-            <input type="hidden" id="eduItemID">
-            <input type="hidden" id="eduBasePrice">
-
-            <div>
-                <label class="block text-sm font-semibold text-gray-600 mb-1">Item Dipilih</label>
-                <input type="text" id="eduItemName" readonly class="w-full bg-gray-100 border border-gray-300 rounded-lg px-4 py-2 font-bold text-gray-800 outline-none">
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-semibold text-gray-600 mb-1">Kuantiti</label>
-                    <input type="number" id="eduQuantity" value="1" min="1" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-600 mb-1">Nama Pemesan</label>
-                    <input type="text" id="eduStudentName" readonly class="w-full bg-gray-100 border border-gray-300 rounded-lg px-4 py-2 text-gray-600 outline-none">
-                </div>
-            </div>
-
-            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 text-sm text-yellow-800">
-                <i class="fas fa-info-circle mr-1"></i> Pesanan anda akan dihantar kepada guru untuk pengesahan.
-            </div>
-        </div>
-
-        <div class="p-4 bg-gray-50 flex gap-3">
-            <button onclick="closeEduCheckout()" class="flex-1 px-4 py-2 bg-gray-300 text-gray-700 rounded-xl font-bold hover:bg-gray-400 transition-all">
-                Batal
-            </button>
-            <button id="eduConfirmBtn" onclick="submitEduCheckout()" class="flex-[2] px-4 py-2 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition-all">
-                Sahkan Pesanan
-            </button>
-        </div>
-    </div>
-</div>
-
 <div id="floating-chat-box" class="hidden fixed bottom-0 right-4 md:right-8 w-80 bg-white/10 backdrop-blur-lg rounded-t-2xl shadow-[0_8px_32px_0_rgba(31,38,135,0.2)] border border-white/30 z-50 flex-col transition-all duration-300">
     
     <div class="bg-indigo-600/80 backdrop-blur-md text-white px-4 py-3 rounded-t-2xl flex justify-between items-center cursor-pointer border-b border-white/20" onclick="toggleChatMinimize()">
@@ -2350,5 +2304,53 @@ window.showScreen = function(screenId) {
         </div>
     </div>
 </div>
+
+<div id="edu-checkout-modal" class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate__animated animate__zoomIn animate__faster">
+        
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-4 text-white flex justify-between items-center">
+            <h3 class="text-xl font-bold"><i class="fas fa-shopping-cart mr-2"></i> Borang Pesanan</h3>
+            <button onclick="closeEduCheckout()" class="hover:text-red-200 transition-colors">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+
+        <div class="p-6 space-y-4">
+            <input type="hidden" id="eduItemID">
+            <input type="hidden" id="eduBasePrice">
+
+            <div>
+                <label class="block text-sm font-semibold text-gray-600 mb-1">Item Dipilih</label>
+                <input type="text" id="eduItemName" readonly class="w-full bg-gray-100 border border-gray-300 rounded-lg px-4 py-2 font-bold text-gray-800 outline-none">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-600 mb-1">Kuantiti</label>
+                    <input type="number" id="eduQuantity" value="1" min="1" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-600 mb-1">Nama Pemesan</label>
+                    <input type="text" id="eduStudentName" readonly class="w-full bg-gray-100 border border-gray-300 rounded-lg px-4 py-2 text-gray-600 outline-none">
+                </div>
+            </div>
+
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 text-sm text-yellow-800">
+                <i class="fas fa-info-circle mr-1"></i> Pesanan anda akan dihantar kepada guru untuk pengesahan.
+            </div>
+        </div>
+
+        <div class="p-4 bg-gray-50 flex gap-3">
+            <button onclick="closeEduCheckout()" class="flex-1 px-4 py-2 bg-gray-300 text-gray-700 rounded-xl font-bold hover:bg-gray-400 transition-all">
+                Batal
+            </button>
+            <button id="eduConfirmBtn" onclick="submitEduCheckout()" class="flex-[2] px-4 py-2 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition-all">
+                Sahkan Pesanan
+            </button>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
