@@ -54,6 +54,9 @@
                     <button onclick="switchMainMenu('shop')" id="nav-shop" class="w-full text-left px-4 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl text-slate-300 font-bold transition-all">
                         <i class="fas fa-store w-6"></i> Pengurusan Kedai
                     </button>
+                    <button onclick="semakKehadiran()" id="nav-attendance" class="w-full text-left px-4 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl text-slate-300 font-bold transition-all border border-emerald-500/20 hover:border-emerald-500/50">
+                        <i class="fas fa-user-check w-6 text-emerald-400"></i> Analisis Kehadiran
+                    </button>
                 </nav>
             </div>
             
@@ -218,7 +221,7 @@
         });
 
         // ==========================================
-        // 1. FUNGSI LOG MASUK (KEMASKINI PENGIKTIRAFAN KAEDAH 2)
+        // 1. FUNGSI LOG MASUK
         // ==========================================
         async function loginTeacher() {
             const pass = document.getElementById('teacher-pass').value.trim();
@@ -232,30 +235,24 @@
                 if (docRef.exists) {
                     currentSchoolData = docRef.data();
 
-                    // -------------------------------------------------------------
-                    // LOGIK PENGIKTIRAFAN LANGGANAN & SEMAKAN TAMAT TEMPOH
-                    // -------------------------------------------------------------
                     const now = new Date();
                     
-                    // SITUASI A: Log Masuk Pertama Kali (Belum diaktifkan)
                     if (!currentSchoolData.activation_date) {
                         const durationVal = currentSchoolData.duration_value || 3; 
                         const durationType = currentSchoolData.duration_type || 'months'; 
                         
                         let expiryDate = new Date();
                         if (durationType === 'days') {
-                            expiryDate.setDate(expiryDate.getDate() + durationVal); // Pakej Demo 5 Hari
+                            expiryDate.setDate(expiryDate.getDate() + durationVal); 
                         } else {
-                            expiryDate.setMonth(expiryDate.getMonth() + durationVal); // Pakej Biasa 3/6/12 Bulan
+                            expiryDate.setMonth(expiryDate.getMonth() + durationVal);
                         }
 
-                        // Simpan tarikh mula dan luput ke pangkalan data
                         await db.collection("school_admins").doc(pass).update({
                             activation_date: now,
                             expiry_date: expiryDate
                         });
 
-                        // Kemas kini profil sementara di pelayar (tanpa perlu reload page)
                         currentSchoolData.activation_date = firebase.firestore.Timestamp.fromDate(now);
                         currentSchoolData.expiry_date = firebase.firestore.Timestamp.fromDate(expiryDate);
 
@@ -268,7 +265,6 @@
                         });
                         
                     } else {
-                        // SITUASI B: Akaun Sudah Aktif - Semak jika sudah tamat tempoh
                         const expiry = currentSchoolData.expiry_date.toDate();
                         if (now > expiry) {
                             Swal.fire({
@@ -278,11 +274,10 @@
                                 confirmButtonColor: '#d33'
                             });
                             btn.innerHTML = 'MASUK';
-                            return; // Halang akses seterusnya
+                            return; 
                         }
                     }
 
-                    // Jika lulus semua, terus paparkan papan pemuka
                     setupDashboard();
 
                 } else {
@@ -306,7 +301,6 @@
             document.getElementById('display-school').innerText = currentSchoolData.schoolName;
             document.getElementById('display-admin').innerText = currentSchoolData.adminName;
 
-            // Memaparkan status pakej langganan dan tarikh luput
             const subTier = currentSchoolData.subscription_tier || "CITRA";
             document.getElementById('display-subscription').innerText = `PAKEJ ${subTier.toUpperCase()}`;
             
@@ -334,7 +328,7 @@
         }
 
         function logoutTeacher() {
-            currentSchoolData = null; // Cuci memori semasa
+            currentSchoolData = null; 
             window.location.href = 'https://ediharianto010474.github.io/lexiquestv2';
         }
 
@@ -484,6 +478,61 @@
                 }
             };
             reader.readAsText(fileInput.files[0]);
+        }
+
+        // ==========================================
+        // 5. FUNGSI SEMAK KEHADIRAN (JIMAT KUOTA)
+        // ==========================================
+        async function semakKehadiran() {
+            if (!currentSchoolData) return;
+
+            const hariIni = new Date().toDateString(); // Contoh: "Fri Jun 12 2026"
+            
+            Swal.fire({
+                title: 'Menyemak Data...',
+                text: 'Sedang menarik senarai kehadiran hari ini.',
+                allowOutsideClick: false,
+                didOpen: () => { Swal.showLoading(); }
+            });
+
+            try {
+                // Carian Pangkalan Data pantas menggunakan Index lastLoginDate
+                const snapshot = await db.collection("players")
+                    .where("school", "==", currentSchoolData.schoolName)
+                    .where("lastLoginDate", "==", hariIni)
+                    .get();
+                    
+                let senaraiHadir = [];
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    senaraiHadir.push(`✅ <b class="text-emerald-600">${data.name}</b> <span class="text-xs text-slate-500">(${data.class})</span>`);
+                });
+
+                // Paparkan keputusan dalam bentuk Modal Pop-up
+                if (senaraiHadir.length > 0) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: `Kehadiran: ${senaraiHadir.length} Murid`,
+                        html: `<div class="text-left text-sm max-h-60 overflow-y-auto mt-4 p-4 bg-slate-50 border border-slate-200 rounded-xl shadow-inner">
+                                <ul class="space-y-2">
+                                    <li>${senaraiHadir.join('</li><li>')}</li>
+                                </ul>
+                               </div>`,
+                        confirmButtonColor: '#10b981' // emerald-500
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Belum Ada Kehadiran',
+                        text: `Tiada murid dari ${currentSchoolData.schoolName} yang log masuk pada hari ini (${hariIni}).`,
+                        confirmButtonColor: '#3b82f6' // blue-500
+                    });
+                }
+
+            } catch (error) {
+                console.error("Ralat semak kehadiran:", error);
+                Swal.fire('Ralat', 'Gagal menyemak kehadiran: ' + error.message, 'error');
+            }
         }
     </script>
 </body>
