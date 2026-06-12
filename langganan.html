@@ -21,6 +21,13 @@
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen py-10 px-4 flex flex-col items-center justify-center">
 
+    <div class="max-w-4xl w-full mb-4 text-left">
+        <a href="https://ediharianto010474.github.io/lexiquestv2" 
+           class="inline-flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-indigo-400 bg-slate-800/40 hover:bg-slate-800/90 border border-slate-700/50 px-4 py-2 rounded-xl transition shadow-md backdrop-blur-sm">
+            <i class="fas fa-arrow-left"></i> KEMBALI KE UTAMA
+        </a>
+    </div>
+
     <div class="max-w-4xl w-full bg-slate-800 rounded-2xl shadow-2xl border border-slate-700/50 overflow-hidden backdrop-blur-sm">
         
         <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-8 text-center relative overflow-hidden">
@@ -220,14 +227,12 @@
             const descDisplay = document.getElementById('tier-desc-display');
 
             if (tier && duration) {
-                // Semak jika kombinasi pakej dan tempoh wujud dan sepadan
                 if (PRICING_MATRIX[tier] && PRICING_MATRIX[tier][duration] !== undefined) {
                     const totalAmount = PRICING_MATRIX[tier][duration];
                     
-                    // Paparan Harga (Tukar RM 0 kepada PERCUMA)
                     if (totalAmount === 0) {
                         priceDisplay.innerText = "PERCUMA";
-                        priceDisplay.className = "text-3xl font-black text-emerald-400 mt-1"; // Tukar warna hijau
+                        priceDisplay.className = "text-3xl font-black text-emerald-400 mt-1";
                     } else {
                         priceDisplay.innerText = `RM ${totalAmount}.00`;
                         priceDisplay.className = "text-3xl font-black text-white mt-1";
@@ -237,7 +242,6 @@
                     descDisplay.innerHTML = `<span class="text-indigo-300 font-medium">${PRICING_MATRIX[tier]['desc']}</span> untuk tempoh <span class="text-pink-400 font-medium">${textTempoh}</span>.`;
                 
                 } else {
-                    // Jika pengguna silap pilih (Contoh: Pakej Mega tapi pilih 5 Hari)
                     priceDisplay.innerText = "TIDAK SAH";
                     priceDisplay.className = "text-3xl font-black text-red-500 mt-1";
                     descDisplay.innerHTML = `<span class="text-red-400 font-medium">Sila pastikan pakej dan tempoh yang dipilih adalah sepadan.</span>`;
@@ -257,23 +261,20 @@
             const tier = document.getElementById('packageTier').value;
             const duration = document.getElementById('duration').value;
 
-            // Halang hantar jika kombinasi tidak sah
             if (document.getElementById('price-display').innerText === "TIDAK SAH") {
                 alert("Kombinasi Pakej dan Tempoh tidak sah. Sila pilih gabungan yang betul.");
-                return; // Berhenti di sini
+                return;
             }
 
             btn.disabled = true;
             btn.innerHTML = `<i class="fas fa-spinner animate-spin"></i> MEMPROSES DATA...`;
 
             try {
-                // A. Ambil nilai borang
                 const adminName = document.getElementById('adminName').value.trim();
                 const adminPhone = document.getElementById('adminPhone').value.trim();
                 const schoolName = document.getElementById('schoolName').value.trim();
                 const schoolCode = document.getElementById('schoolCode').value.trim().toUpperCase() || "TIADA";
 
-                // B. Simpan Maklumat ke Firestore (Koleksi: pending_subscriptions)
                 await db.collection("pending_subscriptions").add({
                     teacherName: adminName,
                     teacherPhone: adminPhone,
@@ -286,13 +287,8 @@
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
 
-                // C. PENETAPAN NOMBOR SUPER ADMIN & MESEJ WHATSAPP
-                // -------------------------------------------------------------
-                // PENTING: GANTIKAN "60123456789" DI BAWAH KEPADA NOMBOR ANDA.
-                // -------------------------------------------------------------
                 const superAdminPhone = "601123456789"; 
 
-                // Tentukan ayat arahan resit berdasarkan pakej
                 let ayatResit = tier === "DEMO" 
                     ? `*(MOHON AKTIFKAN PAKEJ DEMO SAYA UNTUK 5 HARI)*` 
                     : `*(SILA LAMPIRKAN GAMBAR RESIT BAYARAN ANDA DI SINI)*`;
@@ -310,17 +306,14 @@
                 
                 const urlWhatsApp = `https://wa.me/${superAdminPhone}?text=${encodeURIComponent(mesejWA)}`;
 
-                // Alert berbeza mengikut pakej
                 if (tier === "DEMO") {
                     alert("✨ Permohonan Demo Direkodkan!\n\nSistem kini akan membawa anda ke aplikasi WhatsApp untuk pengesahan admin.");
                 } else {
                     alert("✨ Permohonan Berjaya Direkodkan!\n\nSistem kini akan membawa anda ke aplikasi WhatsApp.\n\nSILA PASTIKAN ANDA MELAMPIRKAN GAMBAR RESIT BAYARAN DI DALAM CHAT WHATSAPP TERSEBUT.");
                 }
                 
-                // Buka tab WhatsApp
                 window.open(urlWhatsApp, '_blank');
                 
-                // D. Reset Borang
                 document.getElementById('subscriptionForm').reset();
                 calculatePrice();
 
