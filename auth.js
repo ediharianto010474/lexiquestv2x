@@ -1123,15 +1123,16 @@ function listenToChatMessages(recipientName) {
                 const isMe = (data.sender === myName); // Semak siapa hantar
 
                 // Bina HTML berdasarkan siapa yang hantar
+                // NOTA: Kelas 'whitespace-pre-wrap' ditambah pada kedua-dua gelembung!
                 const msgHtml = isMe ? 
                     `<div class="flex justify-end mb-2">
-                        <div class="bg-indigo-500 text-white text-[11px] py-2 px-3 rounded-2xl rounded-tr-none shadow-sm max-w-[85%]">
+                        <div class="whitespace-pre-wrap bg-indigo-500 text-white text-[11px] py-2 px-3 rounded-2xl rounded-tr-none shadow-sm max-w-[85%]">
                             ${data.message}
                         </div>
                     </div>` 
                     : 
                     `<div class="flex justify-start mb-2">
-                        <div class="bg-white border border-gray-100 text-gray-800 text-[11px] py-2 px-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%]">
+                        <div class="whitespace-pre-wrap bg-white border border-gray-100 text-gray-800 text-[11px] py-2 px-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%]">
                             ${data.message}
                         </div>
                     </div>`;
@@ -1169,6 +1170,26 @@ function toggleQuickChat(forceState) {
     }
 }
 
+// Papar senarai Kategori (Greetings, Social, dll)
+function showQuickChatCategories() {
+    const list = document.getElementById('quick-chat-list');
+    const title = document.getElementById('quick-chat-title');
+    const backBtn = document.getElementById('quick-chat-back');
+
+    title.innerText = "KATEGORI MESEJ";
+    backBtn.classList.add('hidden');
+    list.innerHTML = '';
+
+    // Gelung baca dari objek quickChatData
+    for (let category in quickChatData) {
+        const btn = document.createElement('button');
+        btn.className = "text-left text-xs font-bold text-gray-700 bg-gray-50 hover:bg-indigo-50 p-2.5 rounded-lg border border-gray-100 hover:border-indigo-200 transition-colors shadow-sm active:scale-[0.98]";
+        btn.innerText = category;
+        btn.onclick = () => showQuickChatMessages(category);
+        list.appendChild(btn);
+    }
+}
+
 // Papar ayat sebenar di dalam kategori yang dipilih (Dikemas kini untuk Multibahasa)
 function showQuickChatMessages(category) {
     const list = document.getElementById('quick-chat-list');
@@ -1198,27 +1219,6 @@ function showQuickChatMessages(category) {
 
         // Apabila mesej ditekan, ia menghantar kesemua 4 bahasa kepada rakan
         btn.onclick = () => sendQuickMessage(combinedMessage); 
-        list.appendChild(btn);
-    });
-}
-
-// Papar ayat sebenar di dalam kategori yang dipilih
-function showQuickChatMessages(category) {
-    const list = document.getElementById('quick-chat-list');
-    const title = document.getElementById('quick-chat-title');
-    const backBtn = document.getElementById('quick-chat-back');
-
-    title.innerText = category.toUpperCase();
-    backBtn.classList.remove('hidden');
-    list.innerHTML = '';
-
-    const messages = quickChatData[category];
-    messages.forEach(msg => {
-        const btn = document.createElement('button');
-        btn.className = "text-left text-[11px] font-medium text-gray-800 bg-white hover:bg-green-50 p-2.5 rounded-lg border border-gray-100 hover:border-green-300 transition-colors shadow-sm active:scale-[0.98]";
-        btn.innerText = msg;
-        // Apabila mesej ditekan, hantar terus!
-        btn.onclick = () => sendQuickMessage(msg); 
         list.appendChild(btn);
     });
 }
