@@ -51,7 +51,7 @@
                         </li>
                         <li class="flex gap-3">
                             <span class="flex-shrink-0 w-5 h-5 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold">2</span>
-                            <span>Lakukan pindahan wang (manual transfer) ke akaun di bawah.</span>
+                            <span>Lakukan pindahan wang (manual transfer) ke akaun di bawah. <i class="text-emerald-400">(Abaikan jika Pakej Demo)</i></span>
                         </li>
                         <li class="flex gap-3">
                             <span class="flex-shrink-0 w-5 h-5 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold">3</span>
@@ -142,6 +142,7 @@
                             <select id="packageTier" required onchange="calculatePrice()"
                                 class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition cursor-pointer">
                                 <option value="" disabled selected>-- Pilih Saiz --</option>
+                                <option value="DEMO" class="font-bold text-emerald-400">Pakej Demo (Percubaan 5 Hari)</option>
                                 <option value="CITRA">Pakej Citra (Maks 150 Murid)</option>
                                 <option value="PERDANA">Pakej Perdana (Maks 600 Murid)</option>
                                 <option value="MEGA">Pakej Mega (Tanpa Had Murid)</option>
@@ -152,6 +153,7 @@
                             <select id="duration" required onchange="calculatePrice()"
                                 class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition cursor-pointer">
                                 <option value="" disabled selected>-- Pilih Tempoh --</option>
+                                <option value="5">Akses 5 Hari (Khusus Pakej Demo)</option>
                                 <option value="3">Akses 3 Bulan (Pecutan Akhir)</option>
                                 <option value="6">Akses 6 Bulan (Separuh Penggal)</option>
                                 <option value="12">Akses 1 Tahun (Sesi Penuh)</option>
@@ -171,7 +173,7 @@
                         </div>
                         <div>
                             <p class="text-sm font-semibold text-slate-200">Sistem WhatsApp Automatik</p>
-                            <p class="text-[11px] text-slate-400 mt-1">Selepas menekan butang hantar, sistem akan menghalakan anda ke aplikasi WhatsApp kami. <strong class="text-emerald-300">Sila lampirkan (attach) gambar resit anda di dalam chat tersebut.</strong></p>
+                            <p class="text-[11px] text-slate-400 mt-1">Selepas menekan butang hantar, sistem akan menghalakan anda ke aplikasi WhatsApp kami. <strong class="text-emerald-300">Sila lampirkan gambar resit anda di dalam chat tersebut (Abaikan untuk Pakej Demo).</strong></p>
                         </div>
                     </div>
                 </div>
@@ -203,8 +205,9 @@
         }
         const db = firebase.firestore();
 
-        // 2. Kalkulator Harga (Visual Sahaja)
+        // 2. Kalkulator Harga (Dikemaskini dengan DEMO & Validasi)
         const PRICING_MATRIX = {
+            'DEMO': { '5': 0, 'desc': 'Pakej Demo Percuma' },
             'CITRA': { '3': 150, '6': 250, '12': 400, 'desc': 'Pakej Citra (Had Maks 150 murid)' },
             'PERDANA': { '3': 350, '6': 600, '12': 1000, 'desc': 'Pakej Perdana (Had Maks 600 murid)' },
             'MEGA': { '3': 600, '6': 1000, '12': 1600, 'desc': 'Pakej Mega (Akses Tanpa Had)' }
@@ -217,12 +220,31 @@
             const descDisplay = document.getElementById('tier-desc-display');
 
             if (tier && duration) {
-                const totalAmount = PRICING_MATRIX[tier][duration];
-                priceDisplay.innerText = `RM ${totalAmount}.00`;
-                let textTempoh = duration == '12' ? '1 Tahun' : `${duration} Bulan`;
-                descDisplay.innerHTML = `<span class="text-indigo-300 font-medium">${PRICING_MATRIX[tier]['desc']}</span> untuk tempoh <span class="text-pink-400 font-medium">${textTempoh}</span>.`;
+                // Semak jika kombinasi pakej dan tempoh wujud dan sepadan
+                if (PRICING_MATRIX[tier] && PRICING_MATRIX[tier][duration] !== undefined) {
+                    const totalAmount = PRICING_MATRIX[tier][duration];
+                    
+                    // Paparan Harga (Tukar RM 0 kepada PERCUMA)
+                    if (totalAmount === 0) {
+                        priceDisplay.innerText = "PERCUMA";
+                        priceDisplay.className = "text-3xl font-black text-emerald-400 mt-1"; // Tukar warna hijau
+                    } else {
+                        priceDisplay.innerText = `RM ${totalAmount}.00`;
+                        priceDisplay.className = "text-3xl font-black text-white mt-1";
+                    }
+
+                    let textTempoh = duration == '12' ? '1 Tahun' : (duration == '5' ? '5 Hari' : `${duration} Bulan`);
+                    descDisplay.innerHTML = `<span class="text-indigo-300 font-medium">${PRICING_MATRIX[tier]['desc']}</span> untuk tempoh <span class="text-pink-400 font-medium">${textTempoh}</span>.`;
+                
+                } else {
+                    // Jika pengguna silap pilih (Contoh: Pakej Mega tapi pilih 5 Hari)
+                    priceDisplay.innerText = "TIDAK SAH";
+                    priceDisplay.className = "text-3xl font-black text-red-500 mt-1";
+                    descDisplay.innerHTML = `<span class="text-red-400 font-medium">Sila pastikan pakej dan tempoh yang dipilih adalah sepadan.</span>`;
+                }
             } else {
                 priceDisplay.innerText = "RM 0.00";
+                priceDisplay.className = "text-3xl font-black text-white mt-1";
                 descDisplay.innerText = "Sila pilih pakej dan tempoh akses di sebelah.";
             }
         }
@@ -232,6 +254,15 @@
             e.preventDefault();
             
             const btn = document.getElementById('btnSubmit');
+            const tier = document.getElementById('packageTier').value;
+            const duration = document.getElementById('duration').value;
+
+            // Halang hantar jika kombinasi tidak sah
+            if (document.getElementById('price-display').innerText === "TIDAK SAH") {
+                alert("Kombinasi Pakej dan Tempoh tidak sah. Sila pilih gabungan yang betul.");
+                return; // Berhenti di sini
+            }
+
             btn.disabled = true;
             btn.innerHTML = `<i class="fas fa-spinner animate-spin"></i> MEMPROSES DATA...`;
 
@@ -241,11 +272,8 @@
                 const adminPhone = document.getElementById('adminPhone').value.trim();
                 const schoolName = document.getElementById('schoolName').value.trim();
                 const schoolCode = document.getElementById('schoolCode').value.trim().toUpperCase() || "TIADA";
-                const tier = document.getElementById('packageTier').value;
-                const duration = document.getElementById('duration').value;
 
                 // B. Simpan Maklumat ke Firestore (Koleksi: pending_subscriptions)
-                // Kita abaikan field receiptUrl supaya ia tidak wajib, admin semak terus di WA
                 await db.collection("pending_subscriptions").add({
                     teacherName: adminName,
                     teacherPhone: adminPhone,
@@ -261,9 +289,15 @@
                 // C. PENETAPAN NOMBOR SUPER ADMIN & MESEJ WHATSAPP
                 // -------------------------------------------------------------
                 // PENTING: GANTIKAN "60123456789" DI BAWAH KEPADA NOMBOR ANDA.
-                // Mesti bermula dengan kod negara '60' dan tiada jarak/tanda '+'.
                 // -------------------------------------------------------------
-                const superAdminPhone = "60106607787"; 
+                const superAdminPhone = "601123456789"; 
+
+                // Tentukan ayat arahan resit berdasarkan pakej
+                let ayatResit = tier === "DEMO" 
+                    ? `*(MOHON AKTIFKAN PAKEJ DEMO SAYA UNTUK 5 HARI)*` 
+                    : `*(SILA LAMPIRKAN GAMBAR RESIT BAYARAN ANDA DI SINI)*`;
+
+                let teksDurasi = duration == '5' ? '5 Hari' : `${duration} Bulan`;
 
                 const mesejWA = `Salam Admin LexiQuest V2, saya ingin memohon kelulusan langganan sekolah.\n\n` +
                                 `📋 *MAKLUMAT LANGGANAN:*\n` +
@@ -271,12 +305,17 @@
                                 `No. Telefon: ${adminPhone}\n` +
                                 `Sekolah: ${schoolName}\n` +
                                 `Kod: ${schoolCode}\n` +
-                                `Pakej: ${tier} (${duration} Bulan)\n\n` +
-                                `*(SILA LAMPIRKAN GAMBAR RESIT BAYARAN ANDA DI SINI)*`;
+                                `Pakej: ${tier} (${teksDurasi})\n\n` +
+                                `${ayatResit}`;
                 
                 const urlWhatsApp = `https://wa.me/${superAdminPhone}?text=${encodeURIComponent(mesejWA)}`;
 
-                alert("✨ Permohonan Berjaya Direkodkan!\n\nSistem kini akan membawa anda ke aplikasi WhatsApp.\n\nSILA PASTIKAN ANDA MELAMPIRKAN GAMBAR RESIT BAYARAN DI DALAM CHAT WHATSAPP TERSEBUT.");
+                // Alert berbeza mengikut pakej
+                if (tier === "DEMO") {
+                    alert("✨ Permohonan Demo Direkodkan!\n\nSistem kini akan membawa anda ke aplikasi WhatsApp untuk pengesahan admin.");
+                } else {
+                    alert("✨ Permohonan Berjaya Direkodkan!\n\nSistem kini akan membawa anda ke aplikasi WhatsApp.\n\nSILA PASTIKAN ANDA MELAMPIRKAN GAMBAR RESIT BAYARAN DI DALAM CHAT WHATSAPP TERSEBUT.");
+                }
                 
                 // Buka tab WhatsApp
                 window.open(urlWhatsApp, '_blank');
