@@ -1122,19 +1122,15 @@ function listenToChatMessages(recipientName) {
                 const data = doc.data();
                 const isMe = (data.sender === myName); // Semak siapa hantar
 
-                // Bina HTML berdasarkan siapa yang hantar
-                // NOTA: Kelas 'whitespace-pre-wrap' ditambah pada kedua-dua gelembung!
+               // Bina HTML berdasarkan siapa yang hantar
+                // NOTA: ${data.message} kini dirapatkan terus ke tag <div>
                 const msgHtml = isMe ? 
                     `<div class="flex justify-end mb-2">
-                        <div class="whitespace-pre-wrap bg-indigo-500 text-white text-[11px] py-2 px-3 rounded-2xl rounded-tr-none shadow-sm max-w-[85%]">
-                            ${data.message}
-                        </div>
+                        <div class="whitespace-pre-wrap bg-indigo-500 text-white text-[11px] py-2 px-3 rounded-2xl rounded-tr-none shadow-sm max-w-[85%]">${data.message}</div>
                     </div>` 
                     : 
                     `<div class="flex justify-start mb-2">
-                        <div class="whitespace-pre-wrap bg-white border border-gray-100 text-gray-800 text-[11px] py-2 px-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%]">
-                            ${data.message}
-                        </div>
+                        <div class="whitespace-pre-wrap bg-white border border-gray-100 text-gray-800 text-[11px] py-2 px-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%]">${data.message}</div>
                     </div>`;
 
                 messagesContainer.insertAdjacentHTML('beforeend', msgHtml);
