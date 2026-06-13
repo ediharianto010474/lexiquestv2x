@@ -1122,15 +1122,19 @@ function listenToChatMessages(recipientName) {
                 const data = doc.data();
                 const isMe = (data.sender === myName); // Semak siapa hantar
 
-               // Bina HTML berdasarkan siapa yang hantar
-                // NOTA: ${data.message} kini dirapatkan terus ke tag <div>
+                // Bina HTML berdasarkan siapa yang hantar
+                // NOTA: Kelas 'whitespace-pre-wrap' ditambah pada kedua-dua gelembung!
                 const msgHtml = isMe ? 
                     `<div class="flex justify-end mb-2">
-                        <div class="whitespace-pre-wrap bg-indigo-500 text-white text-[11px] py-2 px-3 rounded-2xl rounded-tr-none shadow-sm max-w-[85%]">${data.message}</div>
+                        <div class="whitespace-pre-wrap bg-indigo-500 text-white text-[11px] py-2 px-3 rounded-2xl rounded-tr-none shadow-sm max-w-[85%]">
+                            ${data.message}
+                        </div>
                     </div>` 
                     : 
                     `<div class="flex justify-start mb-2">
-                        <div class="whitespace-pre-wrap bg-white border border-gray-100 text-gray-800 text-[11px] py-2 px-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%]">${data.message}</div>
+                        <div class="whitespace-pre-wrap bg-white border border-gray-100 text-gray-800 text-[11px] py-2 px-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%]">
+                            ${data.message}
+                        </div>
                     </div>`;
 
                 messagesContainer.insertAdjacentHTML('beforeend', msgHtml);
@@ -1186,7 +1190,7 @@ function showQuickChatCategories() {
     }
 }
 
-// Papar ayat sebenar di dalam kategori yang dipilih (Dikemas kini untuk Multibahasa)
+// Papar ayat sebenar di dalam kategori yang dipilih (Dikemas kini untuk 5 Bahasa)
 function showQuickChatMessages(category) {
     const list = document.getElementById('quick-chat-list');
     const title = document.getElementById('quick-chat-title');
@@ -1202,18 +1206,19 @@ function showQuickChatMessages(category) {
         // Kita guna flex-col supaya ayat tersusun ke bawah seperti senarai
         btn.className = "text-left flex flex-col gap-0.5 w-full bg-white hover:bg-green-50 p-2.5 rounded-lg border border-gray-100 hover:border-green-300 transition-colors shadow-sm active:scale-[0.98] mb-2";
         
-        // Paparan 4 Bahasa di dalam menu pop-up butang
+        // Paparan 5 Bahasa di dalam menu pop-up butang
         btn.innerHTML = `
             <span class="text-[12px] font-bold text-gray-800">${msgObj.en}</span>
             <span class="text-[10px] font-medium text-gray-500 border-t border-gray-100 pt-1 mt-1">🇲🇾 ${msgObj.ms}</span>
             <span class="text-[10px] font-medium text-blue-600">🇨🇳 ${msgObj.zh}</span>
             <span class="text-[10px] font-medium text-red-500">🇯🇵 ${msgObj.ja}</span>
+            <span class="text-[10px] font-medium text-emerald-600">🇸🇦 ${msgObj.ar}</span>
         `;
 
-        // Gabungkan kesemua bahasa menggunakan "line break (\n)" untuk dihantar ke Firebase
-        const combinedMessage = `${msgObj.en}\n🇲🇾 ${msgObj.ms}\n🇨🇳 ${msgObj.zh}\n🇯🇵 ${msgObj.ja}`;
+        // Gabungkan kesemua 5 bahasa menggunakan "line break (\n)" untuk dihantar ke Firebase
+        const combinedMessage = `${msgObj.en}\n🇲🇾 ${msgObj.ms}\n🇨🇳 ${msgObj.zh}\n🇯🇵 ${msgObj.ja}\n🇸🇦 ${msgObj.ar}`;
 
-        // Apabila mesej ditekan, ia menghantar kesemua 4 bahasa kepada rakan
+        // Apabila mesej ditekan, ia menghantar kesemua 5 bahasa kepada rakan
         btn.onclick = () => sendQuickMessage(combinedMessage); 
         list.appendChild(btn);
     });
