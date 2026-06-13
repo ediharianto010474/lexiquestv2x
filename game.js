@@ -1375,6 +1375,7 @@ let myBoostersUsed = 0;
 let myBoostersReceived = 0;
 let bakiSoalanMudahPaksaan = 0;
 let isGanjaranDisimpan = false;
+let isGanjaranPvPDisimpan = false;
 
 // =========================================================================
 // 1. FUNGSI: KEMASKINI UI PROFIL & SUBJEK DARI FIREBASE (VERSI PENUH 6 PEMAIN)
@@ -4679,38 +4680,36 @@ function endPvPMatch() {
     localPlayerData.coins = (localPlayerData.coins || 0) + coinReward;
     localPlayerData.totalScore = (localPlayerData.totalScore || 0) + xpReward;
 
-// 🔴 4. SIMPAN KEPUTUSAN & GANJARAN KE FIREBASE (VERSI OPTIMUM & JAYAHED COINS)
-const today = new Date().toISOString().split('T')[0];
-const docId = `${studentInfo.school}_${studentInfo.class}_${studentInfo.name}`.replace(/\s+/g, '_');
+    // 4. SIMPAN KEPUTUSAN & GANJARAN KE FIREBASE (VERSI OPTIMUM & JAYAHED COINS)
+    const today = new Date().toISOString().split('T')[0];
+    const docId = `${studentInfo.school}_${studentInfo.class}_${studentInfo.name}`.replace(/\s+/g, '_');
 
-// Sediakan objek kemas kini
-let updateData = {
-    coins: localPlayerData.coins,
-    totalScore: localPlayerData.totalScore,
-    currentStatus: "idle" // 🟢 Sekali gus kemas kini status ke idle di sini!
-};
+    // Sediakan objek kemas kini
+    let updateData = {
+        coins: localPlayerData.coins,
+        totalScore: localPlayerData.totalScore,
+        currentStatus: "idle" // 🟢 Sekali gus kemas kini status ke idle di sini!
+    };
 
-// Logik had harian pvpCountToday tanpa perlu .get() dahulu
-if (localPlayerData.lastPvPDate === today) {
-    // Jika hari ini hari yang sama, tambah 1 menggunakan increment tempatan atau Firebase
-    localPlayerData.pvpCountToday = (localPlayerData.pvpCountToday || 0) + 1;
-    updateData.pvpCountToday = firebase.firestore.FieldValue.increment(1);
-} else {
-    // Jika hari baharu, reset kaunter ke 1
-    localPlayerData.lastPvPDate = today;
-    localPlayerData.pvpCountToday = 1;
-    updateData.lastPvPDate = today;
-    updateData.pvpCountToday = 1;
-}
+    // Logik had harian pvpCountToday tanpa perlu .get() dahulu
+    if (localPlayerData.lastPvPDate === today) {
+        localPlayerData.pvpCountToday = (localPlayerData.pvpCountToday || 0) + 1;
+        updateData.pvpCountToday = firebase.firestore.FieldValue.increment(1);
+    } else {
+        localPlayerData.lastPvPDate = today;
+        localPlayerData.pvpCountToday = 1;
+        updateData.lastPvPDate = today;
+        updateData.pvpCountToday = 1;
+    }
 
-// Terus hantar UPDATE (Jimat 100% kos operasi BACA/READ!)
-db.collection("players").doc(docId).update(updateData)
-.then(() => {
-    console.log("💰 [PvP] Ganjaran disimpan & Status menjadi IDLE!");
-    if (typeof updateUI === "function") updateUI(); 
-}).catch(error => {
-    console.error("❌ Ralat menyimpan ganjaran PvP:", error);
-});
+    // Terus hantar UPDATE (Jimat 100% kos operasi BACA/READ!)
+    db.collection("players").doc(docId).update(updateData)
+    .then(() => {
+        console.log("💰 [PvP] Ganjaran disimpan & Status menjadi IDLE!");
+        if (typeof updateUI === "function") updateUI(); 
+    }).catch(error => {
+        console.error("❌ Ralat menyimpan ganjaran PvP:", error);
+    });
 
     // 5. PAPARKAN KEPUTUSAN KEPADA MURID
     let titleText = result === "menang" ? "Tahniah, Anda Menang! 🏆" : (result === "kalah" ? "Anda Tewas! 💔" : "Seri! 🤝");
@@ -4728,6 +4727,9 @@ db.collection("players").doc(docId).update(updateData)
         confirmButtonText: "Kembali ke Lobi",
         allowOutsideClick: false
     }).then(() => {
+        // 🟢 BUKA SEMULA KUNCI: Supaya mereka boleh dapat ganjaran lagi untuk game PvP yang seterusnya!
+        isGanjaranPvPDisimpan = false;
+
         // Tutup arena, buka balik lobi
         if (typeof showScreen === "function") {
             showScreen('challenge-lobby-screen');
@@ -4740,12 +4742,8 @@ db.collection("players").doc(docId).update(updateData)
         // 🎵 Mainkan semula muzik apabila kembali ke Lobi PvP
         if (typeof playBgMusic === 'function') playBgMusic();
 
-        // 🟢 KEMBALIKAN STATUS KE IDLE (Selamat & hanya dipanggil 1 kali selepas klik)
-        db.collection("players").doc(docId).update({
-            currentStatus: "idle"
-        }).then(() => {
-            console.log("🟢 Status pemain dikembalikan ke IDLE.");
-        }).catch(e => console.log("Ralat update status idle:", e));
+        // 🗑️ (KOD REDUNDANT DI SINI TELAH DIBUANG UNTUK JIMAT KUOTA WRITE FIREBASE)
+        console.log("🟢 Pemain kembali ke lobi.");
     });
 }
 
