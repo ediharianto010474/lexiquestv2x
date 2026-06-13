@@ -21,7 +21,9 @@ let studentInfo = {
     score_muzik: 0,
     score_pjk: 0,
     score_psv: 0,
-    score_rbt: 0
+    score_rbt: 0,
+    score_pai: 0,
+    score_ba: 0
 };
 let currentGameType = ''; 
 let studentDatabase = [];
@@ -200,7 +202,25 @@ const HAD_MASA_GAME = {
     // Tahap Sukar (7 Minit)
     "kos_dan_modal": 420,
     "pemasaran_digital": 420,
-    "etika_keusahawanan": 420
+    "etika_keusahawanan": 420,
+
+    // -------------------------------------------------------------------------
+    // PENDIDIKAN AGAMA ISLAM (PAI) 🕌
+    // -------------------------------------------------------------------------
+    // Semua Kategori (7 Minit - Memberi ruang membaca jawi)
+    "aqidah": 420,
+    "ibadah": 420,
+    "sirah": 420,
+    "akhlak": 420,
+
+    // -------------------------------------------------------------------------
+    // BAHASA ARAB (BA) 🇸🇦
+    // -------------------------------------------------------------------------
+    // Semua Kategori (7 Minit - Memberi ruang membaca bahasa asing/jawi)
+    "mufrodat": 420,
+    "qawaid": 420,
+    "hiwar": 420,
+    "arqam": 420
 };
 
 // ==========================================
