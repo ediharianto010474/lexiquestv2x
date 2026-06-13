@@ -76,6 +76,22 @@ const sejarahCategoryDifficulty = {
     ]
 };
 
+// -------------------------------------------------------------------------
+// PENDIDIKAN AGAMA ISLAM & BAHASA ARAB
+// Kategori diletakkan di 'medium' untuk sepadan dengan +2 XP
+// -------------------------------------------------------------------------
+const paiCategoryDifficulty = {
+    easy: [],
+    medium: ['aqidah', 'ibadah', 'sirah', 'akhlak'],
+    hard: []
+};
+
+const baCategoryDifficulty = {
+    easy: [],
+    medium: ['mufrodat', 'qawaid', 'hiwar', 'arqam'],
+    hard: []
+};
+
 // ==========================================
 // 🛡️ GATEKEEPER: FUNGSI TARIK DATA & SEMAK AKSES LOBI 3V3
 // ==========================================
@@ -2426,7 +2442,7 @@ function openSubjectCategories(subjectId, renderCallback) {
     }
     
     // 4. Panggil fungsi lukis butang kategori jika wujud
-    if (typeof renderCallback === 'function') {
+    if (typeof renderCallback === 'function' && renderCallback !== null) {
         renderCallback();
     }
 
@@ -2462,22 +2478,22 @@ function openMoralCategories()    { openSubjectCategories('moral', typeof render
 function openPsvCategories()      { openSubjectCategories('psv', typeof renderPSVCategoryButtons === 'function' ? renderPSVCategoryButtons : null); }
 function showRbtCategories()      { openSubjectCategories('rbt', typeof renderRBTCategoryButtons === 'function' ? renderRBTCategoryButtons : null); }
 
+// 🟢 SUBJEK AGAMA & ARAB 🕌🇸🇦 (TIDAK PERLU RENDER CALLBACK)
+function openPaiCategories()      { openSubjectCategories('pai', null); }
+function openBaCategories()       { openSubjectCategories('ba', null); }
+
 // ==========================================
 // 3. FUNGSI KEMBALI KE MENU UTAMA
 // ==========================================
 function backToSubjects() {
     const subjectGrid = document.getElementById('subject-grid');
-    const englishCat = document.getElementById('english-categories');
-    const scienceCat = document.getElementById('science-categories');
-    const mathCat = document.getElementById('math-categories'); // Kita biarkan ia cari kot-kot ada sisa lama
     
     // Buka semula menu utama
     if (subjectGrid) subjectGrid.classList.remove('hidden');
     
-    // Tutup (sembunyikan) semua skrin subjek
-    if (englishCat) englishCat.classList.add('hidden');
-    if (scienceCat) scienceCat.classList.add('hidden');
-    if (mathCat) mathCat.classList.add('hidden');
+    // Tutup (sembunyikan) semua skrin subjek secara dinamik (Lebih kemas & selamat)
+    const allContainers = document.querySelectorAll('[id$="-categories"]');
+    allContainers.forEach(container => container.classList.add('hidden'));
 }
 
 function closeSubjectModal() {
@@ -2713,7 +2729,7 @@ function giveXP(category, correctCount) {
 // 1. SISTEM KUIZ & MEMORI PERMAINAN
 // ==========================================
 function initGame(type) {
-isGanjaranDisimpan = false;
+    isGanjaranDisimpan = false;
     if (typeof pauseBgMusic === 'function') pauseBgMusic();
     if (!type) return; 
     const safeType = type.toUpperCase(); 
@@ -2833,15 +2849,15 @@ isGanjaranDisimpan = false;
         "nilai_nota_ritma": "Nilai Nota & Ritma", "solfa_dan_nyanyian": "Solfa & Nyanyian", "muzik_tradisional": "Muzik Tradisional",
         "apresiasi_muzik": "Apresiasi Muzik", "etika_persembahan": "Etika Persembahan", "kerjaya_muzik": "Kerjaya Muzik",
 
-// PJK
-"gimnastik_asas": "Gimnastik Asas", 
-"pergerakan_berirama": "Pergerakan Berirama", 
-"permainan_kategori_serangan": "Permainan Kategori Serangan",
-"permainan_kategori_jaring": "Permainan Kategori Jaring", 
-"permainan_kategori_padang": "Permainan Kategori Padang", 
-"olahraga_asas": "Olahraga Asas",
-"komponen_kecergasan": "Komponen Kecergasan", 
-"kekeluargaan_dan_perhubungan": "Kekeluargaan & Perhubungan",
+        // PJK
+        "gimnastik_asas": "Gimnastik Asas", 
+        "pergerakan_berirama": "Pergerakan Berirama", 
+        "permainan_kategori_serangan": "Permainan Kategori Serangan",
+        "permainan_kategori_jaring": "Permainan Kategori Jaring", 
+        "permainan_kategori_padang": "Permainan Kategori Padang", 
+        "olahraga_asas": "Olahraga Asas",
+        "komponen_kecergasan": "Komponen Kecergasan", 
+        "kekeluargaan_dan_perhubungan": "Kekeluargaan & Perhubungan",
 
         // Pendidikan Moral
         "kepercayaan_kepada_tuhan": "Kepercayaan Kepada Tuhan", "baik_hati": "Baik Hati", "bertanggungjawab": "Bertanggungjawab",
@@ -2863,7 +2879,11 @@ isGanjaranDisimpan = false;
         // RBT
         "keselamatan_bengkel": "Keselamatan Bengkel", "pengenalan_reka_bentuk": "Pengenalan Reka Bentuk", "alatan_tangan": "Alatan Tangan",
         "asas_teknologi": "Asas Teknologi", "reka_bentuk_pengaturcaraan": "Reka Bentuk Pengaturcaraan", "hidroponik": "Hidroponik",
-        "kos_dan_modal": "Kos & Modal", "pemasaran_digital": "Pemasaran Digital", "etika_keusahawanan": "Etika Keusahawanan"
+        "kos_dan_modal": "Kos & Modal", "pemasaran_digital": "Pemasaran Digital", "etika_keusahawanan": "Etika Keusahawanan",
+
+        // 🟢 PAI & BA (KEMAS KINI BAHARU)
+        "aqidah": "Aqidah", "ibadah": "Ibadah", "sirah": "Sirah", "akhlak": "Akhlak",
+        "mufrodat": "Mufrodat", "qawaid": "Qawaid", "hiwar": "Hiwar", "arqam": "Arqam"
     };
 
     // Ambil tajuk yang dipetakan, jika tiada baru fallback format asal string (.toUpperCase)
@@ -2907,6 +2927,13 @@ isGanjaranDisimpan = false;
     else if (typeof rbtData !== 'undefined' && rbtData[type]) {
         allQuestions = [...rbtData[type]]; // RBT Baharu
     }
+    // 🟢 KEMAS KINI DATA PAI & BA
+    else if (typeof paiQuestions !== 'undefined' && paiQuestions[type]) {
+        allQuestions = [...paiQuestions[type]]; // PAI
+    }
+    else if (typeof baQuestions !== 'undefined' && baQuestions[type]) {
+        allQuestions = [...baQuestions[type]]; // BA
+    }
 
     if (allQuestions.length === 0) {
         container.innerHTML = "<p class='text-center text-red-500 font-bold mt-10'>Soalan belum disediakan untuk kategori ini!</p>";
@@ -2921,21 +2948,51 @@ isGanjaranDisimpan = false;
         const div = document.createElement('div');
         div.className = "bg-white p-5 rounded-2xl border-l-4 border-indigo-400 shadow-sm";
         
+        // Semak format data (Sama ada format lama 'q'/'a', atau format baharu 'question'/'answer')
+        const soalanTeks = item.question || item.q;
+        const jawapanTeks = item.answer !== undefined ? item.answer : item.a;
+        
         if (type === 'speaking' || type === 'pronunciation') {
             div.classList.add('text-center');
             div.innerHTML = `
                 <p class="font-bold text-gray-500 mb-2">Sebut ayat di bawah:</p>
-                <h1 class="text-2xl font-extrabold text-indigo-700 mb-4 target-word">${item.q}</h1>
+                <h1 class="text-2xl font-extrabold text-indigo-700 mb-4 target-word">${soalanTeks}</h1>
                 <button type="button" onclick="startMic(this)" class="bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded-full font-bold shadow-md">
                     🎤 Tekan & Cakap
                 </button>
                 <p class="status-text text-sm text-gray-500 mt-3 italic"></p>
-                <input type="hidden" class="game-input" data-answer="${item.a}" value="">
+                <input type="hidden" class="game-input" data-answer="${jawapanTeks}" value="">
             `;
-        } else {
+        } 
+        else if (item.options && Array.isArray(item.options)) {
+            // ====================================================================
+            // 🟢 MAGIS BUTANG MCQ (UNTUK PAI & BA - SOKONGAN JAWI RTL)
+            // ====================================================================
+            let butangPilihanHTML = '';
+            item.options.forEach((opt, optIndex) => {
+                butangPilihanHTML += `
+                    <label class="block p-4 mb-3 border-2 border-gray-100 rounded-xl cursor-pointer hover:bg-indigo-50 hover:border-indigo-300 transition-all flex items-center gap-4">
+                        <input type="radio" name="soalan_${index}" value="${optIndex}" onchange="document.getElementById('hidden_jawapan_${index}').value = this.value" class="w-6 h-6 text-indigo-600 focus:ring-indigo-500 ml-2 cursor-pointer">
+                        <span class="flex-1 text-xl font-bold text-gray-800">${opt}</span>
+                    </label>
+                `;
+            });
+
             div.innerHTML = `
-                <p class="font-bold text-gray-700 mb-3">${index + 1}. ${item.q}</p>
-                <input type="text" class="game-input w-full p-3 rounded-lg bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-indigo-400" placeholder="Taip jawapan anda di sini..." data-answer="${item.a}">
+                <div dir="rtl" class="text-right">
+                    <p class="font-bold text-indigo-900 mb-5 text-2xl leading-relaxed">${soalanTeks} .${index + 1}</p>
+                    <div class="space-y-2 mt-4">
+                        ${butangPilihanHTML}
+                    </div>
+                    <input type="hidden" id="hidden_jawapan_${index}" class="game-input" data-answer="${jawapanTeks}" value="">
+                </div>
+            `;
+        } 
+        else {
+            // Format Biasa (Taip Jawapan)
+            div.innerHTML = `
+                <p class="font-bold text-gray-700 mb-3">${index + 1}. ${soalanTeks}</p>
+                <input type="text" class="game-input w-full p-3 rounded-lg bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-indigo-400" placeholder="Taip jawapan anda di sini..." data-answer="${jawapanTeks}">
             `;
         }
         container.appendChild(div);
