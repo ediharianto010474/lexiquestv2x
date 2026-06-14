@@ -132,14 +132,52 @@ function prosesMasukLobi3v3() {
             return;
         }
 
-        // 7. Himpunkan senarai subjek mengikut kategori
-        const allEasy = [...englishCategoryDifficulty.easy, ...mathCategoryDifficulty.easy, ...scienceCategoryDifficulty.easy, ...bmCategoryDifficulty.easy, ...muzikCategoryDifficulty.easy, ...kesihatanCategoryDifficulty.easy, ...moralCategoryDifficulty.easy, ...psvCategoryDifficulty.easy, ...rbtCategoryDifficulty.easy, ...sejarahCategoryDifficulty.easy];
-        const allMedium = [...englishCategoryDifficulty.medium, ...mathCategoryDifficulty.medium, ...scienceCategoryDifficulty.medium, ...bmCategoryDifficulty.medium, ...muzikCategoryDifficulty.medium, ...kesihatanCategoryDifficulty.medium, ...moralCategoryDifficulty.medium, ...psvCategoryDifficulty.medium, ...rbtCategoryDifficulty.medium, ...sejarahCategoryDifficulty.medium];
-        const allHard = [...englishCategoryDifficulty.hard, ...mathCategoryDifficulty.hard, ...scienceCategoryDifficulty.hard, ...bmCategoryDifficulty.hard, ...muzikCategoryDifficulty.hard, ...kesihatanCategoryDifficulty.hard, ...moralCategoryDifficulty.hard, ...psvCategoryDifficulty.hard, ...rbtCategoryDifficulty.hard, ...sejarahCategoryDifficulty.hard];
+	// ---------------------------------------------------------
+        // 7. Himpunkan senarai subjek mengikut kategori (VERSI SELAMAT & LENGKAP)
+        // ---------------------------------------------------------
+        let allEasyCats = [];
+        let allMedCats = [];
+        let allHardCats = [];
+
+        function extractDifficulty(diffObject) {
+            if (typeof diffObject !== 'undefined' && diffObject) {
+                if (diffObject.easy) allEasyCats.push(...diffObject.easy.map(c => c.toLowerCase()));
+                if (diffObject.medium) allMedCats.push(...diffObject.medium.map(c => c.toLowerCase()));
+                if (diffObject.hard) allHardCats.push(...diffObject.hard.map(c => c.toLowerCase()));
+            }
+        }
+
+        // 📚 Sedut data dari objek kesukaran global (Termasuk PAI & BA!)
+        extractDifficulty(typeof englishCategoryDifficulty !== 'undefined' ? englishCategoryDifficulty : undefined);
+        extractDifficulty(typeof mathCategoryDifficulty !== 'undefined' ? mathCategoryDifficulty : undefined);
+        extractDifficulty(typeof scienceCategoryDifficulty !== 'undefined' ? scienceCategoryDifficulty : undefined);
+        extractDifficulty(typeof bmCategoryDifficulty !== 'undefined' ? bmCategoryDifficulty : undefined);
+        extractDifficulty(typeof muzikCategoryDifficulty !== 'undefined' ? muzikCategoryDifficulty : undefined);
+        extractDifficulty(typeof kesihatanCategoryDifficulty !== 'undefined' ? kesihatanCategoryDifficulty : undefined);
+        extractDifficulty(typeof moralCategoryDifficulty !== 'undefined' ? moralCategoryDifficulty : undefined);
+        extractDifficulty(typeof psvCategoryDifficulty !== 'undefined' ? psvCategoryDifficulty : undefined);
+        extractDifficulty(typeof rbtCategoryDifficulty !== 'undefined' ? rbtCategoryDifficulty : undefined);
+        extractDifficulty(typeof sejarahCategoryDifficulty !== 'undefined' ? sejarahCategoryDifficulty : undefined);
+        
+        // 🕌 🇸🇦 TAMBAHAN PAI & BAHASA ARAB DI SINI
+        extractDifficulty(typeof paiCategoryDifficulty !== 'undefined' ? paiCategoryDifficulty : undefined);
+        extractDifficulty(typeof baCategoryDifficulty !== 'undefined' ? baCategoryDifficulty : undefined);
+        extractDifficulty(typeof arabicCategoryDifficulty !== 'undefined' ? arabicCategoryDifficulty : undefined);
+
+        // 🛡️ PELAN SANDARAN KESELAMATAN (HARDCODE FALLBACK)
+        const fallbackEasy = ['missing', 'spelling', 'plural', 'gendernouns', 'occupation', 'number_recognition', 'addition', 'subtraction', 'kata_nama', 'mufrodat', 'arqam', 'alquran', 'jawi', 'aqidah', 'pengenalan_ilmu_sejarah', 'keselamatan_bengkel', 'unsur_seni', 'notasi_dan_balar', 'kepercayaan_kepada_tuhan', 'gimnastik_asas'];
+        const fallbackMed = ['puzzle', 'guessing', 'pasttense', 'superlatives', 'synonym', 'antonym', 'multiplication', 'division', 'time_and_money', 'simpulan_bahasa', 'hiwar', 'ibadah', 'sirah', 'zaman_air_batu', 'kerajaan_melayu_awal', 'asas_reka_bentuk', 'prinsip_rekaan', 'apresiasi_muzik', 'baik_hati', 'bertanggungjawab', 'olahraga_asas'];
+        const fallbackHard = ['grammar', 'architect', 'idioms', 'listening', 'speaking', 'fraction_and_decimal', 'area_and_perimeter', 'susunan_songsang', 'pemahaman', 'qawaid', 'akhlak', 'tokoh_terbilang', 'reka_bentuk_pembungkusan', 'asas_pertanian', 'menggambar', 'kraf_tradisional', 'nyanyian', 'keadilan', 'toleransi', 'pertolongan_cemas', 'kesihatan_diri'];
+        
+        allEasyCats.push(...fallbackEasy);
+        allMedCats.push(...fallbackMed);
+        allHardCats.push(...fallbackHard);
 
         let passedEasy = 0, passedMedium = 0, passedHard = 0;
 
+        // ---------------------------------------------------------
         // 8. Semak Markah di dalam studentInfo.games
+        // ---------------------------------------------------------
         if (studentInfo.games) {
             // Tukar semua kunci subjek ke huruf kecil supaya mudah dipadankan
             const normalizedGames = {};
@@ -150,7 +188,10 @@ function prosesMasukLobi3v3() {
             // Fungsi pengiraan untuk setiap aras
             function checkScore(subjectArray) {
                 let count = 0;
-                subjectArray.forEach(subject => {
+                // Gunakan Set untuk buang nama kategori yang berulang (duplicate)
+                const uniqueSubjects = [...new Set(subjectArray)]; 
+                
+                uniqueSubjects.forEach(subject => {
                     const gameData = normalizedGames[subject.toLowerCase()];
                     if (gameData !== undefined) {
                         // Semak kalau format Objek {highScore: x} atau Nombor bulat
@@ -161,9 +202,9 @@ function prosesMasukLobi3v3() {
                 return count;
             }
 
-            passedEasy = checkScore(allEasy);
-            passedMedium = checkScore(allMedium);
-            passedHard = checkScore(allHard);
+            passedEasy = checkScore(allEasyCats);
+            passedMedium = checkScore(allMedCats);
+            passedHard = checkScore(allHardCats);
         }
 
 // 9. Keputusan Akhir Semakan
@@ -918,9 +959,13 @@ async function masukFasaBanning(lobiId) {
             { id: "psv", name: "SENI VISUAL", icon: "🎨", color: "from-rose-500 to-red-600" },
             { id: "mz", name: "MUZIK", icon: "🎵", color: "from-fuchsia-500 to-violet-600" },
             { id: "pjk", name: "PJK", icon: "⚽", color: "from-green-500 to-emerald-600" },
-            { id: "pm", name: "MORAL", icon: "🤝", color: "from-cyan-500 to-sky-600" }
+            { id: "pm", name: "MORAL", icon: "🤝", color: "from-cyan-500 to-sky-600" },
+            // 🆕 KEMAS KINI: Menambah PAI & Bahasa Arab ke dalam Pool
+            { id: "pai", name: "AGAMA ISLAM", icon: "🕌", color: "from-emerald-600 to-green-800" },
+            { id: "ba", name: "BAHASA ARAB", icon: "🐫", color: "from-amber-600 to-yellow-800" }
         ];
         
+        // Pilih 9 subjek secara rawak daripada 12 subjek di atas
         const pool9 = masterSubjek.sort(() => 0.5 - Math.random()).slice(0, 9);
         
         let susunanGiliranDinamik = [];
@@ -1471,12 +1516,14 @@ function kemaskiniPaparanBattle(lobi, lobiId, slotSaya) {
 let senaraiSoalanSukar = []; 
 
 // =========================================================================
-// 2. FUNGSI: PADANKAN ID SUBJEK (Telah Ditambah 'bi' Bahasa Inggeris)
+// 2. FUNGSI: PADANKAN ID SUBJEK & FORMAT DATA SECARA DINAMIK (3v3)
 // =========================================================================
-function sediakanSoalanPertamaPemain(kodSubjek) {
+function sediakanSoalanPertamaPemain(kodSubjek, dataLobi) {
     senaraiSoalanSemasa = []; 
-    senaraiSoalanSukar = []; // 👈 Kosongkan tong soalan sukar untuk bina semula
+    senaraiSoalanSukar = []; 
+    senaraiSoalanMudah = []; 
     let dataKasar = null;
+    let jenisFormatObjektif = false;
 
     // Pastikan ID ini sama dengan ID di RTDB Cikgu
     switch(kodSubjek) {
@@ -1490,10 +1537,20 @@ function sediakanSoalanPertamaPemain(kodSubjek) {
         case 'pm': dataKasar = typeof moralData !== 'undefined' ? moralData : null; break;
         case 'psv': dataKasar = typeof psvData !== 'undefined' ? psvData : null; break;
         case 'rbt': dataKasar = typeof rbtData !== 'undefined' ? rbtData : null; break;
+        case 'pai': 
+            dataKasar = typeof paiQuestions !== 'undefined' ? paiQuestions : null; 
+            jenisFormatObjektif = true; // Tandakan subjek menggunakan format objektif
+            break;
+        case 'ba': 
+            dataKasar = typeof baQuestions !== 'undefined' ? baQuestions : null; 
+            jenisFormatObjektif = true; // Tandakan subjek menggunakan format objektif
+            break;
     }
     
     if (!dataKasar) {
-        document.getElementById('quiz-question-text').innerText = "Ralat: Fail data bagi subjek " + kodSubjek + " tidak dijumpai di dalam HTML!";
+        if(document.getElementById('quiz-question-text')) {
+            document.getElementById('quiz-question-text').innerText = "Ralat: Fail data bagi subjek " + kodSubjek + " tidak dijumpai di dalam HTML!";
+        }
         return;
     }
 
@@ -1501,79 +1558,161 @@ function sediakanSoalanPertamaPemain(kodSubjek) {
     for (let kategori in dataKasar) {
         if (dataKasar.hasOwnProperty(kategori)) {
             let susunanKategori = dataKasar[kategori];
-            senaraiSoalanSemasa = senaraiSoalanSemasa.concat(susunanKategori);
+            let senaraiDiproses = [];
+
+            if (jenisFormatObjektif) {
+                // Kekalkan struktur array options, tetapi petakan indeks jawapan ke parameter 'a'
+                senaraiDiproses = susunanKategori.map(item => ({
+                    q: item.question,
+                    options: item.options, // Simpan array pilihan jawapan [A, B, C, D]
+                    a: item.answer         // Simpan indeks jawapan yang betul (0, 1, 2, atau 3)
+                }));
+            } else {
+                senaraiDiproses = susunanKategori; // Subjek biasa kekal format {q, a}
+            }
+
+            senaraiSoalanSemasa = senaraiSoalanSemasa.concat(senaraiDiproses);
             
-            // 💥 KOD PENGASINGAN SOALAN SUKAR 💥
-            // Kita cari nama kategori yang ada kaitan dengan 'sukar' atau 'hard'
+            // 💥 KOD PENGASINGAN ARAS SOALAN 💥
             let namaKategori = String(kategori).toLowerCase();
-            if (namaKategori.includes('sukar') || namaKategori.includes('hard') || namaKategori.includes('tinggi') || namaKategori.includes('3')) {
-                senaraiSoalanSukar = senaraiSoalanSukar.concat(susunanKategori);
+            if (namaKategori.includes('sukar') || namaKategori.includes('hard') || namaKategori.includes('tinggi') || namaKategori.includes('3') || namaKategori.includes('adab') || namaKategori.includes('sirah')) {
+                senaraiSoalanSukar = senaraiSoalanSukar.concat(senaraiDiproses);
+            }
+            if (namaKategori.includes('mudah') || namaKategori.includes('easy') || namaKategori.includes('rendah') || namaKategori.includes('1') || namaKategori.includes('aqidah') || namaKategori.includes('mufrodat')) {
+                senaraiSoalanMudah = senaraiSoalanMudah.concat(senaraiDiproses);
             }
         }
     }
 
-    // Backup plan: Kalau dalam data Cikgu tak guna perkataan 'sukar'/'hard', 
-    // sistem akan automatik cedok kategori yang paling terakhir (biasanya aras paling susah)
+    // Fail-safe jika tong pengasingan kosong
     if (senaraiSoalanSukar.length === 0) {
         let kunciKategori = Object.keys(dataKasar);
         if (kunciKategori.length > 0) {
-            senaraiSoalanSukar = dataKasar[kunciKategori[kunciKategori.length - 1]];
+            let kategoriTerakhir = kunciKategori[kunciKategori.length - 1];
+            if (jenisFormatObjektif) {
+                senaraiSoalanSukar = dataKasar[kategoriTerakhir].map(item => ({
+                    q: item.question, options: item.options, a: item.answer
+                }));
+            } else {
+                senaraiSoalanSukar = dataKasar[kategoriTerakhir];
+            }
         } else {
-            senaraiSoalanSukar = senaraiSoalanSemasa; // Fail-safe jika struktur data pelik
+            senaraiSoalanSukar = senaraiSoalanSemasa;
         }
     }
+
+    if (senaraiSoalanMudah.length === 0) {
+        senaraiSoalanMudah = senaraiSoalanSemasa;
+    }
     
+    // Simpan rujukan lobi ke skop global untuk semakan masa tamat (kalis ralat)
+    if (dataLobi) window.rtdbLobiDataSemasa = dataLobi;
+
     paparSoalanBaru();
 }
 
 // =========================================================================
-// 3. FUNGSI: PAPAR SOALAN & KOSONGKAN KOTAK TAIP
+// 3. FUNGSI: PAPAR SOALAN & TUKAR UI SECARA DINAMIK (TAIP VS OBJEKTIF)
 // =========================================================================
 function paparSoalanBaru() {
     if (senaraiSoalanSemasa.length === 0) return;
 
-    // Default: Murid akan ambil soalan dari tong campuran (biasa)
     let bankSoalan = senaraiSoalanSemasa; 
 
-    // 💥 1. SEMAK IMPAK BOOSTER SHINING (SOALAN MUDAH) 💥
+    // 💥 SEMAK IMPAK BOOSTER (SHINING / CHALLENGER) 💥
     if (typeof bakiSoalanMudahPaksaan !== 'undefined' && bakiSoalanMudahPaksaan > 0) {
-        // Tukar tong soalan ke tong SOALAN MUDAH!
         if (typeof senaraiSoalanMudah !== 'undefined' && senaraiSoalanMudah.length > 0) {
             bankSoalan = senaraiSoalanMudah; 
         }
-        bakiSoalanMudahPaksaan--; // Tolak baki ganjaran soalan mudah
+        bakiSoalanMudahPaksaan--; 
         console.log(`[Shining] Soalan Mudah dipaksa! Baki ganjaran: ${bakiSoalanMudahPaksaan}`);
     } 
-    // 💥 2. SEMAK IMPAK BOOSTER CHALLENGER (SOALAN SUKAR) 💥
     else if (typeof bakiSoalanSukarPaksaan !== 'undefined' && bakiSoalanSukarPaksaan > 0) {
-        // Tukar tong soalan ke tong SOALAN SUKAR!
         if (typeof senaraiSoalanSukar !== 'undefined' && senaraiSoalanSukar.length > 0) {
             bankSoalan = senaraiSoalanSukar; 
         }
-        bakiSoalanSukarPaksaan--; // Tolak baki hukuman soalan sukar
+        bakiSoalanSukarPaksaan--; 
         console.log(`[Challenger] Soalan Sukar dipaksa! Baki hukuman: ${bakiSoalanSukarPaksaan}`);
     }
 
-    // Pilih soalan rawak dari bank yang telah ditentukan (Mudah / Sukar / Biasa)
+    // Ambil soalan rawak
     const indexRawak = Math.floor(Math.random() * bankSoalan.length);
     soalanAktif = bankSoalan[indexRawak];
 
-    // Papar teks soalan
+    // Paparkan teks soalan utama
     document.getElementById('quiz-question-text').innerText = soalanAktif.q;
     
-    // Kosongkan kotak taip & sedia untuk ditaip
+    // Dapatkan elemen kontena UI
+    const containerTaip = document.getElementById('container-input-taip'); 
+    const containerObjektif = document.getElementById('container-input-objektif'); 
     const kotakInput = document.getElementById('input-jawapan-taip');
-    kotakInput.value = "";
-    kotakInput.disabled = false;
-    kotakInput.focus(); 
-    
-    // Aktifkan semula butang hantar
-    document.getElementById('btn-hantar-jawapan').disabled = false;
-    document.getElementById('input-jawapan-taip').classList.remove('border-red-500', 'border-emerald-500', 'bg-red-900/30', 'bg-emerald-900/30');
+    const butangHantar = document.getElementById('btn-hantar-jawapan');
+
+    // 💥 LOGIK PERTUKARAN SKRIN INTERFAKS 💥
+    if (soalanAktif.options) {
+        // Papar UI Objektif, Sembunyikan Kotak Taip
+        if (containerTaip) containerTaip.style.display = 'none';
+        if (containerObjektif) containerObjektif.style.display = 'block';
+
+        // Kemaskini teks pada ke-4 butang objektif (Sama konsep macam pvp)
+        for(let i = 0; i < 4; i++) {
+            let btn = document.getElementById('battle-btn-mcq-' + i);
+            if(btn) {
+                btn.innerText = soalanAktif.options[i] || "";
+                btn.disabled = false;
+                btn.classList.remove('bg-red-500', 'bg-emerald-500', 'animate-shake'); 
+            }
+        }
+    } else {
+        // Papar UI Kotak Taip, Sembunyikan Objektif
+        if (containerTaip) containerTaip.style.display = 'block';
+        if (containerObjektif) containerObjektif.style.display = 'none';
+
+        // Reset tetapan kotak taip asal
+        kotakInput.value = "";
+        kotakInput.disabled = false;
+        butangHantar.disabled = false;
+        kotakInput.classList.remove('border-red-500', 'border-emerald-500', 'bg-red-900/30', 'bg-emerald-900/30');
+        kotakInput.focus(); 
+    }
 }
 
 // =========================================================================
-// 4. FUNGSI: SEMAK JAWAPAN TAIP KETIKA TEKAN 'ENTER' ATAU KLIK 'HANTAR'
+// 4A. FUNGSI SEMAK JAWAPAN: JIKA MURID KLIK BUTANG OBJEKTIF (PAI / BA)
+// =========================================================================
+function hantarJawapanObjektif(selectedIndex) {
+    // Pengahadang masa tamat menggunakan objek pembantu global window
+    if (window.rtdbLobiDataSemasa && window.rtdbLobiDataSemasa.battleEndTime) {
+        if (Date.now() >= window.rtdbLobiDataSemasa.battleEndTime) {
+            console.log("Masa tamat! Pilihan ditolak.");
+            return;
+        }
+    }
+
+    // Kunci semua butang objektif serta merta semasa animasi jawapan diproses
+    for(let i = 0; i < 4; i++) {
+        let btn = document.getElementById('battle-btn-mcq-' + i);
+        if(btn) btn.disabled = true;
+    }
+
+    const btnDitekan = document.getElementById('battle-btn-mcq-' + selectedIndex);
+    const indexJawapanBetul = soalanAktif.a; 
+
+    // Bandingkan indeks butang dengan indeks skema jawapan
+    if (parseInt(selectedIndex) === parseInt(indexJawapanBetul)) {
+        if(btnDitekan) btnDitekan.classList.add('bg-emerald-500');
+        prosesKiraanMarkahDanStreak(true); // Isyarat Betul
+    } else {
+        if(btnDitekan) btnDitekan.classList.add('animate-shake', 'bg-red-500');
+        prosesKiraanMarkahDanStreak(false); // Isyarat Salah
+    }
+
+    // Beri masa 1 saat untuk kesan visual hijau/merah sebelum tukar soalan
+    setTimeout(() => paparSoalanBaru(), 1000);
+}
+
+// =========================================================================
+// 4B. FUNGSI SEMAK JAWAPAN: JIKA MURID MENGGUNAKAN KOTAK TAIP (BM, MT, DLL)
 // =========================================================================
 function semakTekanEnter(event) {
     if (event.key === "Enter") {
@@ -1583,10 +1722,11 @@ function semakTekanEnter(event) {
 }
 
 function hantarJawapanTaip() {
-	// 🛡️ PENGHADANG 1: Jika masa sudah tamat (atau kurang dari 0), terus sekat!
-    if (typeof bakiMasa !== 'undefined' && bakiMasa <= 0) {
-        console.log("Masa perlawanan telah tamat! Jawapan ini tidak akan dikira.");
-        return; // Berhenti di sini, jangan proses apa-apa lagi!
+    if (window.rtdbLobiDataSemasa && window.rtdbLobiDataSemasa.battleEndTime) {
+        if (Date.now() >= window.rtdbLobiDataSemasa.battleEndTime) {
+            console.log("Masa perlawanan telah tamat! Jawapan ditolak.");
+            return;
+        }
     }
 
     const kotakInput = document.getElementById('input-jawapan-taip');
@@ -1598,16 +1738,28 @@ function hantarJawapanTaip() {
     kotakInput.disabled = true;
     butangHantar.disabled = true;
 
-    let jawapanSkema = soalanAktif.a.toLowerCase().split(" atau "); 
+    let jawapanSkema = String(soalanAktif.a).toLowerCase().split(" atau "); 
     let adakahBetul = jawapanSkema.includes(jawapanMurid);
 
     if (adakahBetul) {
         kotakInput.classList.add('border-emerald-500', 'bg-emerald-900/30');
-        
+        prosesKiraanMarkahDanStreak(true);
+    } else {
+        kotakInput.classList.add('border-red-500', 'bg-red-900/30');
+        prosesKiraanMarkahDanStreak(false);
+    }
+
+    setTimeout(() => paparSoalanBaru(), 1000);
+}
+
+// =========================================================================
+// 5. ENJIN UTAMA: PROSES KIRAAN SKOR, STREAK, DETEKSI BOOSTER & SINKRONISASI RTDB
+// =========================================================================
+function prosesKiraanMarkahDanStreak(adakahBetul) {
+    if (adakahBetul) {
         currentStreak++;
         if (currentStreak > longestStreak) longestStreak = currentStreak;
 
-        // 💥 LOGIK SKOR BARU: Semak gandaan mata berdasarkan BOOSTER YANG DIKLIK MURID
         let mataDiperoleh = 1;
         
         if (boosterAktif === 'x2') {
@@ -1620,33 +1772,28 @@ function hantarJawapanTaip() {
 
         myLivePoints += mataDiperoleh;
 
-        // Jika baki soalan booster gandaan dah habis, reset semula booster aktif
         if ((boosterAktif === 'x2' || boosterAktif === 'x3') && bakiSoalanBooster <= 0) {
             boosterAktif = null;
         } 
-        // 💥 TAMBAHAN: Jika dalam mode Shining dan baki soalan mudah dah habis dibaca oleh enjin, reset boosterAktif
         else if (boosterAktif === 'shining' && bakiSoalanMudahPaksaan <= 0) {
             boosterAktif = null;
         }
 
     } else {
-        kotakInput.classList.add('border-red-500', 'bg-red-900/30');
-        
-        // Salah jawab: Streak kembali ke 0 & booster aktif hangus/tamat serta merta
         currentStreak = 0;
         boosterAktif = null; 
         bakiSoalanBooster = 0;
-        bakiSoalanMudahPaksaan = 0; // 💥 TAMBAHAN: Hangus mod Shining serta merta jika salah jawab
+        bakiSoalanMudahPaksaan = 0; 
 
         myLivePoints = Math.max(0, myLivePoints - 1);
     }
 
-    // Kemaskini paparan skor pada HTML
-    document.getElementById('my-live-points').innerText = myLivePoints;
-    document.getElementById('quiz-current-streak').innerText = currentStreak;
-    document.getElementById('my-longest-streak').innerText = longestStreak;
+    // Kemaskini Visual Papan Skor Pemain (UI Teman Lokal)
+    if(document.getElementById('my-live-points')) document.getElementById('my-live-points').innerText = myLivePoints;
+    if(document.getElementById('quiz-current-streak')) document.getElementById('quiz-current-streak').innerText = currentStreak;
+    if(document.getElementById('my-longest-streak')) document.getElementById('my-longest-streak').innerText = longestStreak;
 
-    // 💥 TAMBAHAN LOGIKA: Sinkronisasi data Poin & Longest Streak ke Firebase Realtime Database 💥
+    // HANTAR SERENTAK DATA TERBARU KE DATABASE REALTIME FIREBASE
     const elemenSlot = document.getElementById('my-battle-slot');
     const mySlot = elemenSlot ? elemenSlot.innerText : '';
 
@@ -1658,17 +1805,8 @@ function hantarJawapanTaip() {
         });
     }
 
-    // Segarkan semula rupa panel booster selepas jawab
-    kemaskiniPanelBooster();
-
-    setTimeout(() => {
-        kotakInput.disabled = false;
-        butangHantar.disabled = false;
-        kotakInput.value = "";
-        kotakInput.classList.remove('border-emerald-500', 'bg-emerald-900/30', 'border-red-500', 'bg-red-900/30');
-        
-        paparSoalanBaru();
-    }, 1000);
+    // Segarkan rupa panel booster jika fungsi tersebut wujud
+    if (typeof kemaskiniPanelBooster === 'function') kemaskiniPanelBooster();
 }
 
 // =========================================================================
@@ -4518,7 +4656,7 @@ isGanjaranDisimpan = false;
 }
 
 // ==========================================
-// D. LOGIK PERLAWANAN & MARKAH (90 SAAT + JEDA UX) - VERSI RTDB
+// D. LOGIK PERLAWANAN & MARKAH (VERSI BEBAS FORMAT)
 // ==========================================
 function setupPvPLogic(challengeId, data) {
     currentPvPChallengeId = challengeId;
@@ -4527,78 +4665,68 @@ function setupPvPLogic(challengeId, data) {
     let pvpEndTime = null; 
     const timerDisplay = document.getElementById('pvp-timer');
 
-    // ========================================================
-    // 🆕 SISTEM PENGHALA BANK DATA (DATA ROUTER)
-    // ========================================================
+    // 🆕 SISTEM PENGHALA BANK DATA
     window.getPvPBankData = function(subjectName) {
         switch(subjectName) {
             case "Bahasa Melayu": return typeof malayLanguageData !== 'undefined' ? malayLanguageData : {};
             case "Matematik": return typeof mathData !== 'undefined' ? mathData : (typeof mathematicsData !== 'undefined' ? mathematicsData : {});
             case "Sains": return typeof scienceData !== 'undefined' ? scienceData : {};
+            case "Pendidikan Agama Islam": return typeof paiQuestions !== 'undefined' ? paiQuestions : {};
+            case "Bahasa Arab": return typeof baQuestions !== 'undefined' ? baQuestions : {};
             case "Pendidikan Jasmani & Kesihatan": return typeof pjkData !== 'undefined' ? pjkData : {};
             case "Pendidikan Muzik": return typeof pendidikanMuzikData !== 'undefined' ? pendidikanMuzikData : {};
             case "Sejarah": return typeof sejarahData !== 'undefined' ? sejarahData : {};
             case "Reka Bentuk dan Teknologi (RBT)": return typeof rbtData !== 'undefined' ? rbtData : {};
             case "Pendidikan Seni Visual": return typeof psvData !== 'undefined' ? psvData : {};
             case "Pendidikan Moral": return typeof moralData !== 'undefined' ? moralData : {};
-            default: return typeof gameData !== 'undefined' ? gameData : {}; // Bahasa Inggeris sebagai lalai
+            default: return typeof gameData !== 'undefined' ? gameData : {};
         }
     };
 
-    // 1. Pemain 1 tarik soalan pertama (GUNA RTDB)
+    // 1. Pemain 1 tarik soalan pertama
     if (isPlayer1 && !data.currentQ) {
-        // Tarik data mengikut subjek yang betul!
         const targetBankData = window.getPvPBankData(data.subject);
-        
         let catKey = "missing"; 
         let chosenCategory = data.category ? data.category.toLowerCase() : "";
         
-        // Cari kunci kategori yang tepat di dalam subjek tersebut
         if (targetBankData[data.category]) {
             catKey = data.category;
         } else {
             for (let key in targetBankData) {
                 if (chosenCategory.includes(key.toLowerCase()) || key.toLowerCase().includes(chosenCategory)) { 
-                    catKey = key; 
-                    break; 
+                    catKey = key; break; 
                 }
             }
         }
-        
         currentPvPCategoryKey = catKey;
-
-        // Ambil soalan
         const questions = targetBankData[currentPvPCategoryKey] || gameData.missing; 
         const firstQ = questions[Math.floor(Math.random() * questions.length)];
         
-// 🟢 HANTAR SOALAN PERTAMA KE RTDB
+        // 🟢 NORMALIZER: Cantumkan format yang berbeza!
+        const qText = firstQ.question || firstQ.q;
+        const qAns = firstQ.answer !== undefined ? firstQ.answer : firstQ.a;
+        const qOpts = firstQ.options || null;
+
         rtdb.ref("challenges/" + challengeId).update({
             p1Score: 0, p2Score: 0,
-            currentQ: firstQ.q, currentA: firstQ.a,
+            currentQ: qText, 
+            currentA: qAns,
+            currentOptions: qOpts, // 🟢 Simpan Butang Pilihan ke Firebase!
             categoryKey: currentPvPCategoryKey,
-            subjectKey: data.subject, // Simpan rujuk subjek untuk transaksi!
+            subjectKey: data.subject,
             isTransitioning: false, 
-            // ⏱️ BACA HAD MASA DINAMIK DARI CONFIG
             endTime: (() => {
                 let namaKategoriInput = data.category ? data.category.toLowerCase().trim() : "";
-                let masaDariConfig = 90; // Default fallback jika tidak ada di dalam list (90 detik)
-
-                // Jika objek HAD_MASA_GAME wujud dari config.js
+                let masaDariConfig = 90; 
                 if (typeof HAD_MASA_GAME !== 'undefined' && HAD_MASA_GAME[namaKategoriInput]) {
                     masaDariConfig = HAD_MASA_GAME[namaKategoriInput];
-                    
-                    // 💡 CATATAN UX: Waktu solo (300s / 5 menit) mungkin terlalu lama untuk PvP "Siapa Cepat".
-                    // Jika Anda ingin memotong separuh waktu tersebut khusus untuk PvP, hapus tanda // pada baris di bawah ini:
-                    // masaDariConfig = Math.ceil(masaDariConfig / 2); 
                 }
-                
-                console.log(`⏱️ PvP ditetapkan selama ${masaDariConfig} detik untuk kategori: ${namaKategoriInput}`);
-                return Date.now() + (masaDariConfig * 1000); // Ubah detik ke milidetik
+                return Date.now() + (masaDariConfig * 1000);
             })()
         });
     }
 
-    // 2. Telinga Khas: Dengar perubahan (GUNA RTDB .on 'value')
+    // 2. Dengar perubahan dari Firebase (UI Controller)
     rtdb.ref("challenges/" + challengeId).on('value', snapshot => {
         if (!snapshot.exists()) return;
         const matchData = snapshot.val(); 
@@ -4608,15 +4736,19 @@ function setupPvPLogic(challengeId, data) {
 
         if (matchData.endTime) pvpEndTime = matchData.endTime;
         if (matchData.categoryKey) currentPvPCategoryKey = matchData.categoryKey;
-        if (matchData.subjectKey) window.currentPvPSubjectKey = matchData.subjectKey; // Set global untuk pendengar input
+        if (matchData.subjectKey) window.currentPvPSubjectKey = matchData.subjectKey; 
 
+        // Rujukan Elemen UI
         const inputBox = document.getElementById('pvp-answer-input');
+        const inputContainer = document.getElementById('pvp-input-container');
+        const optionsContainer = document.getElementById('pvp-options-container');
 
-        // 🔴 SISTEM UX: "SIAPA CEPAT" & JEDA (PAUSE)
         if (matchData.isTransitioning) {
-            if (inputBox) {
-                inputBox.disabled = true; 
-                inputBox.value = "";      
+            // Kunci semua UI sementara Jeda "Siapa Cepat"
+            if (inputBox) { inputBox.disabled = true; inputBox.value = ""; }
+            for(let i=0; i<4; i++) {
+                let btn = document.getElementById('pvp-btn-'+i);
+                if(btn) { btn.disabled = true; btn.classList.remove('bg-red-500', 'animate-shake'); }
             }
             
             Swal.fire({
@@ -4630,26 +4762,51 @@ function setupPvPLogic(challengeId, data) {
                     rtdb.ref("challenges/" + challengeId).update({
                         currentQ: matchData.nextQ,
                         currentA: matchData.nextA,
+                        currentOptions: matchData.nextOptions || null, // 🟢 Tembak options baharu
                         isTransitioning: false 
                     });
                 }, 1500);
             }
         } else {
-            if (inputBox) {
-                inputBox.disabled = false;
-                inputBox.focus();
-            }
+            // PAPARKAN SOALAN & BUKA KUNCI UI
             if (matchData.currentQ) {
                 document.getElementById('pvp-question-display').innerText = matchData.currentQ;
                 currentPvPAnswer = matchData.currentA; 
                 window.currentPvPQuestionText = matchData.currentQ; 
+                
+                // 🟢 PENGESAN FORMAT (Objektif vs Menaip)
+                if (matchData.currentOptions) {
+                    // MODE OBJEKTIF (PAI/BA)
+                    if(inputContainer) inputContainer.classList.add('hidden');
+                    if(optionsContainer) {
+                        optionsContainer.classList.remove('hidden');
+                        optionsContainer.classList.add('grid', 'grid-cols-1', 'md:grid-cols-2');
+                    }
+                    matchData.currentOptions.forEach((opt, idx) => {
+                        let btn = document.getElementById('pvp-btn-'+idx);
+                        if(btn) {
+                            btn.innerText = opt;
+                            btn.disabled = false;
+                            btn.classList.remove('bg-red-500', 'animate-shake'); // Buang kesan salah sebelumnya
+                        }
+                    });
+                } else {
+                    // MODE MENAIP (BM/Math)
+                    if(optionsContainer) {
+                        optionsContainer.classList.add('hidden');
+                        optionsContainer.classList.remove('grid', 'grid-cols-1', 'md:grid-cols-2');
+                    }
+                    if(inputContainer) inputContainer.classList.remove('hidden');
+                    if (inputBox) {
+                        inputBox.disabled = false;
+                        inputBox.focus();
+                    }
+                }
             }
         }
     });
 
-    // 3. PEMASA TERSINKRONISASI LOKAL (90 SAAT)
     if (window.pvpTimerInterval) clearInterval(window.pvpTimerInterval);
-    
     window.pvpTimerInterval = setInterval(() => {
         if (!pvpEndTime) return;
         let timeLeft = Math.floor((pvpEndTime - Date.now()) / 1000);
@@ -4660,6 +4817,96 @@ function setupPvPLogic(challengeId, data) {
             endPvPMatch(); 
         }
     }, 1000);
+}
+
+// ==========================================
+// E. PENGESAN JAWAPAN (MENAIP & OBJEKTIF)
+// ==========================================
+
+// 1. PENGESAN KOTAK MENAIP 
+document.addEventListener('input', function(e) {
+    if (e.target && e.target.id === 'pvp-answer-input') {
+        if (!currentPvPChallengeId || currentPvPAnswer === undefined || currentPvPAnswer === null) return;
+        
+        const inputBox = e.target;
+        const userInput = String(inputBox.value).toUpperCase().trim();
+        const correctA_raw = String(currentPvPAnswer).toUpperCase().trim();
+        const possibleAnswers = correctA_raw.split('|');
+        
+        if (possibleAnswers.includes(userInput)) {
+            inputBox.value = ""; 
+            inputBox.disabled = true; 
+            hantarTransaksiMarkah();
+        }
+    }
+});
+
+// 2. PENGESAN BUTANG OBJEKTIF (Baru!)
+window.submitPvPObjektif = function(selectedIndex) {
+    if (!currentPvPChallengeId || currentPvPAnswer === undefined || currentPvPAnswer === null) return;
+
+    if (parseInt(selectedIndex) === parseInt(currentPvPAnswer)) {
+        // Kunci butang sementara memproses
+        for(let i=0; i<4; i++) {
+            let btn = document.getElementById('pvp-btn-'+i);
+            if(btn) btn.disabled = true;
+        }
+        hantarTransaksiMarkah();
+    } else {
+        // Jika Salah - Goncang & Merahkan butang! (Feedback Visual)
+        const btn = document.getElementById('pvp-btn-'+selectedIndex);
+        if(btn) {
+            btn.classList.add('animate-shake', 'bg-red-500');
+            setTimeout(() => {
+                btn.classList.remove('animate-shake', 'bg-red-500');
+            }, 500);
+        }
+    }
+};
+
+// 3. FUNGSI PUSAT PENGHANTARAN MARKAH (Jimat Kod Berkali-kali)
+function hantarTransaksiMarkah() {
+    const rtdbChallengeRef = rtdb.ref("challenges/" + currentPvPChallengeId);
+            
+    rtdbChallengeRef.transaction((data) => {
+        if (data) {
+            // Batal jika soalan dah bertukar (lawan dah jawab dulu)
+            if (data.currentQ !== window.currentPvPQuestionText || data.isTransitioning) {
+                return; 
+            }
+
+            const targetBankData = window.getPvPBankData(window.currentPvPSubjectKey);
+            const questions = targetBankData[currentPvPCategoryKey] || gameData.missing; 
+            const newQ = questions[Math.floor(Math.random() * questions.length)];
+            
+            const scoreField = isPlayer1 ? "p1Score" : "p2Score";
+
+            // Normalizer untuk soalan seterusnya
+            data[scoreField] = (data[scoreField] || 0) + 1; 
+            data.lastScorer = studentInfo.name; 
+            data.nextQ = newQ.question || newQ.q;
+            data.nextA = newQ.answer !== undefined ? newQ.answer : newQ.a;
+            data.nextOptions = newQ.options || null; // Simpan option baru jika ada
+            data.isTransitioning = true; 
+            
+            return data; 
+        }
+        return data; 
+        
+    }, (error, committed, snapshot) => {
+        if (error || !committed) {
+            // Jika transaksi gagal (contohnya internet lambat), buka semula UI
+            const inputBox = document.getElementById('pvp-answer-input');
+            if(inputBox && !inputBox.parentElement.classList.contains('hidden')) {
+                inputBox.disabled = false; inputBox.focus();
+            } else {
+                for(let i=0; i<4; i++) {
+                    let btn = document.getElementById('pvp-btn-'+i);
+                    if(btn) btn.disabled = false;
+                }
+            }
+        }
+    });
 }
 
 // ==========================================
