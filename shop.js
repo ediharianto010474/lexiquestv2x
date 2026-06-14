@@ -743,7 +743,7 @@ async function requestPhysicalBadge(id, name) {
 }
 
 // ==========================================
-// 👤 5. PAPARAN KEDAI AVATAR DIGITAL
+// 👤 5. PAPARAN KEDAI AVATAR DIGITAL (BERANTAI)
 // ==========================================
 function loadAvatarShop() {
     const container = document.getElementById('avatar-shop-items');
@@ -760,44 +760,88 @@ function loadAvatarShop() {
     for (const key in avatars) {
         const category = avatars[key];
         
+        // 🆕 LOGIK BERANTAI: Semak jika murid sudah memiliki avatar dari kategori ini
+        // Kita cari avatar tahap (level) paling tinggi yang dimiliki murid dalam kategori semasa.
+        // Jika belum ada, tahap tertinggi yang dimiliki dianggap 0.
+        let highestOwnedLevel = 0;
         category.levels.forEach(item => {
-            if (item.isSecret && playerName.trim().toUpperCase() !== "GAME MASTER") return; 
+             const itemKey = `${key}_lvl${item.level}`;
+             if (localPlayerData.inventory.includes(itemKey) && item.level > highestOwnedLevel) {
+                 highestOwnedLevel = item.level;
+             }
+        });
 
-            const isLocked = playerLevel < item.level;
+        // Loop melalui senarai avatar dalam kategori ini secara tertib
+        for (let i = 0; i < category.levels.length; i++) {
+            const item = category.levels[i];
+            
+            if (item.isSecret && playerName.trim().toUpperCase() !== "GAME MASTER") continue; 
+
             const itemKey = `${key}_lvl${item.level}`;
             const isOwned = localPlayerData.inventory.includes(itemKey);
+            const isLevelLocked = playerLevel < item.level; // Kunci berdasarkan profil level
             
+            // 🆕 LOGIK BERANTAI: Kunci evolusi!
+            // Jika ia bukan avatar level pertama (index > 0), dan murid BELUM memiliki avatar tahap sebelumnya, KUNCI ia.
+            let isEvolutionLocked = false;
+            let previousLevelRequired = 0;
+            
+            if (i > 0) {
+                 const previousItem = category.levels[i-1];
+                 previousLevelRequired = previousItem.level; // Simpan maklumat tahap sebelumnya untuk dipapar di butang
+                 
+                 // Kunci jika tahap tertinggi yang dimiliki lebih rendah daripada tahap *sebelum* item ini.
+                 if (highestOwnedLevel < previousLevelRequired) {
+                     isEvolutionLocked = true;
+                 }
+            }
+
             const safeImg = item.img ? item.img : '';
             const safeIcon = item.icon ? item.icon : '';
 
+            // Visual avatar akan dimalapkan (grayscale) jika dikunci oleh level atau rantaian evolusi
             const visual = item.img 
-                ? `<img src="assets/avatars/${item.img}" class="w-20 h-20 object-contain mb-2 ${isLocked ? 'grayscale opacity-50' : ''}">`
-                : `<div class="w-14 h-14 ${isLocked ? 'bg-gray-200 text-gray-400' : 'bg-blue-50 text-blue-600'} rounded-full flex items-center justify-center text-2xl mb-2 shadow-inner"><i class="${isLocked ? 'fas fa-lock' : item.icon}"></i></div>`;
+                ? `<img src="assets/avatars/${item.img}" class="w-20 h-20 object-contain mb-2 ${(isLevelLocked || isEvolutionLocked) ? 'grayscale opacity-50' : ''}">`
+                : `<div class="w-14 h-14 ${(isLevelLocked || isEvolutionLocked) ? 'bg-gray-200 text-gray-400' : 'bg-blue-50 text-blue-600'} rounded-full flex items-center justify-center text-2xl mb-2 shadow-inner"><i class="${(isLevelLocked || isEvolutionLocked) ? 'fas fa-lock' : item.icon}"></i></div>`;
 
             let buttonHtml = "";
-            if (isLocked) {
-                buttonHtml = `<button class="mt-3 w-full py-2 bg-gray-200 text-gray-400 rounded-xl font-bold text-[10px] cursor-not-allowed" disabled>LVL ${item.level} DIPERLUKAN</button>`;
-            } else if (isOwned) {
+            
+            if (isOwned) {
+                // Murid sudah beli, tunjuk butang Guna
                 buttonHtml = `<button onclick="equipAvatar('${safeImg}', '${safeIcon}', '${item.name}')" class="mt-3 w-full py-2 bg-green-500 text-white rounded-xl font-bold text-[10px] hover:bg-green-600 shadow-md">GUNA AVATAR</button>`;
+            } else if (isEvolutionLocked) {
+                // 🆕 Butang dikunci sebab tak ikut turutan (perlu beli tahap sebelumnya)
+                buttonHtml = `<button class="mt-3 w-full py-2 bg-slate-300 text-slate-500 rounded-xl font-bold text-[10px] cursor-not-allowed" disabled>BELI LVL ${previousLevelRequired} DAHULU</button>`;
+            } else if (isLevelLocked) {
+                // Butang dikunci sebab level profil tak cukup
+                buttonHtml = `<button class="mt-3 w-full py-2 bg-gray-200 text-gray-400 rounded-xl font-bold text-[10px] cursor-not-allowed" disabled>LVL ${item.level} DIPERLUKAN</button>`;
             } else {
+                // Butang sedia dibeli!
                 buttonHtml = `<button onclick="buyAvatar('${key}', ${item.level}, ${item.price}, '${item.name}')" class="mt-3 w-full py-2 bg-indigo-600 text-white rounded-xl font-bold text-[10px] hover:bg-indigo-700 shadow-md">BELI GUARDIAN</button>`;
             }
 
+            // Status Badge di bahagian atas kad
+            let badgeText = category.theme;
+            let badgeClass = 'bg-indigo-600';
+            
+            if (isEvolutionLocked) { badgeText = 'PERLU EVOLUSI'; badgeClass = 'bg-slate-400'; }
+            else if (isLevelLocked) { badgeText = 'TERKUNCI'; badgeClass = 'bg-gray-400'; }
+
             html += `
             <div class="bg-white rounded-3xl p-4 shadow-sm border flex flex-col items-center text-center relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full text-center ${isLocked ? 'bg-gray-400' : 'bg-indigo-600'} text-white text-[8px] font-bold py-0.5 uppercase">
-                    ${isLocked ? 'TERKUNCI' : category.theme}
+                <div class="absolute top-0 left-0 w-full text-center ${badgeClass} text-white text-[8px] font-bold py-0.5 uppercase">
+                    ${badgeText}
                 </div>
                 <div class="mt-3"></div>
                 ${visual}
-                <h4 class="font-bold text-xs ${isLocked ? 'text-gray-400' : 'text-gray-800'} mb-1">${item.name}</h4>
+                <h4 class="font-bold text-xs ${(isLevelLocked || isEvolutionLocked) ? 'text-gray-400' : 'text-gray-800'} mb-1">${item.name}</h4>
                 
                 <div class="font-black ${isOwned ? 'text-green-500' : 'text-yellow-600'} text-xs mt-auto pt-2 border-t w-full text-center">
                     ${isOwned ? 'DIMILIKI' : `<i class="fas fa-coins"></i> ${item.price}`}
                 </div>
                 ${buttonHtml}
             </div>`;
-        });
+        }
     }
     container.innerHTML = html;
 }
@@ -824,7 +868,9 @@ function buyAvatar(category, level, price, name) {
             if (typeof saveCloudPlayerData === 'function') saveCloudPlayerData();
             if (typeof updateUI === 'function') updateUI();
             
+            // Refresh semula kedai untuk kemas kini butang
             loadAvatarShop();
+            
             Swal.fire('Berjaya!', 'Avatar sedia digunakan.', 'success');
         }
     });
