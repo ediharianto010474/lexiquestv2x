@@ -211,9 +211,6 @@ function updateBossRadarUI() {
 // ==========================================
 // 🛡️ 3. PINTU MASUK & POTONGAN KUOTA 
 // ==========================================
-// ==========================================
-// 🛡️ 3. PINTU MASUK & POTONGAN KUOTA 
-// ==========================================
 async function attemptJoinBoss() {
     console.log("🔎 [1] Butang ditekan. Semakan bermula...");
     const today = new Date();
@@ -221,6 +218,11 @@ async function attemptJoinBoss() {
 
     if (!currentBossData || currentBossData.currentHp <= 0) return Swal.fire('Tamat', 'Boss telah ditewaskan atau arena ditutup!', 'info');
     if (!localPlayerData) return Swal.fire('Ralat', 'Data pemain tidak dijumpai. Sila muat semula halaman.', 'error');
+    
+    // 🔥 SYARAT LEVEL 20 DI SINI 🔥
+    if ((localPlayerData.level || 1) < 20) {
+        return Swal.fire('Akses Ditolak', 'Anda perlu mencapai Level 20 untuk menyertai Boss Battle!', 'error');
+    }
     
     // --- SEMAKAN KUOTA 10 KALI ---
     // Pastikan rekod hari ini sepadan. Jika hari bertukar, reset kuota.
