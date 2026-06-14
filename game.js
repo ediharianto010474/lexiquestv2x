@@ -4023,7 +4023,6 @@ function checkChallengeEligibility() {
         showScreen('challenge-lobby-screen');
     } else {
         console.warn("Fungsi showScreen tiada, menggunakan logik lalai...");
-        // Logik penyorok skrin manual jika showScreen tiada
         document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
         const lobby = document.getElementById('challenge-lobby-screen');
         if (lobby) lobby.classList.remove('hidden');
@@ -4041,7 +4040,6 @@ window.loadAvailableOpponents = async function() {
     listContainer.innerHTML = "<li class='text-center italic text-indigo-400 py-4'>⏳ Sedang mengimbas arena...</li>";
 
     try {
-        // Semak jika db (Firestore) sedia ada
         if (typeof db === 'undefined') {
             listContainer.innerHTML = "<li class='text-center text-red-500 py-4'>Pangkalan data terputus. Sila muat semula.</li>";
             return;
@@ -4054,7 +4052,6 @@ window.loadAvailableOpponents = async function() {
 
         let html = "";
         
-        // Elakkan ReferenceError dengan studentInfo
         let myName = "";
         if (typeof studentInfo !== 'undefined' && studentInfo && studentInfo.name) {
             myName = studentInfo.name;
@@ -4067,21 +4064,19 @@ window.loadAvailableOpponents = async function() {
 
             // Jangan tunjukkan diri sendiri dalam senarai cabaran
             if (opponent.name !== myName) {
-                // --- BACA isOnline DARI SISTEM SEDIA ADA CIKGU ---
                 let isPlayerOnline = opponent.isOnline === true; 
                 let specificStatus = opponent.currentStatus || 'idle'; 
 
-                let dotColor = 'bg-gray-400'; // Lalai: Offline (Kelabu)
+                let dotColor = 'bg-gray-400'; // Offline (Kelabu)
                 let statusLabel = 'Offline';
                 let btnDisabled = 'disabled';
-                let btnClass = 'bg-gray-300 text-gray-500 cursor-not-allowed'; // Butang dikunci
+                let btnClass = 'bg-gray-300 text-gray-500 cursor-not-allowed';
 
-                // Jika pemain online, barulah kita semak apa dia sedang buat
                 if (isPlayerOnline) {
                     if (specificStatus === 'idle') {
                         dotColor = 'bg-green-500';
                         statusLabel = 'Ready (Idle)';
-                        btnDisabled = ''; // Buka kunci butang
+                        btnDisabled = ''; 
                         btnClass = 'bg-red-500 hover:bg-red-600 text-white shadow-sm';
                     } else if (specificStatus === 'in-game') {
                         dotColor = 'bg-yellow-400';
@@ -4124,14 +4119,9 @@ window.loadAvailableOpponents = async function() {
     }
 };
 
-// 3. Fungsi Sementara untuk Butang Cabar
-// (Nota: Boleh dibuang jika fungsi async di bawah sudah digunakan, tapi saya kekalkan agar kod tak berubah)
-function sendChallengeInvite_old(opponentName) {
-    alert(`System is generating the Lobby Room for you and ${opponentName}. (Logik Firebase akan dimasukkan di sini seterusnya!)`);
-}
 
 // ==========================================
-// A. PENGHANTAR: Fungsi Hantar Jemputan & Had Harian & SYARAT KELAYAKAN (ENGLISH ALERTS)
+// A. PENGHANTAR: Fungsi Hantar Jemputan & Semak Syarat Kelayakan
 // ==========================================
 window.sendChallengeInvite = async function(opponentName) {
     // ---------------------------------------------------------
@@ -4148,50 +4138,85 @@ window.sendChallengeInvite = async function(opponentName) {
     }
 
 // ---------------------------------------------------------
-    // 🛑 2. SARINGAN PENGUASAAN KATEGORI (EASY/MED/HARD) - KEMAS KINI
+    // 🛑 2. SARINGAN PENGUASAAN KATEGORI (VERSI MAHA LENGKAP - SEMUA SUBJEK)
     // ---------------------------------------------------------
-    // Dapatkan senarai kategori yang pernah dimainkan daripada medan 'games'
     let playedGames = [];
     if (localPlayerData.games) {
-        // Ambil semua nama kunci (key) dari dalam map 'games'
         playedGames = Object.keys(localPlayerData.games);
     } else if (localPlayerData.playedGamesList) {
-        playedGames = localPlayerData.playedGamesList; // Sandaran jika wujud
+        playedGames = localPlayerData.playedGamesList;
     }
     let hasEasy = false, hasMed = false, hasHard = false;
 
-    // Kumpulkan semua senarai kesukaran (Gunakan tatasusunan sementara)
     let allEasyCats = [];
     let allMedCats = [];
     let allHardCats = [];
 
-    // Fungsi kecil untuk menyedut data kesukaran jika objeknya wujud
     function extractDifficulty(diffObject) {
-        if (typeof diffObject !== 'undefined') {
+        if (typeof diffObject !== 'undefined' && diffObject) {
             if (diffObject.easy) allEasyCats.push(...diffObject.easy.map(c => c.toLowerCase()));
             if (diffObject.medium) allMedCats.push(...diffObject.medium.map(c => c.toLowerCase()));
             if (diffObject.hard) allHardCats.push(...diffObject.hard.map(c => c.toLowerCase()));
         }
     }
 
-    // Ekstrak dari subjek-subjek yang ada objek kesukaran (Tambah jika ada lagi)
+    // 📚 1. SEDUT DATA DARI OBJEK KESUKARAN GLOBAL (JIKA WUJUD)
     extractDifficulty(typeof englishCategoryDifficulty !== 'undefined' ? englishCategoryDifficulty : undefined);
     extractDifficulty(typeof mathCategoryDifficulty !== 'undefined' ? mathCategoryDifficulty : undefined);
     extractDifficulty(typeof scienceCategoryDifficulty !== 'undefined' ? scienceCategoryDifficulty : undefined);
     extractDifficulty(typeof bmCategoryDifficulty !== 'undefined' ? bmCategoryDifficulty : undefined);
+    extractDifficulty(typeof paiCategoryDifficulty !== 'undefined' ? paiCategoryDifficulty : undefined);
+    extractDifficulty(typeof baCategoryDifficulty !== 'undefined' ? baCategoryDifficulty : undefined);
+    extractDifficulty(typeof arabicCategoryDifficulty !== 'undefined' ? arabicCategoryDifficulty : undefined);
+    
+    // 🆕 Tambahan subjek baharu yang Cikgu perasan:
+    extractDifficulty(typeof sejarahCategoryDifficulty !== 'undefined' ? sejarahCategoryDifficulty : undefined);
+    extractDifficulty(typeof rbtCategoryDifficulty !== 'undefined' ? rbtCategoryDifficulty : undefined);
+    extractDifficulty(typeof psvCategoryDifficulty !== 'undefined' ? psvCategoryDifficulty : undefined);
+    extractDifficulty(typeof muzikCategoryDifficulty !== 'undefined' ? muzikCategoryDifficulty : undefined);
+    extractDifficulty(typeof moralCategoryDifficulty !== 'undefined' ? moralCategoryDifficulty : undefined);
+    extractDifficulty(typeof pkCategoryDifficulty !== 'undefined' ? pkCategoryDifficulty : undefined);
 
-    // Khas untuk Game Lama (Hardcode fallback jika objek tiada)
-    const fallbackEasy = ['missing', 'spelling', 'plural', 'gendernouns', 'occupation'];
-    const fallbackMed = ['puzzle', 'guessing', 'pasttense', 'superlatives', 'synonym', 'antonym'];
-    const fallbackHard = ['grammar', 'architect', 'idioms', 'listening', 'speaking'];
+// 🛡️ 2. PELAN SANDARAN KESELAMATAN (HARDCODE FALLBACK) YANG TELAH DIKEMAS KINI
+    const fallbackEasy = [
+        // English & Matematik & BM
+        'missing', 'spelling', 'plural', 'gendernouns', 'occupation', 'number_recognition', 'addition', 'subtraction', 'kata_nama',
+        // Agama Islam & Bahasa Arab
+        'mufrodat', 'arqam', 'alquran', 'jawi', 'aqidah', 
+        // Subjek Elektif & Teras Lain (PSV, RBT, Muzik, Sejarah, Moral, PJK)
+        'pengenalan_ilmu_sejarah', 'keselamatan_bengkel', 'unsur_seni', 'notasi_dan_balar', 'kepercayaan_kepada_tuhan', 'gimnastik_asas',
+        // Kata Kunci Am (Luar Jangkaan)
+        'tokoh', 'tarikh', 'alatan', 'bahan', 'warna', 'lukisan', 'not', 'irama', 'nilai', 'kebersihan', 'kesihatan'
+    ];
+    
+    const fallbackMed = [
+        // English & Matematik & BM
+        'puzzle', 'guessing', 'pasttense', 'superlatives', 'synonym', 'antonym', 'multiplication', 'division', 'time_and_money', 'simpulan_bahasa',
+        // Agama Islam & Bahasa Arab
+        'hiwar', 'ibadah', 'sirah', 
+        // Subjek Elektif & Teras Lain
+        'zaman_air_batu', 'kerajaan_melayu_awal', 'asas_reka_bentuk', 'prinsip_rekaan', 'apresiasi_muzik', 'baik_hati', 'bertanggungjawab', 'olahraga_asas',
+        // Kata Kunci Am (Luar Jangkaan)
+        'peristiwa', 'kerajaan', 'reka-bentuk', 'kraf', 'anyaman', 'alat-muzik', 'tempo', 'diri', 'keluarga', 'pemakanan'
+    ];
+    
+    const fallbackHard = [
+        // English & Matematik & BM
+        'grammar', 'architect', 'idioms', 'listening', 'speaking', 'fraction_and_decimal', 'area_and_perimeter', 'susunan_songsang', 'pemahaman',
+        // Agama Islam & Bahasa Arab
+        'qawaid', 'akhlak', 
+        // Subjek Elektif & Teras Lain
+        'tokoh_terbilang', 'reka_bentuk_pembungkusan', 'asas_pertanian', 'menggambar', 'kraf_tradisional', 'nyanyian', 'keadilan', 'toleransi', 'pertolongan_cemas', 'kesihatan_diri',
+        // Kata Kunci Am (Luar Jangkaan)
+        'kemerdekaan', 'nasionalisme', 'pengaturcaraan', 'elektronik', 'senibina', 'apresiasi', 'simfoni', 'masyarakat', 'penyakit', 'gejala'
+    ];
     
     allEasyCats.push(...fallbackEasy);
     allMedCats.push(...fallbackMed);
     allHardCats.push(...fallbackHard);
 
-    // Semak senarai permainan yang pemain telah main
+    // 🔍 3. SEMAK LOG DATA PERMAINAN MURID
     playedGames.forEach(gameKey => {
-        // TUKAR KE HURUF KECIL SEMULA (Wajib supaya padanan sentiasa tepat)
         const cat = String(gameKey).toLowerCase().trim(); 
         
         if (allEasyCats.includes(cat)) hasEasy = true;
@@ -4205,12 +4230,18 @@ window.sendChallengeInvite = async function(opponentName) {
             title: 'Syarat Belum Dipenuhi!',
             html: `Untuk memasuki Arena PvP, anda mesti bermain sekurang-kurangnya 1 permainan dari setiap tahap kesukaran (Mudah, Sederhana & Sukar) merentasi mana-mana subjek.<br><br>
                    Kemajuan Anda Sekarang:<br>
-                   ✅ Mudah: ${hasEasy ? '<span style="color:green;">Selesai</span>' : '<b style="color:red;">Belum Selesai</b>'}<br>
-                   ✅ Sederhana: ${hasMed ? '<span style="color:green;">Selesai</span>' : '<b style="color:red;">Belum Selesai</b>'}<br>
-                   ✅ Sukar: ${hasHard ? '<span style="color:green;">Selesai</span>' : '<b style="color:red;">Belum Selesai</b>'}`
+                   ✅ Mudah: ${hasEasy ? '<span style="color:green; font-weight:bold;">Selesai</span>' : '<b style="color:red;">Belum Selesai</b>'}<br>
+                   ✅ Sederhana: ${hasMed ? '<span style="color:green; font-weight:bold;">Selesai</span>' : '<b style="color:red;">Belum Selesai</b>'}<br>
+                   ✅ Sukar: ${hasHard ? '<span style="color:green; font-weight:bold;">Selesai</span>' : '<b style="color:red;">Belum Selesai</b>'}`
         });
-        return; // Halang terus
+        return;
     }
+
+    // --- LOGIK PENGHANTARAN JEMPUTAN REALTIME FIREBASE AKAN BERSAMBUNG DI BAWAH SINI ---
+    console.log(`🚀 Kelayakan lulus! Menghantar jemputan PvP kepada ${opponentName}...`);
+    if (typeof sendChallengeInvite_Realtime === 'function') {
+        sendChallengeInvite_Realtime(opponentName);
+}
 
     // ---------------------------------------------------------
     // 🛑 3. SEMAK HAD HARIAN (Maksimum 5 kali sehari)
@@ -4226,18 +4257,20 @@ window.sendChallengeInvite = async function(opponentName) {
                 Swal.fire('Had Harian Dicapai 🛑', 'Anda telah mencapai had maksimum 5 perlawanan PvP hari ini. Sila kembali esok!', 'warning');
                 return;
             }
-        }
+        };
 
-        // ========================================================
+// ========================================================
         // 🆕 4. UI BARU: PILIH SUBJEK DAHULU KEMUDIAN KATEGORI
         // ========================================================
-const allSubjectsData = {
+        const allSubjectsData = {
             "Bahasa Inggeris": typeof gameData !== 'undefined' ? gameData : {},
             "Bahasa Melayu": typeof malayLanguageData !== 'undefined' ? malayLanguageData : {},
-            
-            // 👇 TUKAR EJAAN DI DUA BARIS INI MENGIKUT FAIL CIKGU
             "Matematik": typeof mathData !== 'undefined' ? mathData : (typeof mathematicsData !== 'undefined' ? mathematicsData : {}),
             "Sains": typeof scienceData !== 'undefined' ? scienceData : {},
+            
+            // 🕌 🇸🇦 TAMBAHAN PAI & BAHASA ARAB DI SINI
+            "Pendidikan Agama Islam": typeof paiQuestions !== 'undefined' ? paiQuestions : (typeof paiData !== 'undefined' ? paiData : {}),
+            "Bahasa Arab": typeof baQuestions !== 'undefined' ? baQuestions : (typeof baData !== 'undefined' ? baData : {}),
             
             "Pendidikan Jasmani & Kesihatan": typeof pjkData !== 'undefined' ? pjkData : {},
             "Pendidikan Muzik": typeof pendidikanMuzikData !== 'undefined' ? pendidikanMuzikData : {},
