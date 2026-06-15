@@ -224,12 +224,44 @@ const HAD_MASA_GAME = {
 };
 
 // ==========================================
-// DYNAMIC LIMITED TIME EVENT CALENDAR
+// DYNAMIC LIMITED TIME EVENT CALENDAR (2026)
 // ==========================================
 const EVENT_CALENDAR = [
-    { name: "LexiQuest V2 Grand Launch! (2x Coins)", startDate: "2026-01-10T00:00:00", endDate: "2026-01-31T23:59:59", multiplier: 2 },
-    { name: "Pi Day Math Special (3x Coins)", startDate: "2026-03-14T00:00:00", endDate: "2026-03-14T23:59:59", multiplier: 3 },
-    { name: "Merdeka Celebration (2x Coins)", startDate: "2026-08-30T00:00:00", endDate: "2026-08-31T23:59:59", multiplier: 2 }
+    // JANUARI (XP Boost - 5 Hari Sahaja)
+    { name: "Misi Kembali ke Sekolah", startDate: "2026-01-05T00:00:00", endDate: "2026-01-09T23:59:59", rewardType: "xp_buff", rewardValue: 2 },
+    
+    // FEBRUARI (Kosmetik: Title - 10 Hari Terkumpul)
+    { name: "Pencarian Perintis Lexi", startDate: "2026-02-01T00:00:00", endDate: "2026-02-28T23:59:59", rewardType: "custom_title", rewardValue: "Perintis Ilmu", requiredDays: 10, requiredAction: "login_and_play" },
+    
+    // MAC (Coins Boost - 3 Hari Sahaja)
+    { name: "Bulan Kebangkitan Minda", startDate: "2026-03-12T00:00:00", endDate: "2026-03-14T23:59:59", rewardType: "coins_buff", rewardValue: 2 },
+    
+    // APRIL (Kosmetik: Avatar - 20 Hari Terkumpul)
+    { name: "Kembara Syawal", startDate: "2026-04-01T00:00:00", endDate: "2026-04-30T23:59:59", rewardType: "custom_avatar", rewardValue: "satria_syawal.webp", requiredDays: 20, requiredAction: "login_and_play" },
+    
+    // MEI (Kosmetik: Border - Ditetapkan kepada 15 Hari Terkumpul)
+    { name: "Bulan Jasamu Dikenang", startDate: "2026-05-01T00:00:00", endDate: "2026-05-31T23:59:59", rewardType: "custom_border", rewardValue: "bingkai_murabbi.webp", requiredDays: 15, requiredAction: "login_and_play" },
+    
+    // JUN (Gameplay: No Penalty - Khas untuk Boss Challenge sahaja)
+    { name: "Pecutan Pertengahan Tahun", startDate: "2026-06-15T00:00:00", endDate: "2026-06-30T23:59:59", rewardType: "no_penalty", rewardValue: true, targetMode: "boss_challenge" }, 
+    
+    // JULAI (Kosmetik: Badge - 15 Hari Terkumpul)
+    { name: "Karnival Jaguh Kecergasan", startDate: "2026-07-01T00:00:00", endDate: "2026-07-31T23:59:59", rewardType: "event_badge", rewardValue: "badge_olahraga.webp", requiredDays: 15, requiredAction: "login_and_play" },
+    
+    // OGOS (Kosmetik: Title - 10 Hari Terkumpul)
+    { name: "Misi Pahlawan Merdeka", startDate: "2026-08-01T00:00:00", endDate: "2026-08-31T23:59:59", rewardType: "custom_title", rewardValue: "Wira Merdeka", requiredDays: 10, requiredAction: "login_and_play" },
+    
+    // SEPTEMBER (Shop Discount - 5 Hari Sahaja)
+    { name: "Karnival Kedai Malaysia", startDate: "2026-09-12T00:00:00", endDate: "2026-09-16T23:59:59", rewardType: "shop_discount", rewardValue: 0.5 }, 
+    
+    // OKTOBER (Kosmetik: Avatar - 20 Hari Terkumpul)
+    { name: "Minggu Inovasi Masa Depan", startDate: "2026-10-01T00:00:00", endDate: "2026-10-31T23:59:59", rewardType: "custom_avatar", rewardValue: "arkitek_siber.webp", requiredDays: 20, requiredAction: "login_and_play" },
+    
+    // NOVEMBER (Coins Boost Gila-Gila - 3 Hari Sahaja)
+    { name: "Pecutan Masteri Akhir", startDate: "2026-11-20T00:00:00", endDate: "2026-11-22T23:59:59", rewardType: "coins_buff", rewardValue: 3 }, 
+    
+    // DISEMBER (Kosmetik: Border - Ditetapkan kepada 15 Hari Terkumpul)
+    { name: "Penutup Tirai LexiQuest", startDate: "2026-12-01T00:00:00", endDate: "2026-12-31T23:59:59", rewardType: "custom_border", rewardValue: "bingkai_legenda_2026.webp", requiredDays: 15, requiredAction: "login_and_play" }
 ];
 
 function getCurrentEvent() {
