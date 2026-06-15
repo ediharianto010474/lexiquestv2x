@@ -71,6 +71,13 @@ function triggerGameHooks() {
         Trackers.rekodLogin();
     }
 
+    // ==========================================
+    // 🔥 TAMBAHAN BARU: LANCARKAN ACARA TERHAD (LTE)
+    // ==========================================
+    if (typeof initLTE === 'function') {
+        initLTE();
+    }
+
     if (typeof applyTitleStyle === "function") applyTitleStyle(localPlayerData.activeTitle);
     if (typeof updatePlayerLevelUI === 'function') updatePlayerLevelUI();
     if (typeof updateCategoryProgress === "function") updateCategoryProgress();
