@@ -3265,11 +3265,12 @@ function updateCategoryProgress() {
 }
 
 // ==========================================
-// 3. LEADERBOARD (VERSI 10 SUBJEK & SCROLLABLE TABS)
+// 3. LEADERBOARD (VERSI 12 SUBJEK, SCROLLABLE TABS & DEV GOD-MODE)
 // ==========================================
 
 window.leaderboardDataTemp = []; 
-window.lastLeaderboardFetch = 0; // Pembolehubah baru untuk menjejak masa
+window.lastLeaderboardFetch = 0; 
+window.currentDevYearView = '6'; // Default paparan tahun untuk akaun DEV
 
 async function loadLeaderboard() {
     document.getElementById('menu-screen').classList.add('hidden');
@@ -3285,8 +3286,6 @@ async function loadLeaderboard() {
     if (lbSchoolName) lbSchoolName.innerText = `School: ${mySchool || 'Global'}`;
 
     // 🛡️ GATEKEEPER CACHE (PENTING!) 🛡️
-    // Jika data pernah ditarik kurang daripada 3 minit yang lepas (180,000 milisaat)
-    // dan tatasusunan (array) tidak kosong, KITA GUNA DATA LAMA!
     const currentTime = Date.now();
     const cacheValidTime = 3 * 60 * 1000; // 3 minit
     
@@ -3320,15 +3319,12 @@ async function loadLeaderboard() {
         window.leaderboardDataTemp = [];
         snapshot.forEach(doc => {
             const data = doc.data();
-            // Hanya tarik jika pemain bukan ADMIN dan pernah bermain (totalScore > 0)
             if (data.class !== "ADMIN" && data.totalScore && data.totalScore > 0) { 
                 window.leaderboardDataTemp.push(data);
             }
         });
 
-        // Kemaskini masa terakhir kita tarik data dari Firebase
         window.lastLeaderboardFetch = currentTime;
-
         renderLeaderboardData('all');
 
     } catch (error) {
@@ -3341,64 +3337,112 @@ async function loadLeaderboard() {
     }
 }
 
+// 🌟 FUNGSI PENUKAR TAHUN KHAS UNTUK USER DEV 🌟
+function changeDevYearView(year, currentTab) {
+    window.currentDevYearView = year;
+    renderLeaderboardData(currentTab);
+}
+
+// 🌟 FUNGSI UTAMA PAPARAN LEADERBOARD 🌟
 function renderLeaderboardData(filterTab) {
     const listContainer = document.getElementById('leaderboard-list');
+    const controlsContainer = document.getElementById('leaderboard-controls');
     if (!listContainer) return;
 
-    let players = [...window.leaderboardDataTemp];
+    // Ambil data pemain semasa log masuk
     const infoPemain = (typeof studentInfo !== 'undefined') ? studentInfo : (typeof localPlayerData !== 'undefined' ? localPlayerData : null);
-    const currentPlayerName = infoPemain ? String(infoPemain.name).toUpperCase() : "";
+    const currentPlayerName = infoPemain ? String(infoPemain.name).toUpperCase().trim() : "";
+    const currentUserClass = infoPemain ? String(infoPemain.class).toUpperCase().trim() : "";
+    
+    const isDevUser = currentUserClass === "DEV";
 
-    // 🌟 KONFIGURASI TEMA BAGI SETIAP SUBJEK 🌟
-    const subjectConfig = {
-        'all':     { label: 'Keseluruhan', icon: '🏆', colorBtn: 'bg-indigo-600', colorText: 'text-indigo-600', field: 'totalScore' },
-        'bm':      { label: 'BM',          icon: '📝', colorBtn: 'bg-red-500',    colorText: 'text-red-600',    field: 'score_bm' },
-        'english': { label: 'English',     icon: '📘', colorBtn: 'bg-blue-500',   colorText: 'text-blue-600',   field: 'score_english' },
-        'math':    { label: 'Matematik',   icon: '📐', colorBtn: 'bg-green-500',  colorText: 'text-green-600',  field: 'score_matematik' },
-        'sains':   { label: 'Sains',       icon: '🔬', colorBtn: 'bg-teal-500',   colorText: 'text-teal-600',   field: 'score_sains' },
-        'sejarah': { label: 'Sejarah',     icon: '⏳', colorBtn: 'bg-amber-600',  colorText: 'text-amber-700',  field: 'score_sejarah' },
-        'pjk':     { label: 'PJK',         icon: '🏃', colorBtn: 'bg-rose-500',   colorText: 'text-rose-600',   field: 'score_pjk' },
-        'muzik':   { label: 'Muzik',       icon: '🎵', colorBtn: 'bg-purple-500', colorText: 'text-purple-600', field: 'score_muzik' },
-        'moral':   { label: 'Moral',       icon: '🤝', colorBtn: 'bg-orange-500', colorText: 'text-orange-600', field: 'score_moral' },
-        'psv':     { label: 'Seni (PSV)',  icon: '🎨', colorBtn: 'bg-pink-500',   colorText: 'text-pink-600',   field: 'score_psv' },
-        'rbt':     { label: 'RBT',         icon: '⚙️',  colorBtn: 'bg-cyan-600',   colorText: 'text-cyan-700',   field: 'score_rbt' }
-    };
+    // 🛡️ Logik Kecemasan: Jika DEV masuk dan tahun belum dipilih, tetapkan ke Tahun 4 secara default
+    if (isDevUser && !window.currentDevYearView) {
+        window.currentDevYearView = "4";
+    }
 
-    // Proses Bacaan Nilai Markah
-    players.forEach(p => {
-        const config = subjectConfig[filterTab];
-        p.sortScore = parseInt(p[config.field]) || 0;
+    // Tentukan tahun sasaran yang mahu dilihat
+    const targetYear = isDevUser ? window.currentDevYearView : currentUserClass.charAt(0);
+
+    // 🔥 TAPIS DATA: Buang semua akaun DEV dan ambil tahun yang betul sahaja
+    let players = window.leaderboardDataTemp.filter(p => {
+        const pClass = String(p.class || "").toUpperCase().trim();
+        
+        // ❌ JIKA KELAS ADALAH "DEV", JANGAN MASUKKAN DALAM LEADERBOARD Langsung!
+        if (pClass === "DEV") return false; 
+        
+        // Hanya ambil murid yang kelasnya bermula dengan angka tahun sasaran (cth: "4")
+        return pClass.startsWith(targetYear); 
     });
 
+    // 🎨 KONFIGURASI 12 SUBJEK
+    const subjectConfig = {
+        'all':     { label: 'Keseluruhan', icon: '🏆', colorBtn: 'bg-indigo-600',  colorText: 'text-indigo-600',  field: 'totalScore' },
+        'bm':      { label: 'BM',          icon: '📝', colorBtn: 'bg-red-500',     colorText: 'text-red-600',     field: 'score_bm' },
+        'english': { label: 'English',     icon: '📘', colorBtn: 'bg-blue-500',    colorText: 'text-blue-600',    field: 'score_english' },
+        'math':    { label: 'Matematik',   icon: '📐', colorBtn: 'bg-green-500',   colorText: 'text-green-600',   field: 'score_matematik' },
+        'sains':   { label: 'Sains',       icon: '🔬', colorBtn: 'bg-teal-500',    colorText: 'text-teal-600',    field: 'score_sains' },
+        'sejarah': { label: 'Sejarah',     icon: '⏳', colorBtn: 'bg-amber-600',   colorText: 'text-amber-700',   field: 'score_sejarah' },
+        'pjk':     { label: 'PJK',         icon: '🏃', colorBtn: 'bg-rose-500',    colorText: 'text-rose-600',    field: 'score_pjk' },
+        'muzik':   { label: 'Muzik',       icon: '🎵', colorBtn: 'bg-purple-500',  colorText: 'text-purple-600',  field: 'score_muzik' },
+        'moral':   { label: 'Moral',       icon: '🤝', colorBtn: 'bg-orange-500',  colorText: 'text-orange-600',  field: 'score_moral' },
+        'psv':     { label: 'Seni (PSV)',  icon: '🎨', colorBtn: 'bg-pink-500',    colorText: 'text-pink-600',    field: 'score_psv' },
+        'rbt':     { label: 'RBT',         icon: '⚙️',  colorBtn: 'bg-cyan-600',    colorText: 'text-cyan-700',    field: 'score_rbt' },
+        'pai':     { label: 'PAI',         icon: '🕋', colorBtn: 'bg-emerald-600', colorText: 'text-emerald-700', field: 'score_pai' },
+        'ba':      { label: 'B.Arab',      icon: '🔤', colorBtn: 'bg-lime-600',    colorText: 'text-lime-700',    field: 'score_ba' }
+    };
+
+    // Ekstrak markah ikut subjek terpilih & susun kedudukan (Sorting)
+    players.forEach(p => {
+        const config = subjectConfig[filterTab] || subjectConfig['all'];
+        p.sortScore = parseInt(p[config.field]) || 0;
+    });
     players.sort((a, b) => b.sortScore - a.sortScore);
 
-    // 🌟 REKA BENTUK MENU TAB BOLEH DI-SCROLL 🌟
-    let tabsHtml = `<div class="flex overflow-x-auto pb-4 mb-4 space-x-2 scrollbar-hide snap-x">`;
-    
+    // 👑 REKAAN DASHBOARD UNTUK GURU / DEV USER
+    let devControlsHtml = '';
+    if (isDevUser) {
+        devControlsHtml = `
+        <div class="mb-3 p-3 bg-slate-950 rounded-2xl border-2 border-amber-500 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div class="text-amber-400 font-black text-xs uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fas fa-user-shield text-sm"></i> DEV MODE (VIEWING YEAR ${targetYear})
+            </div>
+            <div class="flex gap-1">
+                <button onclick="changeDevYearView('4', '${filterTab}')" class="px-3 py-1.5 rounded-xl font-black text-xs transition-all ${targetYear === '4' ? 'bg-amber-500 text-slate-900 shadow-md scale-105' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}">Tahun 4</button>
+                <button onclick="changeDevYearView('5', '${filterTab}')" class="px-3 py-1.5 rounded-xl font-black text-xs transition-all ${targetYear === '5' ? 'bg-amber-500 text-slate-900 shadow-md scale-105' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}">Tahun 5</button>
+                <button onclick="changeDevYearView('6', '${filterTab}')" class="px-3 py-1.5 rounded-xl font-black text-xs transition-all ${targetYear === '6' ? 'bg-amber-500 text-slate-900 shadow-md scale-105' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}">Tahun 6</button>
+            </div>
+        </div>`;
+    }
+
+    // 📱 REKAAN MENU BUTTON SUBJEK (SCROLLABLE)
+    let tabsHtml = `<div class="flex overflow-x-auto pb-2 mb-2 space-x-2 scrollbar-none">`;
     Object.keys(subjectConfig).forEach(key => {
         const conf = subjectConfig[key];
         const isActive = filterTab === key;
-        const btnClass = isActive 
-            ? `${conf.colorBtn} text-white shadow-lg scale-105` 
-            : `bg-gray-100 text-gray-500 hover:bg-gray-200`;
+        const btnClass = isActive ? `${conf.colorBtn} text-white shadow-md scale-105` : `bg-gray-100 text-gray-500 hover:bg-gray-200`;
             
         tabsHtml += `
-            <button onclick="renderLeaderboardData('${key}')" 
-                    class="snap-start shrink-0 px-4 py-2 rounded-xl font-bold text-sm transition-all ${btnClass}">
+            <button onclick="renderLeaderboardData('${key}')" class="shrink-0 px-4 py-2 rounded-xl font-bold text-xs transition-all ${btnClass}">
                 ${conf.icon} ${conf.label}
             </button>`;
     });
     tabsHtml += `</div>`;
 
-    let htmlContent = tabsHtml;
+    // Masukkan bahagian penapis ke HTML container atas
+    if (controlsContainer) {
+        controlsContainer.innerHTML = devControlsHtml + tabsHtml;
+    }
+
+// 📜 REKAAN SENARAI MURID
+    let htmlContent = ''; 
     let index = 0;
     
     players.slice(0, 50).forEach(student => {
-        if (student.sortScore <= 0) return; 
+        if (student.sortScore <= 0) return; // Langkau jika tiada markah
 
         index++;
-        
-        const safeName = student.name ? String(student.name).toUpperCase() : "GUEST";
+        const safeName = student.name ? String(student.name).toUpperCase() : "EXPLORER";
         const safeCls = student.class || "-";
         const studentLevel = student.level || 1; 
         
@@ -3409,72 +3453,48 @@ function renderLeaderboardData(filterTab) {
 
         const isMe = (currentPlayerName !== "" && safeName === currentPlayerName);
 
-        if (isMe && filterTab === 'all' && window.Trackers && typeof window.Trackers.rekodKedudukanLeaderboard === 'function') {
-            window.Trackers.rekodKedudukanLeaderboard(index);
-        }
-
-        let visualContent = `<span class="text-xl md:text-3xl text-gray-400">👤</span>`;
+        let visualContent = `<span class="text-xl">👤</span>`;
         let avatarData = student.activeAvatar || student.avatar;
         if (avatarData && typeof avatarData === 'string') {
             if (avatarData.startsWith('img|')) {
-                visualContent = `<img src="${avatarData.replace('img|', '').trim()}" class="w-[85%] h-[85%] object-contain drop-shadow-md">`;
+                // Tambah drop-shadow supaya imej lebih pop-up
+                visualContent = `<img src="${avatarData.replace('img|', '').trim()}" class="w-[85%] h-[85%] object-contain drop-shadow-sm">`;
             } else if (avatarData.startsWith('icon|')) {
-                visualContent = `<i class="${avatarData.replace('icon|', '').trim()} text-2xl text-indigo-500"></i>`;
-            } else {
-                visualContent = `<span class="text-xl md:text-3xl">${avatarData}</span>`;
+                visualContent = `<i class="${avatarData.replace('icon|', '').trim()} text-xl text-indigo-500"></i>`;
             }
         }
 
+        // 🌟 KEMASKINI: Tambah z-10 pada LVL dan letak posisi yang lebih cantik
         const avatarHtml = `
-            <div class="relative flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-b from-white to-indigo-50 rounded-xl border-2 ${isMe ? 'border-yellow-400' : 'border-indigo-100'} shadow-sm shrink-0">
+            <div class="relative flex items-center justify-center w-12 h-12 bg-gradient-to-b from-white to-indigo-50 rounded-xl border shrink-0">
                 ${visualContent}
-                <div class="absolute -bottom-2 -right-2 bg-gradient-to-r from-green-500 to-green-600 text-white text-[9px] md:text-[10px] font-black px-1.5 py-0.5 rounded-md border-2 border-white shadow-sm z-10">LVL ${studentLevel}</div>
+                <div class="absolute -bottom-2 -right-1.5 bg-green-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow-sm z-10">LVL ${studentLevel}</div>
             </div>`;
 
-        const titleName = String(student.activeTitle || "Novice").toUpperCase();
-        let titleHTML = `<span class="bg-slate-100 text-slate-600 border border-slate-200 text-[9px] md:text-[10px] px-2 py-0.5 rounded-full font-bold">${titleName}</span>`;
+        const currentConfig = subjectConfig[filterTab] || subjectConfig['all'];
+        let rowTheme = isMe ? 'bg-yellow-50 border-yellow-300' : 'bg-white border-gray-100 hover:border-indigo-100';
 
-        // Lencana Dinamik (Hanya tunjuk markah subjek yang sedang dilihat)
-        const currentConfig = subjectConfig[filterTab];
-        let subjectBadgesHtml = `
-            <span class="inline-flex items-center gap-1 bg-white border border-gray-200 ${currentConfig.colorText} text-[10px] md:text-xs px-2 py-1 rounded-lg font-bold mr-1 mt-1 shadow-sm">
-                ${currentConfig.icon} ${currentConfig.label}: ${student.sortScore.toLocaleString()}
-            </span>
-        `;
-
-        let rowTheme = isMe ? 'bg-yellow-50 border-yellow-200 shadow-md scale-[1.02]' : 'bg-white border-indigo-50 shadow-sm hover:border-indigo-200';
-        let scoreLabel = filterTab === 'all' ? 'XP' : currentConfig.label;
-        let scoreColor = currentConfig.colorBtn;
-
+        // 🌟 KEMASKINI: Ganti 'overflow-hidden' dengan 'min-w-0 flex-1'
         htmlContent += `
-            <div class="flex items-center justify-between p-3 md:p-4 rounded-2xl border-2 transition-all duration-200 mb-3 ${rowTheme}">
-                <div class="flex items-center gap-3 md:gap-4 overflow-hidden">
-                    <div class="font-black ${isMe ? 'text-yellow-600' : 'text-indigo-300'} text-lg md:text-2xl w-6 md:w-8 text-center shrink-0">${rankIcon}</div>
+            <div class="flex items-center justify-between p-3 rounded-2xl border-2 mb-2 ${rowTheme}">
+                <div class="flex items-center gap-3 min-w-0 flex-1">
+                    <div class="font-black text-indigo-400 text-lg w-6 text-center shrink-0">${rankIcon}</div>
                     ${avatarHtml}
-                    <div class="flex flex-col min-w-0">
-                        <div class="font-black uppercase text-slate-800 text-sm md:text-base leading-tight tracking-tight truncate">
-                            ${safeName} ${isMe ? '<span class="text-[10px] text-yellow-600 ml-1">(ANDA)</span>' : ''}
-                        </div>
-                        <div class="flex items-center gap-2 mt-1 mb-1">
-                            ${titleHTML}
-                            <span class="text-[10px] font-bold text-slate-400 uppercase truncate">• ${safeCls}</span>
-                        </div>
-                        <div class="flex flex-wrap">
-                            ${subjectBadgesHtml}
-                        </div>
+                    <div class="flex flex-col min-w-0 pr-2">
+                        <div class="font-bold uppercase text-slate-800 text-sm truncate">${safeName}</div>
+                        <div class="text-[10px] font-bold text-slate-400 uppercase truncate">${safeCls}</div>
                     </div>
                 </div>
-                <div class="text-right shrink-0 ml-2">
-                    <div class="${scoreColor} text-white px-3 py-1.5 rounded-xl font-black shadow-sm text-sm md:text-base whitespace-nowrap transition-colors flex flex-col items-end leading-none">
-                        <span>${student.sortScore.toLocaleString()}</span>
-                        <span class="text-[9px] font-normal opacity-90 mt-1 uppercase">${scoreLabel}</span>
+                <div class="text-right shrink-0">
+                    <div class="${currentConfig.colorBtn} text-white px-3 py-1 rounded-xl font-black text-sm">
+                        ${student.sortScore.toLocaleString()} <span class="text-[9px] font-normal opacity-80">${filterTab === 'all' ? 'XP' : 'PTS'}</span>
                     </div>
                 </div>
             </div>`;
     });
 
     if (index === 0) {
-        htmlContent += `<div class='p-8 text-center text-gray-400 font-bold'>Tiada pemain dalam kategori ini.</div>`;
+        htmlContent += `<div class='p-8 text-center text-gray-400 font-bold'>Tiada rekod data bagi Tahun ${targetYear} untuk kategori ini.</div>`;
     }
 
     listContainer.innerHTML = htmlContent;
@@ -5079,3 +5099,124 @@ document.addEventListener('input', function(e) {
         }
     }
 });
+
+
+// ==========================================
+// PENGURUSAN WIDGET EVENT (LTE)
+// ==========================================
+let lteTimerInterval = null;
+
+// Semak acara yang sedang berlangsung berdasarkan tarikh hari ini
+function getCurrentEvent() {
+    const now = new Date(); 
+    console.log("🔍 [LTE] Memulakan semakan event. Waktu sistem sekarang:", now.toString());
+        
+    if (typeof EVENT_CALENDAR === 'undefined') {
+        console.error("❌ [LTE] Ralat Kritikal: Variabel 'EVENT_CALENDAR' langsung tidak dijumpai dalam skop fail ini!");
+        return null;
+    }
+
+    const matchedEvent = EVENT_CALENDAR.find(event => {
+        const start = new Date(event.startDate);
+        const end = new Date(event.endDate);
+        const isHappening = now >= start && now <= end; 
+        
+        // Log penjejak khusus untuk memastikan tarikh Jun 2026 dikesan betul
+        if (event.name.includes("Pertengahan") || isHappening) {
+            console.log(`📅 [LTE] Menilai: "${event.name}"\n` +
+                        `   👉 Tarikh Mula  : ${event.startDate} (Parsed: ${start})\n` +
+                        `   👉 Tarikh Tamat : ${event.endDate} (Parsed: ${end})\n` +
+                        `   👉 Status Semasa: Lepas Tarikh Mula? ${now >= start} | Sebelum Tarikh Tamat? ${now <= end} | Keputusan -> ${isHappening}`);
+        }
+        return isHappening;
+    });
+
+    console.log("🎯 [LTE] Hasil carian event semasa:", matchedEvent ? `Acara Aktif: "${matchedEvent.name}"` : "TIADA ACARA AKTIF UNTUK TARIKH HARI INI");
+    return matchedEvent;
+}
+
+// Fungsi utama kemas kini paparan widget LTE
+function updateLTEWidget() {
+    const activeEvent = getCurrentEvent();
+    const widgetDOM = document.getElementById('lte-active-widget');
+    const titleDOM = document.getElementById('lte-widget-title');
+    const timerDOM = document.getElementById('lte-widget-timer');
+
+    // Pengesan ralat elemen HTML jika ID tidak sepadan
+    if (!widgetDOM) {
+        console.error("❌ [LTE] Ralat UI: Elemen HTML dengan id 'lte-active-widget' TIDAK DIJUMPAI dalam dokumen!");
+        return;
+    }
+
+    // 1. Sembunyikan widget jika tiada acara aktif
+    if (!activeEvent) {
+        if (!widgetDOM.classList.contains('hidden')) {
+            console.log("🙈 [LTE] Tiada acara dikesan aktif. Menyembunyikan widget dari paparan murid.");
+            widgetDOM.classList.add('hidden');
+        }
+        return;
+    }
+
+    // 2. Paparkan widget jika ada acara aktif
+    if (widgetDOM.classList.contains('hidden')) {
+        console.log("👀 [LTE] Acara aktif dikesan! Membuka paparan widget (membuang kelas 'hidden').");
+        widgetDOM.classList.remove('hidden');
+    }
+
+    // 3. Format teks ganjaran berdasarkan rewardType
+    let rewardText = "";
+    switch(activeEvent.rewardType) {
+        case 'xp_buff': rewardText = `(${activeEvent.rewardValue}x XP)`; break;
+        case 'coins_buff': rewardText = `(${activeEvent.rewardValue}x Koin)`; break;
+        case 'no_penalty': rewardText = `(Zon Kebal Boss)`; break;
+        case 'shop_discount': rewardText = `(Diskaun Kedai ${(1 - activeEvent.rewardValue) * 100}%)`; break;
+        case 'custom_title': rewardText = `(Misi Gelaran)`; break;
+        case 'custom_avatar': rewardText = `(Misi Avatar)`; break;
+        case 'custom_border': rewardText = `(Misi Bingkai)`; break;
+        case 'event_badge': rewardText = `(Misi Lencana)`; break;
+        default: rewardText = `(Misi Khas)`;
+    }
+
+    if (titleDOM) {
+        titleDOM.innerText = `${activeEvent.name} ${rewardText}`;
+    }
+
+    // 4. Kira Baki Masa (Countdown Timer)
+    const now = new Date();
+    const endDate = new Date(activeEvent.endDate);
+    const timeDiff = endDate - now;
+
+    if (timeDiff <= 0) {
+        console.log("⌛ [LTE] Tempoh masa acara telah tamat secara rasmi.");
+        if (timerDOM) timerDOM.innerText = "Telah Tamat!";
+        clearInterval(lteTimerInterval);
+        setTimeout(initLTE, 2000); 
+        return;
+    }
+
+    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+    let timerText = "⏳ ";
+    if (days > 0) timerText += `${days}H `;
+    timerText += `${hours}J ${minutes}M ${seconds}S`;
+
+    if (timerDOM) {
+        timerDOM.innerText = timerText;
+    }
+}
+
+// Fungsi inisialisasi yang dipanggil semasa Dashboard dimuatkan
+function initLTE() {
+    console.log("🚀 [LTE] Fungsi initLTE() mula dicetuskan!");
+    
+    if (lteTimerInterval) {
+        clearInterval(lteTimerInterval);
+    }
+    
+    updateLTEWidget();
+    lteTimerInterval = setInterval(updateLTEWidget, 1000);
+    console.log("⏱️ [LTE] Pendaftaran pemasa 1 saat berjaya dibuat!");
+}
