@@ -81,6 +81,27 @@
 <div id="menu-screen" class="hidden animate-fade-in">
     
     <div class="flex flex-wrap md:flex-nowrap justify-end items-center bg-transparent p-2 mb-2 w-full gap-4 md:gap-5">
+        
+        <!-- ========================================== -->
+        <!-- WIDGET LTE BARU (Bersebelahan Avatar)      -->
+        <!-- ========================================== -->
+        <!-- Nota: Buang class 'hidden' pada div di bawah melalui JS apabila ada event aktif -->
+        <div id="lte-active-widget" class="hidden flex items-center bg-gradient-to-r from-purple-900/90 to-indigo-900/90 border border-yellow-400/50 rounded-xl px-3 py-1.5 shadow-[0_0_15px_rgba(147,51,234,0.5)] transform hover:scale-105 transition-all cursor-pointer backdrop-blur-sm">
+            <div class="mr-2 text-lg md:text-xl animate-pulse drop-shadow-[0_0_8px_rgba(250,204,21,0.8)]">
+                🔥
+            </div>
+            <div class="flex flex-col">
+                <span id="lte-widget-title" class="text-[9px] md:text-[10px] font-black text-yellow-300 uppercase tracking-widest drop-shadow-md leading-none mb-1">
+                    Pecutan Minda (2x XP)
+                </span>
+                <span id="lte-widget-timer" class="text-[8px] md:text-[9px] font-mono font-bold text-white bg-black/40 px-1.5 py-0.5 rounded-md inline-block w-max border border-white/10">
+                    ⏳ 3H 14J 20M
+                </span>
+            </div>
+        </div>
+        <!-- ========================================== -->
+
+        <!-- BLOK PROFIL ASAL -->
         <div class="flex items-center gap-3">
             <div id="dashboard-avatar-container" onclick="openProfile()" class="w-16 h-16 md:w-20 md:h-20 flex flex-shrink-0 items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-300 drop-shadow-[0_8px_8px_rgba(0,0,0,0.3)] text-4xl md:text-5xl"></div>       
             <div>
@@ -101,6 +122,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- BLOK COIN & LOGOUT ASAL -->
         <div class="flex flex-col items-end gap-2 flex-shrink-0">
             <div class="bg-yellow-400 text-yellow-900 px-3 py-1.5 rounded-xl font-bold shadow-[0_3px_0_0_#ca8a04] flex items-center gap-1.5 border border-yellow-200">
                 <span class="text-base md:text-lg">💰</span>
@@ -111,6 +134,7 @@
             </button>
         </div>
     </div>
+</div>
 
     <div id="dashboard-super-admin" class="grid grid-cols-2 md:grid-cols-4 gap-4 hidden">
         <button onclick="openAdminPanel()" class="glass p-6 rounded-3xl hover:bg-purple-50 transition-all group border-2 border-purple-200">
@@ -252,168 +276,191 @@
         </div>
     </div>
 
-</div> <div id="game-arena" class="hidden animate-fade-in glass rounded-3xl p-6 md:p-10 max-w-4xl mx-auto shadow-2xl relative">
-    <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 border-b-2 border-indigo-100 pb-4">
-        <button onclick="showScreen('menu-screen')" class="text-gray-600 hover:text-red-600 font-bold bg-white px-4 py-2 rounded-xl shadow-sm">
-            <i class="fas fa-arrow-left"></i> Run Away
-        </button>
-        <h2 id="game-title" class="text-2xl md:text-3xl font-black text-indigo-800 uppercase tracking-wider text-center">ARENA</h2>
-        <div class="bg-red-100 border-2 border-red-300 px-6 py-2 rounded-2xl shadow-inner flex items-center gap-2">
-            <i class="fas fa-hourglass-half text-red-500 animate-pulse"></i>
-            <span id="timer-text" class="text-xl font-black text-red-600">00:00</span>
+<!-- LAPISAN OVERLAY UTAMA (Memastikan Game Arena di tengah skrin) -->
+<div id="game-arena" class="hidden animate-fade-in fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+    <!-- KOTAK GAME ARENA SEBENAR -->
+    <div class="glass w-full rounded-3xl p-5 md:p-8 max-w-4xl shadow-2xl relative max-h-[95vh] flex flex-col">
+        <!-- Header Arena (Kekal di atas) -->
+        <div class="flex flex-col sm:flex-row justify-between items-center mb-5 gap-4 border-b-2 border-indigo-100 pb-4 flex-shrink-0">
+            <button onclick="showScreen('menu-screen')" class="text-gray-600 hover:text-red-600 font-bold bg-white px-4 py-2 rounded-xl shadow-sm transition-colors">
+                <i class="fas fa-arrow-left"></i> Run Away
+            </button>
+            <h2 id="game-title" class="text-2xl md:text-3xl font-black text-indigo-800 uppercase tracking-wider text-center">ARENA</h2>
+            <div class="bg-red-100 border-2 border-red-300 px-5 py-2 rounded-2xl shadow-inner flex items-center gap-2">
+                <i class="fas fa-hourglass-half text-red-500 animate-pulse"></i>
+                <span id="timer-text" class="text-xl font-black text-red-600">00:00</span>
+            </div>
         </div>
+        <!-- Ruangan Soalan (Boleh di-skrol jika soalan banyak) -->
+        <div id="question-container" class="space-y-4 mb-5 flex-1 overflow-y-auto pr-2 pb-2 min-h-[40vh] md:min-h-[50vh]"></div>
+        <!-- Butang Hantar (Kekal di bawah) -->
+        <button id="check-btn" onclick="endGame()" class="w-full bg-green-500 hover:bg-green-600 text-white font-black py-4 rounded-xl shadow-lg transition-transform hover:scale-[1.01] text-lg md:text-xl flex-shrink-0">
+            CHECK ANSWERS & SEE SCORE
+        </button>
+        <!-- Kotak Keputusan (Akan muncul selepas hantar) -->
+        <div id="final-score" class="hidden mt-6 bg-indigo-50 border-2 border-indigo-200 p-6 md:p-8 rounded-2xl text-center shadow-inner flex-shrink-0"></div>
+    </div> <!-- Penutup kotak game arena -->
+</div> <!-- Penutup lapisan overlay -->
+
+<div id="challenge-lobby-screen" class="hidden animate-fade-in fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+    <div class="glass w-full rounded-3xl p-5 md:p-6 max-w-4xl shadow-2xl relative max-h-[95vh] overflow-y-auto">
+        <div class="flex justify-between items-center mb-4 border-b pb-3 gap-4">
+            <div>
+                <h2 class="text-2xl md:text-3xl font-black text-red-600"><i class="fas fa-fire-alt mr-1 md:mr-2"></i> Challenge Arena</h2>
+                <p class="text-xs md:text-sm text-gray-600 font-bold mt-0.5">PVP (Level 15 and other requirements) / 3 vs 3 (Level 35 and other requirements)</p>
+            </div>
+            <button onclick="showScreen('menu-screen')" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3.5 py-1.5 md:px-4 md:py-2 rounded-xl font-bold text-sm md:text-base transition-colors flex-shrink-0">
+                <i class="fas fa-arrow-left mr-1 md:mr-2"></i> Back
+            </button>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 mb-5">
+            <div class="flex-1 bg-gradient-to-r from-amber-500 to-red-600 text-white py-3 px-4 rounded-xl font-black shadow-md border-b-4 border-red-800 text-center text-sm md:text-base flex items-center justify-center gap-2">
+                <i class="fas fa-user-shield"></i> 1 VS 1 SOLO (LV 15+)
+            </div>
+            <button type="button" onclick="prosesMasukLobi3v3()" class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-xl font-black shadow-md border-b-4 border-purple-800 transform transition hover:scale-105 active:scale-95 text-sm md:text-base flex items-center justify-center gap-2">
+                <i class="fas fa-users"></i> 3 VS 3 TEAM (LV 35+)
+            </button>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-inner min-h-[300px]">
+            <h3 class="font-bold text-gray-700 mb-4 border-b pb-2">List of Potential Challengers</h3>
+            <ul id="available-players-list" class="space-y-3">
+                <li class="text-center italic text-gray-400 py-4">⏳ Scanning for elite players...</li>
+            </ul>
+        </div>
+    </div> </div>
+
+<div id="pvp-arena" class="hidden animate-fade-in fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+
+    <div class="w-full max-w-4xl flex flex-col gap-4 max-h-[98vh] overflow-y-auto">
+        
+        <div class="bg-gradient-to-r from-red-600 via-purple-600 to-blue-600 rounded-3xl p-4 md:p-6 shadow-2xl text-white flex justify-between items-center border-4 border-yellow-400 relative overflow-hidden flex-shrink-0">
+            <div class="flex flex-col items-center z-10 w-1/3">
+                <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-3xl mb-2 backdrop-blur-sm border-2 border-white shadow-lg">🥷</div>
+                <div id="pvp-p1-name" class="font-black text-lg md:text-xl truncate w-full text-center drop-shadow-md">PLAYER 1</div>
+                <div id="pvp-p1-score" class="text-4xl md:text-5xl font-black text-yellow-300 drop-shadow-lg mt-1">0</div>
+            </div>
+            <div class="z-10 flex flex-col items-center w-1/3">
+                <div class="text-5xl md:text-6xl font-black italic text-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)] animate-bounce">VS</div>
+                <div id="pvp-category-title" class="text-xs md:text-sm font-bold bg-black/60 px-4 py-1 rounded-full mt-2 uppercase tracking-wider text-center">Category</div>
+            </div>
+            <div class="flex flex-col items-center z-10 w-1/3">
+                <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-3xl mb-2 backdrop-blur-sm border-2 border-white shadow-lg">🧙‍♂️</div>
+                <div id="pvp-p2-name" class="font-black text-lg md:text-xl truncate w-full text-center drop-shadow-md">PLAYER 2</div>
+                <div id="pvp-p2-score" class="text-4xl md:text-5xl font-black text-yellow-300 drop-shadow-lg mt-1">0</div>
+            </div>
+        </div>
+
+        <div class="glass rounded-3xl p-6 md:p-10 shadow-2xl relative border-t-4 border-white bg-white/90 flex flex-col flex-shrink-0">
+            <div class="text-center mb-6">
+                <h3 class="text-gray-500 font-bold uppercase tracking-widest text-sm mb-2">Current Question</h3>
+                <div id="pvp-question-display" class="text-3xl md:text-5xl font-black text-gray-800 drop-shadow-sm min-h-[80px] flex items-center justify-center" dir="auto">
+                    GET READY...
+                </div>
+            </div>
+            
+            <div id="pvp-input-container" class="max-w-md mx-auto hidden w-full">
+                <input type="text" id="pvp-answer-input" class="w-full text-center text-2xl p-4 rounded-2xl border-4 border-gray-200 focus:border-indigo-500 focus:ring-0 transition-colors uppercase font-bold shadow-inner text-gray-800" placeholder="TYPE ANSWER..." disabled autocomplete="off">
+            </div>
+            
+            <div id="pvp-options-container" class="hidden gap-4 max-w-3xl mx-auto mt-4 w-full">
+                <button id="pvp-btn-0" onclick="submitPvPObjektif(0)" class="w-full bg-blue-500 hover:bg-blue-600 text-white text-xl md:text-2xl p-4 rounded-2xl border-b-4 border-blue-700 shadow-md"></button>
+                <button id="pvp-btn-1" onclick="submitPvPObjektif(1)" class="w-full bg-green-500 hover:bg-green-600 text-white text-xl md:text-2xl p-4 rounded-2xl border-b-4 border-green-700 shadow-md"></button>
+                <button id="pvp-btn-2" onclick="submitPvPObjektif(2)" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white text-xl md:text-2xl p-4 rounded-2xl border-b-4 border-yellow-700 shadow-md"></button>
+                <button id="pvp-btn-3" onclick="submitPvPObjektif(3)" class="w-full bg-purple-500 hover:bg-purple-600 text-white text-xl md:text-2xl p-4 rounded-2xl border-b-4 border-purple-700 shadow-md"></button>
+            </div>
+            
+            <div class="mt-8 flex justify-between items-center text-sm font-bold text-gray-400">
+                <span class="bg-gray-100 px-3 py-1 rounded-lg">Target: <span id="pvp-q-count" class="text-gray-700">Highest Score</span></span>
+                <span class="bg-red-50 px-3 py-1 rounded-lg text-red-500 border border-red-100">Time: <span id="pvp-timer" class="text-xl">60</span>s</span>
+            </div>
+        </div>
+
+    </div> </div>
+
+<div id="leaderboard-screen" class="hidden animate-fade-in fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+    <div class="glass w-full rounded-3xl p-6 md:p-8 max-w-2xl shadow-2xl relative flex flex-col max-h-[90vh]">
+        
+        <div class="flex justify-between items-center mb-4 shrink-0">
+            <h2 class="text-2xl md:text-3xl font-bold text-indigo-800">Top Explorers 🏆</h2>
+            <button onclick="showScreen('menu-screen')" class="text-gray-500 hover:text-red-500 transition-colors">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>        
+        
+        <div id="lb-school-name" class="text-sm text-indigo-600 font-bold mb-3 italic shrink-0">School: -</div>
+        
+        <div id="leaderboard-controls" class="shrink-0 mb-2"></div>
+        
+        <div id="leaderboard-list" class="space-y-3 overflow-y-auto pr-2 flex-1"></div>
+        
     </div>
-    <div id="question-container" class="space-y-4 mb-8 max-h-[55vh] overflow-y-auto pr-2 pb-4"></div>
-    <button id="check-btn" onclick="endGame()" class="w-full bg-green-500 hover:bg-green-600 text-white font-black py-4 rounded-xl shadow-lg transition-transform hover:scale-[1.01] text-lg md:text-xl">
-        CHECK ANSWERS & SEE SCORE
-    </button>
-    <div id="final-score" class="hidden mt-6 bg-indigo-50 border-2 border-indigo-200 p-8 rounded-2xl text-center shadow-inner"></div>
 </div>
 
 
-<div id="challenge-lobby-screen" class="hidden animate-fade-in glass rounded-3xl p-5 md:p-6 max-w-4xl mx-auto shadow-2xl my-4">
-    <div class="flex justify-between items-center mb-4 border-b pb-3 gap-4">
-        <div>
-            <h2 class="text-2xl md:text-3xl font-black text-red-600"><i class="fas fa-fire-alt mr-1 md:mr-2"></i> Challenge Arena</h2>
-            <p class="text-xs md:text-sm text-gray-600 font-bold mt-0.5">PVP (Level 15 and other requirements) / 3 vs 3 (Level 35 and other requirements)</p>
+<div id="shop-screen" class="hidden animate-fade-in fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+    <div class="glass w-full rounded-3xl p-6 md:p-8 max-w-4xl shadow-2xl relative max-h-[95vh] overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl md:text-3xl font-bold text-indigo-800">🛒 Reward Shop</h2>
+            <button onclick="showScreen('menu-screen')" class="text-gray-500 hover:text-red-500 transition-colors">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
         </div>
-        <button onclick="showScreen('menu-screen')" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3.5 py-1.5 md:px-4 md:py-2 rounded-xl font-bold text-sm md:text-base transition-colors flex-shrink-0">
-            <i class="fas fa-arrow-left mr-1 md:mr-2"></i> Back
-        </button>
-    </div>
-
-    <div class="flex flex-col sm:flex-row gap-3 mb-5">
-        <div class="flex-1 bg-gradient-to-r from-amber-500 to-red-600 text-white py-3 px-4 rounded-xl font-black shadow-md border-b-4 border-red-800 text-center text-sm md:text-base flex items-center justify-center gap-2">
-            <i class="fas fa-user-shield"></i> 1 VS 1 SOLO (LV 15+)
+        <div class="flex gap-2 mb-6 border-b-2 border-indigo-100 pb-3 overflow-x-auto">
+            <button id="tab-btn-edu" onclick="switchShopTab('edu')" class="shop-tab-btn px-5 py-2 bg-indigo-600 text-white font-bold rounded-xl whitespace-nowrap shadow-sm transition-all">📚 Edu Shop</button>
+            <button id="tab-btn-gift" onclick="switchShopTab('gift')" class="shop-tab-btn px-5 py-2 bg-gray-200 text-gray-500 hover:bg-gray-300 font-bold rounded-xl whitespace-nowrap transition-all">🎁 Gift Shop</button>
+            <button id="tab-btn-avatar" onclick="switchShopTab('avatar')" class="shop-tab-btn px-5 py-2 bg-gray-200 text-gray-500 hover:bg-gray-300 font-bold rounded-xl whitespace-nowrap transition-all">👤 Avatar</button>
+            <button id="tab-btn-badge" onclick="switchShopTab('badge')" class="shop-tab-btn px-5 py-2 bg-gray-200 text-gray-500 hover:bg-gray-300 font-bold rounded-xl whitespace-nowrap transition-all">🏅 Badges</button>
         </div>
-        <button type="button" onclick="prosesMasukLobi3v3()" class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-xl font-black shadow-md border-b-4 border-purple-800 transform transition hover:scale-105 active:scale-95 text-sm md:text-base flex items-center justify-center gap-2">
-            <i class="fas fa-users"></i> 3 VS 3 TEAM (LV 35+)
-        </button>
-    </div>
 
-    <div class="bg-white p-4 rounded-2xl shadow-inner min-h-[300px]">
-        <h3 class="font-bold text-gray-700 mb-4 border-b pb-2">List of Potential Challengers</h3>
-        <ul id="available-players-list" class="space-y-3">
-            <li class="text-center italic text-gray-400 py-4">⏳ Scanning for elite players...</li>
-        </ul>
-    </div>
-</div>
-
-
-<div id="pvp-arena" class="hidden animate-fade-in max-w-5xl mx-auto p-4 md:p-8">
-    <div class="bg-gradient-to-r from-red-600 via-purple-600 to-blue-600 rounded-3xl p-4 md:p-6 shadow-2xl text-white flex justify-between items-center mb-6 border-4 border-yellow-400 relative overflow-hidden">
-        <div class="flex flex-col items-center z-10 w-1/3">
-            <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-3xl mb-2 backdrop-blur-sm border-2 border-white shadow-lg">🥷</div>
-            <div id="pvp-p1-name" class="font-black text-lg md:text-xl truncate w-full text-center drop-shadow-md">PLAYER 1</div>
-            <div id="pvp-p1-score" class="text-4xl md:text-5xl font-black text-yellow-300 drop-shadow-lg mt-1">0</div>
-        </div>
-        <div class="z-10 flex flex-col items-center w-1/3">
-            <div class="text-5xl md:text-6xl font-black italic text-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)] animate-bounce">VS</div>
-            <div id="pvp-category-title" class="text-xs md:text-sm font-bold bg-black/60 px-4 py-1 rounded-full mt-2 uppercase tracking-wider text-center">Category</div>
-        </div>
-        <div class="flex flex-col items-center z-10 w-1/3">
-            <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-3xl mb-2 backdrop-blur-sm border-2 border-white shadow-lg">🧙‍♂️</div>
-            <div id="pvp-p2-name" class="font-black text-lg md:text-xl truncate w-full text-center drop-shadow-md">PLAYER 2</div>
-            <div id="pvp-p2-score" class="text-4xl md:text-5xl font-black text-yellow-300 drop-shadow-lg mt-1">0</div>
-        </div>
-    </div>
-
-    <div class="glass rounded-3xl p-6 md:p-10 shadow-2xl relative border-t-4 border-white bg-white/90">
-        <div class="text-center mb-6">
-            <h3 class="text-gray-500 font-bold uppercase tracking-widest text-sm mb-2">Current Question</h3>
-            <div id="pvp-question-display" class="text-3xl md:text-5xl font-black text-gray-800 drop-shadow-sm min-h-[80px] flex items-center justify-center" dir="auto">
-                GET READY...
-            </div>
-        </div>
-        <div id="pvp-input-container" class="max-w-md mx-auto hidden">
-            <input type="text" id="pvp-answer-input" class="w-full text-center text-2xl p-4 rounded-2xl border-4 border-gray-200 focus:border-indigo-500 focus:ring-0 transition-colors uppercase font-bold shadow-inner text-gray-800" placeholder="TYPE ANSWER..." disabled autocomplete="off">
-        </div>
-        <div id="pvp-options-container" class="hidden gap-4 max-w-3xl mx-auto mt-4">
-            <button id="pvp-btn-0" onclick="submitPvPObjektif(0)" class="w-full bg-blue-500 hover:bg-blue-600 text-white text-xl md:text-2xl p-4 rounded-2xl border-b-4 border-blue-700 shadow-md"></button>
-            <button id="pvp-btn-1" onclick="submitPvPObjektif(1)" class="w-full bg-green-500 hover:bg-green-600 text-white text-xl md:text-2xl p-4 rounded-2xl border-b-4 border-green-700 shadow-md"></button>
-            <button id="pvp-btn-2" onclick="submitPvPObjektif(2)" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white text-xl md:text-2xl p-4 rounded-2xl border-b-4 border-yellow-700 shadow-md"></button>
-            <button id="pvp-btn-3" onclick="submitPvPObjektif(3)" class="w-full bg-purple-500 hover:bg-purple-600 text-white text-xl md:text-2xl p-4 rounded-2xl border-b-4 border-purple-700 shadow-md"></button>
-        </div>
-        <div class="mt-8 flex justify-between items-center text-sm font-bold text-gray-400">
-            <span class="bg-gray-100 px-3 py-1 rounded-lg">Target: <span id="pvp-q-count" class="text-gray-700">Highest Score</span></span>
-            <span class="bg-red-50 px-3 py-1 rounded-lg text-red-500 border border-red-100">Time: <span id="pvp-timer" class="text-xl">60</span>s</span>
-        </div>
-    </div>
-</div> <div id="leaderboard-screen" class="hidden animate-fade-in glass rounded-3xl p-8 max-w-2xl mx-auto shadow-2xl">
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-3xl font-bold text-indigo-800">Top Explorers 🏆</h2>
-        <button onclick="showScreen('menu-screen')" class="text-gray-500 hover:text-gray-800"><i class="fas fa-times text-2xl"></i></button>
-    </div>
-    <p id="lb-school-name" class="text-sm text-indigo-600 font-bold mb-4 italic">School: -</p>
-    <div id="leaderboard-list" class="space-y-3 max-h-[60vh] overflow-y-auto pr-2"></div>
-</div>
-
-
-<div id="shop-screen" class="hidden animate-fade-in glass rounded-3xl p-8 max-w-4xl mx-auto shadow-2xl">
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-3xl font-bold text-indigo-800">🛒 Reward Shop</h2>
-        <button onclick="showScreen('menu-screen')" class="text-gray-500 hover:text-gray-800 transition-colors">
-            <i class="fas fa-times text-2xl"></i>
-        </button>
-    </div>
-
-    <div class="flex gap-2 mb-6 border-b-2 border-indigo-100 pb-3 overflow-x-auto">
-        <button id="tab-btn-edu" onclick="switchShopTab('edu')" class="shop-tab-btn px-5 py-2 bg-indigo-600 text-white font-bold rounded-xl whitespace-nowrap shadow-sm transition-all">📚 Edu Shop</button>
-        <button id="tab-btn-gift" onclick="switchShopTab('gift')" class="shop-tab-btn px-5 py-2 bg-gray-200 text-gray-500 hover:bg-gray-300 font-bold rounded-xl whitespace-nowrap transition-all">🎁 Gift Shop</button>
-        <button id="tab-btn-avatar" onclick="switchShopTab('avatar')" class="shop-tab-btn px-5 py-2 bg-gray-200 text-gray-500 hover:bg-gray-300 font-bold rounded-xl whitespace-nowrap transition-all">👤 Avatar</button>
-        <button id="tab-btn-badge" onclick="switchShopTab('badge')" class="shop-tab-btn px-5 py-2 bg-gray-200 text-gray-500 hover:bg-gray-300 font-bold rounded-xl whitespace-nowrap transition-all">🏅 Badges</button>
-    </div>
-
-    <div id="shop-content-edu" class="shop-section">
-        <div id="edu-shop-items" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="text-center col-span-full py-10 text-gray-500">
-                <i class="fas fa-spinner fa-spin text-3xl mb-2 text-indigo-600"></i>
-                <p>Loading Edu Shop items...</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="shop-content-gift" class="shop-section hidden">
-        <div id="gift-shop-items" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="text-center col-span-full py-10 text-gray-500">
-                <i class="fas fa-spinner fa-spin text-3xl mb-2 text-indigo-600"></i>
-                <p>Loading Gift Shop items...</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="shop-content-avatar" class="shop-section hidden">
-        <div class="mb-6">
-            <h3 class="text-xl font-bold text-gray-800">Guardian Collections</h3>
-            <p class="text-sm text-gray-500">Get your unique Guardian to accompany your adventure!</p>
-        </div>
-        <div id="avatar-shop-items" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
-    </div>
-
-    <div id="shop-content-badge" class="shop-section hidden">
-        <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 mt-2">
-            <div class="flex flex-col items-center justify-center mb-8 text-center">
-                <h2 class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500 uppercase tracking-wider">
-                    <i class="fas fa-medal mr-2 text-yellow-500"></i> Achievements Badge
-                </h2>
-                <p class="text-gray-500 mt-2 max-w-2xl">
-                    Show your skills! Fulfill all challenges to unlock all achievements and collect all badges.
-                </p>
-            </div>
-
-            <div id="medal-shop-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <div class="col-span-full text-center py-10 text-gray-400">
-                    <i class="fas fa-spinner fa-spin text-3xl mb-3"></i>
-                    <p>Loading Achievements Badges...</p>
+        <div id="shop-content-edu" class="shop-section">
+            <div id="edu-shop-items" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="text-center col-span-full py-10 text-gray-500">
+                    <i class="fas fa-spinner fa-spin text-3xl mb-2 text-indigo-600"></i>
+                    <p>Loading Edu Shop items...</p>
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
+        <div id="shop-content-gift" class="shop-section hidden">
+            <div id="gift-shop-items" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="text-center col-span-full py-10 text-gray-500">
+                    <i class="fas fa-spinner fa-spin text-3xl mb-2 text-indigo-600"></i>
+                    <p>Loading Gift Shop items...</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="shop-content-avatar" class="shop-section hidden">
+            <div class="mb-6">
+                <h3 class="text-xl font-bold text-gray-800">Guardian Collections</h3>
+                <p class="text-sm text-gray-500">Get your unique Guardian to accompany your adventure!</p>
+            </div>
+            <div id="avatar-shop-items" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+        </div>
+
+        <div id="shop-content-badge" class="shop-section hidden">
+            <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 mt-2">
+                <div class="flex flex-col items-center justify-center mb-8 text-center">
+                    <h2 class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500 uppercase tracking-wider">
+                        <i class="fas fa-medal mr-2 text-yellow-500"></i> Achievements Badge
+                    </h2>
+                    <p class="text-gray-500 mt-2 max-w-2xl">
+                        Show your skills! Fulfill all challenges to unlock all achievements and collect all badges.
+                    </p>
+                </div>
+
+                <div id="medal-shop-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <div class="col-span-full text-center py-10 text-gray-400">
+                        <i class="fas fa-spinner fa-spin text-3xl mb-3"></i>
+                        <p>Loading Achievements Badges...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> </div> ```
 
 <div id="achievements-screen" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-[95%] max-w-3xl max-h-[85vh] flex flex-col animate-fade-in glass rounded-3xl p-5 md:p-6 shadow-2xl">
-    
     <div class="flex justify-between items-center mb-3 border-b-2 border-pink-100 pb-3 shrink-0">
         <div>
             <h2 class="text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500 uppercase tracking-wider">
@@ -427,13 +474,11 @@
             <i class="fas fa-times-circle text-2xl md:text-3xl"></i>
         </button>
     </div>
-
     <div class="shrink-0 mb-4">
         <div class="bg-pink-50 text-pink-700 px-4 py-2 rounded-xl font-bold text-xs md:text-sm inline-block shadow-inner border border-pink-100">
             <i class="fas fa-trophy mr-1"></i> Achievements: <span id="achievements-stats">0 / 0</span>
         </div>
     </div>
-
     <div id="achievements-list" class="flex-1 overflow-y-auto pr-2 custom-scrollbar grid grid-cols-1 sm:grid-cols-2 gap-3">
         </div>
 </div>
@@ -502,73 +547,6 @@
                 <tr><td colspan="5" class="text-center italic">Memuat turun data...</td></tr>
             </tbody>
         </table>
-    </div>
-</div>
-
-
-<div id="sa-boss-setup-screen" class="hidden animate-fade-in glass rounded-3xl p-8 max-w-4xl mx-auto shadow-2xl">
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-3xl font-bold text-red-700">🐉 Boss Challenge Setup</h2>
-        <button onclick="showScreen('menu-screen')" class="text-gray-500 hover:text-gray-800"><i class="fas fa-times text-2xl"></i></button>
-    </div>
-    <div class="bg-red-50 p-6 rounded-2xl border-2 border-red-200 space-y-4">
-        
-        <div class="mb-4">
-            <label class="block text-red-800 font-bold mb-2">Pilih Guardian/Boss:</label>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="boss-selection-grid">
-                <div onclick="selectBossImage('cogwheel-sage.webp', this)" class="boss-thumbnail cursor-pointer border-4 border-transparent rounded-xl overflow-hidden hover:scale-105 transition-transform bg-white shadow-sm relative">
-                    <img src="assets/boss/cogwheel-sage.webp" class="w-full h-24 object-contain p-2">
-                    <div class="bg-gray-800 text-white text-center text-[10px] py-1 font-bold">Cogwheel Sage</div>
-                </div>
-                <div onclick="selectBossImage('cosmic-currator.webp', this)" class="boss-thumbnail cursor-pointer border-4 border-transparent rounded-xl overflow-hidden hover:scale-105 transition-transform bg-white shadow-sm relative">
-                    <img src="assets/boss/cosmic-currator.webp" class="w-full h-24 object-contain p-2">
-                    <div class="bg-gray-800 text-white text-center text-[10px] py-1 font-bold">Cosmic Curator</div>
-                </div>
-                <div onclick="selectBossImage('living-archive.webp', this)" class="boss-thumbnail cursor-pointer border-4 border-transparent rounded-xl overflow-hidden hover:scale-105 transition-transform bg-white shadow-sm relative">
-                    <img src="assets/boss/living-archive.webp" class="w-full h-24 object-contain p-2">
-                    <div class="bg-gray-800 text-white text-center text-[10px] py-1 font-bold">Living Archive</div>
-                </div>
-                <div onclick="selectBossImage('golden-astromancer.webp', this)" class="boss-thumbnail cursor-pointer border-4 border-transparent rounded-xl overflow-hidden hover:scale-105 transition-transform bg-white shadow-sm relative">
-                    <img src="assets/boss/golden-astromancer.webp" class="w-full h-24 object-contain p-2">
-                    <div class="bg-gray-800 text-white text-center text-[10px] py-1 font-bold">Golden Astromancer</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4">
-            <div>
-                <label class="block font-bold text-red-800 mb-1">Nama Boss</label>
-                <input type="text" id="setup-boss-name" class="w-full p-2 rounded-xl border border-red-300" placeholder="Cth: NAGA BERAPI">
-            </div>
-            <div>
-                <label class="block font-bold text-red-800 mb-1">Jumlah HP (Nyawa)</label>
-                <input type="number" id="setup-boss-hp" class="w-full p-2 rounded-xl border border-red-300" placeholder="Cth: 10000">
-            </div>
-        </div>
-        
-        <div>
-            <label class="block font-bold text-red-800 mb-1">Had Masa Menjawab (Saat)</label>
-            <input type="number" id="setup-boss-time" class="w-full p-2 rounded-xl border border-red-300" placeholder="Cth: 15">
-        </div>
-        
-        <div>
-            <label class="block font-bold text-red-800 mb-1">Topik / Kategori Soalan</label>
-            <select id="setup-boss-category" class="w-full p-2 rounded-xl border border-red-300">
-                <option value="RANDOM">🎲 Campur Semua Topik (Rawak)</option>
-            </select>
-        </div>
-        
-        <div>
-            <label class="block font-bold text-red-800 mb-1">Status Event</label>
-            <select id="setup-boss-status" class="w-full p-2 rounded-xl border border-red-300">
-                <option value="INACTIVE">Tidak Aktif (Tutup)</option>
-                <option value="ACTIVE">Aktif (Sedang Berlangsung)</option>
-            </select>
-        </div>
-        
-        <button onclick="activateBossEvent()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl mt-4 shadow-lg transition-transform hover:scale-[1.02]">
-            <i class="fas fa-broadcast-tower mr-2"></i> Simpan & Siarkan Tetapan Boss
-        </button>
     </div>
 </div>
 
@@ -780,406 +758,428 @@ window.showScreen = function(screenId) {
 };
     </script>
 
-<div id="arena-lobby-container" class="hidden">
-    <div class="min-h-screen flex flex-col items-center justify-center py-10 px-4">
-        
-        <div class="w-full max-w-5xl p-8 bg-slate-900 rounded-3xl border border-slate-700 shadow-[0_0_40px_rgba(0,0,0,0.5)] relative overflow-hidden">  
+<!-- ========================================== -->
+<!-- 1. OVERLAY LOBI ARENA 3V3                  -->
+<!-- ========================================== -->
+<div id="arena-lobby-container" class="hidden animate-fade-in fixed top-0 left-0 w-screen h-screen z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">    
+    <!-- KOTAK LOBI UTAMA (Boleh skrol) -->
+<div class="w-full max-w-5xl mx-auto my-auto p-6 md:p-8 bg-slate-900 rounded-3xl border border-slate-700 shadow-[0_0_40px_rgba(0,0,0,0.5)] relative max-h-[95vh] overflow-y-auto">            
+        <button onclick="keluarLobi3v3()" id="btn-back-lobby" class="absolute top-6 left-6 text-slate-400 hover:text-white font-bold flex items-center gap-2 transition-colors z-20">
+            <i class="fas fa-arrow-left"></i> KEMBALI
+        </button>
+
+        <div class="text-center mb-8 mt-8 md:mt-0">
+            <h2 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-600 uppercase tracking-widest">Arena 3 vs 3</h2>
+        </div>
+
+        <!-- VIEW: SENARAI LOBI -->
+        <div id="lobby-list-view" class="block">
+            <p class="text-slate-400 text-center mt-2 mb-6 font-medium">Sila pilih bilik untuk sertainya atau cipta bilik baharu.</p>
             
-            <button onclick="keluarLobi3v3()" id="btn-back-lobby" class="absolute top-6 left-6 text-slate-400 hover:text-white font-bold flex items-center gap-2 transition-colors z-20">
-                <i class="fas fa-arrow-left"></i> KEMBALI
-            </button>
-
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-600 uppercase tracking-widest">Arena 3 vs 3</h2>
+            <div id="active-lobbies-list" class="bg-slate-800/50 rounded-2xl border border-slate-700 p-4 min-h-[200px] max-h-[300px] overflow-y-auto flex flex-col gap-3">
+                <div id="empty-lobby-message" class="flex flex-col items-center justify-center h-full text-slate-500 italic py-12">
+                    <i class="fas fa-ghost text-4xl mb-3 opacity-50"></i>
+                    <p>Tiada lobi aktif dikesan buat masa ini.</p>
+                    <p class="text-sm">Jadilah yang pertama mencipta ruang pertempuran!</p>
+                </div>
             </div>
 
-            <div id="lobby-list-view" class="block">
-                <p class="text-slate-400 text-center mt-2 mb-6 font-medium">Sila pilih bilik untuk sertainya atau cipta bilik baharu.</p>
+            <div id="action-buttons-container" class="mt-8 flex flex-wrap justify-center gap-4">
+                <button id="btn-create-lobby" onclick="ciptaLobiBaharu()" class="px-8 py-3 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold rounded-full shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-all transform hover:scale-105">
+                    CREATE NEW LOBBY
+                </button>
                 
-                <div id="active-lobbies-list" class="bg-slate-800/50 rounded-2xl border border-slate-700 p-4 min-h-[200px] max-h-[300px] overflow-y-auto flex flex-col gap-3">
-                    <div id="empty-lobby-message" class="flex flex-col items-center justify-center h-full text-slate-500 italic py-12">
-                        <i class="fas fa-ghost text-4xl mb-3 opacity-50"></i>
-                        <p>Tiada lobi aktif dikesan buat masa ini.</p>
-                        <p class="text-sm">Jadilah yang pertama mencipta ruang pertempuran!</p>
-                    </div>
-                </div>
-
-                <div id="action-buttons-container" class="mt-8 flex justify-center gap-4">
-                    <button id="btn-create-lobby" onclick="ciptaLobiBaharu()" class="px-8 py-3 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold rounded-full shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-all transform hover:scale-105">
-                        CREATE NEW LOBBY
-                    </button>
-                    
-                    <button id="btn-join-lobby" class="hidden px-8 py-3 bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-white font-bold rounded-full shadow-[0_0_15px_rgba(234,179,8,0.4)] transition-all transform hover:scale-105">
-                        JOIN ARENA
-                    </button>
-                    
-                    <button id="btn-watch-battle" onclick="tontonLobi()" class="hidden px-8 py-3 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white font-bold rounded-full shadow-[0_0_15px_rgba(168,85,247,0.4)] transition-all transform hover:scale-105">
-                        WATCH BATTLE
-                    </button>
-                </div>
-            </div>
-
-            <div id="lobby-room-view" class="hidden">
-                <div class="text-center mb-6">
-                    <p id="room-status-text" class="text-emerald-400 font-bold animate-pulse">Menunggu pemain menyertai...</p>
-                </div>
-
-                <div class="flex flex-col md:flex-row items-stretch justify-between gap-6">
-                    <div id="team-a-container" class="flex-1 bg-red-950/30 p-4 rounded-2xl border border-red-900/50">
-                        <div class="text-center mb-4">
-                            <h3 id="team-a-name" class="text-xl font-black text-red-500 uppercase tracking-wide">Pasukan A</h3>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div id="slot-A1" class="h-16 rounded-xl border-2 border-dashed border-red-500/40 bg-red-900/10 flex items-center justify-center cursor-pointer hover:bg-red-900/30 transition-colors duration-300"><span class="text-red-500/60 font-bold uppercase tracking-wider">+ Slot A1</span></div>
-                            <div id="slot-A2" class="h-16 rounded-xl border-2 border-dashed border-red-500/40 bg-red-900/10 flex items-center justify-center cursor-pointer hover:bg-red-900/30 transition-colors duration-300"><span class="text-red-500/60 font-bold uppercase tracking-wider">+ Slot A2</span></div>
-                            <div id="slot-A3" class="h-16 rounded-xl border-2 border-dashed border-red-500/40 bg-red-900/10 flex items-center justify-center cursor-pointer hover:bg-red-900/30 transition-colors duration-300"><span class="text-red-500/60 font-bold uppercase tracking-wider">+ Slot A3</span></div>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center justify-center shrink-0 py-4 md:py-0">
-                        <div class="w-16 h-16 rounded-full bg-slate-800 border-4 border-slate-700 flex items-center justify-center shadow-lg z-10">
-                            <span class="text-2xl font-black text-white italic">VS</span>
-                        </div>
-                    </div>
-
-                    <div id="team-b-container" class="flex-1 bg-blue-950/30 p-4 rounded-2xl border border-blue-900/50">
-                        <div class="text-center mb-4">
-                            <h3 id="team-b-name" class="text-xl font-black text-blue-500 uppercase tracking-wide">Pasukan B</h3>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div id="slot-B1" class="h-16 rounded-xl border-2 border-dashed border-blue-500/40 bg-blue-900/10 flex items-center justify-center cursor-pointer hover:bg-blue-900/30 transition-colors duration-300"><span class="text-blue-500/60 font-bold uppercase tracking-wider">+ Slot B1</span></div>
-                            <div id="slot-B2" class="h-16 rounded-xl border-2 border-dashed border-blue-500/40 bg-blue-900/10 flex items-center justify-center cursor-pointer hover:bg-blue-900/30 transition-colors duration-300"><span class="text-blue-500/60 font-bold uppercase tracking-wider">+ Slot B2</span></div>
-                            <div id="slot-B3" class="h-16 rounded-xl border-2 border-dashed border-blue-500/40 bg-blue-900/10 flex items-center justify-center cursor-pointer hover:bg-blue-900/30 transition-colors duration-300"><span class="text-blue-500/60 font-bold uppercase tracking-wider">+ Slot B3</span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-8 flex justify-center">
-                    <button id="btn-leave-room" onclick="tinggalkanBilik()" class="px-8 py-3 bg-slate-700 hover:bg-slate-600 border border-slate-500 text-white font-bold rounded-full transition-all">TINGGALKAN BILIK</button>
-                </div>
-            </div>
-
-            <div id="banning-view" class="hidden w-full mt-4">
-                <div class="text-center mb-8 bg-slate-800 border-2 border-yellow-500 rounded-xl p-4 shadow-[0_0_15px_rgba(234,179,8,0.3)]">
-                    <h2 class="text-3xl font-bold text-red-500 mb-2 tracking-widest">FASA BANNING</h2>
-                    <p class="text-gray-300 mb-1">Hapus subjek yang anda tidak mahu jawab!</p>
-                    <p id="turn-indicator" class="text-2xl text-yellow-400 font-bold animate-pulse">GILIRAN: MENUNGGU...</p>
-                </div>
+                <button id="btn-join-lobby" class="hidden px-8 py-3 bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-white font-bold rounded-full shadow-[0_0_15px_rgba(234,179,8,0.4)] transition-all transform hover:scale-105">
+                    JOIN ARENA
+                </button>
                 
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div class="col-span-1 bg-red-900/20 border-2 border-red-500/50 rounded-xl p-4 flex flex-col items-center">
-                        <h3 class="text-red-400 font-bold mb-4 text-center uppercase tracking-wider" id="ban-team-a-name">PASUKAN A BAN</h3>
-                        <div id="team-a-bans" class="flex flex-col gap-3 w-full">
-                            <div class="h-12 w-full border border-red-500/30 rounded flex items-center justify-center text-red-500/30 text-sm">Slot 1</div>
-                            <div class="h-12 w-full border border-red-500/30 rounded flex items-center justify-center text-red-500/30 text-sm">Slot 2</div>
-                            <div class="h-12 w-full border border-red-500/30 rounded flex items-center justify-center text-red-500/30 text-sm">Slot 3</div>
-                        </div>
-                    </div>
+                <button id="btn-watch-battle" onclick="tontonLobi()" class="hidden px-8 py-3 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white font-bold rounded-full shadow-[0_0_15px_rgba(168,85,247,0.4)] transition-all transform hover:scale-105">
+                    WATCH BATTLE
+                </button>
+            </div>
+        </div>
 
-                    <div class="col-span-2 bg-slate-800 border-2 border-slate-600 rounded-xl p-6">
-                        <h3 class="text-white font-bold mb-4 text-center">PILIH SUBJEK UNTUK DI-BAN</h3>
-                        <div id="subject-pool" class="grid grid-cols-3 gap-3"></div>
-                    </div>
-
-                    <div class="col-span-1 bg-blue-900/20 border-2 border-blue-500/50 rounded-xl p-4 flex flex-col items-center">
-                        <h3 class="text-blue-400 font-bold mb-4 text-center uppercase tracking-wider" id="ban-team-b-name">PASUKAN B BAN</h3>
-                        <div id="team-b-bans" class="flex flex-col gap-3 w-full">
-                            <div class="h-12 w-full border border-blue-500/30 rounded flex items-center justify-center text-blue-500/30 text-sm">Slot 1</div>
-                            <div class="h-12 w-full border border-blue-500/30 rounded flex items-center justify-center text-blue-500/30 text-sm">Slot 2</div>
-                            <div class="h-12 w-full border border-blue-500/30 rounded flex items-center justify-center text-blue-500/30 text-sm">Slot 3</div>
-                        </div>
-                    </div>
-                </div> 
+        <!-- VIEW: DALAM BILIK LOBI -->
+        <div id="lobby-room-view" class="hidden">
+            <div class="text-center mb-6">
+                <p id="room-status-text" class="text-emerald-400 font-bold animate-pulse">Menunggu pemain menyertai...</p>
             </div>
 
-            <div id="picking-view" class="hidden w-full mt-4">
-                <div class="text-center mb-8 bg-slate-800 border-2 border-emerald-500 rounded-xl p-4 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
-                    <h2 class="text-3xl font-bold text-emerald-400 mb-2 tracking-widest">FASA PICKING</h2>
-                    <p class="text-gray-300 mb-1">Pilih subjek pertempuran anda! Ahli sepasukan tidak boleh memilih subjek yang sama.</p>
-                    <p id="pick-turn-indicator" class="text-2xl text-yellow-400 font-bold animate-pulse">GILIRAN: MENUNGGU...</p>
+            <div class="flex flex-col md:flex-row items-stretch justify-between gap-6">
+                <div id="team-a-container" class="flex-1 bg-red-950/30 p-4 rounded-2xl border border-red-900/50">
+                    <div class="text-center mb-4">
+                        <h3 id="team-a-name" class="text-xl font-black text-red-500 uppercase tracking-wide">Pasukan A</h3>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <div id="slot-A1" class="h-16 rounded-xl border-2 border-dashed border-red-500/40 bg-red-900/10 flex items-center justify-center cursor-pointer hover:bg-red-900/30 transition-colors duration-300"><span class="text-red-500/60 font-bold uppercase tracking-wider">+ Slot A1</span></div>
+                        <div id="slot-A2" class="h-16 rounded-xl border-2 border-dashed border-red-500/40 bg-red-900/10 flex items-center justify-center cursor-pointer hover:bg-red-900/30 transition-colors duration-300"><span class="text-red-500/60 font-bold uppercase tracking-wider">+ Slot A2</span></div>
+                        <div id="slot-A3" class="h-16 rounded-xl border-2 border-dashed border-red-500/40 bg-red-900/10 flex items-center justify-center cursor-pointer hover:bg-red-900/30 transition-colors duration-300"><span class="text-red-500/60 font-bold uppercase tracking-wider">+ Slot A3</span></div>
+                    </div>
                 </div>
+
+                <div class="flex items-center justify-center shrink-0 py-4 md:py-0">
+                    <div class="w-16 h-16 rounded-full bg-slate-800 border-4 border-slate-700 flex items-center justify-center shadow-lg z-10">
+                        <span class="text-2xl font-black text-white italic">VS</span>
+                    </div>
+                </div>
+
+                <div id="team-b-container" class="flex-1 bg-blue-950/30 p-4 rounded-2xl border border-blue-900/50">
+                    <div class="text-center mb-4">
+                        <h3 id="team-b-name" class="text-xl font-black text-blue-500 uppercase tracking-wide">Pasukan B</h3>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <div id="slot-B1" class="h-16 rounded-xl border-2 border-dashed border-blue-500/40 bg-blue-900/10 flex items-center justify-center cursor-pointer hover:bg-blue-900/30 transition-colors duration-300"><span class="text-blue-500/60 font-bold uppercase tracking-wider">+ Slot B1</span></div>
+                        <div id="slot-B2" class="h-16 rounded-xl border-2 border-dashed border-blue-500/40 bg-blue-900/10 flex items-center justify-center cursor-pointer hover:bg-blue-900/30 transition-colors duration-300"><span class="text-blue-500/60 font-bold uppercase tracking-wider">+ Slot B2</span></div>
+                        <div id="slot-B3" class="h-16 rounded-xl border-2 border-dashed border-blue-500/40 bg-blue-900/10 flex items-center justify-center cursor-pointer hover:bg-blue-900/30 transition-colors duration-300"><span class="text-blue-500/60 font-bold uppercase tracking-wider">+ Slot B3</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 flex justify-center">
+                <button id="btn-leave-room" onclick="tinggalkanBilik()" class="px-8 py-3 bg-slate-700 hover:bg-slate-600 border border-slate-500 text-white font-bold rounded-full transition-all">TINGGALKAN BILIK</button>
+            </div>
+        </div>
+
+        <!-- VIEW: BANNING -->
+        <div id="banning-view" class="hidden w-full mt-4">
+            <div class="text-center mb-8 bg-slate-800 border-2 border-yellow-500 rounded-xl p-4 shadow-[0_0_15px_rgba(234,179,8,0.3)]">
+                <h2 class="text-3xl font-bold text-red-500 mb-2 tracking-widest">FASA BANNING</h2>
+                <p class="text-gray-300 mb-1">Hapus subjek yang anda tidak mahu jawab!</p>
+                <p id="turn-indicator" class="text-2xl text-yellow-400 font-bold animate-pulse">GILIRAN: MENUNGGU...</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="col-span-1 bg-red-900/20 border-2 border-red-500/50 rounded-xl p-4 flex flex-col items-center">
+                    <h3 class="text-red-400 font-bold mb-4 text-center uppercase tracking-wider" id="ban-team-a-name">PASUKAN A BAN</h3>
+                    <div id="team-a-bans" class="flex flex-col gap-3 w-full">
+                        <div class="h-12 w-full border border-red-500/30 rounded flex items-center justify-center text-red-500/30 text-sm">Slot 1</div>
+                        <div class="h-12 w-full border border-red-500/30 rounded flex items-center justify-center text-red-500/30 text-sm">Slot 2</div>
+                        <div class="h-12 w-full border border-red-500/30 rounded flex items-center justify-center text-red-500/30 text-sm">Slot 3</div>
+                    </div>
+                </div>
+
+                <div class="col-span-2 bg-slate-800 border-2 border-slate-600 rounded-xl p-6">
+                    <h3 class="text-white font-bold mb-4 text-center">PILIH SUBJEK UNTUK DI-BAN</h3>
+                    <div id="subject-pool" class="grid grid-cols-3 gap-3"></div>
+                </div>
+
+                <div class="col-span-1 bg-blue-900/20 border-2 border-blue-500/50 rounded-xl p-4 flex flex-col items-center">
+                    <h3 class="text-blue-400 font-bold mb-4 text-center uppercase tracking-wider" id="ban-team-b-name">PASUKAN B BAN</h3>
+                    <div id="team-b-bans" class="flex flex-col gap-3 w-full">
+                        <div class="h-12 w-full border border-blue-500/30 rounded flex items-center justify-center text-blue-500/30 text-sm">Slot 1</div>
+                        <div class="h-12 w-full border border-blue-500/30 rounded flex items-center justify-center text-blue-500/30 text-sm">Slot 2</div>
+                        <div class="h-12 w-full border border-blue-500/30 rounded flex items-center justify-center text-blue-500/30 text-sm">Slot 3</div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+        <!-- VIEW: PICKING -->
+        <div id="picking-view" class="hidden w-full mt-4">
+            <div class="text-center mb-8 bg-slate-800 border-2 border-emerald-500 rounded-xl p-4 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                <h2 class="text-3xl font-bold text-emerald-400 mb-2 tracking-widest">FASA PICKING</h2>
+                <p class="text-gray-300 mb-1">Pilih subjek pertempuran anda! Ahli sepasukan tidak boleh memilih subjek yang sama.</p>
+                <p id="pick-turn-indicator" class="text-2xl text-yellow-400 font-bold animate-pulse">GILIRAN: MENUNGGU...</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="col-span-1 bg-red-900/20 border-2 border-red-500/50 rounded-xl p-4 flex flex-col items-center">
+                    <h3 class="text-red-400 font-bold mb-4 text-center uppercase tracking-wider" id="pick-team-a-name">PASUKAN A PICKS</h3>
+                    <div id="team-a-picks" class="flex flex-col gap-3 w-full"></div>
+                </div>
+
+                <div class="col-span-2 bg-slate-800 border-2 border-slate-600 rounded-xl p-6">
+                    <h3 class="text-white font-bold mb-4 text-center">KLIK 1 SUBJEK UNTUK PILIHAN ANDA</h3>
+                    <div id="picking-pool" class="grid grid-cols-3 gap-3"></div>
+                </div>
+
+                <div class="col-span-1 bg-blue-900/20 border-2 border-blue-500/50 rounded-xl p-4 flex flex-col items-center">
+                    <h3 class="text-blue-400 font-bold mb-4 text-center uppercase tracking-wider" id="pick-team-b-name">PASUKAN B PICKS</h3>
+                    <div id="team-b-picks" class="flex flex-col gap-3 w-full"></div>
+                </div>
+            </div> 
+        </div>
+
+        <!-- VIEW: BATTLE (ARENA) -->
+        <div id="battle-view" class="hidden w-full mt-4 animate-fade-in">
+            <div class="grid grid-cols-3 items-center mb-6 bg-slate-800 border-2 border-red-600 rounded-2xl p-4 shadow-[0_0_25px_rgba(239,68,68,0.15)]">
+                <div class="text-left pl-2">
+                    <span id="label-name-team-a" class="text-xs font-black text-red-500 block uppercase tracking-widest">PASUKAN A</span>
+                    <span id="live-score-team-a" class="text-4xl font-black text-white tracking-tight drop-shadow">0 <span class="text-lg font-normal text-slate-400">pts</span></span>
+                </div>
+                <div class="text-center bg-slate-900/80 border border-slate-700 rounded-xl py-2 px-4 shadow-inner">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1"><i class="fas fa-hourglass-half text-amber-500 mr-1"></i> SISA MASA</h4>
+                    <div id="battle-main-timer" class="text-3xl font-black text-yellow-400 tracking-wider font-mono">10:00</div>
+                </div>
+                <div class="text-right pr-2">
+                    <span id="label-name-team-b" class="text-xs font-black text-blue-500 block uppercase tracking-widest">PASUKAN B</span>
+                    <span id="live-score-team-b" class="text-4xl font-black text-white tracking-tight drop-shadow">0 <span class="text-lg font-normal text-slate-400">pts</span></span>
+                </div>
+            </div>
+
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 shadow-md mb-6 overflow-x-auto">
+                <h3 class="text-xs font-black text-slate-400 border-b border-slate-700 pb-2 mb-3 uppercase tracking-widest flex items-center justify-center gap-2">
+                    <i class="fas fa-bolt text-yellow-500"></i> PANEL STATUS BOOSTER
+                </h3>
                 
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div class="col-span-1 bg-red-900/20 border-2 border-red-500/50 rounded-xl p-4 flex flex-col items-center">
-                        <h3 class="text-red-400 font-bold mb-4 text-center uppercase tracking-wider" id="pick-team-a-name">PASUKAN A PICKS</h3>
-                        <div id="team-a-picks" class="flex flex-col gap-3 w-full"></div>
+                <div class="flex md:grid md:grid-cols-6 gap-3 min-w-[600px] md:min-w-0">
+                    <div id="booster-card-x2" onclick="pilihBooster('x2')" class="opacity-40 bg-slate-900 border border-slate-800 rounded-xl p-2 flex items-center gap-2 transition-all cursor-pointer">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-black shrink-0">x2</div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-[10px] font-bold text-white truncate">Mata Ganda x2</h4>
+                            <span class="text-[9px] text-slate-400 block truncate">Streak 5 • 3 Soalan</span>
+                        </div>
                     </div>
 
-                    <div class="col-span-2 bg-slate-800 border-2 border-slate-600 rounded-xl p-6">
-                        <h3 class="text-white font-bold mb-4 text-center">KLIK 1 SUBJEK UNTUK PILIHAN ANDA</h3>
-                        <div id="picking-pool" class="grid grid-cols-3 gap-3"></div>
+                    <div id="booster-card-x3" onclick="pilihBooster('x3')" class="opacity-40 bg-slate-900 border border-slate-800 rounded-xl p-2 flex items-center gap-2 transition-all cursor-pointer">
+                        <div class="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center text-sm font-black shrink-0">x3</div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-[10px] font-bold text-white truncate">Mata Ganda x3</h4>
+                            <span class="text-[9px] text-slate-400 block truncate">Streak 7 • 3 Soalan</span>
+                        </div>
                     </div>
 
-                    <div class="col-span-1 bg-blue-900/20 border-2 border-blue-500/50 rounded-xl p-4 flex flex-col items-center">
-                        <h3 class="text-blue-400 font-bold mb-4 text-center uppercase tracking-wider" id="pick-team-b-name">PASUKAN B PICKS</h3>
-                        <div id="team-b-picks" class="flex flex-col gap-3 w-full"></div>
+                    <div id="booster-card-shining" onclick="pilihBooster('shining')" class="opacity-40 bg-slate-900 border border-slate-800 rounded-xl p-2 flex items-center gap-2 transition-all cursor-pointer">
+                        <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-sm shrink-0"><i class="fas fa-sun"></i></div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-[10px] font-bold text-white truncate">Shining Buff</h4>
+                            <span class="text-[9px] text-slate-400 block truncate">Streak 10 • Easy Qs</span>
+                        </div>
                     </div>
-                </div> 
-            </div>
 
-<div id="battle-view" class="hidden w-full mt-4 animate-fade-in">
-    <div class="grid grid-cols-3 items-center mb-6 bg-slate-800 border-2 border-red-600 rounded-2xl p-4 shadow-[0_0_25px_rgba(239,68,68,0.15)]">
-        <div class="text-left pl-2">
-            <span id="label-name-team-a" class="text-xs font-black text-red-500 block uppercase tracking-widest">PASUKAN A</span>
-            <span id="live-score-team-a" class="text-4xl font-black text-white tracking-tight drop-shadow">0 <span class="text-lg font-normal text-slate-400">pts</span></span>
-        </div>
-        <div class="text-center bg-slate-900/80 border border-slate-700 rounded-xl py-2 px-4 shadow-inner">
-            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1"><i class="fas fa-hourglass-half text-amber-500 mr-1"></i> SISA MASA</h4>
-            <div id="battle-main-timer" class="text-3xl font-black text-yellow-400 tracking-wider font-mono">10:00</div>
-        </div>
-        <div class="text-right pr-2">
-            <span id="label-name-team-b" class="text-xs font-black text-blue-500 block uppercase tracking-widest">PASUKAN B</span>
-            <span id="live-score-team-b" class="text-4xl font-black text-white tracking-tight drop-shadow">0 <span class="text-lg font-normal text-slate-400">pts</span></span>
-        </div>
-    </div>
-
-<div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 shadow-md mb-6">
-                    <h3 class="text-xs font-black text-slate-400 border-b border-slate-700 pb-2 mb-3 uppercase tracking-widest flex items-center justify-center gap-2">
-                        <i class="fas fa-bolt text-yellow-500"></i> PANEL STATUS BOOSTER
-                    </h3>
-                    
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-                        
-                        <div id="booster-card-x2" onclick="pilihBooster('x2')" class="opacity-40 bg-slate-900 border border-slate-800 rounded-xl p-2 flex items-center gap-2 transition-all">
-                            <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-black shrink-0">x2</div>
-                            <div class="flex-1 min-w-0">
-                                <h4 class="text-[10px] font-bold text-white truncate">Mata Ganda x2</h4>
-                                <span class="text-[9px] text-slate-400 block truncate">Streak 5 • 3 Soalan</span>
-                            </div>
+                    <div id="booster-card-mist" onclick="pilihBooster('mist')" class="opacity-40 bg-slate-900 border border-slate-800 rounded-xl p-2 flex items-center gap-2 transition-all cursor-pointer">
+                        <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center text-sm shrink-0"><i class="fas fa-smog"></i></div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-[10px] font-bold text-white truncate">Mist Attack</h4>
+                            <span class="text-[9px] text-slate-400 block truncate">Streak 15 • Ganggu</span>
                         </div>
+                    </div>
 
-                        <div id="booster-card-x3" onclick="pilihBooster('x3')" class="opacity-40 bg-slate-900 border border-slate-800 rounded-xl p-2 flex items-center gap-2 transition-all">
-                            <div class="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center text-sm font-black shrink-0">x3</div>
-                            <div class="flex-1 min-w-0">
-                                <h4 class="text-[10px] font-bold text-white truncate">Mata Ganda x3</h4>
-                                <span class="text-[9px] text-slate-400 block truncate">Streak 7 • 3 Soalan</span>
-                            </div>
+                    <div id="booster-card-challenger" onclick="pilihBooster('challenger')" class="opacity-40 bg-slate-900 border border-slate-800 rounded-xl p-2 flex items-center gap-2 transition-all cursor-pointer">
+                        <div class="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center text-sm shrink-0"><i class="fas fa-skull"></i></div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-[10px] font-bold text-white truncate">Challenger</h4>
+                            <span class="text-[9px] text-slate-400 block truncate">Streak 20 • Hard Qs</span>
                         </div>
+                    </div>
 
-                        <div id="booster-card-shining" onclick="pilihBooster('shining')" class="opacity-40 bg-slate-900 border border-slate-800 rounded-xl p-2 flex items-center gap-2 transition-all">
-                            <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-sm shrink-0"><i class="fas fa-sun"></i></div>
-                            <div class="flex-1 min-w-0">
-                                <h4 class="text-[10px] font-bold text-white truncate">Shining Buff</h4>
-                                <span class="text-[9px] text-slate-400 block truncate">Streak 10 • Easy Qs</span>
-                            </div>
-                        </div>
-
-                        <div id="booster-card-mist" onclick="pilihBooster('mist')" class="opacity-40 bg-slate-900 border border-slate-800 rounded-xl p-2 flex items-center gap-2 transition-all">
-                            <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center text-sm shrink-0"><i class="fas fa-smog"></i></div>
-                            <div class="flex-1 min-w-0">
-                                <h4 class="text-[10px] font-bold text-white truncate">Mist Attack</h4>
-                                <span class="text-[9px] text-slate-400 block truncate">Streak 15 • Ganggu</span>
-                            </div>
-                        </div>
-
-                        <div id="booster-card-challenger" onclick="pilihBooster('challenger')" class="opacity-40 bg-slate-900 border border-slate-800 rounded-xl p-2 flex items-center gap-2 transition-all">
-                            <div class="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center text-sm shrink-0"><i class="fas fa-skull"></i></div>
-                            <div class="flex-1 min-w-0">
-                                <h4 class="text-[10px] font-bold text-white truncate">Challenger</h4>
-                                <span class="text-[9px] text-slate-400 block truncate">Streak 20 • Hard Qs</span>
-                            </div>
-                        </div>
-
-                        <div id="booster-card-switch" onclick="pilihBooster('switch')" class="opacity-40 bg-slate-900 border border-slate-800 rounded-xl p-2 flex items-center gap-2 transition-all">
-                            <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm shrink-0"><i class="fas fa-random"></i></div>
-                            <div class="flex-1 min-w-0">
-                                <h4 class="text-[10px] font-bold text-white truncate">Switch Curse</h4>
-                                <span class="text-[9px] text-slate-400 block truncate">Streak 25 • Tukar</span>
-                            </div>
+                    <div id="booster-card-switch" onclick="pilihBooster('switch')" class="opacity-40 bg-slate-900 border border-slate-800 rounded-xl p-2 flex items-center gap-2 transition-all cursor-pointer">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm shrink-0"><i class="fas fa-random"></i></div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-[10px] font-bold text-white truncate">Switch Curse</h4>
+                            <span class="text-[9px] text-slate-400 block truncate">Streak 25 • Tukar</span>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
-                    
-                    <div class="col-span-1 bg-slate-800 border border-slate-700 rounded-2xl p-4 shadow-md">
-                        <div class="flex items-center gap-3 border-b border-slate-700 pb-3 mb-3">
-                            <div class="w-12 h-12 bg-gradient-to-tr from-amber-500 to-yellow-400 rounded-xl flex items-center justify-center text-white text-xl font-bold shadow-md overflow-hidden" id="my-battle-avatar">
-                                <i class="fas fa-user-shield"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-black text-white text-base truncate max-w-[130px]" id="my-battle-name">Memuatkan...</h3>
-                                <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-md font-bold uppercase tracking-wider" id="my-battle-slot">A1</span>
-                            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
+                
+                <!-- Status Pemain Sisi Kiri -->
+                <div class="col-span-1 bg-slate-800 border border-slate-700 rounded-2xl p-4 shadow-md">
+                    <div class="flex items-center gap-3 border-b border-slate-700 pb-3 mb-3">
+                        <div class="w-12 h-12 bg-gradient-to-tr from-amber-500 to-yellow-400 rounded-xl flex items-center justify-center text-white text-xl font-bold shadow-md overflow-hidden" id="my-battle-avatar">
+                            <i class="fas fa-user-shield"></i>
                         </div>
-                        <div class="bg-slate-900 rounded-xl p-3 border border-slate-800 text-center">
-                            <span class="text-xs text-slate-400 font-bold block uppercase tracking-wider mb-1">Subjek Anda</span>
-                            <div class="text-lg font-black text-cyan-400 uppercase truncate" id="my-active-subject">Matematik</div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2 mt-3">
-                            <div class="bg-slate-900/50 p-2 rounded-lg text-center border border-slate-800">
-                                <span class="text-[10px] text-slate-400 font-bold block">MATA SAYA</span>
-                                <span class="text-xl font-black text-white" id="my-live-points">0</span>
-                            </div>
-                            <div class="bg-slate-900/50 p-2 rounded-lg text-center border border-slate-800">
-                                <span class="text-[10px] text-slate-400 font-bold block">STREAK MAX</span>
-                                <span class="text-xl font-black text-amber-500" id="my-longest-streak">0</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-span-1 bg-slate-800 border border-slate-700 rounded-2xl p-4 shadow-md hidden md:block">
-                        <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-3 border-b border-slate-700 pb-2">Senarai Pemain</h3>
-                        
-                        <div class="mb-4">
-                            <span class="text-[10px] font-bold text-red-500 uppercase tracking-wider block mb-2">Pasukan A</span>
-                            <div class="flex flex-col gap-2">
-                                <div class="flex items-center gap-2 bg-slate-900/50 p-2 rounded-lg border border-slate-800/50">
-                                    <div class="w-8 h-8 bg-slate-700 rounded-full flex-shrink-0 overflow-hidden" id="battle-avatar-A1"></div>
-                                    <div class="truncate flex-1 text-xs font-bold text-white" id="battle-name-A1">-</div>
-                                </div>
-                                <div class="flex items-center gap-2 bg-slate-900/50 p-2 rounded-lg border border-slate-800/50">
-                                    <div class="w-8 h-8 bg-slate-700 rounded-full flex-shrink-0 overflow-hidden" id="battle-avatar-A2"></div>
-                                    <div class="truncate flex-1 text-xs font-bold text-white" id="battle-name-A2">-</div>
-                                </div>
-                                <div class="flex items-center gap-2 bg-slate-900/50 p-2 rounded-lg border border-slate-800/50">
-                                    <div class="w-8 h-8 bg-slate-700 rounded-full flex-shrink-0 overflow-hidden" id="battle-avatar-A3"></div>
-                                    <div class="truncate flex-1 text-xs font-bold text-white" id="battle-name-A3">-</div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div>
-                            <span class="text-[10px] font-bold text-blue-500 uppercase tracking-wider block mb-2">Pasukan B</span>
-                            <div class="flex flex-col gap-2">
-                                <div class="flex items-center gap-2 bg-slate-900/50 p-2 rounded-lg border border-slate-800/50">
-                                    <div class="w-8 h-8 bg-slate-700 rounded-full flex-shrink-0 overflow-hidden" id="battle-avatar-B1"></div>
-                                    <div class="truncate flex-1 text-xs font-bold text-white" id="battle-name-B1">-</div>
-                                </div>
-                                <div class="flex items-center gap-2 bg-slate-900/50 p-2 rounded-lg border border-slate-800/50">
-                                    <div class="w-8 h-8 bg-slate-700 rounded-full flex-shrink-0 overflow-hidden" id="battle-avatar-B2"></div>
-                                    <div class="truncate flex-1 text-xs font-bold text-white" id="battle-name-B2">-</div>
-                                </div>
-                                <div class="flex items-center gap-2 bg-slate-900/50 p-2 rounded-lg border border-slate-800/50">
-                                    <div class="w-8 h-8 bg-slate-700 rounded-full flex-shrink-0 overflow-hidden" id="battle-avatar-B3"></div>
-                                    <div class="truncate flex-1 text-xs font-bold text-white" id="battle-name-B3">-</div>
-                                </div>
+                            <h3 class="font-black text-white text-base truncate max-w-[130px]" id="my-battle-name">Memuatkan...</h3>
+                            <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-md font-bold uppercase tracking-wider" id="my-battle-slot">A1</span>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 rounded-xl p-3 border border-slate-800 text-center">
+                        <span class="text-xs text-slate-400 font-bold block uppercase tracking-wider mb-1">Subjek Anda</span>
+                        <div class="text-lg font-black text-cyan-400 uppercase truncate" id="my-active-subject">Matematik</div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 mt-3">
+                        <div class="bg-slate-900/50 p-2 rounded-lg text-center border border-slate-800">
+                            <span class="text-[10px] text-slate-400 font-bold block">MATA SAYA</span>
+                            <span class="text-xl font-black text-white" id="my-live-points">0</span>
+                        </div>
+                        <div class="bg-slate-900/50 p-2 rounded-lg text-center border border-slate-800">
+                            <span class="text-[10px] text-slate-400 font-bold block">STREAK MAX</span>
+                            <span class="text-xl font-black text-amber-500" id="my-longest-streak">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Senarai Pemain Sisi Tengah (Desktop Only) -->
+                <div class="col-span-1 bg-slate-800 border border-slate-700 rounded-2xl p-4 shadow-md hidden md:block">
+                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-3 border-b border-slate-700 pb-2">Senarai Pemain</h3>
+                    
+                    <div class="mb-4">
+                        <span class="text-[10px] font-bold text-red-500 uppercase tracking-wider block mb-2">Pasukan A</span>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-center gap-2 bg-slate-900/50 p-2 rounded-lg border border-slate-800/50">
+                                <div class="w-8 h-8 bg-slate-700 rounded-full flex-shrink-0 overflow-hidden" id="battle-avatar-A1"></div>
+                                <div class="truncate flex-1 text-xs font-bold text-white" id="battle-name-A1">-</div>
+                            </div>
+                            <div class="flex items-center gap-2 bg-slate-900/50 p-2 rounded-lg border border-slate-800/50">
+                                <div class="w-8 h-8 bg-slate-700 rounded-full flex-shrink-0 overflow-hidden" id="battle-avatar-A2"></div>
+                                <div class="truncate flex-1 text-xs font-bold text-white" id="battle-name-A2">-</div>
+                            </div>
+                            <div class="flex items-center gap-2 bg-slate-900/50 p-2 rounded-lg border border-slate-800/50">
+                                <div class="w-8 h-8 bg-slate-700 rounded-full flex-shrink-0 overflow-hidden" id="battle-avatar-A3"></div>
+                                <div class="truncate flex-1 text-xs font-bold text-white" id="battle-name-A3">-</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-span-1 lg:col-span-2 flex flex-col gap-4">
-                        <div id="battle-debuff-alert" class="hidden bg-purple-950/40 border border-purple-500/50 rounded-xl p-3 text-center text-purple-400 font-bold animate-pulse">
-                            <i class="fas fa-smog mr-2"></i> PANDANGAN ANDA KABUR! KESAN MIST AKTIF.
+                    <div>
+                        <span class="text-[10px] font-bold text-blue-500 uppercase tracking-wider block mb-2">Pasukan B</span>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-center gap-2 bg-slate-900/50 p-2 rounded-lg border border-slate-800/50">
+                                <div class="w-8 h-8 bg-slate-700 rounded-full flex-shrink-0 overflow-hidden" id="battle-avatar-B1"></div>
+                                <div class="truncate flex-1 text-xs font-bold text-white" id="battle-name-B1">-</div>
+                            </div>
+                            <div class="flex items-center gap-2 bg-slate-900/50 p-2 rounded-lg border border-slate-800/50">
+                                <div class="w-8 h-8 bg-slate-700 rounded-full flex-shrink-0 overflow-hidden" id="battle-avatar-B2"></div>
+                                <div class="truncate flex-1 text-xs font-bold text-white" id="battle-name-B2">-</div>
+                            </div>
+                            <div class="flex items-center gap-2 bg-slate-900/50 p-2 rounded-lg border border-slate-800/50">
+                                <div class="w-8 h-8 bg-slate-700 rounded-full flex-shrink-0 overflow-hidden" id="battle-avatar-B3"></div>
+                                <div class="truncate flex-1 text-xs font-bold text-white" id="battle-name-B3">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paparan Soalan & Input Jawapan -->
+                <div class="col-span-1 lg:col-span-2 flex flex-col gap-4">
+                    <div id="battle-debuff-alert" class="hidden bg-purple-950/40 border border-purple-500/50 rounded-xl p-3 text-center text-purple-400 font-bold animate-pulse">
+                        <i class="fas fa-smog mr-2"></i> PANDANGAN ANDA KABUR! KESAN MIST AKTIF.
+                    </div>
+
+                    <div class="bg-slate-800 border-2 border-slate-700 rounded-3xl p-6 shadow-xl relative min-h-[340px] flex flex-col justify-between">
+                        <div class="flex justify-between items-center mb-4">
+                            <span id="quiz-question-level" class="text-xs font-black px-3 py-1 rounded-full bg-slate-700 text-slate-300 uppercase tracking-widest border border-slate-600">ARAS: RANDOM</span>
+                            <div class="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full text-amber-400 font-black text-sm">
+                                <i class="fas fa-fire text-amber-500 animate-bounce"></i> STREAK: <span id="quiz-current-streak">0</span>
+                            </div>
                         </div>
 
-                        <div class="bg-slate-800 border-2 border-slate-700 rounded-3xl p-6 shadow-xl relative min-h-[340px] flex flex-col justify-between">
-                            <div class="flex justify-between items-center mb-4">
-                                <span id="quiz-question-level" class="text-xs font-black px-3 py-1 rounded-full bg-slate-700 text-slate-300 uppercase tracking-widest border border-slate-600">ARAS: RANDOM</span>
-                                <div class="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full text-amber-400 font-black text-sm">
-                                    <i class="fas fa-fire text-amber-500 animate-bounce"></i> STREAK: <span id="quiz-current-streak">0</span>
+                        <div class="my-auto py-4">
+                            <p id="quiz-question-text" class="text-xl font-semibold text-white text-center leading-relaxed">
+                                Sila tunggu sebentar, sistem sedang memuatkan soalan dari subjek terpilih...
+                            </p>
+                        </div>
+
+                        <div id="kuiz-input-container" class="mt-6 w-full">
+                            <div id="container-input-taip" class="flex flex-col sm:flex-row gap-3 justify-center items-center w-full">
+                                <input type="text" id="input-jawapan-taip" placeholder="TAIP JAWAPAN ANDA DI SINI..." 
+                                    class="w-full sm:w-3/4 p-4 bg-slate-900 border-2 border-slate-600 rounded-xl text-white font-bold text-center uppercase tracking-wider focus:border-yellow-400 focus:outline-none transition-colors" 
+                                    autocomplete="off" onkeypress="semakTekanEnter(event)">
+                                
+                                <button onclick="hantarJawapanTaip()" id="btn-hantar-jawapan" 
+                                    class="w-full sm:w-1/4 py-4 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-black rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-all transform hover:-translate-y-1">
+                                    HANTAR
+                                </button>
+                            </div>
+
+                            <div id="container-input-objektif" class="w-full hidden">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
+                                    <button id="battle-btn-mcq-0" onclick="hantarJawapanObjektif(0)" class="p-4 bg-slate-900 hover:bg-slate-700 border-2 border-slate-600 rounded-xl text-white font-bold text-center transition-colors shadow-md"></button>
+                                    <button id="battle-btn-mcq-1" onclick="hantarJawapanObjektif(1)" class="p-4 bg-slate-900 hover:bg-slate-700 border-2 border-slate-600 rounded-xl text-white font-bold text-center transition-colors shadow-md"></button>
+                                    <button id="battle-btn-mcq-2" onclick="hantarJawapanObjektif(2)" class="p-4 bg-slate-900 hover:bg-slate-700 border-2 border-slate-600 rounded-xl text-white font-bold text-center transition-colors shadow-md"></button>
+                                    <button id="battle-btn-mcq-3" onclick="hantarJawapanObjektif(3)" class="p-4 bg-slate-900 hover:bg-slate-700 border-2 border-slate-600 rounded-xl text-white font-bold text-center transition-colors shadow-md"></button>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div> <!-- End Col-span Soalan -->
+            </div> <!-- End Grid Bawah -->
+        </div> <!-- End Battle View -->
 
-                            <div class="my-auto py-4">
-                                <p id="quiz-question-text" class="text-xl font-semibold text-white text-center leading-relaxed">
-                                    Sila tunggu sebentar, sistem sedang memuatkan soalan dari subjek terpilih...
-                                </p>
-                            </div>
+    </div> <!-- End Kotak Lobi Utama -->
+</div> <!-- End Overlay Arena -->
 
-<div id="kuiz-input-container" class="mt-6 w-full">
+<!-- ========================================== -->
+<!-- 2. OVERLAY BATTLE ANALYSIS (KEPUTUSAN)     -->
+<!-- ========================================== -->
+<div id="screen-battle-analysis" class="hidden animate-fade-in fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
     
-    <div id="container-input-taip" class="flex flex-col sm:flex-row gap-3 justify-center items-center w-full">
-        <input type="text" id="input-jawapan-taip" placeholder="TAIP JAWAPAN ANDA DI SINI..." 
-            class="w-full sm:w-3/4 p-4 bg-slate-900 border-2 border-slate-600 rounded-xl text-white font-bold text-center uppercase tracking-wider focus:border-yellow-400 focus:outline-none transition-colors" 
-            autocomplete="off" onkeypress="semakTekanEnter(event)">
+    <!-- Kotak Analysis Sebenar -->
+    <div class="w-full max-w-6xl bg-slate-950 border-2 border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl relative flex flex-col items-center max-h-[95vh] overflow-y-auto text-white">
         
-        <button onclick="hantarJawapanTaip()" id="btn-hantar-jawapan" 
-            class="w-full sm:w-1/4 py-4 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-black rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-all transform hover:-translate-y-1">
-            HANTAR
-        </button>
-    </div>
-
-    <div id="container-input-objektif" class="w-full hidden">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
-            <button id="battle-btn-mcq-0" onclick="hantarJawapanObjektif(0)" class="p-4 bg-slate-900 hover:bg-slate-700 border-2 border-slate-600 rounded-xl text-white font-bold text-center transition-colors shadow-md"></button>
-            <button id="battle-btn-mcq-1" onclick="hantarJawapanObjektif(1)" class="p-4 bg-slate-900 hover:bg-slate-700 border-2 border-slate-600 rounded-xl text-white font-bold text-center transition-colors shadow-md"></button>
-            <button id="battle-btn-mcq-2" onclick="hantarJawapanObjektif(2)" class="p-4 bg-slate-900 hover:bg-slate-700 border-2 border-slate-600 rounded-xl text-white font-bold text-center transition-colors shadow-md"></button>
-            <button id="battle-btn-mcq-3" onclick="hantarJawapanObjektif(3)" class="p-4 bg-slate-900 hover:bg-slate-700 border-2 border-slate-600 rounded-xl text-white font-bold text-center transition-colors shadow-md"></button>
-        </div>
-    </div>
-    </div>
-</div>
-</div> </div>
-</div>
-</div>
-</div></div>
-
-<div id="screen-battle-analysis" class="hidden fixed inset-0 z-[99999] overflow-y-auto bg-slate-950 text-white flex flex-col items-center p-4 md:p-8 animate-fade-in">
-    
-    <div class="text-center my-6 max-w-2xl w-full">
-        <h1 id="analysis-victory-title" class="text-3xl md:text-5xl font-black uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 drop-shadow-[0_4px_12px_rgba(245,158,11,0.5)] animate-pulse">
-            PASUKAN A JUARA ARENA!
-        </h1>
-        
-        <div class="mt-4 inline-flex items-center gap-6 bg-slate-900/80 border border-slate-800 px-8 py-3 rounded-3xl shadow-2xl">
-            <span id="analysis-score-teamA" class="text-4xl font-black text-emerald-400">420</span>
-            <i class="fas fa-trophy text-3xl text-amber-400 animate-bounce"></i>
-            <span id="analysis-score-teamB" class="text-4xl font-black text-purple-400">394</span>
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl mt-4">
-        
-        <div class="space-y-4">
-            <h2 id="analysis-label-teamA" class="text-xl font-extrabold text-emerald-400 uppercase tracking-wider flex items-center gap-2 px-2">
-                <span class="w-3 h-3 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]"></span>
-                Pasukan A (Green Faction)
-            </h2>
+        <div class="text-center mb-6 max-w-2xl w-full">
+            <h1 id="analysis-victory-title" class="text-3xl md:text-5xl font-black uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 drop-shadow-[0_4px_12px_rgba(245,158,11,0.5)] animate-pulse">
+                PASUKAN A JUARA ARENA!
+            </h1>
             
-            <div id="container-cards-teamA" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="mt-6 inline-flex items-center gap-6 bg-slate-900/80 border border-slate-800 px-8 py-3 rounded-3xl shadow-2xl">
+                <span id="analysis-score-teamA" class="text-4xl font-black text-emerald-400">420</span>
+                <i class="fas fa-trophy text-3xl text-amber-400 animate-bounce"></i>
+                <span id="analysis-score-teamB" class="text-4xl font-black text-purple-400">394</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full mt-4">
+            
+            <!-- Pasukan A -->
+            <div class="space-y-4 w-full">
+                <h2 id="analysis-label-teamA" class="text-xl font-extrabold text-emerald-400 uppercase tracking-wider flex items-center justify-center lg:justify-start gap-2 px-2">
+                    <span class="w-3 h-3 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]"></span>
+                    Pasukan A (Green Faction)
+                </h2>
                 
-                <div class="flex flex-col bg-slate-950 border-2 border-emerald-500/80 shadow-[0_0_20px_rgba(16,185,129,0.2)] rounded-3xl p-4 text-center items-center relative overflow-hidden">
-                    <span class="absolute top-2 left-2 bg-emerald-600 text-white font-black text-[10px] px-2 py-0.5 rounded-md shadow-md">A1</span>
+                <div id="container-cards-teamA" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
                     
-                    <div class="w-14 h-14 bg-slate-800 rounded-full flex items-center justify-center border-2 border-amber-400 shadow-md mt-2">
-                        <i class="fas fa-user-ninja text-2xl text-amber-400"></i>
-                    </div>
-                    <h3 class="text-sm font-bold text-white mt-2 truncate w-full">Alia Maisarah</h3>
-                    
-                    <div class="w-full bg-gradient-to-r from-amber-500/20 via-amber-500/40 to-amber-500/20 border-y border-amber-500/50 py-1.5 my-3 text-amber-400 font-black text-xs uppercase tracking-widest flex items-center justify-center gap-1.5 shadow-[0_0_10px_rgba(245,158,11,0.1)]">
-                        <i class="fas fa-crown text-amber-400"></i> MVP 🥇
-                    </div>
-                    
-                    <div class="w-full text-left bg-slate-900/90 border border-slate-800 p-2.5 rounded-xl text-[11px] space-y-1 text-slate-300">
-                        <div class="flex justify-between"><span>🎯 Mata</span> <span class="font-bold text-emerald-400">150 Pts</span></div>
-                        <div class="flex justify-between"><span>🔥 Streak Max</span> <span class="font-bold text-orange-400">45</span></div>
-                        <div class="flex justify-between"><span>🚀 Guna Booster</span> <span class="font-bold text-sky-400">5</span></div>
-                        <div class="flex justify-between"><span>💥 Kena Serang</span> <span class="font-bold text-red-400">1</span></div>
-                    </div>
-                    
-                    <div class="w-full mt-3 border-t border-dashed border-slate-800 pt-2.5 flex justify-around text-[11px] font-bold">
-                        <div class="flex items-center gap-1 text-yellow-400">
-                            <i class="fas fa-coins animate-spin" style="animation-duration: 3s"></i> +500
+                    <!-- Kad Contoh MVP A1 -->
+                    <div class="flex flex-col bg-slate-950 border-2 border-emerald-500/80 shadow-[0_0_20px_rgba(16,185,129,0.2)] rounded-3xl p-4 text-center items-center relative overflow-hidden">
+                        <span class="absolute top-2 left-2 bg-emerald-600 text-white font-black text-[10px] px-2 py-0.5 rounded-md shadow-md">A1</span>
+                        
+                        <div class="w-14 h-14 bg-slate-800 rounded-full flex items-center justify-center border-2 border-amber-400 shadow-md mt-2">
+                            <i class="fas fa-user-ninja text-2xl text-amber-400"></i>
                         </div>
-                        <div class="flex items-center gap-1 text-cyan-400">
-                            <i class="fas fa-sparkles"></i> +2,500 XP
+                        <h3 class="text-sm font-bold text-white mt-2 truncate w-full">Alia Maisarah</h3>
+                        
+                        <div class="w-full bg-gradient-to-r from-amber-500/20 via-amber-500/40 to-amber-500/20 border-y border-amber-500/50 py-1.5 my-3 text-amber-400 font-black text-xs uppercase tracking-widest flex items-center justify-center gap-1.5 shadow-[0_0_10px_rgba(245,158,11,0.1)]">
+                            <i class="fas fa-crown text-amber-400"></i> MVP 🥇
+                        </div>
+                        
+                        <div class="w-full text-left bg-slate-900/90 border border-slate-800 p-2.5 rounded-xl text-[11px] space-y-1 text-slate-300">
+                            <div class="flex justify-between"><span>🎯 Mata</span> <span class="font-bold text-emerald-400">150 Pts</span></div>
+                            <div class="flex justify-between"><span>🔥 Streak Max</span> <span class="font-bold text-orange-400">45</span></div>
+                            <div class="flex justify-between"><span>🚀 Guna Booster</span> <span class="font-bold text-sky-400">5</span></div>
+                            <div class="flex justify-between"><span>💥 Kena Serang</span> <span class="font-bold text-red-400">1</span></div>
+                        </div>
+                        
+                        <div class="w-full mt-3 border-t border-dashed border-slate-800 pt-2.5 flex justify-around text-[11px] font-bold">
+                            <div class="flex items-center gap-1 text-yellow-400">
+                                <i class="fas fa-coins animate-spin" style="animation-duration: 3s"></i> +500
+                            </div>
+                            <div class="flex items-center gap-1 text-cyan-400">
+                                <i class="fas fa-sparkles"></i> +2,500 XP
+                            </div>
                         </div>
                     </div>
+                    <!-- Akhir Kad Contoh -->
+                    
                 </div>
+            </div>
+
+            <!-- Pasukan B -->
+            <div class="space-y-4 w-full">
+                <h2 id="analysis-label-teamB" class="text-xl font-extrabold text-purple-400 uppercase tracking-wider flex items-center justify-center lg:justify-start gap-2 px-2">
+                    <span class="w-3 h-3 rounded-full bg-purple-500 shadow-[0_0_10px_#a855f7]"></span>
+                    Pasukan B (Purple Shadows)
+                </h2>
+                
+                <div id="container-cards-teamB" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                    <!-- Javascript akan masukkan kad B di sini -->
                 </div>
+            </div>
+
+        </div> <!-- End Grid Pasukan -->
+        
+<div class="mt-10 mb-4 flex justify-center w-full">
+            <button id="btn-analysis-exit" onclick="kembaliKeLobiUtama()" class="w-full max-w-md px-6 py-3 font-black text-sm uppercase tracking-wider rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white shadow-[0_4px_15px_rgba(124,58,237,0.3)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex justify-center items-center">
+                <i class="fas fa-door-open mr-2"></i> Kembali Ke Lobi Utama
+            </button>
         </div>
 
-        <div class="space-y-4">
-            <h2 id="analysis-label-teamB" class="text-xl font-extrabold text-purple-400 uppercase tracking-wider flex items-center gap-2 px-2">
-                <span class="w-3 h-3 rounded-full bg-purple-500 shadow-[0_0_10px_#a855f7]"></span>
-                Pasukan B (Purple Shadows)
-            </h2>
-            
-            <div id="container-cards-teamB" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                </div>
-        </div>
+    </div> </div>
 
-    </div>
-
-    <div class="mt-10 mb-6 flex flex-col sm:flex-row gap-4 w-full max-w-md justify-center">
-        <button id="btn-analysis-exit" onclick="kembaliKeLobiUtama()" class="w-full px-6 py-3 font-black text-sm uppercase tracking-wider rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white shadow-[0_4px_15px_rgba(124,58,237,0.3)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0">
-            <i class="fas fa-door-open mr-2"></i> Kembali Ke Lobi Utama
-        </button>
-    </div>
-</div>
-
-<div id="subject-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 animate-fade-in">
+<div id="subject-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-4 animate-fade-in">
     <div class="bg-white rounded-3xl p-8 max-w-5xl w-full shadow-2xl relative max-h-[90vh] overflow-y-auto">
 
         <button onclick="closeSubjectModal()" class="absolute top-4 right-5 text-gray-400 hover:text-red-500 text-3xl"><i class="fas fa-times"></i></button>
@@ -2307,83 +2307,85 @@ window.showScreen = function(screenId) {
     </div>
 </div>
 
-<div id="boss-arena" class="hidden animate-fade-in glass rounded-3xl p-4 max-w-5xl mx-auto relative overflow-hidden flex flex-col md:flex-row gap-4 shadow-[0_0_40px_rgba(0,0,0,0.2)]">
+<div id="boss-arena" class="hidden animate-fade-in fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
     
-    <div id="arena-flash-overlay" class="absolute inset-0 z-40 pointer-events-none opacity-0 transition-opacity duration-200"></div>
-
-    <div class="flex-1 relative z-10 flex flex-col">
+    <div class="glass rounded-3xl p-4 max-w-5xl w-full mx-auto relative flex flex-col md:flex-row gap-4 shadow-[0_0_40px_rgba(0,0,0,0.3)] max-h-[98vh] overflow-y-auto">
         
-        <div id="damage-indicator" class="hidden absolute top-1/3 left-1/2 transform -translate-x-1/2 text-red-600 font-black text-6xl drop-shadow-[0_0_10px_rgba(255,255,255,1)] z-50 pointer-events-none">
-            -15
-        </div>
+        <div id="arena-flash-overlay" class="absolute inset-0 z-40 pointer-events-none opacity-0 transition-opacity duration-200 rounded-3xl"></div>
 
-        <div class="flex justify-between items-center mb-3 border-b-2 border-gray-200/50 pb-2">
-            <button onclick="leaveBossFight()" class="text-gray-600 hover:text-red-600 font-bold bg-white/30 px-3 py-1.5 rounded-xl transition-all text-sm">
-                <i class="fas fa-arrow-left"></i> Lari
-            </button>
+        <div class="flex-1 relative z-10 flex flex-col">
             
-            <div class="flex flex-col items-center">
-                <h2 class="text-xl font-black text-red-700 animate-pulse hidden md:block leading-none">BOSS BATTLE</h2>
-                <div class="text-sm font-bold text-red-600 bg-red-100 px-4 py-0.5 rounded-full mt-1 border border-red-200 shadow-sm flex items-center gap-1">
-                    <i class="fas fa-clock"></i> <span id="global-battle-timer">05:00</span>
-                </div>
+            <div id="damage-indicator" class="hidden absolute top-1/3 left-1/2 transform -translate-x-1/2 text-red-600 font-black text-6xl drop-shadow-[0_0_10px_rgba(255,255,255,1)] z-50 pointer-events-none">
+                -15
             </div>
 
-            <div class="text-green-700 font-bold text-sm bg-white/50 px-3 py-1.5 rounded-xl shadow-sm border border-green-200">
-                <i class="fas fa-heart text-red-500 animate-pulse mr-1"></i> HP Anda: <span id="player-hp-text">100</span>
-            </div>
-        </div>
-
-        <div class="bg-black/5 p-4 rounded-3xl border border-red-200/50 flex flex-col items-center mb-3 shadow-inner relative">
-            
-            <div id="streak-indicator" class="absolute top-2 left-0 w-full h-8 flex items-center justify-center z-50 pointer-events-none"></div>
-
-            <h3 id="boss-name-ui" class="text-xl font-black text-red-700 mb-1 uppercase tracking-widest drop-shadow-md text-center mt-2">
-                Mencari Boss...
-            </h3>
-
-            <div class="relative w-full max-w-sm h-32 md:h-40 mb-3 flex justify-center items-center">
-                <img id="battle-boss-avatar" src="" alt="Boss" class="w-full h-full object-contain drop-shadow-[0_10px_10px_rgba(220,38,38,0.3)] animate-bounce-slow transform scale-105">
-            </div>
-
-            <div class="w-full bg-white h-6 rounded-full overflow-hidden border-2 border-gray-300 relative shadow-md mb-2">
-                <div id="arena-boss-hp-bar" class="bg-gradient-to-r from-red-600 to-red-400 h-full transition-all duration-300 w-full"></div>
-                <div id="arena-boss-hp-text" class="absolute inset-0 flex items-center justify-center text-gray-900 font-black text-xs">
-                    Memuatkan HP...
-                </div>
-            </div>
-
-            <div id="active-boosters-container" class="flex flex-wrap justify-center gap-2 w-full min-h-[24px]">
-                </div>
-        </div>
-
-        <div class="bg-white/70 backdrop-blur-md p-4 rounded-3xl shadow-xl border border-white flex flex-col items-center text-center flex-1 justify-center">
-            <div class="w-full bg-gray-200 h-2 rounded-full mb-2 overflow-hidden shadow-inner">
-                <div id="boss-timer-bar" class="bg-blue-500 h-full w-full"></div>
-            </div>
-            <div class="text-gray-600 font-bold mb-3 text-xs">
+            <div class="flex justify-between items-center mb-3 border-b-2 border-gray-200/50 pb-2">
+                <button onclick="leaveBossFight()" class="text-gray-600 hover:text-red-600 font-bold bg-white/30 px-3 py-1.5 rounded-xl transition-all text-sm">
+                    <i class="fas fa-arrow-left"></i> Lari
+                </button>
                 
+                <div class="flex flex-col items-center">
+                    <h2 class="text-xl font-black text-red-700 animate-pulse hidden md:block leading-none">BOSS BATTLE</h2>
+                    <div class="text-sm font-bold text-red-600 bg-red-100 px-4 py-0.5 rounded-full mt-1 border border-red-200 shadow-sm flex items-center gap-1">
+                        <i class="fas fa-clock"></i> <span id="global-battle-timer">05:00</span>
+                    </div>
+                </div>
+
+                <div class="text-green-700 font-bold text-sm bg-white/50 px-3 py-1.5 rounded-xl shadow-sm border border-green-200">
+                    <i class="fas fa-heart text-red-500 animate-pulse mr-1"></i> HP Anda: <span id="player-hp-text">100</span>
+                </div>
             </div>
 
-            <h2 id="boss-question-text" class="text-lg md:text-2xl font-black text-gray-800 mb-4 leading-tight">
-                Menjana serangan...
-            </h2>
+            <div class="bg-black/5 p-4 rounded-3xl border border-red-200/50 flex flex-col items-center mb-3 shadow-inner relative">
+                
+                <div id="streak-indicator" class="absolute top-2 left-0 w-full h-8 flex items-center justify-center z-50 pointer-events-none"></div>
 
-            <div id="boss-answer-zone" class="w-full max-w-lg">
+                <h3 id="boss-name-ui" class="text-xl font-black text-red-700 mb-1 uppercase tracking-widest drop-shadow-md text-center mt-2">
+                    Mencari Boss...
+                </h3>
+
+                <div class="relative w-full max-w-sm h-32 md:h-40 mb-3 flex justify-center items-center">
+                    <img id="battle-boss-avatar" src="" alt="Boss" class="w-full h-full object-contain drop-shadow-[0_10px_10px_rgba(220,38,38,0.3)] animate-bounce-slow transform scale-105">
+                </div>
+
+                <div class="w-full bg-white h-6 rounded-full overflow-hidden border-2 border-gray-300 relative shadow-md mb-2">
+                    <div id="arena-boss-hp-bar" class="bg-gradient-to-r from-red-600 to-red-400 h-full transition-all duration-300 w-full"></div>
+                    <div id="arena-boss-hp-text" class="absolute inset-0 flex items-center justify-center text-gray-900 font-black text-xs">
+                        Memuatkan HP...
+                    </div>
+                </div>
+
+                <div id="active-boosters-container" class="flex flex-wrap justify-center gap-2 w-full min-h-[24px]">
+                </div>
+            </div>
+
+            <div class="bg-white/70 backdrop-blur-md p-4 rounded-3xl shadow-xl border border-white flex flex-col items-center text-center flex-1 justify-center min-h-[150px]">
+                <div class="w-full bg-gray-200 h-2 rounded-full mb-2 overflow-hidden shadow-inner">
+                    <div id="boss-timer-bar" class="bg-blue-500 h-full w-full"></div>
+                </div>
+                <div class="text-gray-600 font-bold mb-3 text-xs">
+                    
+                </div>
+
+                <h2 id="boss-question-text" class="text-lg md:text-2xl font-black text-gray-800 mb-4 leading-tight">
+                    Menjana serangan...
+                </h2>
+
+                <div id="boss-answer-zone" class="w-full max-w-lg">
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="w-full md:w-72 bg-white/80 backdrop-blur-md rounded-3xl p-4 border-2 border-orange-300 shadow-[0_0_15px_rgba(251,146,60,0.3)] flex flex-col z-10">
-        <h3 class="text-base font-black text-orange-600 mb-3 text-center border-b-2 border-orange-200 pb-2 flex items-center justify-center gap-2">
-            <i class="fas fa-fire animate-pulse"></i> LIVE TOP 10 
-        </h3>
-        
-        <div id="live-ranking-list" class="flex-1 overflow-y-auto flex flex-col gap-2 pr-1 max-h-[400px]">
-            <div id="boss-radar-text" class="text-center text-sm text-gray-500 mt-10 animate-pulse">Memuatkan radar pertarungan...</div>
+        <div class="w-full md:w-72 bg-white/80 backdrop-blur-md rounded-3xl p-4 border-2 border-orange-300 shadow-[0_0_15px_rgba(251,146,60,0.3)] flex flex-col z-10">
+            <h3 class="text-base font-black text-orange-600 mb-3 text-center border-b-2 border-orange-200 pb-2 flex items-center justify-center gap-2">
+                <i class="fas fa-fire animate-pulse"></i> LIVE TOP 10 
+            </h3>
+            
+            <div id="live-ranking-list" class="flex-1 overflow-y-auto flex flex-col gap-2 pr-1 max-h-[200px] md:max-h-[400px]">
+                <div id="boss-radar-text" class="text-center text-sm text-gray-500 mt-10 animate-pulse">Memuatkan radar pertarungan...</div>
+            </div>
         </div>
-    </div>
 
-</div>
+    </div> </div> ```
 </body>
 </html>
