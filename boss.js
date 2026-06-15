@@ -4,18 +4,18 @@
 
 // --- TETAPAN 12 BOSS BULANAN (AUTOMATIK) ---
 const monthlyBossesConfig = [
-    { month: 0, name: "Titan Kalkulus", category: "MT", avatar: "mtboss.webp" },        
-    { month: 1, name: "Raja Naga Tatabahasa", category: "BM", avatar: "bmboss.webp" },  
-    { month: 2, name: "Specter Sains", category: "SN", avatar: "snboss.webp" },         
-    { month: 3, name: "Phantom Sejarah", category: "SEJ", avatar: "sjboss.webp" },      
-    { month: 4, name: "Sultan Sirah", category: "PAI", avatar: "paiboss.webp" },         
-    { month: 5, name: "Mummy Mufrodat", category: "BA", avatar: "baboss.webp" },        
-    { month: 6, name: "Gargoyle Grammar", category: "BI", avatar: "biboss.webp" },      
-    { month: 7, name: "Golem Muzik", category: "MZ", avatar: "mzboss.webp" },           
-    { month: 8, name: "Troll RBT", category: "RBT", avatar: "rbtboss.webp" },            
-    { month: 9, name: "Ogre PJK", category: "PJK", avatar: "pjboss.webp" },            
-    { month: 10, name: "Djinn Moral", category: "PM", avatar: "pmboss.webp" },         
-    { month: 11, name: "Colossus PSV", category: "PSV", avatar: "psvboss.webp" }        
+{ month: 0, name: "Sifu Kalkulus", category: "MT", avatar: "mtboss.webp" },        
+    { month: 1, name: "Pujangga Tatabahasa", category: "BM", avatar: "bmboss.webp" },  
+    { month: 2, name: "Cendekiawan Kosmos", category: "SN", avatar: "snboss.webp" },         
+    { month: 3, name: "Penjaga Kronologi", category: "SEJ", avatar: "sjboss.webp" },      
+    { month: 4, name: "Murabbi Sirah", category: "PAI", avatar: "paiboss.webp" },         
+    { month: 5, name: "Syeikh Mufrodat", category: "BA", avatar: "baboss.webp" },        
+    { month: 6, name: "Lexicon Master", category: "BI", avatar: "biboss.webp" },      
+    { month: 7, name: "Maestro Simfoni", category: "MZ", avatar: "mzboss.webp" },           
+    { month: 8, name: "Arkitek Inovasi", category: "RBT", avatar: "rbtboss.webp" },            
+    { month: 9, name: "Jaguh Kecergasan", category: "PJK", avatar: "pjboss.webp" },            
+    { month: 10, name: "Ksatria Etika", category: "PM", avatar: "pmboss.webp" },         
+    { month: 11, name: "Maestro Kanvas", category: "PSV", avatar: "psvboss.webp" }        
 ];
 
 // --- PEMBOLEHUBAH SISTEM & FIREBASE ---
@@ -327,8 +327,22 @@ function startBossFight() {
 function startPassiveAttack() {
     clearInterval(passiveAttackInterval);
     passiveAttackInterval = setInterval(() => {
-        if (isTimeFrozen || isInvisible) return; // Diselamatkan oleh buff
-        
+        // Diselamatkan oleh buff in-game sedia ada
+        if (isTimeFrozen || isInvisible) return; 
+
+        // ==========================================
+        // SEMAKAN LTE: ZON KEBAL BOSS (no_penalty)
+        // ==========================================
+        if (typeof getCurrentEvent === 'function') {
+            const activeEvent = getCurrentEvent();
+            if (activeEvent && activeEvent.rewardType === 'no_penalty' && activeEvent.targetMode === 'boss_challenge') {
+                // Log untuk Cikgu nampak sistem kebal berfungsi di F12 Console
+                // console.log("🛡️ [LTE] Serangan pasif Boss dihalang oleh Zon Kebal!"); 
+                return; // Batalkan tolakan HP
+            }
+        }
+
+        // Jika tiada event Zon Kebal, teruskan tolak HP seperti biasa
         bossPlayerHP -= 2;
         updatePlayerHPUI();
         showDamageIndicator("-2 HP", "text-purple-500", "battle-boss-avatar"); 
