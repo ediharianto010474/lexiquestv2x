@@ -119,29 +119,66 @@ function leaveBossFight() {
     console.log("🚪 Pemain telah keluar dari Boss Arena.");
 } 
 
-// ==========================================
-// 📡 2. CCTV BOSS & AUTOMASI BULANAN
-// ==========================================
+// ============================================================================
+// 📡 2. CCTV BOSS & AUTOMASI BULANAN (VERSI KALIS JAM ROSAK & TIADA LOOP)
+// ============================================================================
 function initBossRadar() {
+    // Tutup 'telinga' lama supaya tidak bertindih data
     bossRtdbRef.off(); 
 
-    const today = new Date();
-    const currentMonth = today.getMonth(); 
-    const currentYear = today.getFullYear();
-    const expectedBossId = `BOSS_${currentYear}_${currentMonth}`;
+    // Langkah 1: Paksa sistem minta beza masa (offset) dengan Server Firebase
+    firebase.database().ref(".info/serverTimeOffset").once("value").then((offsetSnap) => {
+        const offset = offsetSnap.val() || 0;
+        const estimatedServerTimeMs = Date.now() + offset; // Waktu internet yang tepat
+        const realDate = new Date(estimatedServerTimeMs);
+        
+        const currentMonth = realDate.getMonth(); 
+        const currentYear = realDate.getFullYear();
+        const expectedBossId = `BOSS_${currentYear}_${currentMonth}`;
 
-    bossRtdbRef.on('value', async (snapshot) => {
+        // 🔥 FUNGSI 1: MENDENGAR DATA (BACA SAHAJA)
+        bossRtdbRef.on('value', (snapshot) => {
+            const data = snapshot.val();
+
+            // Hanya terima jika Boss di server sepadan dengan bulan/tahun sebenar
+            if (data && data.bossId === expectedBossId) {
+                currentBossData = data;
+                updateBossRadarUI();
+                
+                if (currentBossData.currentHp <= 0 && currentBossData.status === "ACTIVE") {
+                    handleBossDefeated(currentBossData.final_blow_player);
+                }
+            } else {
+                // Jika data kosong atau data bulan lain, sembunyikan butang cabaran
+                currentBossData = null;
+                if(document.getElementById('boss-challenge-btn-radar')) document.getElementById('boss-challenge-btn-radar').classList.add('hidden');
+                if(document.getElementById('boss-challenge-btn-floating')) document.getElementById('boss-challenge-btn-floating').classList.add('hidden');
+            }
+        });
+
+        // 🔥 FUNGSI 2: MENUKAR BOSS (TULIS SAHAJA - DIPANGGIL SEKALI)
+        checkAndSpawnBoss(expectedBossId, currentMonth);
+    });
+}
+
+// Fungsi pembantu untuk menguruskan perpindahan bulan & cipta boss baharu
+async function checkAndSpawnBoss(expectedBossId, currentMonth) {
+    try {
+        // Guna .once() supaya sistem hanya semak SEKALI SAHAJA sewaktu login/refresh
+        const snapshot = await bossRtdbRef.once('value');
         const data = snapshot.val();
 
-        // JIKA TIADA DATA ATAU BULAN TELAH BERTUKAR
+        // Jika boss belum wujud di Firebase, atau bossId di server adalah bulan lepas
         if (!data || data.bossId !== expectedBossId) {
-            
-            // 🔥 SISTEM ARKIB: Simpan data Boss bulan lepas sebelum padam 🔥
+            console.log(`Menyemak status Boss untuk bulan ke-${currentMonth}...`);
+
+            // Simpan data lama ke dalam arkib sebelum ia dipadam
             if (data && data.bossId) {
                 await firebase.database().ref(`boss_archives/${data.bossId}`).set(data);
                 console.log(`📁 Data Boss lama (${data.bossId}) telah diarkibkan!`);
             }
 
+            // Cari template boss yang sepadan dalam konfigurasi
             const bossTemplate = monthlyBossesConfig.find(b => b.month === currentMonth);
             if (bossTemplate) {
                 const newBossData = {
@@ -153,27 +190,20 @@ function initBossRadar() {
                     currentHp: 20000,
                     status: "ACTIVE",
                     defeatedBy: "",
-                    createdAt: firebase.database.ServerValue.TIMESTAMP
+                    createdAt: firebase.database.ServerValue.TIMESTAMP // Timestamp rasmi Google Server
                 };
+                
+                // Masukkan boss baharu ke database
                 await bossRtdbRef.set(newBossData);
-                return; 
+                console.log(`🐉 Boss baharu (${expectedBossId}) telah berjaya dilahirkan!`);
             }
         }
-
-        if (data) {
-            currentBossData = data;
-            updateBossRadarUI();
-            
-            if (currentBossData.currentHp <= 0 && currentBossData.status === "ACTIVE") {
-                handleBossDefeated(currentBossData.final_blow_player);
-            }
-        } else {
-            currentBossData = null;
-            if(document.getElementById('boss-challenge-btn-radar')) document.getElementById('boss-challenge-btn-radar').classList.add('hidden');
-            if(document.getElementById('boss-challenge-btn-floating')) document.getElementById('boss-challenge-btn-floating').classList.add('hidden');
-        }
-    });
+    } catch (error) {
+        console.error("Gagal menguruskan data Boss. Semak Firebase Security Rules anda.", error);
+    }
 }
+
+// Jalankan fungsi radar sebaik sahaja halaman web siap dimuatkan
 document.addEventListener('DOMContentLoaded', initBossRadar);
 
 function updateBossRadarUI() {
