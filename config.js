@@ -463,11 +463,18 @@ const achievementsData = [
     { id: "ach_39", name: "First Arrival", description: "Log in to the Game Hub for the first time.", titleReward: "The Freshman", coinReward: 20, price: 500, tier: "common", image: "assets/badges/freshman.webp", reqType: "first_login", reqValue: 1 },
     { id: "ach_40", name: "Secret Finder", description: "??? (Discover the hidden secret in the Game Hub)", titleReward: "The Context Detective", coinReward: 5000, price: 10000, tier: "legendary", image: "assets/badges/contextDetective.webp", reqType: "hidden_secret", reqValue: 1 },
     
-    // --- Category 12: Rank & Level (GABUNGAN) ---
+// --- Category 12: Rank & Level (GABUNGAN) ---
     { id: "ach_41", name: "Top Honor Roll", description: "Reach Rank 3 in the Leaderboard.", titleReward: "Top Honor Roll", coinReward: 500, price: 1000, tier: "rare", image: "assets/badges/topHonorRoll.webp", reqType: "rank", reqValue: 3 },
     { id: "ach_42", name: "Silver Laureate", description: "Reach Rank 2 in the Leaderboard.", titleReward: "Silver Laureate", coinReward: 1000, price: 5000, tier: "epic", image: "assets/badges/silverLaureate.webp", reqType: "rank", reqValue: 2 },
     { id: "ach_43", name: "Supreme Valedictorian", description: "Reach Rank 1 in the Leaderboard.", titleReward: "Supreme Valedictorian", coinReward: 2000, price: 10000, tier: "legendary", image: "assets/badges/supremeValedictorian.webp", reqType: "rank", reqValue: 1 },
-    { id: "ach_44", name: "Grammar Guardian", description: "Reach level 10.", titleReward: "The Grammar Guardian", coinReward: 50, price: 1000, tier: "rare", image: "assets/badges/grammarGuardian.webp", reqType: "level_reach", reqValue: 10 }
+    { id: "ach_44", name: "Grammar Guardian", description: "Reach level 10.", titleReward: "The Grammar Guardian", coinReward: 50, price: 1000, tier: "rare", image: "assets/badges/grammarGuardian.webp", reqType: "level_reach", reqValue: 10 },
+
+    // ==========================================
+    // 🔥 LENCANA TERSEMBUNYI (KHAS UNTUK LTE)
+    // ==========================================
+    { id: "lte_feb_2026", name: "Pencarian Perintis Lexi", description: "Ganjaran eksklusif kehadiran 10 hari (Februari 2026).", icon: "🧭", titleReward: "Perintis Ilmu", tier: "epic", isLTE: true },
+    { id: "lte_jul_2026", name: "Karnival Jaguh Kecergasan", description: "Ganjaran eksklusif kehadiran 15 hari (Julai 2026).", image: "assets/badges/badge_olahraga.webp", titleReward: "Jaguh Olahraga", tier: "legendary", isLTE: true },
+    { id: "lte_aug_2026", name: "Misi Pahlawan Merdeka", description: "Ganjaran eksklusif kehadiran 10 hari (Ogos 2026).", icon: "🇲🇾", titleReward: "Wira Merdeka", tier: "legendary", isLTE: true }
 ];
 
 // ==========================================
