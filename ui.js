@@ -200,6 +200,7 @@ function openProfile() {
             console.log("   -> Avatar yang nak dilukis:", localPlayerData.activeAvatar);
             if (typeof renderAvatarToScreen === 'function') {
                 renderAvatarToScreen('profile-avatar-container', localPlayerData.activeAvatar);
+		if (typeof drawBorderOnProfile === 'function') drawBorderOnProfile();
                 console.log("   -> ✅ Avatar dilukis.");
             } else {
                 console.log("   -> ❌ AMARAN: Fungsi renderAvatarToScreen tidak wujud!");
@@ -224,12 +225,150 @@ function openProfile() {
             console.log("   -> ❌ AMARAN: Fungsi paparkanLencanaDiProfil tidak wujud!");
         }
 
+	// ==========================================
+        // 🔥 TAMBAHAN BARU: MUAT NAIK AVATAR & BORDER
+        // ==========================================
+        console.log("9. Memanggil fungsi Pilihan Avatar...");
+        if (typeof loadAvatarOptions === 'function') {
+            loadAvatarOptions();
+        }
+
+        console.log("10. Memanggil fungsi Pilihan Border...");
+        if (typeof loadBorderOptions === 'function') {
+            loadBorderOptions();
+        }
+
         console.log("=== 🎉 FUNGSI openProfile SELESAI TANPA RALAT ===");
 
     } catch (error) {
         console.error("=== 💥 RALAT KRITIKAL DIJUMPAI ===");
         console.error("Mesej Ralat:", error.message);
         console.error("Baris Ralat:", error.stack);
+    }
+}
+
+// ==========================================
+// FUNGSI MUAT NAIK PILIHAN AVATAR
+// ==========================================
+function loadAvatarOptions() {
+    const avatarSelect = document.getElementById('profile-avatar-select');
+    if (!avatarSelect) return;
+
+    // 1. Letakkan Placeholder. 
+    // Dibuang 'disabled' supaya boleh diklik, ditambah 'selected' supaya wajib terpapar dahulu
+    avatarSelect.innerHTML = '<option value="" selected>-- SILA PILIH AVATAR --</option>';
+    
+    // 2. Avatar Percuma / Lalai
+    const defaultAvatars = [];
+
+    let allMyAvatars = [...defaultAvatars];
+
+    // 3. Tambah Avatar dari Kedai & LTE (Jika ada)
+    if (typeof localPlayerData !== 'undefined' && localPlayerData.ownedAvatars) {
+        localPlayerData.ownedAvatars.forEach(ava => {
+            if (!allMyAvatars.includes(ava)) allMyAvatars.push(ava);
+        });
+    }
+
+    // 4. Masukkan ke dalam Dropdown
+    allMyAvatars.forEach(ava => {
+        let cleanName = ava.split('/').pop().replace('.webp', '').replace(/_/g, ' ').toUpperCase();
+        let option = document.createElement('option');
+        option.value = ava;
+        option.innerText = cleanName;
+        
+        // Cuma akan melompat ke avatar lain JIKA murid memang sudah pakai/save avatar tersebut
+        if (localPlayerData && localPlayerData.activeAvatar === ava) {
+            option.selected = true;
+        }
+        
+        avatarSelect.appendChild(option);
+    });
+}
+
+// ==========================================
+// FUNGSI MUAT NAIK PILIHAN BORDER (BINGKAI)
+// ==========================================
+function loadBorderOptions() {
+    const borderSelect = document.getElementById('profile-border-select');
+    if (!borderSelect) return;
+
+    borderSelect.innerHTML = ""; 
+    
+    // Border Asas (Kosong)
+    let optionNone = document.createElement('option');
+    optionNone.value = "none";
+    optionNone.innerText = "Tiada Bingkai";
+    borderSelect.appendChild(optionNone);
+
+    // Tambah Border yang dimiliki
+    if (typeof localPlayerData !== 'undefined' && localPlayerData.ownedBorders) {
+        localPlayerData.ownedBorders.forEach(border => {
+            let cleanName = border.split('/').pop().replace('.webp', '').replace(/_/g, ' ').toUpperCase();
+            let option = document.createElement('option');
+            option.value = border;
+            option.innerText = cleanName;
+            
+            if (localPlayerData.activeBorder === border) {
+                option.selected = true;
+            }
+            borderSelect.appendChild(option);
+        });
+    }
+}
+
+// ==========================================
+// FUNGSI SIMPAN PERUBAHAN AVATAR & BORDER
+// ==========================================
+function saveProfileAppearance() {
+    const avatarSelect = document.getElementById('profile-avatar-select');
+    const borderSelect = document.getElementById('profile-border-select');
+
+    if (avatarSelect) {
+        localPlayerData.activeAvatar = avatarSelect.value;
+        // Kemas kini lukisan avatar di profil serta-merta
+        if (typeof renderAvatarToScreen === 'function') {
+            renderAvatarToScreen('profile-avatar-container', localPlayerData.activeAvatar);
+        }
+    }
+
+    if (borderSelect) {
+        localPlayerData.activeBorder = borderSelect.value;
+        // Lukis border di profil
+        drawBorderOnProfile();
+    }
+
+    localStorage.setItem('currentPlayer', JSON.stringify(localPlayerData));
+    if (typeof saveCloudPlayerData === 'function') saveCloudPlayerData();
+    
+    Swal.fire('Berjaya', 'Penampilan profil dikemas kini!', 'success');
+}
+
+// ==========================================
+// FUNGSI MELUKIS BORDER DI ATAS AVATAR
+// ==========================================
+function drawBorderOnProfile() {
+    const container = document.getElementById('profile-avatar-container');
+    if (!container) return;
+
+    // Padam border lama jika ada
+    const oldBorder = document.getElementById('active-profile-border');
+    if (oldBorder) oldBorder.remove();
+
+    if (localPlayerData && localPlayerData.activeBorder && localPlayerData.activeBorder !== "none") {
+        let borderImg = document.createElement('img');
+        borderImg.id = "active-profile-border";
+        
+        // 🌟 PEMBAIKAN: Bersihkan perkataan 'img|' jika wujud di dalam string
+        let cleanBorderPath = localPlayerData.activeBorder.replace('img|', '');
+        borderImg.src = cleanBorderPath; 
+        
+        // Arahan CSS ini memastikan border melekat tepat di atas avatar tanpa kacau butang lain
+        borderImg.className = "absolute inset-0 w-full h-full object-cover pointer-events-none z-10";
+        
+        // Pastikan container avatar bersifat "relative" supaya bingkai tidak lari
+        container.classList.add('relative'); 
+        container.appendChild(borderImg);
     }
 }
 
@@ -472,34 +611,34 @@ window.addEventListener('DOMContentLoaded', (event) => {
 });
 
 // ==========================================
-// FUNGSI BANTUAN UNTUK MELUKIS AVATAR KE SKRIN (VERSI TERAPUNG)
+// FUNGSI BANTUAN UNTUK MELUKIS AVATAR (VERSI BERDIRI DI GARISAN BAWAH)
 // ==========================================
 function renderAvatarToScreen(containerId, avatarFormat) {
     const container = document.getElementById(containerId);
     if (!container || !avatarFormat) return;
 
-    // Bersihkan kontena daripada border/background lama jika ada
     container.style.background = "transparent";
     container.style.border = "none";
     container.style.boxShadow = "none";
+    container.classList.add('relative');
 
     if (avatarFormat.startsWith('img|')) {
-        // --- JIKA IA GAMBAR (PNG/JPG/GIF) ---
         const url = avatarFormat.replace('img|', '');
         
-        // TUKAR: object-cover -> object-contain (Supaya tak terpotong)
-        // TAMBAH: drop-shadow (Supaya nampak terapung/3D)
+        // 🌟 PEMBAIKAN KEDUDUKAN (PIN DI GARISAN BAWAH):
+        // 1. bottom-6 : Menolak avatar ke bawah. Kita beri jarak 2 unit (8px) supaya kaki watak duduk tepat di atas garisan border, bukan terkeluar bawah.
+        // 2. left-1/2 -translate-x-1/2 : Rumus wajib untuk kekalkan avatar sentiasa di tengah secara horizontal.
+        // 3. object-bottom : Memastikan watak di dalam gambar rapat ke bawah kanvasnya sendiri.
+        // 4. origin-bottom : Apabila murid 'hover' (tuding tetikus), watak akan membesar ke atas (zoom-in dari tapak kaki).
         container.innerHTML = `
             <img src="${url}" 
-                 class="w-[90%] h-[90%] object-contain drop-shadow-xl hover:scale-110 transition-transform">
+                 class="absolute bottom-6 left-1/2 -translate-x-1/2 w-16 h-16 object-contain object-bottom drop-shadow-xl z-0 transition-transform hover:scale-105 origin-bottom">
         `;
     } else if (avatarFormat.startsWith('icon|')) {
-        // --- JIKA IA IKON FONTAWESOME ---
         const iconClass = avatarFormat.replace('icon|', '');
-        
-        // Tambahkan drop-shadow juga pada ikon supaya nampak timbul
+        // Untuk ikon, kita kekalkan di tengah kerana ikon tidak mempunyai anatomi "kaki"
         container.innerHTML = `
-            <i class="${iconClass} text-3xl text-gray-700 drop-shadow-md hover:scale-110 transition-transform"></i>
+            <i class="${iconClass} absolute inset-0 m-auto flex items-center justify-center text-5xl text-gray-700 drop-shadow-md z-0 transition-transform hover:scale-110"></i>
         `;
     }
 }
