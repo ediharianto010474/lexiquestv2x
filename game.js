@@ -3654,8 +3654,8 @@ function endGame() {
     // 3. Kira peratus markah
     const percentage = Math.round((score / totalQuestions) * 100);
 
-    // ==========================================
-    // LOGIK SIMPAN MARKAH, XP & KOIN 💰
+// ==========================================
+    // LOGIK SIMPAN MARKAH, XP & KOIN 💰 (TERKEMASKINI LTE BOOST)
     // ==========================================
     
     // Himpunkan semua tahap kesukaran merentas SEMUA subjek baharu
@@ -3685,25 +3685,128 @@ function endGame() {
         ...(typeof rbtCategoryDifficulty !== 'undefined' ? rbtCategoryDifficulty.hard : [])
     ];
 
-    // Tentukan pengganda (multiplier)
+    // Tentukan pengganda (multiplier) kesukaran
     let multiplier = 1; // Default: Easy
     if (currentGameType) {
         if (allMedium.includes(currentGameType)) multiplier = 2;
         else if (allHard.includes(currentGameType)) multiplier = 3;
     }
 
-    // Kira XP dan Koin
+    // Kira XP dan Koin (Asas)
     let pointsEarned = score * multiplier; 
     let coinsEarned = score * 2 * multiplier; 
-    
+
+    // =======================================================
+    // ✨ INTEGRASI BARU: PEMPROSESAN IMPAK GANJARAN LTE
+    // =======================================================
+    let dipengaruhiLTE = false;
+    let jenisBoost = "";
+
+    if (typeof currentActiveEvent !== 'undefined' && currentActiveEvent !== null) {
+        // HALUAN A: Ganjaran Jenis Pengganda (Buff)
+        if (currentActiveEvent.rewardType === 'xp_buff') {
+            pointsEarned = Math.floor(pointsEarned * currentActiveEvent.rewardValue);
+            dipengaruhiLTE = true;
+            jenisBoost = `✨ XP x${currentActiveEvent.rewardValue} BOOST!`;
+            console.log(`🚀 LTE AKTIF: XP digandakan kepada ${pointsEarned}!`);
+        } 
+        else if (currentActiveEvent.rewardType === 'coins_buff') {
+            coinsEarned = Math.floor(coinsEarned * currentActiveEvent.rewardValue);
+            dipengaruhiLTE = true;
+            jenisBoost = `💰 KOIN x${currentActiveEvent.rewardValue} BOOST!`;
+            console.log(`💰 LTE AKTIF: Syiling digandakan kepada ${coinsEarned}!`);
+        }
+        
+// HALUAN B: Ganjaran Jenis Kumpul Hari (Login & Play)
+        if (currentActiveEvent.requiredAction === "login_and_play") {
+            if (!localPlayerData.lte_attendance) localPlayerData.lte_attendance = {};
+            if (!localPlayerData.lte_attendance[currentActiveEvent.name]) {
+                localPlayerData.lte_attendance[currentActiveEvent.name] = {};
+            }
+            
+            const today = new Date();
+            const dateKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+            
+            // Rekodkan kehadiran hari ini
+            localPlayerData.lte_attendance[currentActiveEvent.name][dateKey] = true;
+            
+            const totalDaysPlayed = Object.keys(localPlayerData.lte_attendance[currentActiveEvent.name]).length;
+            console.log(`📅 [LTE Kehadiran] Misi: ${currentActiveEvent.name} | Progress: ${totalDaysPlayed}/${currentActiveEvent.requiredDays} Hari`);
+
+            // =======================================================
+            // 🎁 SISTEM PENGANUGERAHAN AUTOMATIK LTE (AUTO-GIFT)
+            // =======================================================
+            if (totalDaysPlayed >= currentActiveEvent.requiredDays) {
+                // Semak jika hadiah sudah pernah ditebus (untuk elak dapat dua kali)
+                let eventSafeName = currentActiveEvent.name.replace(/\s+/g, '_');
+                if (!localPlayerData.lte_claimed) localPlayerData.lte_claimed = {};
+                
+                if (!localPlayerData.lte_claimed[eventSafeName]) {
+                    
+                    // 1. Hadiah Jenis Lencana (Badge & Title)
+                    if (currentActiveEvent.rewardType === "custom_title" || currentActiveEvent.rewardType === "event_badge") {
+                        if (!localPlayerData.inventory) localPlayerData.inventory = [];
+                        
+                        // Tentukan ID lencana berpandukan bulan/event
+                        let badgeIdToGive = "";
+                        if (currentActiveEvent.name.includes("Pencarian Perintis")) badgeIdToGive = "lte_feb_2026";
+                        if (currentActiveEvent.name.includes("Karnival Jaguh")) badgeIdToGive = "lte_jul_2026";
+                        if (currentActiveEvent.name.includes("Pahlawan Merdeka")) badgeIdToGive = "lte_aug_2026";
+                        
+                        if (badgeIdToGive && !localPlayerData.inventory.includes(badgeIdToGive)) {
+                            localPlayerData.inventory.push(badgeIdToGive);
+                            localPlayerData.lte_claimed[eventSafeName] = true;
+                            
+                            jenisBoost = `🏆 MISI SELESAI: Lencana & Title '${currentActiveEvent.rewardValue}' Diperolehi! Buka Profil Untuk Pakai.`;
+                            dipengaruhiLTE = true;
+                            console.log(`🎁 [AUTO-GIFT] Lencana ${badgeIdToGive} ditolak ke inventory!`);
+                        }
+                    }
+                    
+                    // 2. Hadiah Jenis Avatar
+                    else if (currentActiveEvent.rewardType === "custom_avatar") {
+                        if (!localPlayerData.ownedAvatars) localPlayerData.ownedAvatars = [];
+                        let avatarFile = `img|assets/avatars/${currentActiveEvent.rewardValue}`;
+                        
+                        if (!localPlayerData.ownedAvatars.includes(avatarFile)) {
+                            localPlayerData.ownedAvatars.push(avatarFile);
+                            localPlayerData.lte_claimed[eventSafeName] = true;
+                            
+                            jenisBoost = `👤 MISI SELESAI: Avatar Eksklusif Diperolehi! Buka Profil Untuk Pakai.`;
+                            dipengaruhiLTE = true;
+                            console.log(`🎁 [AUTO-GIFT] Avatar ${avatarFile} ditambah!`);
+                        }
+                    }
+                    
+                    // 3. Hadiah Jenis Border
+                    else if (currentActiveEvent.rewardType === "custom_border") {
+                        if (!localPlayerData.ownedBorders) localPlayerData.ownedBorders = [];
+                        let borderFile = `assets/borders/${currentActiveEvent.rewardValue}`;
+                        
+                        if (!localPlayerData.ownedBorders.includes(borderFile)) {
+                            localPlayerData.ownedBorders.push(borderFile);
+                            localPlayerData.lte_claimed[eventSafeName] = true;
+                            
+                            jenisBoost = `🖼️ MISI SELESAI: Bingkai Profil Eksklusif Diperolehi! Buka Profil Untuk Pakai.`;
+                            dipengaruhiLTE = true;
+                            console.log(`🎁 [AUTO-GIFT] Border ${borderFile} ditambah!`);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // =======================================================
+
+    // Kemas kini ke dalam akaun tempatan (Dompet Murid)
     if (typeof localPlayerData !== 'undefined') {
         localPlayerData.totalScore = (parseInt(localPlayerData.totalScore) || 0) + pointsEarned;
+        localPlayerData.xp = (parseInt(localPlayerData.xp) || 0) + pointsEarned; // Pastikan XP diselaraskan dengan pointsEarned
         localPlayerData.coins = (parseInt(localPlayerData.coins) || 0) + coinsEarned;
 
         // 🔥 MULTI-LEADERBOARD: SIMPAN XP MENGIKUT SUBJEK
         let currentType = (typeof currentGameType !== 'undefined' && currentGameType !== "") ? currentGameType.toLowerCase() : "";
 
-        // Pemetaan Dinamik Subjek (Kalis Ralat: Pastikan object wujud sebelum spread)
         const senaraiSubjekMaju = [
             { field: 'score_matematik', label: 'Matematik', list: typeof mathCategoryDifficulty !== 'undefined' ? [...mathCategoryDifficulty.easy, ...mathCategoryDifficulty.medium, ...mathCategoryDifficulty.hard] : [] },
             { field: 'score_english',   label: 'English',   list: typeof englishCategoryDifficulty !== 'undefined' ? [...englishCategoryDifficulty.easy, ...englishCategoryDifficulty.medium, ...englishCategoryDifficulty.hard] : [] },
@@ -3724,7 +3827,6 @@ function endGame() {
             console.log(`➕ Tambah ${pointsEarned} XP ${padananSubjek.label}. Jumlah: ${localPlayerData[padananSubjek.field]}`);
         } else {
             localPlayerData.score_english = (parseInt(localPlayerData.score_english) || 0) + pointsEarned;
-            console.log(`⚠️ Fallback: Tambah ${pointsEarned} XP English.`);
         }
 
         // Hujung minggu checker
@@ -3733,7 +3835,7 @@ function endGame() {
             localPlayerData.hasPlayedWeekend = true;
         }
         
-        // 🎥 CCTV TRACKER
+        // 🎥 CCTV TRACKER (Rekod syiling yang telah di-boost)
         if (window.Trackers) {
             let isPerfect = (score === totalQuestions && totalQuestions > 0); 
             let catNameForTracker = (typeof currentGameType !== 'undefined' && currentGameType !== "") ? currentGameType : "unknown_game";
@@ -3741,7 +3843,7 @@ function endGame() {
             Trackers.rekodKoinDapat(coinsEarned); 
         }
 
-        // 🏆 SIMPAN MARKAH TERTINGGI (HIGH SCORE) KATEGORI
+        // 🏆 SIMPAN MARKAH TERTINGGI (HIGH SCORE) KATEGORI (Asal)
         if (!localPlayerData.games) localPlayerData.games = {}; 
         
         let catName = (typeof currentGameType !== 'undefined' && currentGameType !== "") ? currentGameType : "missing";
@@ -3757,11 +3859,14 @@ function endGame() {
             localPlayerData.games[catName] = score;
             console.log(`⭐ Markah tertinggi baru untuk ${catName}: ${score}`);
         }
-        
+
         // Simpan & Hantar Data
         localStorage.setItem('currentPlayer', JSON.stringify(localPlayerData));
         if (typeof saveCloudPlayerData === 'function') saveCloudPlayerData();
         if (typeof updateUI === 'function') updateUI();
+        
+        // Kemaskini rupa kad widget LTE jika fungsi disediakan
+        if (typeof updateJulyLteCardUI === 'function') updateJulyLteCardUI();
     }
 
     // 🎯 REKOD BUKU LOG KE FIREBASE
@@ -3777,11 +3882,19 @@ function endGame() {
         console.error("Ralat memanggil saveGameRecord:", error);
     }
 
-    // 4. Paparkan pop-up keputusan
+    // 4. Paparkan pop-up keputusan berserta mesej Boost (jika aktif)
+    let extraHTML = dipengaruhiLTE 
+        ? `<div class="bg-yellow-100 p-2 rounded text-yellow-800 font-black text-sm my-2 animate-bounce border-2 border-yellow-400">${jenisBoost}</div>` 
+        : "";
+
     Swal.fire({
         icon: percentage >= 50 ? 'success' : 'error',
         title: 'Permainan Tamat! 🏁',
-        html: `Anda berjaya menjawab <b>${score}</b> daripada <b>${totalQuestions}</b> soalan dengan betul.<br><br>Markah Keseluruhan: <span class="text-2xl font-bold text-indigo-600">${percentage}%</span><br><br><span class="text-sm text-green-600 font-bold">+ ${pointsEarned} XP Earned!</span>`,
+        html: `Anda berjaya menjawab <b>${score}</b> daripada <b>${totalQuestions}</b> soalan dengan betul.<br><br>
+               Markah Keseluruhan: <span class="text-2xl font-bold text-indigo-600">${percentage}%</span><br>
+               ${extraHTML}
+               <br><span class="text-sm text-green-600 font-bold">+ ${pointsEarned} XP Earned!</span>
+               <br><span class="text-sm text-yellow-600 font-bold">+ ${coinsEarned} Coins Earned!</span>`,
         confirmButtonText: 'Kembali ke Menu',
         confirmButtonColor: '#4f46e5',
         allowOutsideClick: false
@@ -5101,46 +5214,46 @@ document.addEventListener('input', function(e) {
 });
 
 
-// ==========================================
-// PENGURUSAN WIDGET EVENT (LTE)
-// ==========================================
+// ============================================================================
+// 📅 PENGURUSAN WIDGET EVENT (LTE) - VERSI OPTIMASI 12 BULAN AUTOMATIK
+// ============================================================================
 let lteTimerInterval = null;
+let currentActiveEvent = null; // Memori cache untuk menyimpan acara aktif (Mengelakkan spam log)
 
 // Semak acara yang sedang berlangsung berdasarkan tarikh hari ini
 function getCurrentEvent() {
     const now = new Date(); 
-    console.log("🔍 [LTE] Memulakan semakan event. Waktu sistem sekarang:", now.toString());
-        
+    
     if (typeof EVENT_CALENDAR === 'undefined') {
         console.error("❌ [LTE] Ralat Kritikal: Variabel 'EVENT_CALENDAR' langsung tidak dijumpai dalam skop fail ini!");
         return null;
     }
 
+    // Cari acara yang bertindih dengan tarikh peranti sekarang
     const matchedEvent = EVENT_CALENDAR.find(event => {
         const start = new Date(event.startDate);
         const end = new Date(event.endDate);
-        const isHappening = now >= start && now <= end; 
-        
-        // Log penjejak khusus untuk memastikan tarikh Jun 2026 dikesan betul
-        if (event.name.includes("Pertengahan") || isHappening) {
-            console.log(`📅 [LTE] Menilai: "${event.name}"\n` +
-                        `   👉 Tarikh Mula  : ${event.startDate} (Parsed: ${start})\n` +
-                        `   👉 Tarikh Tamat : ${event.endDate} (Parsed: ${end})\n` +
-                        `   👉 Status Semasa: Lepas Tarikh Mula? ${now >= start} | Sebelum Tarikh Tamat? ${now <= end} | Keputusan -> ${isHappening}`);
-        }
-        return isHappening;
+        return now >= start && now <= end; 
     });
 
-    console.log("🎯 [LTE] Hasil carian event semasa:", matchedEvent ? `Acara Aktif: "${matchedEvent.name}"` : "TIADA ACARA AKTIF UNTUK TARIKH HARI INI");
+    // LOG SELESAI: Log hanya dicetak SEKALI sahaja semasa fungsi ini dipanggil (Bukan setiap saat)
+    if (matchedEvent) {
+        console.log(`🎯 [LTE] Acara Aktif Dikesan: "${matchedEvent.name}" | Jenis: ${matchedEvent.rewardType}`);
+    } else {
+        console.log("🎯 [LTE] Hasil carian: Tiada sebarang acara aktif untuk tarikh hari ini.");
+    }
+
     return matchedEvent;
 }
 
-// Fungsi utama kemas kini paparan widget LTE
-function updateLTEWidget() {
-    const activeEvent = getCurrentEvent();
+// Fungsi utama untuk setup teks statik, ikon ganjaran dan paparan widget
+function setupLTEWidget() {
+    // Ambil data acara aktif dan simpan dalam memori global cache
+    currentActiveEvent = getCurrentEvent();
+    
     const widgetDOM = document.getElementById('lte-active-widget');
     const titleDOM = document.getElementById('lte-widget-title');
-    const timerDOM = document.getElementById('lte-widget-timer');
+    const iconDOM = document.getElementById('lte-widget-icon'); // Elemen emoji (jika ada)
 
     // Pengesan ralat elemen HTML jika ID tidak sepadan
     if (!widgetDOM) {
@@ -5148,75 +5261,126 @@ function updateLTEWidget() {
         return;
     }
 
-    // 1. Sembunyikan widget jika tiada acara aktif
-    if (!activeEvent) {
+    // 1. Sembunyikan widget jika tiada acara aktif untuk bulan ini
+    if (!currentActiveEvent) {
         if (!widgetDOM.classList.contains('hidden')) {
-            console.log("🙈 [LTE] Tiada acara dikesan aktif. Menyembunyikan widget dari paparan murid.");
+            console.log("🙈 [LTE] Tiada acara aktif dikesan. Menyembunyikan widget dari paparan murid.");
             widgetDOM.classList.add('hidden');
         }
+        if (lteTimerInterval) clearInterval(lteTimerInterval);
         return;
     }
 
     // 2. Paparkan widget jika ada acara aktif
     if (widgetDOM.classList.contains('hidden')) {
-        console.log("👀 [LTE] Acara aktif dikesan! Membuka paparan widget (membuang kelas 'hidden').");
+        console.log(`👀 [LTE] Acara aktif "${currentActiveEvent.name}" dikesan! Membuka paparan widget.`);
         widgetDOM.classList.remove('hidden');
     }
 
-    // 3. Format teks ganjaran berdasarkan rewardType
+    // 3. Format teks ganjaran & Emoji dinamik berdasarkan kalendar 12 Bulan Cikgu
     let rewardText = "";
-    switch(activeEvent.rewardType) {
-        case 'xp_buff': rewardText = `(${activeEvent.rewardValue}x XP)`; break;
-        case 'coins_buff': rewardText = `(${activeEvent.rewardValue}x Koin)`; break;
-        case 'no_penalty': rewardText = `(Zon Kebal Boss)`; break;
-        case 'shop_discount': rewardText = `(Diskaun Kedai ${(1 - activeEvent.rewardValue) * 100}%)`; break;
-        case 'custom_title': rewardText = `(Misi Gelaran)`; break;
-        case 'custom_avatar': rewardText = `(Misi Avatar)`; break;
-        case 'custom_border': rewardText = `(Misi Bingkai)`; break;
-        case 'event_badge': rewardText = `(Misi Lencana)`; break;
-        default: rewardText = `(Misi Khas)`;
+    let emojiIcon = "🔥"; 
+    
+    switch(currentActiveEvent.rewardType) {
+        case 'xp_buff': 
+            rewardText = `(${currentActiveEvent.rewardValue}x XP)`; 
+            emojiIcon = "⚡";
+            break;
+        case 'coins_buff': 
+            rewardText = `(${currentActiveEvent.rewardValue}x Koin)`; 
+            emojiIcon = "💰";
+            break;
+        case 'no_penalty': 
+            rewardText = `(Zon Kebal Boss)`; 
+            emojiIcon = "🛡️";
+            break;
+        case 'shop_discount': 
+            rewardText = `(Diskaun Kedai ${(1 - currentActiveEvent.rewardValue) * 100}%)`; 
+            emojiIcon = "🏷️";
+            break;
+        case 'custom_title': 
+            rewardText = `(Misi Gelaran)`; 
+            emojiIcon = "🎖️";
+            break;
+        case 'custom_avatar': 
+            rewardText = `(Misi Avatar)`; 
+            emojiIcon = "🖼️";
+            break;
+        case 'custom_border': 
+            rewardText = `(Misi Bingkai)`; 
+            emojiIcon = "🔲";
+            break;
+        case 'event_badge': 
+            rewardText = `(Misi Lencana)`; 
+            emojiIcon = "🏅";
+            break;
+        default: 
+            rewardText = `(Misi Khas)`;
+            emojiIcon = "🔥";
     }
 
+    // Suntik Teks Nama dan Ganjaran Acara
     if (titleDOM) {
-        titleDOM.innerText = `${activeEvent.name} ${rewardText}`;
+        titleDOM.innerText = `${currentActiveEvent.name} ${rewardText}`;
+    }
+    
+    // Suntik Emoji Dinamik (Jika Cikgu menyediakan id="lte-widget-icon" pada HTML)
+    if (iconDOM) {
+        iconDOM.innerText = emojiIcon;
     }
 
-    // 4. Kira Baki Masa (Countdown Timer)
-    const now = new Date();
-    const endDate = new Date(activeEvent.endDate);
-    const timeDiff = endDate - now;
+    // 4. Mulakan pemasa countdown baki masa (Sifar Log)
+    startLteCountdown();
+}
 
-    if (timeDiff <= 0) {
-        console.log("⌛ [LTE] Tempoh masa acara telah tamat secara rasmi.");
-        if (timerDOM) timerDOM.innerText = "Telah Tamat!";
-        clearInterval(lteTimerInterval);
-        setTimeout(initLTE, 2000); 
-        return;
-    }
+// Fungsi Pemasa: Hanya fokus mengira baki masa setiap saat (Jimat CPU & Bebas Spam)
+// Fungsi Pemasa: Hanya fokus mengira baki masa setiap saat (Jimat CPU & Bebas Spam)
+function startLteCountdown() {
+    const timerDOM = document.getElementById('lte-widget-timer');
+    if (!timerDOM || !currentActiveEvent) return;
 
-    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+    const endDate = new Date(currentActiveEvent.endDate);
 
-    let timerText = "⏳ ";
-    if (days > 0) timerText += `${days}H `;
-    timerText += `${hours}J ${minutes}M ${seconds}S`;
+    if (lteTimerInterval) clearInterval(lteTimerInterval);
 
-    if (timerDOM) {
+    lteTimerInterval = setInterval(() => {
+        const now = new Date();
+        const timeDiff = endDate - now;
+
+        // Jika masa tamat semasa murid sedang melihat dashboard
+        if (timeDiff <= 0) {
+            console.log("⌛ [LTE] Tempoh masa acara telah tamat secara rasmi.");
+            timerDOM.innerText = "Telah Tamat!";
+            clearInterval(lteTimerInterval);
+            
+            // Tunggu 2 saat, kemudian semak semula konfigurasi (kot ada event baharu bermula)
+            setTimeout(setupLTEWidget, 2000); 
+            return;
+        }
+
+        // Pengiraan Hari, Jam, Minit, Saat
+        const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+        let timerText = "⏳ ";
+        if (days > 0) timerText += `${days}H `;
+        timerText += `${hours}J ${minutes}M ${seconds}S`;
+
+        // Kemaskini DOM masa sahaja (Tiada console.log di sini, bermakna tiada lagi spam!)
         timerDOM.innerText = timerText;
-    }
+    }, 1000);
 }
 
 // Fungsi inisialisasi yang dipanggil semasa Dashboard dimuatkan
 function initLTE() {
-    console.log("🚀 [LTE] Fungsi initLTE() mula dicetuskan!");
+    console.log("🚀 [LTE] Sistem pengurusan automatik 12 bulan diaktifkan!");
     
     if (lteTimerInterval) {
         clearInterval(lteTimerInterval);
     }
     
-    updateLTEWidget();
-    lteTimerInterval = setInterval(updateLTEWidget, 1000);
-    console.log("⏱️ [LTE] Pendaftaran pemasa 1 saat berjaya dibuat!");
+    // Jalankan penetapan teks widget dan mulakan countdown
+    setupLTEWidget();
 }
