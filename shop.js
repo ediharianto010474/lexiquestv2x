@@ -140,25 +140,48 @@ function renderInventoryHTML(kategoriPilihan, container) {
     itemsToDisplay.forEach(item => {
         const isOutOfStock = item.stock <= 0;
         
-        // Tentukan fungsi butang
+        // ==========================================
+        // ✨ LOGIK LTE: SEMAK & KIRA DISKAUN KEDAI
+        // ==========================================
+        let hargaPapar = item.price;
+        let ribonDiskaunHTML = ""; 
+
+        if (typeof currentActiveEvent !== 'undefined' && currentActiveEvent !== null && currentActiveEvent.rewardType === 'shop_discount') {
+            const kadarDiskaun = currentActiveEvent.rewardValue; // Cth: 0.5 (50%)
+            hargaPapar = Math.floor(item.price * kadarDiskaun);
+            
+            // Bina ribon diskaun di penjuru kiri kad
+            const peratusPotongan = (1 - kadarDiskaun) * 100;
+            ribonDiskaunHTML = `
+                <div class="absolute top-3 left-[-25px] bg-red-500 text-white text-[9px] font-black px-8 py-1.5 -rotate-45 shadow-sm z-10 animate-pulse">
+                    -${peratusPotongan}%
+                </div>
+            `;
+        }
+        
+        // Tentukan fungsi butang (Hantar 'item.price' harga asal. Fungsi processShopPurchase akan kira semula demi keselamatan)
         const actionClick = kategoriPilihan === 'gift' 
             ? `processShopPurchase('${item.id}', '${item.name}', ${item.price}, 'gift')`
             : `processShopPurchase('${item.id}', '${item.name}', ${item.price}, 'self')`;
 
         html += `
         <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 flex flex-col items-center text-center relative overflow-hidden hover:shadow-md transition-shadow">
-            ${isOutOfStock ? `<div class="absolute top-3 right-[-25px] bg-red-500 text-white text-[10px] font-black px-8 py-1.5 rotate-45">HABIS</div>` : ''}
-            
-            <div class="w-14 h-14 bg-indigo-50 text-indigo-500 rounded-full flex items-center justify-center text-2xl mb-2">
+            ${isOutOfStock ? `<div class="absolute top-3 right-[-25px] bg-red-500 text-white text-[10px] font-black px-8 py-1.5 rotate-45 z-10">HABIS</div>` : ''}
+            ${ribonDiskaunHTML} <div class="w-14 h-14 bg-indigo-50 text-indigo-500 rounded-full flex items-center justify-center text-2xl mb-2">
                 <i class="${item.icon || 'fas fa-gift'}"></i>
             </div>
             <h4 class="font-bold text-gray-800 text-xs mb-1">${item.name}</h4>
             <p class="text-[9px] text-gray-400 mb-3 h-8 overflow-hidden">${item.desc || ''}</p>
             
             <div class="w-full flex justify-between items-center mt-auto pt-2 border-t">
-                <div class="font-black text-yellow-600 flex items-center gap-1 text-xs">
-                    <i class="fas fa-coins"></i> ${item.price}
+                
+                <div class="font-black flex flex-col items-start gap-0.5 text-xs">
+                    <div class="text-yellow-600 flex items-center gap-1">
+                        <i class="fas fa-coins"></i> ${hargaPapar}
+                    </div>
+                    ${hargaPapar < item.price ? `<span class="text-[9px] text-gray-400 line-through ml-1">${item.price}</span>` : ''}
                 </div>
+
                 <span class="text-[9px] font-bold px-2 py-0.5 rounded ${isOutOfStock ? 'bg-red-50 text-red-500' : 'bg-green-50 text-green-600'}">
                     Stok: ${item.stock}
                 </span>
@@ -180,8 +203,23 @@ function renderInventoryHTML(kategoriPilihan, container) {
 // 📥 3. LOGIK PEMBELIAN & PENJANAAN KOD 
 // ==========================================
 async function processShopPurchase(itemID, itemName, price, purchaseType = 'self') {
-    if (localPlayerData.coins < price) {
-        return Swal.fire('🪙 Koin Tidak Cukup!', 'Main lebih banyak game untuk kumpul koin ya!', 'error');
+    // ==========================================
+    // ✨ LOGIK LTE: ANTI-CHEAT PENGIRAAN HARGA
+    // ==========================================
+    let finalPrice = price; // Anggap 'price' adalah harga asal (100%)
+    let isDiscounted = false;
+
+    // Semak dan potong harga secara paksa jika event diskaun sedang aktif
+    if (typeof currentActiveEvent !== 'undefined' && currentActiveEvent !== null && currentActiveEvent.rewardType === 'shop_discount') {
+        const kadarDiskaun = currentActiveEvent.rewardValue;
+        finalPrice = Math.floor(price * kadarDiskaun);
+        isDiscounted = true;
+        console.log(`🛡️ [Sistem Kedai] Diskaun aktif dikesan. Harga asal ${price} diselaraskan ke ${finalPrice}.`);
+    }
+
+    // 0. SEMAKAN BAKI SYILING (Gunakan finalPrice, BUKAN price asal)
+    if (localPlayerData.coins < finalPrice) {
+        return Swal.fire('🪙 Koin Tidak Cukup!', `Anda perlukan ${finalPrice} koin untuk transaksi ini!`, 'error');
     }
 
     try {
@@ -233,10 +271,10 @@ async function processShopPurchase(itemID, itemName, price, purchaseType = 'self
             targetStudentName = optionsHtml[selectedPlayerDocId];
             notificationMsg = `Anda mendapat hadiah ${itemName} daripada ${localPlayerData.name.toUpperCase()}! 🎉`;
         } else {
-            // Confirm popup untuk beli sendiri
+            // Confirm popup untuk beli sendiri (Paparkan harga akhir kepada murid)
             const confirmResult = await Swal.fire({
                 title: 'Sahkan Pembelian',
-                text: `Beli ${itemName} dengan harga ${price} koin?`,
+                text: `Beli ${itemName} dengan harga ${finalPrice} koin? ${isDiscounted ? '(✨ Harga Diskaun!)' : ''}`,
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Ya, Beli!',
@@ -245,9 +283,9 @@ async function processShopPurchase(itemID, itemName, price, purchaseType = 'self
             if (!confirmResult.isConfirmed) return;
         }
 
-        // 3. TOLAK KOIN (LOKAL & CLOUD) DAN STOK (CLOUD)
-        localPlayerData.coins -= price;
-        if (window.Trackers) Trackers.rekodKoinBelanja(price);
+        // 3. TOLAK KOIN (LOKAL & CLOUD) DAN STOK (CLOUD) - Guna finalPrice
+        localPlayerData.coins -= finalPrice;
+        if (window.Trackers) Trackers.rekodKoinBelanja(finalPrice);
         
         localStorage.setItem('currentPlayer', JSON.stringify(localPlayerData));
         if (typeof updateUI === 'function') updateUI();
@@ -255,10 +293,10 @@ async function processShopPurchase(itemID, itemName, price, purchaseType = 'self
         const uniqueClaimCode = generateRedemptionCode(purchaseType === 'gift' ? 'GIFT' : 'EDU');
         const myDocId = `${localPlayerData.school || 'SK_DEFAULT'}_${localPlayerData.class || '-'}_${localPlayerData.name.trim().toUpperCase()}`.replace(/\s+/g, '_');
         
-        // Kemas kini pembeli
+        // Kemas kini pembeli di Firestore (Guna finalPrice)
         await db.collection("players").doc(myDocId).update({
-            coins: firebase.firestore.FieldValue.increment(-price),
-            totalSpent: firebase.firestore.FieldValue.increment(price)
+            coins: firebase.firestore.FieldValue.increment(-finalPrice),
+            totalSpent: firebase.firestore.FieldValue.increment(finalPrice)
         });
 
         // Potong stok barang
@@ -285,7 +323,7 @@ async function processShopPurchase(itemID, itemName, price, purchaseType = 'self
             });
         }
 
-        // 5. SELESAI & PAPARKAN KOD KEPADA MURID
+        // 5. SELESAI & PAPARKAN KOD KEPADA MURID (Paparkan finalPrice dalam resit)
         Swal.fire({
             title: purchaseType === 'gift' ? '🎁 HADIAH DIHANTAR!' : '🛍️ PEMBELIAN BERJAYA!',
             html: `
@@ -294,7 +332,7 @@ async function processShopPurchase(itemID, itemName, price, purchaseType = 'self
                     <p class="text-2xl font-black text-indigo-900 tracking-widest my-1">${uniqueClaimCode}</p>
                     <p class="text-[10px] text-gray-500">Tunjukkan kod ini kepada Cikgu untuk menuntut barang.</p>
                 </div>
-                <p class="text-xs text-gray-500">${purchaseType === 'gift' ? `Koin anda ditolak ${price}. Hadiah telah dipindahkan ke profil ${targetStudentName}.` : `Koin telah ditolak. Sila semak tab 'Inventori' anda.`}</p>
+                <p class="text-xs text-gray-500">${purchaseType === 'gift' ? `Koin anda ditolak ${finalPrice}. Hadiah telah dipindahkan ke profil ${targetStudentName}.` : `Koin telah ditolak sebanyak ${finalPrice}. Sila semak tab 'Inventori' anda.`}</p>
             `,
             icon: 'success',
             confirmButtonColor: '#22c55e'
@@ -462,7 +500,7 @@ function checkMedalRequirement(reqType, reqValue) {
 }
 
 // ==========================================
-// 🏆 4. LOGIK KEDAI LENCANA (BADGES SHOP) - TERKEMASKINI 100% KALIS RALAT
+// 🏆 4. LOGIK KEDAI LENCANA (BADGES SHOP) - TERKEMASKINI 100% KALIS RALAT & LTE
 // ==========================================
 async function loadMedalShop(kategoriPilihan = 'all') {
     const container = document.getElementById('medal-shop-container');
@@ -537,12 +575,29 @@ async function loadMedalShop(kategoriPilihan = 'all') {
         const isOwned = playerInventory.includes(item.id);
         const isUnlocked = checkMedalRequirement(item.reqType, item.reqValue);
 
+        // ==========================================
+        // ✨ LOGIK LTE: SEMAK & KIRA DISKAUN KEDAI LENCANA
+        // ==========================================
+        let hargaPapar = item.price;
+        let lencanaDiskaunHTML = ""; 
+
+        if (typeof currentActiveEvent !== 'undefined' && currentActiveEvent !== null && currentActiveEvent.rewardType === 'shop_discount') {
+            const kadarDiskaun = currentActiveEvent.rewardValue; 
+            hargaPapar = Math.floor(item.price * kadarDiskaun);
+            
+            const peratusPotongan = Math.round((1 - kadarDiskaun) * 100);
+            lencanaDiskaunHTML = `
+                <div class="absolute top-3 left-[-25px] bg-red-500 text-white text-[9px] font-black px-8 py-1.5 -rotate-45 shadow-sm z-10 animate-pulse">
+                    -${peratusPotongan}%
+                </div>
+            `;
+        }
+
         let buttonHTML = '';
         
         // --- ⚙️ LANGKAH 2: LOGIK BUTANG BERDASARKAN STATUS (KALIS RALAT) ---
         if (isOwned) {
             if (item.isPhysical) {
-                // Kalis Ralat: Hanya semak ID jika cachedUserClaims sudah wujud (tidak null)
                 const claimStatus = cachedUserClaims ? cachedUserClaims[item.id] : null;
 
                 if (claimStatus === "Sudah Dituntut") {
@@ -555,8 +610,13 @@ async function loadMedalShop(kategoriPilihan = 'all') {
             }
         } 
         else if (isUnlocked) {
-            // Pastikan kita hantar flag isPhysical ke dalam fungsi buyMedal
-            buttonHTML = `<button onclick="buyMedal('${item.id}', ${item.price}, \`${item.name}\`, ${item.isPhysical || false})" class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-sm transition shadow-md active:scale-95">Beli: ${item.price} Koin</button>`;
+            // Bina teks dalam butang beli supaya menampakkan harga potong jika ada diskaun
+            let teksButang = hargaPapar < item.price 
+                ? `Beli: <span class="line-through text-blue-300 mr-1 text-[10px]">${item.price}</span> ${hargaPapar} Koin` 
+                : `Beli: ${item.price} Koin`;
+
+            // Hantar item.price asal kepada fungsi transaksi buyMedal
+            buttonHTML = `<button onclick="buyMedal('${item.id}', ${item.price}, \`${item.name}\`, ${item.isPhysical || false})" class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-sm transition shadow-md active:scale-95">${teksButang}</button>`;
         } 
         else {
             buttonHTML = `<button class="w-full py-2 bg-gray-200 text-gray-500 rounded-lg cursor-not-allowed font-bold text-[11px]" disabled><i class="fas fa-lock mr-1"></i>Terkunci</button>`;
@@ -566,8 +626,8 @@ async function loadMedalShop(kategoriPilihan = 'all') {
         const badgeImage = item.image ? item.image : "assets/badges/default.webp";
 
         const card = `
-            <div class="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-2 ${isUnlocked ? 'border-blue-200' : 'border-gray-100'} text-center relative flex flex-col h-full justify-between">
-                <div>
+            <div class="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-2 ${isUnlocked ? 'border-blue-200' : 'border-gray-100'} text-center relative flex flex-col h-full justify-between overflow-hidden">
+                ${lencanaDiskaunHTML} <div>
                     ${item.isPhysical ? `<div class="bg-orange-500 text-white text-[8px] font-black rounded px-2 py-0.5 absolute top-2 right-2 z-10 shadow-sm">PIN FIZIKAL</div>` : ''}
                     <div class="w-20 h-20 mx-auto mb-3 bg-gray-50 rounded-full flex items-center justify-center relative overflow-hidden shadow-inner">
                         <img src="${badgeImage}" alt="${item.name}" class="w-14 h-14 object-contain transition-all duration-500 ${isUnlocked ? 'drop-shadow-md hover:scale-110' : 'grayscale opacity-30'}">
@@ -584,30 +644,47 @@ async function loadMedalShop(kategoriPilihan = 'all') {
 }
 
 // ==========================================
-// FUNGSI PEMBELIAN LENCANA 
+// FUNGSI PEMBELIAN LENCANA (TERKEMASKINI LTE DISKAUN)
 // ==========================================
 async function buyMedal(id, price, name, isPhysical = false) {
-    if (localPlayerData.coins < price) {
-        Swal.fire('Koin Tidak Cukup!', 'Teruskan bermain untuk kumpul koin.', 'error');
+    // ==========================================
+    // ✨ LOGIK LTE: ANTI-CHEAT PENGIRAAN HARGA
+    // ==========================================
+    let finalPrice = price; // Anggap 'price' adalah harga asal (100%)
+    let isDiscounted = false;
+
+    // Semak dan potong harga secara paksa jika event diskaun sedang aktif
+    if (typeof currentActiveEvent !== 'undefined' && currentActiveEvent !== null && currentActiveEvent.rewardType === 'shop_discount') {
+        const kadarDiskaun = currentActiveEvent.rewardValue;
+        finalPrice = Math.floor(price * kadarDiskaun);
+        isDiscounted = true;
+        console.log(`🛡️ [Kedai Lencana] Diskaun aktif dikesan. Harga asal ${price} diselaraskan ke ${finalPrice}.`);
+    }
+
+    // 0. SEMAKAN BAKI SYILING (Gunakan finalPrice, BUKAN price asal)
+    if (localPlayerData.coins < finalPrice) {
+        Swal.fire('🪙 Koin Tidak Cukup!', `Anda perlukan ${finalPrice} koin untuk memiliki lencana ini.`, 'error');
         return;
     }
 
     const confirmResult = await Swal.fire({
         title: 'Beli Lencana ini?',
-        text: `Adakah anda ingin membeli ${name} dengan harga ${price} koin?`,
+        text: `Adakah anda ingin membeli ${name} dengan harga ${finalPrice} koin? ${isDiscounted ? '(✨ Harga Diskaun!)' : ''}`,
         icon: 'question',
         showCancelButton: true,
-        confirmButtonText: 'Ya, Milikinya!'
+        confirmButtonText: 'Ya, Milikinya!',
+        confirmButtonColor: '#4f46e5'
     });
 
     if (!confirmResult.isConfirmed) return;
 
     try {
-        localPlayerData.coins -= price;
+        // 1. TOLAK KOIN LOKAL (Guna finalPrice)
+        localPlayerData.coins -= finalPrice;
         
         // Rekodkan koin yang dibelanjakan ke dalam Tracker
         if (window.Trackers) {
-            Trackers.rekodKoinBelanja(price);
+            Trackers.rekodKoinBelanja(finalPrice);
         }
         
         if (!localPlayerData.inventory) localPlayerData.inventory = [];
@@ -616,9 +693,10 @@ async function buyMedal(id, price, name, isPhysical = false) {
         localStorage.setItem('currentPlayer', JSON.stringify(localPlayerData));
         if (typeof updateUI === 'function') updateUI();
 
+        // 2. KEMASKINI FIREBASE CLOUD (Guna finalPrice)
         const myDocId = `${localPlayerData.school || 'SK_DEFAULT'}_${localPlayerData.class || '-'}_${localPlayerData.name.trim().toUpperCase()}`.replace(/\s+/g, '_');
         await db.collection("players").doc(myDocId).update({
-            coins: firebase.firestore.FieldValue.increment(-price),
+            coins: firebase.firestore.FieldValue.increment(-finalPrice),
             inventory: firebase.firestore.FieldValue.arrayUnion(id)
         });
 
@@ -649,12 +727,12 @@ async function buyMedal(id, price, name, isPhysical = false) {
                         <p class="text-xs text-yellow-700 font-bold uppercase">Kod Pin Fizikal Anda</p>
                         <p class="text-2xl font-black text-yellow-900 tracking-wider">${claimCode}</p>
                     </div>
-                    <p class="text-[11px] text-gray-500">Bawa kod ini berjumpa Cikgu untuk mendapatkan lencana sebenar.</p>
+                    <p class="text-[11px] text-gray-500">Bawa kod ini berjumpa Cikgu untuk mendapatkan lencana sebenar. <br/>(Koin ditolak: ${finalPrice})</p>
                 `,
                 icon: 'success'
             });
         } else {
-            Swal.fire('🎉 KINI DIAKTIFKAN!', `Lencana digital ${name} telah diaktifkan pada papan profil anda!`, 'success');
+            Swal.fire('🎉 KINI DIAKTIFKAN!', `Lencana digital ${name} telah diaktifkan pada papan profil anda! (Koin ditolak: ${finalPrice})`, 'success');
         }
 
         loadMedalShop();
@@ -743,7 +821,7 @@ async function requestPhysicalBadge(id, name) {
 }
 
 // ==========================================
-// 👤 5. PAPARAN KEDAI AVATAR DIGITAL (BERANTAI)
+// 👤 5. PAPARAN KEDAI AVATAR DIGITAL (BERANTAI & LTE DISKAUN)
 // ==========================================
 function loadAvatarShop() {
     const container = document.getElementById('avatar-shop-items');
@@ -761,8 +839,6 @@ function loadAvatarShop() {
         const category = avatars[key];
         
         // 🆕 LOGIK BERANTAI: Semak jika murid sudah memiliki avatar dari kategori ini
-        // Kita cari avatar tahap (level) paling tinggi yang dimiliki murid dalam kategori semasa.
-        // Jika belum ada, tahap tertinggi yang dimiliki dianggap 0.
         let highestOwnedLevel = 0;
         category.levels.forEach(item => {
              const itemKey = `${key}_lvl${item.level}`;
@@ -782,24 +858,40 @@ function loadAvatarShop() {
             const isLevelLocked = playerLevel < item.level; // Kunci berdasarkan profil level
             
             // 🆕 LOGIK BERANTAI: Kunci evolusi!
-            // Jika ia bukan avatar level pertama (index > 0), dan murid BELUM memiliki avatar tahap sebelumnya, KUNCI ia.
             let isEvolutionLocked = false;
             let previousLevelRequired = 0;
             
             if (i > 0) {
                  const previousItem = category.levels[i-1];
-                 previousLevelRequired = previousItem.level; // Simpan maklumat tahap sebelumnya untuk dipapar di butang
+                 previousLevelRequired = previousItem.level; 
                  
-                 // Kunci jika tahap tertinggi yang dimiliki lebih rendah daripada tahap *sebelum* item ini.
                  if (highestOwnedLevel < previousLevelRequired) {
                      isEvolutionLocked = true;
                  }
             }
 
+            // ==========================================
+            // ✨ LOGIK LTE: KIRA DISKAUN KEDAI AVATAR
+            // ==========================================
+            let hargaPapar = item.price;
+            let diskaunHTML = "";
+
+            if (typeof currentActiveEvent !== 'undefined' && currentActiveEvent !== null && currentActiveEvent.rewardType === 'shop_discount') {
+                const kadarDiskaun = currentActiveEvent.rewardValue;
+                hargaPapar = Math.floor(item.price * kadarDiskaun);
+                
+                const peratusPotongan = Math.round((1 - kadarDiskaun) * 100);
+                diskaunHTML = `
+                    <div class="absolute top-3 left-[-25px] bg-red-500 text-white text-[9px] font-black px-8 py-1.5 -rotate-45 shadow-sm z-10 animate-pulse pointer-events-none">
+                        -${peratusPotongan}%
+                    </div>
+                `;
+            }
+
             const safeImg = item.img ? item.img : '';
             const safeIcon = item.icon ? item.icon : '';
 
-            // Visual avatar akan dimalapkan (grayscale) jika dikunci oleh level atau rantaian evolusi
+            // Visual avatar akan dimalapkan (grayscale) jika dikunci
             const visual = item.img 
                 ? `<img src="assets/avatars/${item.img}" class="w-20 h-20 object-contain mb-2 ${(isLevelLocked || isEvolutionLocked) ? 'grayscale opacity-50' : ''}">`
                 : `<div class="w-14 h-14 ${(isLevelLocked || isEvolutionLocked) ? 'bg-gray-200 text-gray-400' : 'bg-blue-50 text-blue-600'} rounded-full flex items-center justify-center text-2xl mb-2 shadow-inner"><i class="${(isLevelLocked || isEvolutionLocked) ? 'fas fa-lock' : item.icon}"></i></div>`;
@@ -807,16 +899,13 @@ function loadAvatarShop() {
             let buttonHtml = "";
             
             if (isOwned) {
-                // Murid sudah beli, tunjuk butang Guna
                 buttonHtml = `<button onclick="equipAvatar('${safeImg}', '${safeIcon}', '${item.name}')" class="mt-3 w-full py-2 bg-green-500 text-white rounded-xl font-bold text-[10px] hover:bg-green-600 shadow-md">GUNA AVATAR</button>`;
             } else if (isEvolutionLocked) {
-                // 🆕 Butang dikunci sebab tak ikut turutan (perlu beli tahap sebelumnya)
                 buttonHtml = `<button class="mt-3 w-full py-2 bg-slate-300 text-slate-500 rounded-xl font-bold text-[10px] cursor-not-allowed" disabled>BELI LVL ${previousLevelRequired} DAHULU</button>`;
             } else if (isLevelLocked) {
-                // Butang dikunci sebab level profil tak cukup
                 buttonHtml = `<button class="mt-3 w-full py-2 bg-gray-200 text-gray-400 rounded-xl font-bold text-[10px] cursor-not-allowed" disabled>LVL ${item.level} DIPERLUKAN</button>`;
             } else {
-                // Butang sedia dibeli!
+                // Harga asal (item.price) dihantar ke fungsi buyAvatar untuk tapisan Anti-Cheat
                 buttonHtml = `<button onclick="buyAvatar('${key}', ${item.level}, ${item.price}, '${item.name}')" class="mt-3 w-full py-2 bg-indigo-600 text-white rounded-xl font-bold text-[10px] hover:bg-indigo-700 shadow-md">BELI GUARDIAN</button>`;
             }
 
@@ -827,17 +916,25 @@ function loadAvatarShop() {
             if (isEvolutionLocked) { badgeText = 'PERLU EVOLUSI'; badgeClass = 'bg-slate-400'; }
             else if (isLevelLocked) { badgeText = 'TERKUNCI'; badgeClass = 'bg-gray-400'; }
 
+            // Logik Paparan Harga (Strikethrough jika diskaun)
+            let paparanHargaHTML = isOwned 
+                ? 'DIMILIKI' 
+                : (hargaPapar < item.price 
+                    ? `<span class="line-through text-gray-400 text-[10px] mr-1">${item.price}</span> <i class="fas fa-coins text-yellow-600"></i> ${hargaPapar}` 
+                    : `<i class="fas fa-coins text-yellow-600"></i> ${item.price}`);
+
             html += `
             <div class="bg-white rounded-3xl p-4 shadow-sm border flex flex-col items-center text-center relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full text-center ${badgeClass} text-white text-[8px] font-bold py-0.5 uppercase">
+                ${diskaunHTML}
+                <div class="absolute top-0 left-0 w-full text-center ${badgeClass} text-white text-[8px] font-bold py-0.5 uppercase z-0">
                     ${badgeText}
                 </div>
                 <div class="mt-3"></div>
                 ${visual}
                 <h4 class="font-bold text-xs ${(isLevelLocked || isEvolutionLocked) ? 'text-gray-400' : 'text-gray-800'} mb-1">${item.name}</h4>
                 
-                <div class="font-black ${isOwned ? 'text-green-500' : 'text-yellow-600'} text-xs mt-auto pt-2 border-t w-full text-center">
-                    ${isOwned ? 'DIMILIKI' : `<i class="fas fa-coins"></i> ${item.price}`}
+                <div class="font-black ${isOwned ? 'text-green-500' : 'text-yellow-600'} text-xs mt-auto pt-2 border-t w-full text-center z-10">
+                    ${paparanHargaHTML}
                 </div>
                 ${buttonHtml}
             </div>`;
@@ -846,21 +943,41 @@ function loadAvatarShop() {
     container.innerHTML = html;
 }
 
+// ==========================================
+// FUNGSI PEMBELIAN AVATAR (ANTI-CHEAT)
+// ==========================================
 function buyAvatar(category, level, price, name) {
-    if (localPlayerData.coins < price) {
-        Swal.fire('Koin Tidak Cukup!', 'Sila kumpul koin dahulu.', 'error');
+    // ✨ LOGIK LTE: ANTI-CHEAT
+    let finalPrice = price;
+    let isDiscounted = false;
+
+    if (typeof currentActiveEvent !== 'undefined' && currentActiveEvent !== null && currentActiveEvent.rewardType === 'shop_discount') {
+        const kadarDiskaun = currentActiveEvent.rewardValue;
+        finalPrice = Math.floor(price * kadarDiskaun);
+        isDiscounted = true;
+    }
+
+    if (localPlayerData.coins < finalPrice) {
+        Swal.fire('Koin Tidak Cukup!', `Sila kumpul ${finalPrice} koin dahulu untuk memiliki avatar ini.`, 'error');
         return;
     }
 
     Swal.fire({
         title: 'Beli Avatar?',
-        text: `Beli ${name} dengan harga ${price} koin?`,
+        text: `Beli ${name} dengan harga ${finalPrice} koin? ${isDiscounted ? '(✨ Harga Diskaun!)' : ''}`,
         icon: 'question',
         showCancelButton: true,
-        confirmButtonText: 'Ya, Beli'
+        confirmButtonText: 'Ya, Beli',
+        confirmButtonColor: '#4f46e5'
     }).then((result) => {
         if (result.isConfirmed) {
-            localPlayerData.coins -= price;
+            localPlayerData.coins -= finalPrice; // Tolak harga akhir (selepas diskaun)
+            
+            // Rekodkan koin yang dibelanjakan (Jika Cikgu ada sistem Tracker)
+            if (window.Trackers && typeof Trackers.rekodKoinBelanja === 'function') {
+                Trackers.rekodKoinBelanja(finalPrice);
+            }
+
             const itemKey = `${category}_lvl${level}`;
             if (!localPlayerData.inventory.includes(itemKey)) localPlayerData.inventory.push(itemKey);
             
@@ -868,7 +985,7 @@ function buyAvatar(category, level, price, name) {
             if (typeof saveCloudPlayerData === 'function') saveCloudPlayerData();
             if (typeof updateUI === 'function') updateUI();
             
-            // Refresh semula kedai untuk kemas kini butang
+            // Refresh semula kedai untuk kemas kini butang & rantaian evolusi
             loadAvatarShop();
             
             Swal.fire('Berjaya!', 'Avatar sedia digunakan.', 'success');
