@@ -898,12 +898,12 @@ function checkPlayerAlive() {
 }
 
 async function handleBossDefeated(slayerName) {
-    if (!slayerName || slayerName === 'undefined') {
+if (!slayerName || slayerName === 'undefined') {
         slayerName = (typeof currentBossData !== 'undefined' && currentBossData.final_blow_player) 
                      ? currentBossData.final_blow_player 
                      : "Wira Misteri";
     }
-    
+
     clearInterval(passiveAttackInterval);
     audioBGM.pause(); 
     if (typeof audioWin !== 'undefined') {
