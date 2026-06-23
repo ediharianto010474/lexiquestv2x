@@ -101,6 +101,47 @@
 </div>
         <!-- ========================================== -->
 
+		<div id="lte-info-modal" class="hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center animate-fade-in px-4"> 
+    <div class="bg-gradient-to-b from-indigo-950 via-slate-900 to-black border-2 border-amber-400/50 rounded-2xl shadow-[0_0_25px_rgba(147,51,234,0.4)] w-full max-w-sm relative overflow-hidden">       
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-50"></div>
+        <button onclick="closeLteModal()" class="absolute top-3 right-3 text-slate-400 hover:text-red-500 hover:scale-110 transition-all font-black text-xl drop-shadow-md z-10">
+            ✖
+        </button>
+
+        <div class="p-5 flex flex-col items-center text-center mt-2">
+            <div id="modal-lte-icon" class="text-5xl md:text-6xl mb-3 drop-shadow-[0_0_15px_rgba(250,204,21,0.6)] animate-bounce-slow">
+                🔥
+            </div>
+            <h3 id="modal-lte-title" class="text-base md:text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-500 uppercase tracking-wider mb-1 drop-shadow-sm">
+                Nama Acara
+            </h3>
+            <p id="modal-lte-desc" class="text-[10px] md:text-xs text-slate-300 font-medium mb-4 px-2 leading-relaxed">
+                Penerangan tentang acara akan dipaparkan di sini.
+            </p>
+
+            <div id="modal-lte-progress-section" class="w-full bg-black/40 border border-white/10 rounded-xl p-3 hidden">
+                <div class="flex justify-between items-center mb-1.5 px-1">
+                    <span class="text-[9px] md:text-[10px] font-bold text-indigo-300 uppercase tracking-widest">Progres Anda:</span>
+                    <span id="modal-lte-progress-text" class="text-[10px] md:text-xs font-black text-green-400 drop-shadow-[0_0_5px_rgba(74,222,128,0.5)]">
+                        0 / 15 Hari
+                    </span>
+                </div>
+                
+                <div class="w-full h-2.5 bg-slate-800 rounded-full border border-slate-700 overflow-hidden shadow-inner">
+                    <div id="modal-lte-progress-bar" class="h-full bg-gradient-to-r from-emerald-500 to-green-400 rounded-full transition-all duration-1000 w-0 relative">
+                        <div class="absolute top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
+                    </div>
+                </div>
+                
+                <p class="text-[8px] md:text-[9px] text-slate-400 mt-2 font-mono italic">
+                    *Log masuk dan main setiap hari untuk menambah progres.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+		
         <!-- BLOK PROFIL ASAL -->
         <div class="flex items-center gap-3">
             <div id="dashboard-avatar-container" onclick="openProfile()" class="w-16 h-16 md:w-20 md:h-20 flex flex-shrink-0 items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-300 drop-shadow-[0_8px_8px_rgba(0,0,0,0.3)] text-4xl md:text-5xl"></div>       
