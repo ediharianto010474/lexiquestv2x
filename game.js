@@ -5222,7 +5222,8 @@ let currentActiveEvent = null; // Memori cache untuk menyimpan acara aktif (Meng
 
 // Semak acara yang sedang berlangsung berdasarkan tarikh hari ini
 function getCurrentEvent() {
-    const now = new Date(); 
+    // const now = new Date();
+	const now = new Date("2026-07-15T12:00:00");
     
     if (typeof EVENT_CALENDAR === 'undefined') {
         console.error("❌ [LTE] Ralat Kritikal: Variabel 'EVENT_CALENDAR' langsung tidak dijumpai dalam skop fail ini!");
