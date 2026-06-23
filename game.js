@@ -5385,3 +5385,74 @@ function initLTE() {
     // Jalankan penetapan teks widget dan mulakan countdown
     setupLTEWidget();
 }
+
+// ============================================================================
+// FUNGSI POP-UP MODAL LTE (UI)
+// ============================================================================
+
+// Fungsi apabila widget LTE ditekan
+function handleWidgetClick() {
+    if (!currentActiveEvent) return;
+
+    // Ambil elemen HTML pop-up
+    const modal = document.getElementById('lte-info-modal');
+    const titleDOM = document.getElementById('modal-lte-title');
+    const descDOM = document.getElementById('modal-lte-desc');
+    const iconDOM = document.getElementById('modal-lte-icon');
+    const progressSection = document.getElementById('modal-lte-progress-section');
+    const progressText = document.getElementById('modal-lte-progress-text');
+    const progressBar = document.getElementById('modal-lte-progress-bar');
+
+    // 1. Tetapkan Tajuk & Ikon
+    titleDOM.innerText = currentActiveEvent.name;
+    
+    // Guna ikon yang sesuai dari fungsi setup sebelum ini (Mock up manual untuk testing)
+    iconDOM.innerText = currentActiveEvent.rewardType.includes('badge') ? "🏅" : 
+                        currentActiveEvent.rewardType.includes('avatar') ? "🖼️" : 
+                        currentActiveEvent.rewardType.includes('title') ? "🎖️" : "🔥";
+
+    // 2. Semak jenis acara (Adakah ia berasaskan hari terkumpul?)
+    if (currentActiveEvent.requiredDays) {
+        // --- INI ACARA BERASASKAN HARI ---
+        descDOM.innerText = `Log masuk dan selesaikan permainan selama ${currentActiveEvent.requiredDays} hari sepanjang tempoh acara untuk menuntut ganjaran istimewa ini!`;
+        
+        // Buka bahagian progres
+        progressSection.classList.remove('hidden');
+
+        // SEMENTARA UNTUK TESTING UI: Kita anggap murid dah main 5 hari
+        let mockMuridDays = 5; 
+        let targetDays = currentActiveEvent.requiredDays;
+        
+        progressText.innerText = `${mockMuridDays} / ${targetDays} Hari`;
+        
+        // Kira peratusan bar
+        let percent = (mockMuridDays / targetDays) * 100;
+        if (percent > 100) percent = 100;
+        
+        // Animasikan bar
+        setTimeout(() => {
+            progressBar.style.width = `${percent}%`;
+        }, 100);
+
+    } else {
+        // --- INI ACARA BIASA (Contoh: XP Boost, Coins Boost, No Penalty) ---
+        descDOM.innerText = "Acara sedang berlangsung! Nikmati ganjaran istimewa sepanjang tempoh ini tanpa perlu mengumpul hari.";
+        
+        // Tutup bahagian progres kerana ia tidak relevan
+        progressSection.classList.add('hidden');
+    }
+
+    // 3. Tunjukkan Modal
+    modal.classList.remove('hidden');
+}
+
+// Fungsi tutup modal
+function closeLteModal() {
+    const modal = document.getElementById('lte-info-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+        // Reset lebar bar untuk animasi seterusnya
+        const progressBar = document.getElementById('modal-lte-progress-bar');
+        if (progressBar) progressBar.style.width = "0%";
+    }
+}
