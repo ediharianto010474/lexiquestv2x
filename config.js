@@ -265,7 +265,7 @@ const EVENT_CALENDAR = [
 ];
 
 function getCurrentEvent() {
-    const now = new Date("2026-07-15T12:00:00"); 
+    const now = new Date(); 
     return EVENT_CALENDAR.find(event => {
         const start = new Date(event.startDate);
         const end = new Date(event.endDate);
