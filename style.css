@@ -247,13 +247,13 @@ body {
 
 #lte-active-widget {
     position: absolute;
-    top: 20px; 
-    left: 50%;
+    top: 100px; 
+    left: 90%;
     transform: translateX(-50%);
     z-index: 100;
     
     /* 🛠️ TAMBAHAN BARU UNTUK KECILKAN LEBAR */
-    max-width: 280px; /* 👈 Hadkan lebar kotak supaya tidak memanjang */
+    max-width: 250px; /* 👈 Hadkan lebar kotak supaya tidak memanjang */
     width: 100%;
     padding: 8px 12px; /* Nipiskan sedikit ketebalan kotak */
     text-align: center; /* Pastikan teks duduk di tengah */
@@ -263,12 +263,12 @@ body {
 
 /* 🛠️ TAMBAHAN UNTUK TULISAN DALAM WIDGET */
 #lte-widget-title {
-    font-size: 12px; /* 👈 Kecilkan sikit tulisan tajuk */
+    font-size: 9px; /* 👈 Kecilkan sikit tulisan tajuk */
     white-space: normal; /* 👈 Benarkan teks panjang turun ke baris bawah */
     line-height: 1.2;
     margin-bottom: 4px;
 }
 
 #lte-widget-timer {
-    font-size: 11px; /* 👈 Kecilkan sikit tulisan masa */
+    font-size: 9px; /* 👈 Kecilkan sikit tulisan masa */
 }
