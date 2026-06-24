@@ -3654,7 +3654,7 @@ function endGame() {
     // 3. Kira peratus markah
     const percentage = Math.round((score / totalQuestions) * 100);
 
-// ==========================================
+    // ==========================================
     // LOGIK SIMPAN MARKAH, XP & KOIN 💰 (TERKEMASKINI LTE BOOST)
     // ==========================================
     
@@ -3687,7 +3687,7 @@ function endGame() {
 
     // Tentukan pengganda (multiplier) kesukaran
     let multiplier = 1; // Default: Easy
-    if (currentGameType) {
+    if (typeof currentGameType !== 'undefined' && currentGameType) {
         if (allMedium.includes(currentGameType)) multiplier = 2;
         else if (allHard.includes(currentGameType)) multiplier = 3;
     }
@@ -3717,8 +3717,8 @@ function endGame() {
             console.log(`💰 LTE AKTIF: Syiling digandakan kepada ${coinsEarned}!`);
         }
         
-// HALUAN B: Ganjaran Jenis Kumpul Hari (Login & Play)
-        if (currentActiveEvent.requiredAction === "login_and_play") {
+        // HALUAN B: Ganjaran Jenis Kumpul Hari (Login & Play)
+        if (currentActiveEvent.requiredAction === "login_and_play" && typeof localPlayerData !== 'undefined') {
             if (!localPlayerData.lte_attendance) localPlayerData.lte_attendance = {};
             if (!localPlayerData.lte_attendance[currentActiveEvent.name]) {
                 localPlayerData.lte_attendance[currentActiveEvent.name] = {};
@@ -3737,17 +3737,14 @@ function endGame() {
             // 🎁 SISTEM PENGANUGERAHAN AUTOMATIK LTE (AUTO-GIFT)
             // =======================================================
             if (totalDaysPlayed >= currentActiveEvent.requiredDays) {
-                // Semak jika hadiah sudah pernah ditebus (untuk elak dapat dua kali)
                 let eventSafeName = currentActiveEvent.name.replace(/\s+/g, '_');
                 if (!localPlayerData.lte_claimed) localPlayerData.lte_claimed = {};
                 
                 if (!localPlayerData.lte_claimed[eventSafeName]) {
-                    
                     // 1. Hadiah Jenis Lencana (Badge & Title)
                     if (currentActiveEvent.rewardType === "custom_title" || currentActiveEvent.rewardType === "event_badge") {
                         if (!localPlayerData.inventory) localPlayerData.inventory = [];
                         
-                        // Tentukan ID lencana berpandukan bulan/event
                         let badgeIdToGive = "";
                         if (currentActiveEvent.name.includes("Pencarian Perintis")) badgeIdToGive = "lte_feb_2026";
                         if (currentActiveEvent.name.includes("Karnival Jaguh")) badgeIdToGive = "lte_jul_2026";
@@ -3762,7 +3759,6 @@ function endGame() {
                             console.log(`🎁 [AUTO-GIFT] Lencana ${badgeIdToGive} ditolak ke inventory!`);
                         }
                     }
-                    
                     // 2. Hadiah Jenis Avatar
                     else if (currentActiveEvent.rewardType === "custom_avatar") {
                         if (!localPlayerData.ownedAvatars) localPlayerData.ownedAvatars = [];
@@ -3777,7 +3773,6 @@ function endGame() {
                             console.log(`🎁 [AUTO-GIFT] Avatar ${avatarFile} ditambah!`);
                         }
                     }
-                    
                     // 3. Hadiah Jenis Border
                     else if (currentActiveEvent.rewardType === "custom_border") {
                         if (!localPlayerData.ownedBorders) localPlayerData.ownedBorders = [];
@@ -3801,15 +3796,14 @@ function endGame() {
     // Kemas kini ke dalam akaun tempatan (Dompet Murid)
     if (typeof localPlayerData !== 'undefined') {
         localPlayerData.totalScore = (parseInt(localPlayerData.totalScore) || 0) + pointsEarned;
-        localPlayerData.xp = (parseInt(localPlayerData.xp) || 0) + pointsEarned; // Pastikan XP diselaraskan dengan pointsEarned
+        localPlayerData.xp = (parseInt(localPlayerData.xp) || 0) + pointsEarned; 
         localPlayerData.coins = (parseInt(localPlayerData.coins) || 0) + coinsEarned;
 
-		// 🔥 PANGGIL FUNGSI REKOD KEHADIRAN LTE (FIRESTORE) DI SINI 🔥
+        // 🔥 PANGGIL FUNGSI REKOD KEHADIRAN LTE (FIRESTORE) DI SINI 🔥
         if (typeof updateLteProgress === "function") {
             updateLteProgress();
             console.log("Merekod progres LTE ke Firebase...");
         }
-    }
 
         // 🔥 MULTI-LEADERBOARD: SIMPAN XP MENGIKUT SUBJEK
         let currentType = (typeof currentGameType !== 'undefined' && currentGameType !== "") ? currentGameType.toLowerCase() : "";
@@ -3841,14 +3835,6 @@ function endGame() {
         if (todayDay === 0 || todayDay === 6) {
             localPlayerData.hasPlayedWeekend = true;
         }
-        
-        // 🎥 CCTV TRACKER (Rekod syiling yang telah di-boost)
-        if (window.Trackers) {
-            let isPerfect = (score === totalQuestions && totalQuestions > 0); 
-            let catNameForTracker = (typeof currentGameType !== 'undefined' && currentGameType !== "") ? currentGameType : "unknown_game";
-            Trackers.rekodTamatGame(catNameForTracker, score, isPerfect);
-            Trackers.rekodKoinDapat(coinsEarned); 
-        }
 
         // 🏆 SIMPAN MARKAH TERTINGGI (HIGH SCORE) KATEGORI (Asal)
         if (!localPlayerData.games) localPlayerData.games = {}; 
@@ -3867,13 +3853,21 @@ function endGame() {
             console.log(`⭐ Markah tertinggi baru untuk ${catName}: ${score}`);
         }
 
-        // Simpan & Hantar Data
+        // Simpan Data ke LocalStorage
         localStorage.setItem('currentPlayer', JSON.stringify(localPlayerData));
+        
+        // Hantar Data ke Cloud & Kemaskini UI
         if (typeof saveCloudPlayerData === 'function') saveCloudPlayerData();
         if (typeof updateUI === 'function') updateUI();
-        
-        // Kemaskini rupa kad widget LTE jika fungsi disediakan
         if (typeof updateJulyLteCardUI === 'function') updateJulyLteCardUI();
+    } // <-- Kurungan penutup localPlayerData diletakkan di sini dengan selamat
+
+    // 🎥 CCTV TRACKER (Rekod syiling yang telah di-boost)
+    if (window.Trackers) {
+        let isPerfect = (score === totalQuestions && totalQuestions > 0); 
+        let catNameForTracker = (typeof currentGameType !== 'undefined' && currentGameType !== "") ? currentGameType : "unknown_game";
+        Trackers.rekodTamatGame(catNameForTracker, score, isPerfect);
+        Trackers.rekodKoinDapat(coinsEarned); 
     }
 
     // 🎯 REKOD BUKU LOG KE FIREBASE
