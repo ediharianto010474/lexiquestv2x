@@ -910,7 +910,7 @@ function loadAvatarShop() {
             }
 
             // Status Badge di bahagian atas kad
-            let badgeText = category.theme;
+            let badgeText = category.theme || key.toUpperCase();
             let badgeClass = 'bg-indigo-600';
             
             if (isEvolutionLocked) { badgeText = 'PERLU EVOLUSI'; badgeClass = 'bg-slate-400'; }
