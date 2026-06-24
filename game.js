@@ -3804,6 +3804,13 @@ function endGame() {
         localPlayerData.xp = (parseInt(localPlayerData.xp) || 0) + pointsEarned; // Pastikan XP diselaraskan dengan pointsEarned
         localPlayerData.coins = (parseInt(localPlayerData.coins) || 0) + coinsEarned;
 
+		// 🔥 PANGGIL FUNGSI REKOD KEHADIRAN LTE (FIRESTORE) DI SINI 🔥
+        if (typeof updateLteProgress === "function") {
+            updateLteProgress();
+            console.log("Merekod progres LTE ke Firebase...");
+        }
+    }
+
         // 🔥 MULTI-LEADERBOARD: SIMPAN XP MENGIKUT SUBJEK
         let currentType = (typeof currentGameType !== 'undefined' && currentGameType !== "") ? currentGameType.toLowerCase() : "";
 
