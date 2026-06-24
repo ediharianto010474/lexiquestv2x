@@ -1008,71 +1008,71 @@ const avatars = {
     bm: {
         id: 'avatar_bm',
         levels: [
-            { level: 5, name: 'Pujangga Cilik', price: 10000, img: 'babybm.webp', icon: 'fas fa-pen-nib text-red-500 drop-shadow-md text-xl', desc: 'Mulai mengenali keindahan tatabahasa dan kesantunan bahasa ibunda sejak dini.' },
-            { level: 10, name: 'Sasterawan Agung', price: 20000, img: 'bmlvl10.webp', icon: 'fas fa-feather-alt fa-beat legendary-avatar text-red-500 drop-shadow-lg text-2xl', desc: 'Menguasai keindahan bahasa dan keagungan sastera Melayu sepenuhnya.' }
+            { level: 5, name: 'Pujangga Cilik', rarity: 'SPECIAL', price: 10000, img: 'babybm.webp', icon: 'fas fa-pen-nib text-red-500 drop-shadow-md text-xl', desc: 'Mulai mengenali keindahan tatabahasa dan kesantunan bahasa ibunda sejak dini.' },
+            { level: 10, name: 'Sasterawan Agung', rarity: 'EXQUISITE', price: 20000, img: 'bmlvl10.webp', icon: 'fas fa-feather-alt fa-beat legendary-avatar text-red-500 drop-shadow-lg text-2xl', desc: 'Menguasai keindahan bahasa dan keagungan sastera Melayu sepenuhnya.' }
         ]
     },
     bi: {
         id: 'avatar_bi',
         levels: [
-            { level: 5, name: 'English Explorer Cilik', price: 10000, img: 'babyeng.webp', icon: 'fas fa-book text-blue-500 drop-shadow-md text-xl', desc: 'Langkah awal menguasai bahasa dunia dengan penuh ceria dan rasa percaya diri!' },
-            { level: 10, name: 'English Grandmaster', price: 20000, img: 'bilvl10.webp', icon: 'fas fa-globe-americas fa-bounce legendary-avatar text-blue-500 drop-shadow-lg text-2xl', desc: 'Masteri mutlak dalam bahasa global dan komunikasi antarabangsa.' }
+            { level: 5, name: 'English Explorer Cilik', rarity: 'SPECIAL', price: 10000, img: 'babyeng.webp', icon: 'fas fa-book text-blue-500 drop-shadow-md text-xl', desc: 'Langkah awal menguasai bahasa dunia dengan penuh ceria dan rasa percaya diri!' },
+            { level: 10, name: 'English Grandmaster', rarity: 'EXQUISITE', price: 20000, img: 'bilvl10.webp', icon: 'fas fa-globe-americas fa-bounce legendary-avatar text-blue-500 drop-shadow-lg text-2xl', desc: 'Masteri mutlak dalam bahasa global dan komunikasi antarabangsa.' }
         ]
     },
     mt: {
         id: 'avatar_mt',
         levels: [
-            { level: 5, name: 'Celik Nombor', price: 10000, img: 'babymt.webp', icon: 'fas fa-calculator text-green-500 drop-shadow-md text-xl', desc: 'Pakar kalkulator kecil yang pantas menyelesaikan tantangan angka dan berhitung dasar.' },
-            { level: 10, name: 'Mathematician Supreme', price: 20000, img: 'mtlvl10.webp', icon: 'fas fa-calculator fa-pulse legendary-avatar text-purple-500 drop-shadow-lg text-2xl', desc: 'Menyelesaikan formula paling rumit di alam semesta dengan sekelip mata.' }
+            { level: 5, name: 'Celik Nombor', rarity: 'SPECIAL', price: 10000, img: 'babymt.webp', icon: 'fas fa-calculator text-green-500 drop-shadow-md text-xl', desc: 'Pakar kalkulator kecil yang pantas menyelesaikan tantangan angka dan berhitung dasar.' },
+            { level: 10, name: 'Mathematician Supreme', rarity: 'EXQUISITE', price: 20000, img: 'mtlvl10.webp', icon: 'fas fa-calculator fa-pulse legendary-avatar text-purple-500 drop-shadow-lg text-2xl', desc: 'Menyelesaikan formula paling rumit di alam semesta dengan sekelip mata.' }
         ]
     },
     sn: {
         id: 'avatar_sn',
         levels: [
-            { level: 5, name: 'Saintis Cilik', price: 10000, img: 'babysn.webp', icon: 'fas fa-flask text-purple-500 drop-shadow-md text-xl', desc: 'Penuh dengan rasa ingin tahu, bersiap menjelajahi misteri alam dan sains kehidupan.' },
-            { level: 10, name: 'Saintis Terulung', price: 20000, img: 'snlvl10.webp', icon: 'fas fa-atom fa-spin legendary-avatar text-green-400 drop-shadow-lg text-2xl', desc: 'Membongkar rahsia sains, fizik, dan misteri kosmos demi masa depan.' }
+            { level: 5, name: 'Saintis Cilik', rarity: 'SPECIAL', price: 10000, img: 'babysn.webp', icon: 'fas fa-flask text-purple-500 drop-shadow-md text-xl', desc: 'Penuh dengan rasa ingin tahu, bersiap menjelajahi misteri alam dan sains kehidupan.' },
+            { level: 10, name: 'Saintis Terulung', rarity: 'EXQUISITE', price: 20000, img: 'snlvl10.webp', icon: 'fas fa-atom fa-spin legendary-avatar text-green-400 drop-shadow-lg text-2xl', desc: 'Membongkar rahsia sains, fizik, dan misteri kosmos demi masa depan.' }
         ]
     },
     mz: {
         id: 'avatar_mz',
         levels: [
-            { level: 5, name: 'Melodi Cilik', price: 10000, img: 'babymz.webp', icon: 'fas fa-music text-indigo-500 drop-shadow-md text-xl', desc: 'Menari mengikut ritme ceria dan mulai menciptakan harmoni musik yang unik.' },
-            { level: 10, name: 'Maestro Muzik', price: 20000, img: 'mzlvl10.webp', icon: 'fas fa-music fa-bounce legendary-avatar text-pink-500 drop-shadow-lg text-2xl', desc: 'Mencipta simfoni agung yang menggetarkan jiwa dan mengharmonikan dunia.' }
+            { level: 5, name: 'Melodi Cilik', rarity: 'SPECIAL', price: 10000, img: 'babymz.webp', icon: 'fas fa-music text-indigo-500 drop-shadow-md text-xl', desc: 'Menari mengikut ritme ceria dan mulai menciptakan harmoni musik yang unik.' },
+            { level: 10, name: 'Maestro Muzik', rarity: 'EXQUISITE', price: 20000, img: 'mzlvl10.webp', icon: 'fas fa-music fa-bounce legendary-avatar text-pink-500 drop-shadow-lg text-2xl', desc: 'Mencipta simfoni agung yang menggetarkan jiwa dan mengharmonikan dunia.' }
         ]
     },
     pj: {
         id: 'avatar_pj',
         levels: [
-            { level: 5, name: 'Wira Cergas', price: 10000, img: 'babypj.webp', icon: 'fas fa-running text-orange-500 drop-shadow-md text-xl', desc: 'Sentiasa aktif, lincah, menjaga kesehatan diri dan siap menghadapi tantangan fisik.' },
-            { level: 10, name: 'Atlit Legenda', price: 20000, img: 'pjlvl10.webp', icon: 'fas fa-running fa-beat legendary-avatar text-orange-500 drop-shadow-lg text-2xl', desc: 'Mencapai kemuncak kecergasan fizikal dan semangat kesukanan tertinggi.' }
+            { level: 5, name: 'Wira Cergas', rarity: 'SPECIAL', price: 10000, img: 'babypj.webp', icon: 'fas fa-running text-orange-500 drop-shadow-md text-xl', desc: 'Sentiasa aktif, lincah, menjaga kesehatan diri dan siap menghadapi tantangan fisik.' },
+            { level: 10, name: 'Atlit Legenda', rarity: 'EXQUISITE', price: 20000, img: 'pjlvl10.webp', icon: 'fas fa-running fa-beat legendary-avatar text-orange-500 drop-shadow-lg text-2xl', desc: 'Mencapai kemuncak kecergasan fizikal dan semangat kesukanan tertinggi.' }
         ]
     },
     pm: {
         id: 'avatar_pm',
         levels: [
-            { level: 5, name: 'Tunas Berbudi', price: 10000, img: 'babypm.webp', icon: 'fas fa-heart text-pink-500 drop-shadow-md text-xl', desc: 'Mengamalkan nilai-nilai murni, integritas, dan kebaikan dalam setiap langkah petualangan.' },
-            { level: 10, name: 'Suri Teladan Sejati', price: 20000, img: 'pmlvl10.webp', icon: 'fas fa-heart fa-beat legendary-avatar text-emerald-500 drop-shadow-lg text-2xl', desc: 'Simbol keperibadian mulia, etika, dan nilai murni yang menerangi masyarakat.' }
+            { level: 5, name: 'Tunas Berbudi', rarity: 'SPECIAL', price: 10000, img: 'babypm.webp', icon: 'fas fa-heart text-pink-500 drop-shadow-md text-xl', desc: 'Mengamalkan nilai-nilai murni, integritas, dan kebaikan dalam setiap langkah petualangan.' },
+            { level: 10, name: 'Suri Teladan Sejati', rarity: 'EXQUISITE', price: 20000, img: 'pmlvl10.webp', icon: 'fas fa-heart fa-beat legendary-avatar text-emerald-500 drop-shadow-lg text-2xl', desc: 'Simbol keperibadian mulia, etika, dan nilai murni yang menerangi masyarakat.' }
         ]
     },
     psv: {
         id: 'avatar_psv',
         levels: [
-            { level: 5, name: 'Pelukis Cerdik', price: 10000, img: 'babypsv.webp', icon: 'fas fa-palette text-yellow-500 drop-shadow-md text-xl', desc: 'Mencurahkan imajinasi kreatif tanpa batas melalui warna dan lakaran yang menggemaskan.' },
-            { level: 10, name: 'Pelukis Legenda', price: 20000, img: 'psvlvl10.webp', icon: 'fas fa-palette fa-shake legendary-avatar text-teal-400 drop-shadow-lg text-2xl', desc: 'Menghembus nafas kehidupan ke dalam kanvas dengan kreativiti tanpa sempadan.' }
+            { level: 5, name: 'Pelukis Cerdik', rarity: 'SPECIAL', price: 10000, img: 'babypsv.webp', icon: 'fas fa-palette text-yellow-500 drop-shadow-md text-xl', desc: 'Mencurahkan imajinasi kreatif tanpa batas melalui warna dan lakaran yang menggemaskan.' },
+            { level: 10, name: 'Pelukis Legenda', rarity: 'EXQUISITE', price: 20000, img: 'psvlvl10.webp', icon: 'fas fa-palette fa-shake legendary-avatar text-teal-400 drop-shadow-lg text-2xl', desc: 'Menghembus nafas kehidupan ke dalam kanvas dengan kreativiti tanpa sempadan.' }
         ]
     },
     rbt: {
         id: 'avatar_rbt',
         levels: [
-            { level: 5, name: 'Inovator Muda', price: 10000, img: 'babyrbt.webp', icon: 'fas fa-tools text-gray-500 drop-shadow-md text-xl', desc: 'Tangan kreatif yang suka merancang, membangun, dan mencoba teknologi-teknologi baru.' },
-            { level: 10, name: 'Adiwira Inovasi', price: 20000, img: 'rbtlvl10.webp', icon: 'fas fa-tools fa-bounce legendary-avatar text-cyan-600 drop-shadow-lg text-2xl', desc: 'Pelopor teknologi, reka bentuk, dan kejuruteraan praktikal masa hadapan.' }
+            { level: 5, name: 'Inovator Muda', rarity: 'SPECIAL', price: 10000, img: 'babyrbt.webp', icon: 'fas fa-tools text-gray-500 drop-shadow-md text-xl', desc: 'Tangan kreatif yang suka merancang, membangun, dan mencoba teknologi-teknologi baru.' },
+            { level: 10, name: 'Adiwira Inovasi', rarity: 'EXQUISITE', price: 20000, img: 'rbtlvl10.webp', icon: 'fas fa-tools fa-bounce legendary-avatar text-cyan-600 drop-shadow-lg text-2xl', desc: 'Pelopor teknologi, reka bentuk, dan kejuruteraan praktikal masa hadapan.' }
         ]
     },
     sj: {
         id: 'avatar_sj',
         levels: [
-            { level: 5, name: 'Pengembara Masa Cilik', price: 10000, img: 'babysj.webp', icon: 'fas fa-hourglass-start text-amber-500 drop-shadow-md text-xl', desc: 'Mulai meneroka kisah-kisah hebat dan mengambil pengajaran berharga dari sejarah masa lalu.' },
-            { level: 10, name: 'Sejarawan Ulung', price: 20000, img: 'sjlvl10.webp', icon: 'fas fa-scroll fa-pulse legendary-avatar text-amber-600 drop-shadow-lg text-2xl', desc: 'Penjaga garis masa lampau, memelihara iktibar, asal-usul, dan warisan bangsa.' }
+            { level: 5, name: 'Pengembara Masa Cilik', rarity: 'SPECIAL', price: 10000, img: 'babysj.webp', icon: 'fas fa-hourglass-start text-amber-500 drop-shadow-md text-xl', desc: 'Mulai meneroka kisah-kisah hebat dan mengambil pengajaran berharga dari sejarah masa lalu.' },
+            { level: 10, name: 'Sejarawan Ulung', rarity: 'EXQUISITE', price: 20000, img: 'sjlvl10.webp', icon: 'fas fa-scroll fa-pulse legendary-avatar text-amber-600 drop-shadow-lg text-2xl', desc: 'Penjaga garis masa lampau, memelihara iktibar, asal-usul, dan warisan bangsa.' }
         ]
     },
     'ulti-boy': {
@@ -1081,6 +1081,7 @@ const avatars = {
             { 
                 level: 100, 
                 name: 'Ultimate Edu Master',
+                rarity: 'GOD-TIER',
                 price: 100000, 
                 img: 'ulti-boy.webp', 
                 icon: 'fas fa-book fa-pulse legendary-avatar text-blue-600 drop-shadow-lg text-2xl',
@@ -1094,6 +1095,7 @@ const avatars = {
             { 
                 level: 100, 
                 name: 'Ultimate Edu Goddess ',
+                rarity: 'GOD-TIER',
                 price: 100000, 
                 img: 'ulti-girl.webp', 
                 icon: 'fas fa-book fa-pulse legendary-avatar text-blue-600 drop-shadow-lg text-2xl',
@@ -1101,12 +1103,13 @@ const avatars = {
             }
         ]
     },
-school: {
+    school: {
         id: 'avatar_school', 
         levels: [
             { 
                 level: 10, 
                 name: 'Modern School Chancellor', 
+                rarity: 'LEGENDARY',
                 price: 15000, 
                 img: 'modern-school-lvl10.webp', 
                 icon: 'fas fa-crown fa-beat legendary-avatar text-yellow-600 drop-shadow-lg text-2xl', 
@@ -1118,7 +1121,7 @@ school: {
         id: 'avatar_edu', maxLevel: 100, theme: 'Academic Excellence',
         levels: [
             { 
-                level: 10, name: 'Edu Grandmaster', price: 15000, img: 'edu-lvl10.webp', 
+                level: 10, name: 'Edu Grandmaster', rarity: 'LEGENDARY', price: 15000, img: 'edu-lvl10.webp', 
                 icon: 'fas fa-university fa-beat legendary-avatar text-indigo-500 drop-shadow-lg text-2xl', 
                 desc: 'Puncak tertinggi pencapaian akademik!' 
             }
@@ -1128,7 +1131,7 @@ school: {
         id: 'avatar_stem', maxLevel: 100,
         levels: [
             { 
-                level: 10, name: 'STEM Architect', price: 15000, img: 'stem-lvl10.webp', 
+                level: 10, name: 'STEM Architect', rarity: 'LEGENDARY', price: 15000, img: 'stem-lvl10.webp', 
                 icon: 'fas fa-rocket fa-spin legendary-avatar text-purple-500 drop-shadow-lg text-2xl', 
                 desc: 'Arkitek masa depan dunia teknologi!' 
             }
@@ -1138,7 +1141,7 @@ school: {
         id: 'avatar_kampung', maxLevel: 100,
         levels: [
             { 
-                level: 10, name: 'Tokoh Warisan', price: 15000, img: 'kampung-lvl10.webp', 
+                level: 10, name: 'Tokoh Warisan', rarity: 'LEGENDARY', price: 15000, img: 'kampung-lvl10.webp', 
                 icon: 'fas fa-home fa-beat legendary-avatar text-emerald-500 drop-shadow-lg text-2xl', 
                 desc: 'Lagenda hidup tradisi turun-temurun!' 
             }
@@ -1148,7 +1151,7 @@ school: {
         id: 'avatar_muslimah', maxLevel: 100, theme: 'Grace & Virtue',
         levels: [
             { 
-                level: 10, name: 'Eternal Grace', price: 15000, img: 'muslimah-lvl10.webp', 
+                level: 10, name: 'Eternal Grace', rarity: 'LEGENDARY', price: 15000, img: 'muslimah-lvl10.webp', 
                 icon: 'fas fa-dove fa-beat legendary-avatar text-rose-500 drop-shadow-lg text-2xl', 
                 desc: 'Simbol keanggunan dan kecekalan abadi!' 
             }
@@ -1157,18 +1160,19 @@ school: {
     leviathan: {
         id: 'avatar_leviathan', maxLevel: 100, theme: 'Leviathan',
         levels: [
-            { level: 1, name: 'Context Drop', price: 300, icon: 'fas fa-tint fa-pulse text-blue-200', desc: 'Guessing meaning from context.' },
-            { level: 2, name: 'Skimming Drop', price: 600, icon: 'fas fa-tint fa-shake text-blue-300', desc: 'Reading fast to get the main idea.' },
-            { level: 3, name: 'Scanning Fish', price: 900, icon: 'fas fa-fish fa-bounce text-teal-300', desc: 'Looking closely for specific facts.' },
-            { level: 4, name: 'Inference Spirit', price: 1200, icon: 'fas fa-fish fa-fade text-teal-400', desc: 'Reading between the lines.' },
-            { level: 5, name: 'Summary Swimmer', price: 1500, icon: 'fas fa-fish fa-beat text-teal-500', desc: 'Condensing long texts easily.' },
-            { level: 6, name: 'Analysis Spirit', price: 1800, icon: 'fas fa-fish fa-shake text-teal-600', desc: 'Breaking down complex paragraphs.' },
-            { level: 7, name: 'Comprehension Master', price: 2100, icon: 'fas fa-water fa-bounce text-blue-500', desc: 'Understanding the deepest texts.' },
-            { level: 8, name: 'Literature Ancient', price: 2400, icon: 'fas fa-water fa-beat text-blue-600', desc: 'Devouring classic novels.' },
-            { level: 9, name: 'Epic Mythic', price: 2700, icon: 'fas fa-water fa-pulse text-blue-700', desc: 'Mastering poetry and prose.' },
+            { level: 1, name: 'Context Drop', rarity: 'COMMON', price: 300, icon: 'fas fa-tint fa-pulse text-blue-200', desc: 'Guessing meaning from context.' },
+            { level: 2, name: 'Skimming Drop', rarity: 'COMMON', price: 600, icon: 'fas fa-tint fa-shake text-blue-300', desc: 'Reading fast to get the main idea.' },
+            { level: 3, name: 'Scanning Fish', rarity: 'COMMON', price: 900, icon: 'fas fa-fish fa-bounce text-teal-300', desc: 'Looking closely for specific facts.' },
+            { level: 4, name: 'Inference Spirit', rarity: 'COMMON', price: 1200, icon: 'fas fa-fish fa-fade text-teal-400', desc: 'Reading between the lines.' },
+            { level: 5, name: 'Summary Swimmer', rarity: 'RARE', price: 1500, icon: 'fas fa-fish fa-beat text-teal-500', desc: 'Condensing long texts easily.' },
+            { level: 6, name: 'Analysis Spirit', rarity: 'EPIC', price: 1800, icon: 'fas fa-fish fa-shake text-teal-600', desc: 'Breaking down complex paragraphs.' },
+            { level: 7, name: 'Comprehension Master', rarity: 'EPIC', price: 2100, icon: 'fas fa-water fa-bounce text-blue-500', desc: 'Understanding the deepest texts.' },
+            { level: 8, name: 'Literature Ancient', rarity: 'EPIC', price: 2400, icon: 'fas fa-water fa-beat text-blue-600', desc: 'Devouring classic novels.' },
+            { level: 9, name: 'Epic Mythic', rarity: 'EPIC', price: 2700, icon: 'fas fa-water fa-pulse text-blue-700', desc: 'Mastering poetry and prose.' },
             { 
                 level: 10, 
                 name: 'Nanotech Bard', 
+                rarity: 'LEGENDARY',
                 price: 3000, 
                 img: 'avatar_leviathan.webp',
                 icon: 'fas fa-water fa-beat legendary-avatar text-blue-500 drop-shadow-lg text-2xl', 
@@ -1178,6 +1182,7 @@ school: {
             { 
                 level: 50, 
                 name: 'Supreme Nanotech Prime', 
+                rarity: 'MYTHIC',
                 price: 30000, 
                 img: 'avatar_leviathan50.webp',
                 icon: 'fas fa-water fa-spin text-yellow-500 drop-shadow-lg text-3xl', 
@@ -1187,6 +1192,7 @@ school: {
             { 
                 level: 100, 
                 name: 'God-Tier Nanotech Bard', 
+                rarity: 'GOD-TIER',
                 price: 300000, 
                 img: 'avatar_leviathan100.webp', 
                 icon: 'fas fa-water fa-beat text-red-500 drop-shadow-2xl text-4xl', 
@@ -1197,18 +1203,19 @@ school: {
     unicorn: {
         id: 'avatar_unicorn', maxLevel: 100, theme: 'Unicorn',
         levels: [
-            { level: 1, name: 'Rhyme Dust', price: 300, icon: 'fas fa-star fa-pulse text-pink-200', desc: 'Words that sound magically alike.' },
-            { level: 2, name: 'Simile Dust', price: 600, icon: 'fas fa-star fa-shake text-pink-300', desc: 'As bright as a glowing star.' },
-            { level: 3, name: 'Metaphor Pony', price: 900, icon: 'fas fa-horse fa-bounce text-pink-400', desc: 'A pony that IS a star.' },
-            { level: 4, name: 'Personification Pony', price: 1200, icon: 'fas fa-horse fa-fade text-pink-500', desc: 'Making non-human things alive.' },
-            { level: 5, name: 'Idiom Mystic', price: 1500, icon: 'fas fa-horse fa-beat text-purple-400', desc: 'Raining cats and dogs!' },
-            { level: 6, name: 'Hyperbole Unicorn', price: 1800, icon: 'fas fa-horse fa-shake text-purple-500', desc: 'The fastest creature in a million years.' },
-            { level: 7, name: 'Alliteration Master', price: 2100, icon: 'fas fa-horse-head fa-bounce text-purple-600', desc: 'Creating cool consonant combos.' },
-            { level: 8, name: 'Poetic Ancient', price: 2400, icon: 'fas fa-horse-head fa-beat text-purple-700', desc: 'Master of verses and stanzas.' },
-            { level: 9, name: 'Inspiration Mythic', price: 2700, icon: 'fas fa-horse-head fa-pulse text-pink-600', desc: 'Sparking creative writing ideas.' },
+            { level: 1, name: 'Rhyme Dust', rarity: 'COMMON', price: 300, icon: 'fas fa-star fa-pulse text-pink-200', desc: 'Words that sound magically alike.' },
+            { level: 2, name: 'Simile Dust', rarity: 'COMMON', price: 600, icon: 'fas fa-star fa-shake text-pink-300', desc: 'As bright as a glowing star.' },
+            { level: 3, name: 'Metaphor Pony', rarity: 'COMMON', price: 900, icon: 'fas fa-horse fa-bounce text-pink-400', desc: 'A pony that IS a star.' },
+            { level: 4, name: 'Personification Pony', rarity: 'COMMON', price: 1200, icon: 'fas fa-horse fa-fade text-pink-500', desc: 'Making non-human things alive.' },
+            { level: 5, name: 'Idiom Mystic', rarity: 'RARE', price: 1500, icon: 'fas fa-horse fa-beat text-purple-400', desc: 'Raining cats and dogs!' },
+            { level: 6, name: 'Hyperbole Unicorn', rarity: 'EPIC', price: 1800, icon: 'fas fa-horse fa-shake text-purple-500', desc: 'The fastest creature in a million years.' },
+            { level: 7, name: 'Alliteration Master', rarity: 'EPIC', price: 2100, icon: 'fas fa-horse-head fa-bounce text-purple-600', desc: 'Creating cool consonant combos.' },
+            { level: 8, name: 'Poetic Ancient', rarity: 'EPIC', price: 2400, icon: 'fas fa-horse-head fa-beat text-purple-700', desc: 'Master of verses and stanzas.' },
+            { level: 9, name: 'Inspiration Mythic', rarity: 'EPIC', price: 2700, icon: 'fas fa-horse-head fa-pulse text-pink-600', desc: 'Sparking creative writing ideas.' },
             { 
                 level: 10, 
                 name: 'Cosmic Narrator', 
+                rarity: 'LEGENDARY',
                 price: 3000, 
                 img: 'avatar_unicorn.webp',
                 icon: 'fas fa-horse-head fa-beat legendary-avatar text-pink-500 drop-shadow-lg text-2xl', 
@@ -1218,6 +1225,7 @@ school: {
             { 
                 level: 50, 
                 name: 'Supreme Cosmic Prime', 
+                rarity: 'MYTHIC',
                 price: 30000, 
                 img: 'avatar_unicorn50.webp',
                 icon: 'fas fa-horse-head fa-spin text-yellow-500 drop-shadow-lg text-3xl', 
@@ -1227,6 +1235,7 @@ school: {
             { 
                 level: 100, 
                 name: 'God-Tier Cosmic Narrator', 
+                rarity: 'GOD-TIER',
                 price: 300000, 
                 img: 'avatar_unicorn100.webp', 
                 icon: 'fas fa-horse-head fa-beat text-red-500 drop-shadow-2xl text-4xl', 
@@ -1237,18 +1246,19 @@ school: {
     golem: {
         id: 'avatar_golem', maxLevel: 100, theme: 'Golem',
         levels: [
-            { level: 1, name: 'Past Pebble', price: 300, icon: 'fas fa-circle fa-pulse text-gray-400', desc: 'Actions that already happened.' },
-            { level: 2, name: 'Present Pebble', price: 600, icon: 'fas fa-circle fa-shake text-gray-500', desc: 'Actions happening right now.' },
-            { level: 3, name: 'Future Rock', price: 900, icon: 'fas fa-cube fa-bounce text-gray-600', desc: 'Plans that will happen tomorrow.' },
-            { level: 4, name: 'Continuous Stone', price: 1200, icon: 'fas fa-cube fa-fade text-gray-700', desc: 'Rolling with the -ing verbs.' },
-            { level: 5, name: 'Perfect Tense Guardian', price: 1500, icon: 'fas fa-cubes fa-beat text-gray-800', desc: 'Has mastered the past participles.' },
-            { level: 6, name: 'Active Voice Iron', price: 1800, icon: 'fas fa-cubes fa-shake text-gray-900', desc: 'Direct, clear, and unbreakable.' },
-            { level: 7, name: 'Passive Voice Golem', price: 2100, icon: 'fas fa-mountain fa-bounce text-gray-600', desc: 'Actions are being done to it.' },
-            { level: 8, name: 'Conditional Ancient', price: 2400, icon: 'fas fa-mountain fa-beat text-gray-700', desc: 'If you study, you will succeed.' },
-            { level: 9, name: 'Structure Mythic', price: 2700, icon: 'fas fa-mountain fa-pulse text-gray-800', desc: 'A walking mountain of solid grammar.' },
+            { level: 1, name: 'Past Pebble', rarity: 'COMMON', price: 300, icon: 'fas fa-circle fa-pulse text-gray-400', desc: 'Actions that already happened.' },
+            { level: 2, name: 'Present Pebble', rarity: 'COMMON', price: 600, icon: 'fas fa-circle fa-shake text-gray-500', desc: 'Actions happening right now.' },
+            { level: 3, name: 'Future Rock', rarity: 'COMMON', price: 900, icon: 'fas fa-cube fa-bounce text-gray-600', desc: 'Plans that will happen tomorrow.' },
+            { level: 4, name: 'Continuous Stone', rarity: 'COMMON', price: 1200, icon: 'fas fa-cube fa-fade text-gray-700', desc: 'Rolling with the -ing verbs.' },
+            { level: 5, name: 'Perfect Tense Guardian', rarity: 'RARE', price: 1500, icon: 'fas fa-cubes fa-beat text-gray-800', desc: 'Has mastered the past participles.' },
+            { level: 6, name: 'Active Voice Iron', rarity: 'EPIC', price: 1800, icon: 'fas fa-cubes fa-shake text-gray-900', desc: 'Direct, clear, and unbreakable.' },
+            { level: 7, name: 'Passive Voice Golem', rarity: 'EPIC', price: 2100, icon: 'fas fa-mountain fa-bounce text-gray-600', desc: 'Actions are being done to it.' },
+            { level: 8, name: 'Conditional Ancient', rarity: 'EPIC', price: 2400, icon: 'fas fa-mountain fa-beat text-gray-700', desc: 'If you study, you will succeed.' },
+            { level: 9, name: 'Structure Mythic', rarity: 'EPIC', price: 2700, icon: 'fas fa-mountain fa-pulse text-gray-800', desc: 'A walking mountain of solid grammar.' },
             { 
                 level: 10, 
                 name: 'Cyber Etymologist', 
+                rarity: 'LEGENDARY',
                 price: 3000, 
                 img: 'avatar_golem.webp',
                 icon: 'fas fa-mountain fa-shake legendary-avatar text-gray-900 drop-shadow-lg text-2xl', 
@@ -1258,6 +1268,7 @@ school: {
             { 
                 level: 50, 
                 name: 'Supreme Cyber Prime', 
+                rarity: 'MYTHIC',
                 price: 30000, 
                 img: 'avatar_golem50.webp',
                 icon: 'fas fa-mountain fa-spin text-yellow-500 drop-shadow-lg text-3xl', 
@@ -1267,6 +1278,7 @@ school: {
             { 
                 level: 100, 
                 name: 'God-Tier Cyber Etymologist', 
+                rarity: 'GOD-TIER',
                 price: 300000, 
                 img: 'avatar_golem100.webp', 
                 icon: 'fas fa-mountain fa-beat text-red-500 drop-shadow-2xl text-4xl', 
@@ -1277,18 +1289,19 @@ school: {
     fairy: {
         id: 'avatar_fairy', maxLevel: 100, theme: 'Fairy',
         levels: [
-            { level: 1, name: 'Sound Seedling', price: 300, icon: 'fas fa-seedling fa-pulse text-green-300', desc: 'Catching the first English sounds.' },
-            { level: 2, name: 'Tune Sprout', price: 600, icon: 'fas fa-seedling fa-shake text-green-400', desc: 'Listening to the rhythm of sentences.' },
-            { level: 3, name: 'Audio Sprite', price: 900, icon: 'fas fa-leaf fa-bounce text-green-500', desc: 'Understanding short instructions.' },
-            { level: 4, name: 'Podcast Sprite', price: 1200, icon: 'fas fa-leaf fa-fade text-green-600', desc: 'Enjoying English stories in the wind.' },
-            { level: 5, name: 'Conversation Fairy', price: 1500, icon: 'fas fa-tree fa-beat text-green-700', desc: 'Planting ideas through dialogue.' },
-            { level: 6, name: 'Active Listener', price: 1800, icon: 'fas fa-tree fa-shake text-green-800', desc: 'Paying close attention to details.' },
-            { level: 7, name: 'Nuance Master', price: 2100, icon: 'fas fa-tree fa-bounce text-teal-600', desc: 'Understanding tone and emotion.' },
-            { level: 8, name: 'Interpreter Ancient', price: 2400, icon: 'fas fa-tree fa-beat text-teal-700', desc: 'Translating thoughts seamlessly.' },
-            { level: 9, name: 'Polyglot Mythic', price: 2700, icon: 'fas fa-tree fa-pulse text-teal-800', desc: 'Glowing with communication magic.' },
+            { level: 1, name: 'Sound Seedling', rarity: 'COMMON', price: 300, icon: 'fas fa-seedling fa-pulse text-green-300', desc: 'Catching the first English sounds.' },
+            { level: 2, name: 'Tune Sprout', rarity: 'COMMON', price: 600, icon: 'fas fa-seedling fa-shake text-green-400', desc: 'Listening to the rhythm of sentences.' },
+            { level: 3, name: 'Audio Sprite', rarity: 'COMMON', price: 900, icon: 'fas fa-leaf fa-bounce text-green-500', desc: 'Understanding short instructions.' },
+            { level: 4, name: 'Podcast Sprite', rarity: 'COMMON', price: 1200, icon: 'fas fa-leaf fa-fade text-green-600', desc: 'Enjoying English stories in the wind.' },
+            { level: 5, name: 'Conversation Fairy', rarity: 'RARE', price: 1500, icon: 'fas fa-tree fa-beat text-green-700', desc: 'Planting ideas through dialogue.' },
+            { level: 6, name: 'Active Listener', rarity: 'EPIC', price: 1800, icon: 'fas fa-tree fa-shake text-green-800', desc: 'Paying close attention to details.' },
+            { level: 7, name: 'Nuance Master', rarity: 'EPIC', price: 2100, icon: 'fas fa-tree fa-bounce text-teal-600', desc: 'Understanding tone and emotion.' },
+            { level: 8, name: 'Interpreter Ancient', rarity: 'EPIC', price: 2400, icon: 'fas fa-tree fa-beat text-teal-700', desc: 'Translating thoughts seamlessly.' },
+            { level: 9, name: 'Polyglot Mythic', rarity: 'EPIC', price: 2700, icon: 'fas fa-tree fa-pulse text-teal-800', desc: 'Glowing with communication magic.' },
             { 
                 level: 10, 
                 name: 'Bionic Botanist & Grammarian', 
+                rarity: 'LEGENDARY',
                 price: 3000, 
                 img: 'avatar_fairy.webp',
                 icon: 'fas fa-tree fa-beat legendary-avatar text-green-500 drop-shadow-lg text-2xl', 
@@ -1298,6 +1311,7 @@ school: {
             { 
                 level: 50, 
                 name: 'Supreme Botanist Prime', 
+                rarity: 'MYTHIC',
                 price: 30000, 
                 img: 'avatar_fairy50.webp',
                 icon: 'fas fa-tree fa-spin text-yellow-500 drop-shadow-lg text-3xl', 
@@ -1307,6 +1321,7 @@ school: {
             { 
                 level: 100, 
                 name: 'God-Tier Bionic Botanist', 
+                rarity: 'GOD-TIER',
                 price: 300000, 
                 img: 'avatar_fairy100.webp', 
                 icon: 'fas fa-tree fa-beat text-red-500 drop-shadow-2xl text-4xl', 
@@ -1317,18 +1332,19 @@ school: {
     lion: {
         id: 'avatar_lion', maxLevel: 100, theme: 'Lion',
         levels: [
-            { level: 1, name: 'Claim Kitten', price: 300, icon: 'fas fa-bolt fa-pulse text-yellow-200', desc: 'Making a tiny but valid point.' },
-            { level: 2, name: 'Reason Kitten', price: 600, icon: 'fas fa-bolt fa-shake text-yellow-300', desc: 'Backing up claims with "because".' },
-            { level: 3, name: 'Logic Cub', price: 900, icon: 'fas fa-cat fa-bounce text-yellow-400', desc: 'Thinking fast and making sense.' },
-            { level: 4, name: 'Evidence Volt Cat', price: 1200, icon: 'fas fa-cat fa-fade text-yellow-500', desc: 'Running with facts and statistics.' },
-            { level: 5, name: 'Argument Cat', price: 1500, icon: 'fas fa-cat fa-beat text-orange-400', desc: 'Building strong, shocking cases.' },
-            { level: 6, name: 'Rebuttal Lion', price: 1800, icon: 'fas fa-cat fa-shake text-orange-500', desc: 'Countering opposing views with thunder.' },
-            { level: 7, name: 'Persuasion Master', price: 2100, icon: 'fas fa-crown fa-bounce text-yellow-500', desc: 'Convincing the crowd easily.' },
-            { level: 8, name: 'Rhetoric Ancient', price: 2400, icon: 'fas fa-crown fa-beat text-yellow-600', desc: 'A legendary speaker of the sky.' },
-            { level: 9, name: 'Debate Mythic', price: 2700, icon: 'fas fa-crown fa-pulse text-orange-600', desc: 'Summoning lightning-fast responses.' },
+            { level: 1, name: 'Claim Kitten', rarity: 'COMMON', price: 300, icon: 'fas fa-bolt fa-pulse text-yellow-200', desc: 'Making a tiny but valid point.' },
+            { level: 2, name: 'Reason Kitten', rarity: 'COMMON', price: 600, icon: 'fas fa-bolt fa-shake text-yellow-300', desc: 'Backing up claims with "because".' },
+            { level: 3, name: 'Logic Cub', rarity: 'COMMON', price: 900, icon: 'fas fa-cat fa-bounce text-yellow-400', desc: 'Thinking fast and making sense.' },
+            { level: 4, name: 'Evidence Volt Cat', rarity: 'COMMON', price: 1200, icon: 'fas fa-cat fa-fade text-yellow-500', desc: 'Running with facts and statistics.' },
+            { level: 5, name: 'Argument Cat', rarity: 'RARE', price: 1500, icon: 'fas fa-cat fa-beat text-orange-400', desc: 'Building strong, shocking cases.' },
+            { level: 6, name: 'Rebuttal Lion', rarity: 'EPIC', price: 1800, icon: 'fas fa-cat fa-shake text-orange-500', desc: 'Countering opposing views with thunder.' },
+            { level: 7, name: 'Persuasion Master', rarity: 'EPIC', price: 2100, icon: 'fas fa-crown fa-bounce text-yellow-500', desc: 'Convincing the crowd easily.' },
+            { level: 8, name: 'Rhetoric Ancient', rarity: 'EPIC', price: 2400, icon: 'fas fa-crown fa-beat text-yellow-600', desc: 'A legendary speaker of the sky.' },
+            { level: 9, name: 'Debate Mythic', rarity: 'EPIC', price: 2700, icon: 'fas fa-crown fa-pulse text-orange-600', desc: 'Summoning lightning-fast responses.' },
             { 
                 level: 10, 
                 name: 'Aether Historian', 
+                rarity: 'LEGENDARY',
                 price: 3000, 
                 img: 'avatar_lion.webp',
                 icon: 'fas fa-crown fa-beat legendary-avatar text-yellow-400 drop-shadow-lg text-2xl', 
@@ -1338,6 +1354,7 @@ school: {
             { 
                 level: 50, 
                 name: 'Supreme Aether Prime', 
+                rarity: 'MYTHIC',
                 price: 30000, 
                 img: 'avatar_lion50.webp',
                 icon: 'fas fa-crown fa-spin text-yellow-500 drop-shadow-lg text-3xl', 
@@ -1347,6 +1364,7 @@ school: {
             { 
                 level: 100, 
                 name: 'God-Tier Aether Historian', 
+                rarity: 'GOD-TIER',
                 price: 300000, 
                 img: 'avatar_lion100.webp', 
                 icon: 'fas fa-crown fa-beat text-red-500 drop-shadow-2xl text-4xl', 
