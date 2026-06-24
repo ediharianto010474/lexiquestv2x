@@ -500,7 +500,7 @@ function checkMedalRequirement(reqType, reqValue) {
 }
 
 // ==========================================
-// 🏆 4. LOGIK KEDAI LENCANA (BADGES SHOP) - TERKEMASKINI 100% KALIS RALAT & LTE
+// 🏆 4. LOGIK KEDAI LENCANA (BADGES SHOP) - TERKEMASKINI 100% DIGITAL
 // ==========================================
 async function loadMedalShop(kategoriPilihan = 'all') {
     const container = document.getElementById('medal-shop-container');
@@ -512,24 +512,6 @@ async function loadMedalShop(kategoriPilihan = 'all') {
     }
 
     const playerInventory = Array.isArray(localPlayerData.inventory) ? localPlayerData.inventory : [];
-
-    // --- 🔍 LANGKAH 1: TARIK STATUS TUNTUTAN DARI FIREBASE (SISTEM CACHE) ---
-    // Hanya tarik dari database SEKALI SAHAJA apabila murid buka kedai
-    if (cachedUserClaims === null) {
-        cachedUserClaims = {}; // Sediakan objek kosong untuk simpan data
-        const myDocId = `${localPlayerData.school || 'SK_DEFAULT'}_${localPlayerData.class || '-'}_${localPlayerData.name.trim().toUpperCase()}`.replace(/\s+/g, '_');
-        
-        try {
-            const claimsSnap = await db.collection("claims").where("playerDocId", "==", myDocId).get();
-            claimsSnap.forEach(doc => {
-                const data = doc.data();
-                cachedUserClaims[data.itemID] = data.status; // Simpan status dalam memori sementara
-            });
-        } catch (error) {
-            console.error("Gagal menyemak rekod tuntutan:", error);
-        }
-    }
-    // -------------------------------------------------------------------------
 
     let filterWrapper = document.getElementById('medal-shop-filter-wrapper');
     if (!filterWrapper) {
@@ -595,28 +577,16 @@ async function loadMedalShop(kategoriPilihan = 'all') {
 
         let buttonHTML = '';
         
-        // --- ⚙️ LANGKAH 2: LOGIK BUTANG BERDASARKAN STATUS (KALIS RALAT) ---
+        // --- ⚙️ LANGKAH 2: LOGIK BUTANG RINGKAS (100% DIGITAL) ---
         if (isOwned) {
-            if (item.isPhysical) {
-                const claimStatus = cachedUserClaims ? cachedUserClaims[item.id] : null;
-
-                if (claimStatus === "Sudah Dituntut") {
-                    buttonHTML = `<button class="w-full py-2 bg-gray-400 text-white rounded-lg cursor-not-allowed font-bold text-sm shadow-inner" disabled>Telah Ditebus</button>`;
-                } else {
-                    buttonHTML = `<button onclick="requestPhysicalBadge('${item.id}', \`${item.name}\`)" class="w-full py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg font-bold text-sm shadow-md transition-all">Tuntut Pin</button>`;
-                }
-            } else {
-                buttonHTML = `<button class="w-full py-2 bg-gray-400 text-white rounded-lg cursor-not-allowed font-bold text-sm" disabled>Dimiliki</button>`;
-            }
+            buttonHTML = `<button class="w-full py-2 bg-gray-400 text-white rounded-lg cursor-not-allowed font-bold text-sm shadow-inner" disabled>Dimiliki</button>`;
         } 
         else if (isUnlocked) {
-            // Bina teks dalam butang beli supaya menampakkan harga potong jika ada diskaun
             let teksButang = hargaPapar < item.price 
                 ? `Beli: <span class="line-through text-blue-300 mr-1 text-[10px]">${item.price}</span> ${hargaPapar} Koin` 
                 : `Beli: ${item.price} Koin`;
 
-            // Hantar item.price asal kepada fungsi transaksi buyMedal
-            buttonHTML = `<button onclick="buyMedal('${item.id}', ${item.price}, \`${item.name}\`, ${item.isPhysical || false})" class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-sm transition shadow-md active:scale-95">${teksButang}</button>`;
+            buttonHTML = `<button onclick="buyMedal('${item.id}', ${item.price}, \`${item.name}\`)" class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-sm transition shadow-md active:scale-95">${teksButang}</button>`;
         } 
         else {
             buttonHTML = `<button class="w-full py-2 bg-gray-200 text-gray-500 rounded-lg cursor-not-allowed font-bold text-[11px]" disabled><i class="fas fa-lock mr-1"></i>Terkunci</button>`;
@@ -627,9 +597,9 @@ async function loadMedalShop(kategoriPilihan = 'all') {
 
         const card = `
             <div class="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-2 ${isUnlocked ? 'border-blue-200' : 'border-gray-100'} text-center relative flex flex-col h-full justify-between overflow-hidden">
-                ${lencanaDiskaunHTML} <div>
-                    ${item.isPhysical ? `<div class="bg-orange-500 text-white text-[8px] font-black rounded px-2 py-0.5 absolute top-2 right-2 z-10 shadow-sm">PIN FIZIKAL</div>` : ''}
-                    <div class="w-20 h-20 mx-auto mb-3 bg-gray-50 rounded-full flex items-center justify-center relative overflow-hidden shadow-inner">
+                ${lencanaDiskaunHTML} 
+                <div>
+                    <div class="w-20 h-20 mx-auto mb-3 bg-gray-50 rounded-full flex items-center justify-center relative overflow-hidden shadow-inner mt-2">
                         <img src="${badgeImage}" alt="${item.name}" class="w-14 h-14 object-contain transition-all duration-500 ${isUnlocked ? 'drop-shadow-md hover:scale-110' : 'grayscale opacity-30'}">
                         ${!isUnlocked ? '<div class="absolute inset-0 flex items-center justify-center text-gray-600 text-3xl bg-white/40"><i class="fas fa-lock drop-shadow-md"></i></div>' : ''}
                     </div>
@@ -644,16 +614,15 @@ async function loadMedalShop(kategoriPilihan = 'all') {
 }
 
 // ==========================================
-// FUNGSI PEMBELIAN LENCANA (TERKEMASKINI LTE DISKAUN)
+// FUNGSI PEMBELIAN LENCANA (DIGITAL SAHAJA)
 // ==========================================
-async function buyMedal(id, price, name, isPhysical = false) {
+async function buyMedal(id, price, name) {
     // ==========================================
     // ✨ LOGIK LTE: ANTI-CHEAT PENGIRAAN HARGA
     // ==========================================
-    let finalPrice = price; // Anggap 'price' adalah harga asal (100%)
+    let finalPrice = price; 
     let isDiscounted = false;
 
-    // Semak dan potong harga secara paksa jika event diskaun sedang aktif
     if (typeof currentActiveEvent !== 'undefined' && currentActiveEvent !== null && currentActiveEvent.rewardType === 'shop_discount') {
         const kadarDiskaun = currentActiveEvent.rewardValue;
         finalPrice = Math.floor(price * kadarDiskaun);
@@ -661,7 +630,6 @@ async function buyMedal(id, price, name, isPhysical = false) {
         console.log(`🛡️ [Kedai Lencana] Diskaun aktif dikesan. Harga asal ${price} diselaraskan ke ${finalPrice}.`);
     }
 
-    // 0. SEMAKAN BAKI SYILING (Gunakan finalPrice, BUKAN price asal)
     if (localPlayerData.coins < finalPrice) {
         Swal.fire('🪙 Koin Tidak Cukup!', `Anda perlukan ${finalPrice} koin untuk memiliki lencana ini.`, 'error');
         return;
@@ -679,10 +647,9 @@ async function buyMedal(id, price, name, isPhysical = false) {
     if (!confirmResult.isConfirmed) return;
 
     try {
-        // 1. TOLAK KOIN LOKAL (Guna finalPrice)
+        // 1. TOLAK KOIN LOKAL
         localPlayerData.coins -= finalPrice;
         
-        // Rekodkan koin yang dibelanjakan ke dalam Tracker
         if (window.Trackers) {
             Trackers.rekodKoinBelanja(finalPrice);
         }
@@ -693,130 +660,21 @@ async function buyMedal(id, price, name, isPhysical = false) {
         localStorage.setItem('currentPlayer', JSON.stringify(localPlayerData));
         if (typeof updateUI === 'function') updateUI();
 
-        // 2. KEMASKINI FIREBASE CLOUD (Guna finalPrice)
+        // 2. KEMASKINI FIREBASE CLOUD
         const myDocId = `${localPlayerData.school || 'SK_DEFAULT'}_${localPlayerData.class || '-'}_${localPlayerData.name.trim().toUpperCase()}`.replace(/\s+/g, '_');
         await db.collection("players").doc(myDocId).update({
             coins: firebase.firestore.FieldValue.increment(-finalPrice),
             inventory: firebase.firestore.FieldValue.arrayUnion(id)
         });
 
-        // LOGIK UTAMA: Semak jenis lencana (Fizikal atau Digital)
-        if (isPhysical) {
-            const claimCode = generateRedemptionCode('BADGE');
-            
-            await db.collection("claims").add({
-                claimCode: claimCode,
-                buyerName: localPlayerData.name.toUpperCase(),
-                studentName: localPlayerData.name.toUpperCase(),
-                playerDocId: myDocId,
-                itemID: id,
-                itemName: `Lencana Fizikal: ${name}`,
-                status: "Belum Dituntut",
-                shopType: "Badges Shop",
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-
-            // Kosongkan cache supaya sistem paksa baca semula status Tuntut terkini
-            cachedUserClaims = null;
-
-            Swal.fire({
-                title: '🏆 LENCANA DIBELI!',
-                html: `
-                    <p class="text-sm text-green-600 font-bold">Pendaftaran lencana berjaya!</p>
-                    <div class="bg-yellow-50 p-4 rounded-xl my-3 text-center border-2 border-dashed border-yellow-400">
-                        <p class="text-xs text-yellow-700 font-bold uppercase">Kod Pin Fizikal Anda</p>
-                        <p class="text-2xl font-black text-yellow-900 tracking-wider">${claimCode}</p>
-                    </div>
-                    <p class="text-[11px] text-gray-500">Bawa kod ini berjumpa Cikgu untuk mendapatkan lencana sebenar. <br/>(Koin ditolak: ${finalPrice})</p>
-                `,
-                icon: 'success'
-            });
-        } else {
-            Swal.fire('🎉 KINI DIAKTIFKAN!', `Lencana digital ${name} telah diaktifkan pada papan profil anda! (Koin ditolak: ${finalPrice})`, 'success');
-        }
+        // Paparkan status kejayaan terus (tiada lagi penjanaan pin tuntutan)
+        Swal.fire('🎉 KINI DIAKTIFKAN!', `Lencana digital ${name} telah diaktifkan pada papan profil anda! (Koin ditolak: ${finalPrice})`, 'success');
 
         loadMedalShop();
 
     } catch (e) {
         console.error("Gagal membeli lencana:", e);
         Swal.fire('Ralat', 'Proses pembelian terganggu.', 'error');
-    }
-}
-
-// ==========================================
-// 🎟️ FUNGSI TUNTUT PIN UNTUK LENCANA LAMA YANG DAH DIBELI
-// ==========================================
-async function requestPhysicalBadge(id, name) {
-    const myDocId = `${localPlayerData.school || 'SK_DEFAULT'}_${localPlayerData.class || '-'}_${localPlayerData.name.trim().toUpperCase()}`.replace(/\s+/g, '_');
-    
-    // Semak pangkalan data jika murid sudah jana kod untuk lencana ini sebelum ini
-    Swal.fire({
-        title: 'Menyemak Rekod...',
-        allowOutsideClick: false,
-        didOpen: () => Swal.showLoading()
-    });
-
-    try {
-        const claimsSnap = await db.collection("claims")
-            .where("playerDocId", "==", myDocId)
-            .where("itemID", "==", id)
-            .get();
-
-        if (!claimsSnap.empty) {
-            // Jika sudah ada kod, paparkan semula (murid mungkin terlupa kod)
-            const claimData = claimsSnap.docs[0].data();
-            Swal.fire({
-                title: 'KOD ANDA',
-                html: `
-                    <p class="text-sm text-gray-600 mb-2">Anda telah pun mendaftar untuk menuntut lencana ini.</p>
-                    <div class="bg-yellow-50 p-4 rounded-xl text-center border-2 border-dashed border-yellow-400">
-                        <p class="text-xs text-yellow-700 font-bold uppercase">Kod Pin Fizikal Anda</p>
-                        <p class="text-2xl font-black text-yellow-900 tracking-wider">${claimData.claimCode}</p>
-                    </div>
-                    <p class="text-[11px] text-gray-500 mt-3">Status: <b class="${claimData.status === 'Sudah Dituntut' ? 'text-green-600' : 'text-red-500'}">${claimData.status}</b></p>
-                `,
-                icon: 'info'
-            });
-            
-            // Jika cikgu dah sahkan (Sudah Dituntut) tapi cache belum update, paksa update dan reload UI
-            if (claimData.status === 'Sudah Dituntut') {
-                cachedUserClaims = null;
-                loadMedalShop();
-            }
-
-        } else {
-            // Jika belum ada kod (murid lama), jana kod baru tanpa tolak koin
-            const claimCode = generateRedemptionCode('BADGE');
-            await db.collection("claims").add({
-                claimCode: claimCode,
-                buyerName: localPlayerData.name.toUpperCase(),
-                studentName: localPlayerData.name.toUpperCase(),
-                playerDocId: myDocId,
-                itemID: id,
-                itemName: `Lencana Fizikal: ${name}`,
-                status: "Belum Dituntut",
-                shopType: "Badges Shop",
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-
-            // Kosongkan cache supaya butang jadi "Tuntut Pin" semula (jika ditutup)
-            cachedUserClaims = null;
-
-            Swal.fire({
-                title: '🏆 PIN FIZIKAL DIDAFTAR!',
-                html: `
-                    <div class="bg-yellow-50 p-4 rounded-xl my-3 text-center border-2 border-dashed border-yellow-400">
-                        <p class="text-xs text-yellow-700 font-bold uppercase">Kod Pin Fizikal Anda</p>
-                        <p class="text-2xl font-black text-yellow-900 tracking-wider">${claimCode}</p>
-                    </div>
-                    <p class="text-[11px] text-gray-500">Bawa kod ini berjumpa Cikgu untuk mendapatkan lencana sebenar.</p>
-                `,
-                icon: 'success'
-            });
-        }
-    } catch (error) {
-        console.error(error);
-        Swal.fire('Ralat', 'Gagal menyemak rekod tuntutan.', 'error');
     }
 }
 
