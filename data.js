@@ -1155,7 +1155,7 @@ school: {
         ]
     },
     leviathan: {
-        id: 'avatar_leviathan', maxLevel: 100, theme: 'Reading & Comprehension',
+        id: 'avatar_leviathan', maxLevel: 100, theme: 'Leviathan',
         levels: [
             { level: 1, name: 'Context Drop', price: 300, icon: 'fas fa-tint fa-pulse text-blue-200', desc: 'Guessing meaning from context.' },
             { level: 2, name: 'Skimming Drop', price: 600, icon: 'fas fa-tint fa-shake text-blue-300', desc: 'Reading fast to get the main idea.' },
@@ -1195,7 +1195,7 @@ school: {
         ]
     },
     unicorn: {
-        id: 'avatar_unicorn', maxLevel: 100, theme: 'Figurative Language',
+        id: 'avatar_unicorn', maxLevel: 100, theme: 'Unicorn',
         levels: [
             { level: 1, name: 'Rhyme Dust', price: 300, icon: 'fas fa-star fa-pulse text-pink-200', desc: 'Words that sound magically alike.' },
             { level: 2, name: 'Simile Dust', price: 600, icon: 'fas fa-star fa-shake text-pink-300', desc: 'As bright as a glowing star.' },
@@ -1235,7 +1235,7 @@ school: {
         ]
     },
     golem: {
-        id: 'avatar_golem', maxLevel: 100, theme: 'Tenses & Structure',
+        id: 'avatar_golem', maxLevel: 100, theme: 'Golem',
         levels: [
             { level: 1, name: 'Past Pebble', price: 300, icon: 'fas fa-circle fa-pulse text-gray-400', desc: 'Actions that already happened.' },
             { level: 2, name: 'Present Pebble', price: 600, icon: 'fas fa-circle fa-shake text-gray-500', desc: 'Actions happening right now.' },
@@ -1275,7 +1275,7 @@ school: {
         ]
     },
     fairy: {
-        id: 'avatar_fairy', maxLevel: 100, theme: 'Listening & Communication',
+        id: 'avatar_fairy', maxLevel: 100, theme: 'Fairy',
         levels: [
             { level: 1, name: 'Sound Seedling', price: 300, icon: 'fas fa-seedling fa-pulse text-green-300', desc: 'Catching the first English sounds.' },
             { level: 2, name: 'Tune Sprout', price: 600, icon: 'fas fa-seedling fa-shake text-green-400', desc: 'Listening to the rhythm of sentences.' },
@@ -1315,7 +1315,7 @@ school: {
         ]
     },
     lion: {
-        id: 'avatar_lion', maxLevel: 100, theme: 'Debate & Persuasion',
+        id: 'avatar_lion', maxLevel: 100, theme: 'Lion',
         levels: [
             { level: 1, name: 'Claim Kitten', price: 300, icon: 'fas fa-bolt fa-pulse text-yellow-200', desc: 'Making a tiny but valid point.' },
             { level: 2, name: 'Reason Kitten', price: 600, icon: 'fas fa-bolt fa-shake text-yellow-300', desc: 'Backing up claims with "because".' },
