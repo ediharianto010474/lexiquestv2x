@@ -5386,11 +5386,96 @@ function initLTE() {
 }
 
 // ============================================================================
-// FUNGSI POP-UP MODAL LTE (UI)
+// 🔥 FIREBASE: KEMASKINI PROGRES HARI TERKUMPUL LTE (KALIS SPAM)
+// ============================================================================
+async function updateLteProgress() {
+    // 1. Semak jika ada event aktif yang memerlukan syarat "hari terkumpul"
+    if (!currentActiveEvent || !currentActiveEvent.requiredDays) {
+        return; // Keluar jika tiada event atau event itu jenis kekal (macam XP boost)
+    }
+
+    if (!currentUserId) {
+        console.warn("⚠️ [LTE] Tiada ID murid dikesan. Gagal mengemas kini progres.");
+        return;
+    }
+
+    // 2. Dapatkan tarikh hari ini dalam format standard "YYYY-MM-DD"
+    // (Guna format ini supaya tepat dan tidak dipengaruhi oleh waktu jam/minit)
+    const hariIni = new Date().toISOString().split('T')[0]; 
+    
+    // 🔍 UNKUK TESTING SAHAJA (Jika Cikgu guna tarikh Julai palsu semalam):
+    // const hariIni = "2026-07-15"; 
+
+    const userRef = doc(db, "users", currentUserId);
+
+    try {
+        // Ambil data terkini murid dari Firestore
+        const userSnap = await getDoc(userRef);
+        
+        if (!userSnap.exists()) return;
+
+        const userData = userSnap.data();
+        // Ambil objek lte_progress sedia ada (jika belum ada, buat objek kosong)
+        let lteProgress = userData.lte_progress || { activeEventName: "", cumulativeDays: 0, lastPlayedDate: "" };
+
+        // 3. LOGIK AUTOMATIK: Jika nama event bertukar (masuk bulan baharu)
+        if (lteProgress.activeEventName !== currentActiveEvent.name) {
+            console.log(`♻️ [LTE] Acara baharu dikesan (${currentActiveEvent.name}). Me-reset kaunter progres murid.`);
+            lteProgress.activeEventName = currentActiveEvent.name;
+            lteProgress.cumulativeDays = 1;
+            lteProgress.lastPlayedDate = hariIni;
+
+            // Simpan terus ke Firestore
+            await updateDoc(userRef, { lte_progress: lteProgress });
+            console.log("✅ [LTE] Progres bulan baharu berjaya dimulakan: 1 Hari.");
+            return;
+        }
+
+        // 4. LOGIK KALIS SPAM: Semak jika murid sudah main hari ini
+        if (lteProgress.lastPlayedDate === hariIni) {
+            console.log("🛡️ [LTE] Murid sudah bermain hari ini. Progres hari terkumpul tidak ditambah (Anti-Spam).");
+            return;
+        }
+
+        // 5. TANGKAP PROGRES: Jika hari baharu, tambah +1 hari
+        lteProgress.cumulativeDays += 1;
+        lteProgress.lastPlayedDate = hariIni;
+
+        // Kemaskini ke Firestore
+        await updateDoc(userRef, { lte_progress: lteProgress });
+        console.log(`🎉 [LTE] Tahniah! Progres meningkat: ${lteProgress.cumulativeDays} / ${currentActiveEvent.requiredDays} Hari.`);
+
+        // 6. LOGIK BONUS: Semak jika murid baru sahaja mencapai sasaran hari hari ini!
+        if (lteProgress.cumulativeDays === currentActiveEvent.requiredDays) {
+            triggerLteRewardCelebration(currentActiveEvent.name);
+        }
+
+    } catch (error) {
+        console.error("❌ [LTE] Ralat semasa mengemaskini progres ke Firestore:", error);
+    }
+}
+
+// Fungsi gembira apabila hadiah berjaya dicapai! (Boleh pakai SweetAlert2 Cikgu yang dah pulih tu)
+function triggerLteRewardCelebration(eventName) {
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            title: 'TAHNIAH! 🏅',
+            text: `Anda telah berjaya menyelesaikan Misi 15 Hari untuk acara "${eventName}"! Ganjaran anda telah dikunci masuk.`,
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Awesome!'
+        });
+    } else {
+        alert(`🎉 TAHNIAH! Anda telah berjaya menyelesaikan Misi 15 Hari untuk acara "${eventName}"!`);
+    }
+}
+
+// ============================================================================
+// FUNGSI POP-UP MODAL LTE (UI) - VERSI REALTIME FIRESTORE
 // ============================================================================
 
-// Fungsi apabila widget LTE ditekan
-function handleWidgetClick() {
+// Fungsi apabila widget LTE ditekan (VERSI BACA DATA FIRESTORE)
+async function handleWidgetClick() {
     if (!currentActiveEvent) return;
 
     // Ambil elemen HTML pop-up
@@ -5402,10 +5487,9 @@ function handleWidgetClick() {
     const progressText = document.getElementById('modal-lte-progress-text');
     const progressBar = document.getElementById('modal-lte-progress-bar');
 
-    // 1. Tetapkan Tajuk & Ikon
+    // 1. Tetapkan Tajuk & Ikon Utama
     titleDOM.innerText = currentActiveEvent.name;
     
-    // Guna ikon yang sesuai dari fungsi setup sebelum ini (Mock up manual untuk testing)
     iconDOM.innerText = currentActiveEvent.rewardType.includes('badge') ? "🏅" : 
                         currentActiveEvent.rewardType.includes('avatar') ? "🖼️" : 
                         currentActiveEvent.rewardType.includes('title') ? "🎖️" : "🔥";
@@ -5414,43 +5498,62 @@ function handleWidgetClick() {
     if (currentActiveEvent.requiredDays) {
         // --- INI ACARA BERASASKAN HARI ---
         descDOM.innerText = `Log masuk dan selesaikan permainan selama ${currentActiveEvent.requiredDays} hari sepanjang tempoh acara untuk menuntut ganjaran istimewa ini!`;
-        
-        // Buka bahagian progres
         progressSection.classList.remove('hidden');
 
-        // SEMENTARA UNTUK TESTING UI: Kita anggap murid dah main 5 hari
-        let mockMuridDays = 5; 
-        let targetDays = currentActiveEvent.requiredDays;
-        
-        progressText.innerText = `${mockMuridDays} / ${targetDays} Hari`;
-        
-        // Kira peratusan bar
-        let percent = (mockMuridDays / targetDays) * 100;
-        if (percent > 100) percent = 100;
-        
-        // Animasikan bar
-        setTimeout(() => {
-            progressBar.style.width = `${percent}%`;
-        }, 100);
+        // Set paparan awal kepada "Memuatkan" sementara menunggu Firebase
+        progressText.innerText = `Memuatkan...`;
+        progressBar.style.width = "0%";
 
+        if (typeof currentUserId !== 'undefined' && currentUserId) {
+            try {
+                // Minta Firebase baca data murid ini
+                const userSnap = await getDoc(doc(db, "users", currentUserId));
+                let realDays = 0;
+
+                if (userSnap.exists()) {
+                    const userData = userSnap.data();
+                    
+                    // Pastikan LTE Progress wujud dan namanya sama dengan event bulan ini
+                    if (userData.lte_progress && userData.lte_progress.activeEventName === currentActiveEvent.name) {
+                        realDays = userData.lte_progress.cumulativeDays || 0;
+                    }
+                }
+
+                let targetDays = currentActiveEvent.requiredDays;
+                if (realDays > targetDays) realDays = targetDays; // Hadkan bar supaya tak lebih 100%
+
+                // Kemaskini teks pop-up dengan jumlah hari sebenar
+                progressText.innerText = `${realDays} / ${targetDays} Hari`;
+                
+                // Kira peratusan bar & animasikan
+                let percent = (realDays / targetDays) * 100;
+                setTimeout(() => {
+                    progressBar.style.width = `${percent}%`;
+                }, 100);
+
+            } catch (error) {
+                console.error("❌ [LTE UI] Gagal mengambil progres murid dari Firestore:", error);
+                progressText.innerText = "Gagal memuatkan data.";
+            }
+        } else {
+            progressText.innerText = "Ralat: ID Murid tidak dikesan.";
+        }
     } else {
-        // --- INI ACARA BIASA (Contoh: XP Boost, Coins Boost, No Penalty) ---
-        descDOM.innerText = "Acara sedang berlangsung! Nikmati ganjaran istimewa sepanjang tempoh ini tanpa perlu mengumpul hari.";
-        
-        // Tutup bahagian progres kerana ia tidak relevan
+        // --- INI ACARA BIASA (Contoh: XP Boost, Coins Boost) ---
+        descDOM.innerText = "Acara global sedang berlangsung! Nikmati kelebihan ganjaran istimewa ini secara automatik sepanjang tempoh acara.";
         progressSection.classList.add('hidden');
     }
 
-    // 3. Tunjukkan Modal
+    // 3. Tunjukkan Kotak Modal
     modal.classList.remove('hidden');
 }
 
-// Fungsi tutup modal
+// Fungsi tutup modal (Kekal Sama)
 function closeLteModal() {
     const modal = document.getElementById('lte-info-modal');
     if (modal) {
         modal.classList.add('hidden');
-        // Reset lebar bar untuk animasi seterusnya
+        // Reset lebar bar ke 0% supaya animasi berjalan semula bila dibuka kali seterusnya
         const progressBar = document.getElementById('modal-lte-progress-bar');
         if (progressBar) progressBar.style.width = "0%";
     }
