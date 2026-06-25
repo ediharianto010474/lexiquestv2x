@@ -3303,11 +3303,15 @@ async function loadLeaderboard() {
             </div>`;
     }
 
-    try {
+try {
         let query = db.collection("players");
         if (mySchool) {
             query = query.where("school", "==", mySchool);
         }
+
+        // 🔥 PERUBAHAN UTAMA DI SINI (JIMAT BERIBU READS!)
+        // Sistem hanya memuat turun 100 murid dengan markah tertinggi sahaja.
+        query = query.orderBy("totalScore", "desc").limit(100);
 
         const snapshot = await query.get();
         
@@ -3319,11 +3323,13 @@ async function loadLeaderboard() {
         window.leaderboardDataTemp = [];
         snapshot.forEach(doc => {
             const data = doc.data();
+            // Hanya masukkan data ke dalam senarai jika ia bukan ADMIN
             if (data.class !== "ADMIN" && data.totalScore && data.totalScore > 0) { 
                 window.leaderboardDataTemp.push(data);
             }
         });
 
+        // Kemaskini masa cache terakhir
         window.lastLeaderboardFetch = currentTime;
         renderLeaderboardData('all');
 
@@ -3332,11 +3338,10 @@ async function loadLeaderboard() {
         listContainer.innerHTML = `
             <div class='p-8 text-center text-red-500 font-bold'>
                 <i class='fas fa-exclamation-circle text-2xl mb-2'></i><br>
-                Ralat memuat turun data.
+                Ralat memuat turun data. (Semak console F12 jika perlukan Firebase Index)
             </div>`;
     }
-}
-
+} // <--- INI DIA KURUNGAN KEDUA UNTUK MENUTUP FUNGSI loadLeaderboard()
 // 🌟 FUNGSI PENUKAR TAHUN KHAS UNTUK USER DEV 🌟
 function changeDevYearView(year, currentTab) {
     window.currentDevYearView = year;
