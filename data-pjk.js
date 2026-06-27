@@ -3,847 +3,1385 @@
 // ==========================================
 const pjkData = {
     "gimnastik_asas": [
-        {"q": "Kebolehan mengekalkan kedudukan badan dalam keadaan stabil dipanggil ___?", "a": "imbangan"},
-        {"q": "Imbangan yang dilakukan dalam keadaan badan tidak bergerak dipanggil imbangan ___?", "a": "statik"},
-        {"q": "Imbangan yang dilakukan ketika badan sedang bergerak dipanggil imbangan ___?", "a": "dinamik"},
-        {"q": "Melakukan imbangan dengan hanya menggunakan sebelah kaki dinamakan imbangan bangau atau ___ kaki?", "a": "satu"},
-        {"q": "Imbangan statik menggunakan punggung sebagai tapak sokongan diletakkan sebagai posisi huruf ___?", "a": "v"},
-        {"q": "Semakin banyak bilangan tapak sokongan, semakin ___ sesuatu imbangan badan.", "a": "stabil"},
-        {"q": "Antara imbangan satu tapak sokongan dan tiga tapak sokongan, manakah yang lebih stabil?", "a": "tiga tapak sokongan"},
-        {"q": "Sebutkan kedudukan tapak sokongan yang paling luas antara berdiri berkaki rapat atau berdiri tegak berkaki buka?", "a": "berkaki buka"},
-        {"q": "Aktiviti menolak badan ke atas dari lantai dengan kekuatan kaki secara cepat dipanggil ___?", "a": "hambur"},
-        {"q": "Aktiviti memindahkan berat badan dari kaki ke tangan dan kembali ke kaki semula dipanggil hambur ___?", "a": "tangan"},
-        {"q": "Semasa melakukan pendaratan dari tempat tinggi, lutut hendaklah ___ untuk menyerap daya gegaran.", "a": "difleksi"},
-        {"q": "Apakah istilah bahasa Melayu bagi perbuatan membengkokkan lutut semasa mendarat?", "a": "fleksi lutut"},
-        {"q": "Pendaratan yang selamat memerlukan kedua-dua belah ___ menyentuh lantai secara serentak.", "a": "kaki"},
-        {"q": "Pergerakan memusingkan badan 360 darjah di atas lantai mengikut paksi membujur dipanggil ___ balak?", "a": "guling"},
-        {"q": "Pergerakan menggulingkan badan ke hadapan bermula dari tengkuk, belakang dan punggung dipanggil guling ___?", "a": "hadapan"},
-        {"q": "Semasa melakukan guling hadapan, bahagian anggota badan manakah yang patut menyentuh tilam dahulu selepas tangan?", "a": "tengkuk"},
-        {"q": "Adakah bahagian dahi atau kepala dibenarkan menjadi tumpuan utama semasa memulakan guling hadapan?", "a": "tidak"},
-        {"q": "Mengapakah kepala tidak boleh ditekan pada tilam semasa berguling?", "a": "boleh mencederakan leher"},
-        {"q": "Pergerakan menggulingkan badan ke arah belakang dipanggil guling ___?", "a": "belakang"},
-        {"q": "Semasa posisi akhir guling hadapan, murid berada dalam keadaan ___ sebelum berdiri.", "a": "mencangkung"},
-        {"q": "Aktiviti berjalan di atas bangku gimnastik melatih kemahiran imbangan ___?", "a": "dinamik"},
-        {"q": "Alat beralas lembut yang wajib digunakan dalam semua aktiviti gimnastik asas dipanggil ___?", "a": "tilam gimnastik"},
-        {"q": "Apakah nama lain bagi tilam gimnastik yang tebal dan lembut?", "a": "mat"},
-        {"q": "Imbangan statik secara meniarap dengan tangan dan sebelah kaki lurus ke belakang menyerupai bentuk pesawat dipanggil imbangan ___?", "a": "aeroplan"},
-        {"q": "Melakukan pusingan badan di udara selepas melompat dari papan anjal dipanggil lompatan ___?", "a": "udara"},
-        {"q": "Adakah kita dibenarkan melakukan gimnastik di atas lantai simen keras tanpa tilam?", "a": "tidak"},
-        {"q": "Sokongan badan menggunakan dua belah tangan dan dua belah kaki dikira mempunyai berapa tapak sokongan?", "a": "empat"},
-        {"q": "Sokongan badan menggunakan kepala dan dua belah tangan membentuk imbangan ___?", "a": "tiga segi"},
-        {"q": "Aktiviti gimnastik dapat meningkatkan koordinasi dan ___ otot badan.", "a": "kekuatan"},
-        {"q": "Sebelum memulakan aktiviti gimnastik, murid mestilah memakai pakaian sukan yang ___?", "a": "sesuai"},
-        {"q": "Fleksi lutut semasa mendarat penting untuk mengelakkan kecederaan pada sendi ___?", "a": "lutut"},
-        {"q": "Adakah murid dibenarkan menolak rakan secara sengaja semasa melakukan gulingan?", "a": "tidak"},
-        {"q": "Mengekalkan imbangan badan di atas papan imbangan memerlukan fokus mata memandang ke ___?", "a": "hadapan"},
-        {"q": "Kedudukan pusat graviti yang rendah menjadikan tubuh badan kita lebih ___?", "a": "stabil"},
-        {"q": "Merendahkan badan dengan membengkokkan lutut membantu menurunkan pusat ___.", "a": "graviti"},
-        {"q": "Gimnastik yang melibatkan pergerakan kreatif bersandarkan alatan seperti reben atau bola dipanggil gimnastik ___?", "a": "irama"},
-        {"q": "Gimnastik peringkat sekolah rendah memfokuskan kepada pergerakan ___?", "a": "asas"},
-        {"q": "Hambur menggunakan bantuan peti lombol memerlukan kekuatan otot tangan dan ___?", "a": "kaki"},
-        {"q": "Semasa berguling, posisi dagu hendaklah dirapatkan ke bahagian ___?", "a": "dada"},
-        {"q": "Adakah perbuatan memakai jam tangan atau aksesori tajam dibenarkan semasa gimnastik?", "a": "tidak"},
-        {"q": "Kemahiran mengawal pergerakan anggota badan dengan cekap dipanggil ___ motor.", "a": "kawalan"},
-        {"q": "Pendaratan yang tidak stabil boleh menyebabkan murid terjatuh atau ___?", "a": "terseliuh"},
-        {"q": "Aktiviti gayut dan ayun pada palang menguji kekuatan genggaman tangan serta otot ___?", "a": "bahu"},
-        {"q": "Semasa mendarat dari lompatan, pastikan tangan dibuka ke sisi untuk mengimbangi ___?", "a": "badan"},
-        {"q": "Gulingan sisi di atas tilam gimnastik dipanggil juga guling ___?", "a": "sisi"},
-        {"q": "Adakah arahan guru wajib dipatuhi sebelum mencuba sebarang gaya gimnastik baharu?", "a": "ya"},
-        {"q": "Imbangan 'handstand' ialah imbangan statik tegak menggunakan tapak ___?", "a": "tangan"},
-        {"q": "Sokongan satu lutut dan dua tapak tangan di atas lantai memberikan bilangan ___ tapak sokongan.", "a": "three"},
-        {"q": "Aktiviti meniru pergerakan ulat bulu bergerak di atas tilam dikategorikan sebagai pergerakan ___?", "a": "lokomotor"},
-        {"q": "Gimnastik melatih kebolehan melentur badan atau komponen ___.", "a": "kelenturan"}
-    ],
+        {
+            id: "PJK_GM01",
+            question: "Kebolehan mengekalkan kedudukan badan dalam keadaan stabil tanpa jatuh dipanggil ___.",
+            options: ["Lompatan", "Ayunan", "Imbangan", "Hambur"],
+            answer: 2
+        },
+        {
+            id: "PJK_GM02",
+            question: "Imbangan yang dilakukan dalam keadaan badan tidak bergerak (kaku) dipanggil imbangan ___.",
+            options: ["Dinamik", "Statik", "Lompatan", "Kreatif"],
+            answer: 1
+        },
+        {
+            id: "PJK_GM03",
+            question: "Imbangan yang dilakukan ketika badan sedang bergerak (contohnya meniti atas bangku) dipanggil imbangan ___.",
+            options: ["Dinamik", "Statik", "Berirama", "Simetri"],
+            answer: 0
+        },
+        {
+            id: "PJK_GM04",
+            question: "Melakukan 'Imbangan Bangau' memerlukan sokongan menggunakan berapa belah kaki?",
+            options: ["Satu kaki", "Dua kaki", "Tiga titik", "Tiada kaki"],
+            answer: 0
+        },
+        {
+            id: "PJK_GM05",
+            question: "Jika kamu melakukan imbangan dengan punggung sebagai tapak sokongan, badan akan membentuk posisi huruf ___.",
+            options: ["A", "O", "T", "V"],
+            answer: 3
+        },
+        {
+            id: "PJK_GM06",
+            question: "Semakin banyak bilangan tapak sokongan yang menyentuh lantai, semakin ___ imbangan badan kita.",
+            options: ["Bergoyang", "Stabil", "Laju", "Tinggi"],
+            answer: 1
+        },
+        {
+            id: "PJK_GM07",
+            question: "Antara berikut, posisi yang manakah merupakan tapak sokongan yang paling luas dan stabil?",
+            options: ["Berdiri dengan hujung kaki", "Berdiri satu kaki", "Berdiri kaki dirapatkan", "Berdiri tegak dengan kaki dibuka"],
+            answer: 3
+        },
+        {
+            id: "PJK_GM08",
+            question: "Aktiviti menolak badan ke atas dari lantai secara laju menggunakan kekuatan kaki dipanggil ___.",
+            options: ["Guling", "Hambur", "Ayunan", "Imbangan"],
+            answer: 1
+        },
+        {
+            id: "PJK_GM09",
+            question: "Dalam aktiviti hambur tangan, berat badan akan dipindahkan dari kaki ke arah ___ sebelum kembali ke kaki.",
+            options: ["Kepala", "Bahu", "Tangan", "Punggung"],
+            answer: 2
+        },
+        {
+            id: "PJK_GM10",
+            question: "Apakah tindakan yang perlu dilakukan pada bahagian lutut semasa mendarat dari tempat tinggi?",
+            options: ["Diluruskan keras", "Difleksi (dibengkokkan)", "Disilangkan", "Diangkat tinggi"],
+            answer: 1
+        },
+        {
+            id: "PJK_GM11",
+            question: "Tujuan membengkokkan lutut (fleksi lutut) semasa pendaratan adalah untuk ___.",
+            options: ["Menyerap daya gegaran", "Melonjak lebih tinggi", "Nampak lebih bergaya", "Mempercepatkan pendaratan"],
+            answer: 0
+        },
+        {
+            id: "PJK_GM12",
+            question: "Untuk pendaratan yang selamat, kedua-dua belah kaki mestilah menyentuh lantai secara ___.",
+            options: ["Serentak", "Bergilir-gilir", "Kaki kiri dahulu", "Kaki kanan dahulu"],
+            answer: 0
+        },
+        {
+            id: "PJK_GM13",
+            question: "Pergerakan menggulingkan badan ke hadapan bermula dari bahagian tengkuk dipanggil ___.",
+            options: ["Guling sisi", "Guling hadapan", "Guling belakang", "Guling balak"],
+            answer: 1
+        },
+        {
+            id: "PJK_GM14",
+            question: "Pergerakan memusingkan badan 360 darjah di atas lantai secara lurus mengikut paksi membujur dipanggil ___.",
+            options: ["Guling sisi", "Guling hadapan", "Guling belakang", "Guling balak"],
+            answer: 3
+        },
+        {
+            id: "PJK_GM15",
+            question: "Semasa melakukan guling hadapan, bahagian badan manakah yang PATUT menyentuh tilam selepas tangan?",
+            options: ["Dahi", "Ubun-ubun kepala", "Tengkuk (belakang leher)", "Dada"],
+            answer: 2
+        },
+        {
+            id: "PJK_GM16",
+            question: "Kenapa bahagian puncak kepala (ubun-ubun) tidak dibenarkan menjadi tumpuan menekan tilam semasa berguling?",
+            options: ["Boleh merosakkan rambut", "Menyukarkan gulingan", "Mencederakan tulang leher", "Boleh membatalkan gulingan"],
+            answer: 2
+        },
+        {
+            id: "PJK_GM17",
+            question: "Bagi memastikan guling hadapan selamat, dagu murid hendaklah sentiasa dirapatkan ke arah ___.",
+            options: ["Lutut", "Dada", "Bahu", "Perut"],
+            answer: 1
+        },
+        {
+            id: "PJK_GM18",
+            question: "Selepas selesai guling hadapan, murid biasanya akan berada dalam posisi akhir iaitu keadaan ___.",
+            options: ["Mencangkung", "Meniarap", "Baring telentang", "Berdiri sebelah kaki"],
+            answer: 0
+        },
+        {
+            id: "PJK_GM19",
+            question: "Alatan wajib yang beralas lembut dan mesti digunakan di atas lantai semasa gimnastik dipanggil ___.",
+            options: ["Papan anjal", "Papan imbangan", "Tikar getah biasa", "Tilam gimnastik"],
+            answer: 3
+        },
+        {
+            id: "PJK_GM20",
+            question: "Imbangan statik secara meniarap dengan tangan dan kaki lurus ke belakang dipanggil posisi ___.",
+            options: ["Kereta kebal", "Kapal selam", "Aeroplan (kapal terbang)", "Helikopter"],
+            answer: 2
+        },
+        {
+            id: "PJK_GM21",
+            question: "Sokongan badan menggunakan dua belah tangan dan sebelah kaki dikira sebagai imbangan ___ tapak sokongan.",
+            options: ["Satu", "Dua", "Tiga", "Empat"],
+            answer: 2
+        },
+        {
+            id: "PJK_GM22",
+            question: "Apakah nama kemahiran di mana murid bergantung pada palang menggunakan kekuatan genggaman?",
+            options: ["Hambur", "Ayunan / Gayut", "Guling", "Lompatan"],
+            answer: 1
+        },
+        {
+            id: "PJK_GM23",
+            question: "Adakah perbuatan memakai jam tangan atau rantai leher dibenarkan semasa kelas gimnastik?",
+            options: ["Ya, asalkan cantik", "Tidak, kerana membahayakan keselamatan", "Ya, jika disuruh guru", "Tidak, melainkan jam pintar"],
+            answer: 1
+        },
+        {
+            id: "PJK_GM24",
+            question: "Aktiviti memanaskan badan sebelum gimnastik sangat penting untuk ___.",
+            options: ["Mengelakkan kecederaan otot", "Memenatkan badan", "Membazir masa kelas", "Meningkatkan selera makan"],
+            answer: 0
+        },
+        {
+            id: "PJK_GM25",
+            question: "Selain kekuatan otot, gimnastik sangat melatih kebolehan sendi meregang yang dipanggil ___.",
+            options: ["Daya tahan", "Kelenturan", "Kelajuan", "Kapasiti aerobik"],
+            answer: 1
+        },
 
-    "pergerakan_berirama": [
-        {"q": "Pergerakan fizikal yang dilakukan mengikut rentak, tempo atau muzik dipanggil pergerakan ___?", "a": "berirama"},
-        {"q": "Kelajuan rentak irama atau muzik yang mengawal pergerakan dipanggil ___?", "a": "tempo"},
-        {"q": "Pergerakan yang menyebabkan badan berpindah dari satu tempat ke tempat yang lain dipanggil pergerakan ___?", "a": "lokomotor"},
-        {"q": "Sebutkan satu contoh pergerakan lokomotor dalam aktiviti berirama?", "a": "berjalan"},
-        {"q": "Pergerakan yang dilakukan dalam keadaan badan kekal berada di tempat yang sama dipanggil pergerakan ___?", "a": "bukan lokomotor"},
-        {"q": "Sebutkan satu contoh pergerakan bukan lokomotor dalam pergerakan berirama?", "a": "membengkok"},
-        {"q": "Langkah asas berjalan ke hadapan, ke belakang, atau ke sisi mengikut detik dipanggil pergerakan ___ lurus?", "a": "langkah"},
-        {"q": "Langkah menari mengikut corak langkah huruf 'V' dipanggil langkah ___?", "a": "v-step"},
-        {"q": "Pergerakan mengikut irama muzik dengan ekspresi emosi bebas dipanggil pergerakan ___?", "a": "kreatif"},
-        {"q": "Aktiviti meniru pergerakan haiwan seperti burung terbang mengikut muzik menguji daya ___ murid.", "a": "kreativiti"},
-        {"q": "Tarian tradisional kaum Melayu yang ditarikan dengan tempo sederhana laju meter 4/4 ialah tarian ___?", "a": "inang"},
-        {"q": "Tarian tradisional kaum Melayu yang mempunyai rentak sangat rancak dan ceria ialah tarian ___?", "a": "joget"},
-        {"q": "Alat perkusi atau tepukan tangan boleh digunakan sebagai penanda ___ irama.", "a": "detik"},
-        {"q": "Mendengar muzik terlebih dahulu sebelum melakukan pergerakan membantu murid menyelaraskan ___ badan.", "a": "koordinasi"},
-        {"q": "Pergerakan melangkah sebelah kaki ke sisi dan menarik kaki sebelah lagi rapat ke arahnya dipanggil langkah ___?", "a": "sisi"},
-        {"q": "Apakah istilah bahasa Inggeris bagi pergerakan langkah sisi rapat?", "a": "side-step"},
-        {"q": "Langkah menari bersilang kaki ke hadapan atau ke belakang dipanggil langkah ___ vin?", "a": "grapevine"},
-        {"q": "Adakah tempo muzik yang laju memerlukan kita bergerak dengan lebih pantas?", "a": "ya"},
-        {"q": "Adakah tempo muzik yang perlahan sesuai diiringi dengan pergerakan melompat pecut?", "a": "tidak"},
-        {"q": "Aktiviti pergerakan berirama secara berkumpulan melatih nilai bekerjasama dan ___?", "a": "keseragaman"},
-        {"q": "Melakukan pergerakan fleksi dan ekstensi tangan mengikut detik lagu ialah contoh pergerakan ___ lokomotor.", "a": "bukan"},
-        {"q": "Pergerakan melonjak dengan sebelah kaki dan mendarat dengan kaki yang sama dipanggil ___?", "a": "skipping"},
-        {"q": "Pergerakan berlari anak dengan langkah berenjut-enjut mengikut rentak lagu kanak-kanak dinamakan langkah ___?", "a": "enjut"},
-        {"q": "Adakah pakaian ketat atau jeans sesuai dipakai semasa melakukan aktiviti pergerakan berirama?", "a": "tidak"},
-        {"q": "Menggunakan props seperti reben, gelung rotan, atau selendang menambah tarikan estetik dalam pergerakan ___?", "a": "kreatif"},
-        {"q": "Membongkokkan badan ke kiri dan kanan mengikut alunan muzik melatih komponen kecergasan ___.", "a": "kelenturan"},
-        {"q": "Langkah berpusing di tempat yang sama mengikut rentak muzik ialah pergerakan ___?", "a": "pusingan"},
-        {"q": "Tarian tradisional etnik Kadazandusun dari Sabah yang popular diajar dalam PJK ialah tarian ___?", "a": "sumazau"},
-        {"q": "Tarian tradisional etnik Iban dari Sarawak yang diajar dalam komponen pergerakan berirama ialah tarian ___?", "a": "ngajat"},
-        {"q": "Sebutkan rentak irama tradisional yang sering digunakan untuk senamrobik sekolah?", "a": "rancak"},
-        {"q": "Pergerakan berjalan sambil melambai-lambaikan tangan mengikut tempo melatih kemahiran motor ___?", "a": "kasar"},
-        {"q": "Detik lagu yang berulang secara stabil menyamai rentak degupan ___ manusia.", "a": "jantung"},
-        {"q": "Aktiviti berirama yang dilakukan di awal pagi untuk kecergasan seluruh sekolah dipanggil ___?", "a": "senamrobik"},
-        {"q": "Adakah kita perlu menghormati keunikan tarian dan pergerakan tradisional kaum lain?", "a": "ya"},
-        {"q": "Pergerakan mengilas badan tanpa mengubah kedudukan kaki ialah pergerakan ___ lokomotor.", "a": "bukan"},
-        {"q": "Muzik berentak perlahan biasanya mempunyai nilai kesan emosi yang ___ dan tenang.", "a": "syahdu"},
-        {"q": "Menari mengikut formasi bulatan memerlukan murid peka dengan jarak ___ di sebelah mereka.", "a": "rakan"},
-        {"q": "Langkah bergerak maju tiga langkah ke hadapan dan diakhiri dengan tepukan tangan mengikut detik ___?", "a": "keempat"},
-        {"q": "Adakah koordinasi mata, telinga, dan kaki penting dalam pergerakan berirama?", "a": "ya"},
-        {"q": "Tujuan utama aktiviti pergerakan berirama adalah untuk membina keyakinan diri dan apresiasi ___.", "a": "estetik"},
-        {"q": "Melompat melepasi halangan mengikut rentak rentak muzik menguji aspek ___ halangan.", "a": "anggaran"},
-        {"q": "Sebutkan isyarat visual yang boleh digunakan oleh guru untuk menukar pergerakan selain muzik?", "a": "wisil"},
-        {"q": "Langkah mengejar corak langkah rakan di hadapan dinamakan pergerakan ___ bayang.", "a": "mengikut"},
-        {"q": "Suku kata ritma 'Ta' dalam tepukan detik biasanya mewakili ketukan nota ___?", "a": "krochet"},
-        {"q": "Adakah senyuman dan ekspresi muka yang ceria sebahagian daripada markah pergerakan kreatif?", "a": "ya"},
-        {"q": "Pergerakan berirama membantu membakar kalori dan meningkatkan daya tahan ___.", "a": "kardiovaskular"},
-        {"q": "Membentuk gaya patung membeku apabila muzik dihentikan secara tiba-tiba melatih fungsi ___?", "a": "imbat statik"},
-        {"q": "Langkah tarian singa tradisional menggunakan rentak paluan ___ yang kuat.", "a": "dram"},
-        {"q": "Pergerakan menolak tapak tangan ke depan mengikut irama ialah contoh pergerakan ___ lokomotor.", "a": "bukan"},
-        {"q": "Hasil gubahan gerakan kreatif murid boleh dipersembahkan semasa Hari ___ sekolah.", "a": "sukan"}
-    ],
+        // Pergerakan Berirama (25 Soalan)
+        {
+            id: "PJK_PB01",
+            question: "Pergerakan fizikal yang dilakukan dengan langkah bersusun mengikut rentak muzik dipanggil ___.",
+            options: ["Larian asas", "Pergerakan berirama", "Gimnastik", "Senaman bebas"],
+            answer: 1
+        },
+        {
+            id: "PJK_PB02",
+            question: "Pergerakan lokomotor bermaksud pergerakan yang ___.",
+            options: ["Tidak berubah tempat", "Hanya menggunakan tangan", "Berpindah dari satu tempat ke tempat lain", "Bergerak sangat perlahan"],
+            answer: 2
+        },
+        {
+            id: "PJK_PB03",
+            question: "Pergerakan bukan lokomotor pula bermaksud pergerakan yang ___.",
+            options: ["Berlaku setempat tanpa berubah lokasi", "Melompat jauh ke hadapan", "Berpindah dari kiri ke kanan", "Berenang dalam kolam"],
+            answer: 0
+        },
+        {
+            id: "PJK_PB04",
+            question: "Antara berikut, yang manakah contoh pergerakan LOKOMOTOR?",
+            options: ["Membongkok", "Mengilas badan", "Meregang tangan", "Berjalan ke hadapan"],
+            answer: 3
+        },
+        {
+            id: "PJK_PB05",
+            question: "Antara berikut, yang manakah contoh pergerakan BUKAN LOKOMOTOR?",
+            options: ["Membongkokkan badan", "Berlari anak", "Melompat katak", "Berjalan ke sisi"],
+            answer: 0
+        },
+        {
+            id: "PJK_PB06",
+            question: "Tepukan tangan boleh digunakan dalam aktiviti berirama sebagai penanda ___ tanpa muzik.",
+            options: ["Larian", "Masa rehat", "Detik atau tempo", "Penamat kelas"],
+            answer: 2
+        },
+        {
+            id: "PJK_PB07",
+            question: "Kelajuan sesuatu muzik atau rentak yang mengawal kelajuan langkah tarian dipanggil ___.",
+            options: ["Melodi", "Vokal", "Tempo", "Nada"],
+            answer: 2
+        },
+        {
+            id: "PJK_PB08",
+            question: "Langkah asas dengan sebelah kaki dibuka ke sisi dan satu lagi kaki ditarik rapat kepadanya dipanggil ___.",
+            options: ["V-step", "Langkah sisi (Side-step)", "Grapevine", "Skipping"],
+            answer: 1
+        },
+        {
+            id: "PJK_PB09",
+            question: "Corak langkah menari yang menyerupai bentuk huruf 'V' pada lantai dipanggil ___.",
+            options: ["V-step", "A-step", "Langkah sisi", "Langkah lurus"],
+            answer: 0
+        },
+        {
+            id: "PJK_PB10",
+            question: "Aktiviti meniru pergerakan haiwan seperti burung terbang mengikut muzik merupakan sebahagian daripada pergerakan ___.",
+            options: ["Statik", "Kreatif", "Lompatan", "Keras"],
+            answer: 1
+        },
+        {
+            id: "PJK_PB11",
+            question: "Tarian Inang dan Joget merupakan contoh tarian tradisional kaum ___ di Malaysia.",
+            options: ["Cina", "India", "Kadazan", "Melayu"],
+            answer: 3
+        },
+        {
+            id: "PJK_PB12",
+            question: "Tarian tradisional manakah yang biasanya mempunyai rentak yang sangat rancak dan gembira?",
+            options: ["Zapin", "Inang", "Joget", "Mak Yong"],
+            answer: 2
+        },
+        {
+            id: "PJK_PB13",
+            question: "Tarian Sumazau yang sering diiringi paluan gong merupakan tarian tradisi kaum dari negeri ___.",
+            options: ["Sarawak", "Sabah", "Kelantan", "Johor"],
+            answer: 1
+        },
+        {
+            id: "PJK_PB14",
+            question: "Tarian Ngajat yang terkenal dengan pakaian tradisional berbulu burung enggang berasal dari negeri ___.",
+            options: ["Sarawak", "Pahang", "Sabah", "Melaka"],
+            answer: 0
+        },
+        {
+            id: "PJK_PB15",
+            question: "Jika tempo muzik dimainkan dengan perlahan, kita mestilah menggerakkan badan dengan ___.",
+            options: ["Pantas dan melompat", "Kasar dan agresif", "Perlahan dan lembut", "Berhenti terus"],
+            answer: 2
+        },
+        {
+            id: "PJK_PB16",
+            question: "Penggunaan alat tambahan seperti selendang, reben, atau gelung rotan dalam pergerakan dipanggil sebagai ___.",
+            options: ["Senjata", "Props (Alatan)", "Beban", "Halangan"],
+            answer: 1
+        },
+        {
+            id: "PJK_PB17",
+            question: "Pergerakan berirama secara berkumpulan di dalam kelas PJK sangat membantu memupuk semangat ___.",
+            options: ["Mementingkan diri", "Berlawan", "Kerjasama", "Tertidur"],
+            answer: 2
+        },
+        {
+            id: "PJK_PB18",
+            question: "Aktiviti senamrobik sekolah yang diiringi muzik rancak adalah bertujuan untuk membina daya tahan ___.",
+            options: ["Otak", "Mata", "Tulang", "Kardiovaskular (Jantung)"],
+            answer: 3
+        },
+        {
+            id: "PJK_PB19",
+            question: "Bolehkah arahan wisil (wisel) menggantikan muzik untuk menandakan pertukaran pergerakan kreatif?",
+            options: ["Boleh", "Tidak boleh sama sekali", "Hanya untuk larian", "Hanya jika hujan"],
+            answer: 0
+        },
+        {
+            id: "PJK_PB20",
+            question: "Melompat berterusan dengan sebelah kaki dinamakan ___.",
+            options: ["Lari", "Jalan", "Hopping (Lompat sebelah kaki)", "Guling"],
+            answer: 2
+        },
+        {
+            id: "PJK_PB21",
+            question: "Langkah mengejar corak langkah rakan di hadapan tanpa muzik dipanggil pergerakan ___.",
+            options: ["Pusingan", "Mengikut bayang (Shadowing)", "Lompat bintang", "Tarian lurus"],
+            answer: 1
+        },
+        {
+            id: "PJK_PB22",
+            question: "Adakah pakaian baju sekolah rasmi (uniform) sesuai digunakan untuk kelas pergerakan berirama?",
+            options: ["Ya, sangat sesuai", "Tidak, baju sukan lebih sesuai", "Ya, jika menari tarian rasmi", "Bergantung kepada cuaca"],
+            answer: 1
+        },
+        {
+            id: "PJK_PB23",
+            question: "Menari mengikut formasi bulatan memerlukan murid peka dengan ___ agar tidak berlanggar.",
+            options: ["Ruang dan jarak rakan", "Warna baju rakan", "Kasut guru", "Kipas siling"],
+            answer: 0
+        },
+        {
+            id: "PJK_PB24",
+            question: "Langkah menari yang menyilangkan kaki ke belakang kaki yang lain dipanggil pergerakan ___.",
+            options: ["Grapevine", "V-step", "Langkah sisi", "Berjalan lurus"],
+            answer: 0
+        },
+        {
+            id: "PJK_PB25",
+            question: "Kecantikan gerakan, senyuman, dan gaya tubuh semasa persembahan berirama dinilai dari segi apresiasi ___.",
+            options: ["Estetik (Kesenian)", "Matematik", "Sains", "Sejarah"],
+            answer: 0
+        },
 
-    "permainan_kategori_serangan": [
-        {"q": "Kategori permainan di mana sekumpulan pemain menguasai kawasan pihak lawan untuk menjaringkan gol dipanggil kategori ___?", "a": "serangan"},
-        {"q": "Sebutkan satu contoh permainan kategori serangan yang dimainkan menggunakan kaki?", "a": "bola sepak"},
-        {"q": "Sebutkan satu contoh permainan kategori serangan yang dimainkan oleh tujuh orang pemain dalam gelanggang bola jaring?", "a": "bola jaring"},
-        {"q": "Kemahiran memindahkan bola kepada rakan sepasukan dipanggil kemahiran ___?", "a": "menghantar"},
-        {"q": "Kemahiran mengawal bola yang dihantar oleh rakan dipanggil kemahiran ___ bola.", "a": "menerima"},
-        {"q": "Dalam permainan bola sepak, menjaringkan gol dilakukan dengan menggunakan ___ atau kepala.", "a": "kaki"},
-        {"q": "Dalam permainan bola baling, menghantar dan menerima bola dilakukan dengan menggunakan ___?", "a": "tangan"},
-        {"q": "Pemain yang ditugaskan menghalang bola daripada masuk ke dalam gawang gol dipanggil penjaga ___?", "a": "gol"},
-        {"q": "Satu-satunya pemain dalam bola sepak yang dibenarkan memegang bola menggunakan tangan dalam kawasan penalti ialah ___?", "a": "penjaga gol"},
-        {"q": "Kemahiran menggerakkan bola ke hadapan sambil melepasi pemain lawan dipanggil ___ bola?", "a": "mengahantar atau menggelecek"},
-        {"q": "Apakah istilah bahasa Melayu bagi perbuatan 'dribbling'?", "a": "menggelecek"},
-        {"q": "Kemahiran memutuskan atau merebut hantaran bola pihak lawan dipanggil kemahiran ___?", "a": "memotong"},
-        {"q": "Apakah nama lain bagi kemahiran memotong hantaran bola?", "a": "memintas bola"},
-        {"q": "Dalam permainan bola jaring, pemain posisi manakah yang boleh menjaringkan gol selain Goal Attack (GA)?", "a": "goal shooter"},
-        {"q": "Singkatan bagi nama kedudukan pemain 'Goal Shooter' dalam bola jaring ialah ___?", "a": "gs"},
-        {"q": "Adakah pemain bola jaring dibenarkan berlari sambil memegang bola tanpa berhenti?", "a": "tidak"},
-        {"q": "Perbuatan bergerak menggunakan sebelah kaki rujukan tanpa mengangkatnya selepas menerima bola dalam bola jaring dipanggil ___?", "a": "gerak kaki"},
-        {"q": "Apakah istilah bahasa Inggeris bagi kemahiran mengekalkan kaki rujukan dalam bola jaring?", "a": "pivoting"},
-        {"q": "Dalam permainan bola baling, berapakah langkah maksimum yang dibenarkan dibawa bersama bola sebelum melantun atau menghantar?", "a": "tiga langkah"},
-        {"q": "Menghantar bola sepak menggunakan bahagian dalam kaki menghasilkan hantaran yang lebih ___?", "a": "tepat"},
-        {"q": "Hantaran bola sepak yang tinggi ke udara dilakukan dengan menggunakan bahagian ___ kasut.", "a": "kekura kaki"},
-        {"q": "Kemahiran menepis bola baling keluar dari gawang gol menggunakan tangan atau kaki ialah peranan ___?", "a": "penjaga gol"},
-        {"q": "Tindakan mengekori dan mengawal ketat pergerakan pemain lawan dipanggil kemahiran ___?", "a": "membayangi"},
-        {"q": "Apakah istilah bahasa Inggeris bagi perbuatan mengawal atau memantau ketat pemain lawan?", "a": "marking"},
-        {"q": "Adakah sentuhan fizikal yang kasar seperti merempuh atau menarik baju dibenarkan dalam perlawanan sukan?", "a": "tidak"},
-        {"q": "Kekasaran fizikal yang sengaja dilakukan akan menyebabkan pemain diberikan kad amaran atau ___?", "a": "foul"},
-        {"q": "Dalam permainan bola sepak, kad amaran pertama diwakili dengan kad berwarna ___?", "a": "kuning"},
-        {"q": "Pemain bola sepak akan diarah keluar padang sekiranya menerima kad berwarna ___?", "a": "merah"},
-        {"q": "Hantaran bola baling aras dada menggunakan kekuatan sendi ___ tangan.", "a": "pergelangan"},
-        {"q": "Hantaran bola jaring yang dilambung tinggi melebihi kepala pemain lawan dipanggil hantaran ___?", "a": "loba"},
-        {"q": "Apakah istilah bahasa Inggeris bagi hantaran loba?", "a": "lob pass"},
-        {"q": "Kemahiran menangkap bola jaring memerlukan koordinasi yang baik antara mata dan ___?", "a": "tangan"},
-        {"q": "Menghantar bola dengan melantunkannya di atas lantai padang dipanggil hantaran ___?", "a": "lantun"},
-        {"q": "Strategi permainan serangan bertujuan untuk mencipta ruang dan menghasilkan ___?", "a": "jaringan"},
-        {"q": "Formasi kedudukan pemain di padang diatur oleh ___ pasukan.", "a": "jurulatih"},
-        {"q": "Adakah menjerit menghina pemain lawan dikira sebagai semangat kesukanan yang baik?", "a": "tidak"},
-        {"q": "Semangat menghormati undang-undang permainan dan pihak lawan dipanggil semangat ___?", "a": "kesukanan"},
-        {"q": "Kawasan berbentuk separuh bulatan di hadapan tiang gol bola jaring dipanggil kawasan ___?", "a": "gol"},
-        {"q": "Permainan kategori serangan memerlukan stamina tinggi kerana pemain perlu sentiasa ___ sepanjang perlawanan.", "a": "berlari"},
-        {"q": "Kemahiran menanduk bola dalam bola sepak menggunakan bahagian ___ kepala.", "a": "dahi"},
-        {"q": "Adakah hantaran pendek pantas silih berganti (one-two pass) berkesan untuk menembusi pertahanan lawan?", "a": "ya"},
-        {"q": "Pemain posisi manakah yang bertugas mengawal bahagian tengah padang dan menggerakkan serangan?", "a": "pemain tengah"},
-        {"q": "Apakah istilah bahasa Inggeris bagi pemain tengah?", "a": "midfielder"},
-        {"q": "Kemahiran menjaringkan bola baling sambil melompat ke dalam kawasan gol dipanggil jaringan ___?", "a": "lompat"},
-        {"q": "Adakah pemain penyerang bola baling dibenarkan memijak garisan kawasan gol semasa mendarat sebelum melepaskan tembakan?", "a": "tidak"},
-        {"q": "Tindakan menjatuhkan badan secara sengaja untuk menipu pengadil padang dipanggil ___?", "a": "diving"},
-        {"q": "Saiz bola sepak yang digunakan untuk peringkat umur murid sekolah rendah biasanya bersaiz ___?", "a": "empat"},
-        {"q": "Masa rehat di antara dua separuh masa perlawanan bola sepak dipanggil ___?", "a": "half-time"},
-        {"q": "Orang yang bertanggungjawab mengadili dan menguatkuasakan undang-undang di atas padang ialah ___?", "a": "pengadil"},
-        {"q": "Saling bersalaman dengan pasukan lawan selepas tamat perlawanan menunjukkan budaya sukan yang ___?", "a": "terpuji"}
+        // Olahraga Asas (25 Soalan)
+        {
+            id: "PJK_OA01",
+            question: "Olahraga asas di sekolah rendah terbahagi kepada tiga komponen utama iaitu acara balingan, lompatan dan ___.",
+            options: ["Tendangan", "Renangan", "Larian", "Tumbukan"],
+            answer: 2
+        },
+        {
+            id: "PJK_OA02",
+            question: "Acara berlari dalam jarak yang pendek (seperti 50m atau 100m) pada kelajuan maksimum dipanggil lari ___.",
+            options: ["Jauh", "Pecut", "Berhalangan", "Rentas desa"],
+            answer: 1
+        },
+        {
+            id: "PJK_OA03",
+            question: "Untuk lari pecut tanpa menggunakan alat 'blok permulaan', murid perlu menggunakan gaya permulaan ___.",
+            options: ["Duduk baring", "Gaya berdiri", "Meniarap", "Tidur"],
+            answer: 1
+        },
+        {
+            id: "PJK_OA04",
+            question: "Semasa mula berlari pecut (fasa pecutan), kedudukan badan pelari seharusnya ___.",
+            options: ["Condong ke hadapan", "Ditegakkan 90 darjah", "Membongkok ke lantai", "Kaku"],
+            answer: 0
+        },
+        {
+            id: "PJK_OA05",
+            question: "Ayunan tangan semasa berlari pecut perlulah bersilang dengan rentak kaki untuk menambah ___.",
+            options: ["Berat badan", "Halangan angin", "Daya dan kelajuan", "Gaya estetik"],
+            answer: 2
+        },
+        {
+            id: "PJK_OA06",
+            question: "Acara larian yang melibatkan empat orang pelari bertukar-tukar baton dipanggil acara lari ___.",
+            options: ["Jarak Jauh", "Pecut Individu", "Berpagar", "Berganti-ganti"],
+            answer: 3
+        },
+        {
+            id: "PJK_OA07",
+            question: "Alat berbentuk silinder berongga yang wajib dibawa dan dihulurkan kepada rakan sepasukan dipanggil ___.",
+            options: ["Kayu rotan", "Wisel", "Baton", "Lembing"],
+            answer: 2
+        },
+        {
+            id: "PJK_OA08",
+            question: "Penyerahan baton dalam lari berganti-ganti MESTILAH dilakukan di dalam zon yang ditetapkan iaitu zon ___.",
+            options: ["Pertukaran baton", "Rehat", "Tamat", "Permulaan"],
+            answer: 0
+        },
+        {
+            id: "PJK_OA09",
+            question: "Jika pelari terjatuhkan baton semasa pertukaran, pelari tersebut WAJIB ___.",
+            options: ["Membiarkannya", "Berlari mengambilnya semula", "Meminta baton baharu", "Menamatkan perlumbaan"],
+            answer: 1
+        },
+        {
+            id: "PJK_OA10",
+            question: "Teknik memberikan baton di mana penerima TIDAK melihat ke belakang dipanggil teknik pertukaran ___.",
+            options: ["Bukan Visual", "Visual", "Pecutan", "Campuran"],
+            answer: 0
+        },
+        {
+            id: "PJK_OA11",
+            question: "Lari berpagar merupakan acara di mana pelari perlu berlari sambil ___.",
+            options: ["Membawa baton", "Melompat melepasi halangan (pagar)", "Membaling peluru", "Merangkak di bawah jaring"],
+            answer: 1
+        },
+        {
+            id: "PJK_OA12",
+            question: "Acara lompatan di mana atlet berlari, memijak papan lonjakan, dan mendarat sejauh mungkin dipanggil lompat ___.",
+            options: ["Tinggi", "Kijang", "Galah", "Jauh"],
+            answer: 0
+        },
+        {
+            id: "PJK_OA13",
+            question: "Dalam acara lompat jauh, fasa permulaan di mana atlet memecut mencari kelajuan dipanggil fasa ___.",
+            options: ["Lonjakan", "Pendaratan", "Lari Landas (Penujuan)", "Layangan"],
+            answer: 2
+        },
+        {
+            id: "PJK_OA14",
+            question: "Lonjakan di papan lonjakan lompat jauh mestilah menggunakan kekuatan ___.",
+            options: ["Kedua-dua belah kaki", "Sebelah kaki sahaja", "Tangan", "Lutut"],
+            answer: 1
+        },
+        {
+            id: "PJK_OA15",
+            question: "Jika tapak kasut atlet terpijak tanah melebihi garisan papan lonjakan, lompatan tersebut dikira ___.",
+            options: ["Batal", "Sah", "Terbaik", "Seri"],
+            answer: 0
+        },
+        {
+            id: "PJK_OA16",
+            question: "Bagi memastikan keselamatan, kawasan pendaratan lompat jauh mestilah sebuah kotak yang diisi penuh dengan ___.",
+            options: ["Air", "Batu kerikil", "Pasir bersih", "Lumpur"],
+            answer: 2
+        },
+        {
+            id: "PJK_OA17",
+            question: "Lompat tinggi ialah acara yang memerlukan atlet melompat melepasi sebatang ___.",
+            options: ["Tali tali", "Palang melintang", "Tembok bata", "Gelung rotan"],
+            answer: 1
+        },
+        {
+            id: "PJK_OA18",
+            question: "Antara gaya yang terkenal dalam acara lompat tinggi ialah gaya membelakangi palang yang dipanggil gaya ___.",
+            options: ["Gunting", "Guling perut", "Fosbury Flop", "Terjun junam"],
+            answer: 2
+        },
+        {
+            id: "PJK_OA19",
+            question: "Pendaratan acara lompat tinggi wajib dilakukan di atas ___ yang tebal dan empuk.",
+            options: ["Pasir", "Tilam pendaratan", "Rumput", "Karpet nipis"],
+            answer: 1
+        },
+        {
+            id: "PJK_OA20",
+            question: "Acara balingan menggunakan bebola besi yang berat dan keras menolak dari leher dipanggil ___.",
+            options: ["Lempar cakera", "Baling tukul besi", "Merejam lembing", "Lontar peluru"],
+            answer: 3
+        },
+        {
+            id: "PJK_OA21",
+            question: "Sebelum melakukan tolakan lontar peluru, bebola besi mestilah dirapatkan ke kawasan pangkal leher atau di bawah ___.",
+            options: ["Dagu", "Ketiak", "Telinga / Rahang", "Dada"],
+            answer: 2
+        },
+        {
+            id: "PJK_OA22",
+            question: "Adakah atlet dibenarkan 'membaling' (throw) peluru tersebut seperti membaling bola lisut?",
+            options: ["Ya", "Tidak, ia mesti 'ditolak' (put)", "Ya, jika peluru ringan", "Boleh, jika tangan panjang"],
+            answer: 1
+        },
+        {
+            id: "PJK_OA23",
+            question: "Selepas selesai membuat lontaran peluru, atlet WAJIB berjalan keluar melalui bahagian ___ bulatan lontaran.",
+            options: ["Hadapan", "Sisi kanan", "Sisi kiri", "Belakang"],
+            answer: 3
+        },
+        {
+            id: "PJK_OA24",
+            question: "Acara balingan yang menggunakan kayu panjang berhujung tajam dinamakan merejam ___.",
+            options: ["Cakera", "Peluru", "Lembing", "Tukul besi"],
+            answer: 2
+        },
+        {
+            id: "PJK_OA25",
+            question: "Tembakan pistol bermula di padang balapan digunakan untuk menguji tahap kepekaan dan masa ___ atlet.",
+            options: ["Rehat", "Tindak balas (Reaction)", "Tidur", "Kelajuan maksimum"],
+            answer: 1
+        }
+    ],
+"permainan_kategori_serangan": [
+        {
+            id: "PJK_SA01",
+            question: "Kategori permainan di mana sekumpulan pemain cuba menguasai kawasan pihak lawan untuk menjaringkan gol dipanggil kategori ___.",
+            options: ["Jaring", "Padang", "Serangan", "Memanah"],
+            answer: 2
+        },
+        {
+            id: "PJK_SA02",
+            question: "Sebutkan satu contoh permainan kategori serangan yang terkenal di dunia yang dimainkan menggunakan kaki.",
+            answer: "bola sepak"
+        },
+        {
+            id: "PJK_SA03",
+            question: "Permainan kategori serangan yang dimainkan oleh tujuh orang pemain wanita (biasanya) di dalam gelanggang yang dibahagikan kepada tiga pertiga (1/3) ialah ___.",
+            options: ["Bola Keranjang", "Bola Baling", "Bola Tampar", "Bola Jaring"],
+            answer: 3
+        },
+        {
+            id: "PJK_SA04",
+            question: "Kemahiran menggerakkan atau memindahkan bola kepada rakan sepasukan dipanggil kemahiran ___.",
+            answer: "menghantar"
+        },
+        {
+            id: "PJK_SA05",
+            question: "Kemahiran mengawal bola yang dihantar oleh rakan supaya tidak terlepas dipanggil kemahiran ___ bola.",
+            options: ["Menanduk", "Menerima", "Memotong", "Menggelecek"],
+            answer: 1
+        },
+        {
+            id: "PJK_SA06",
+            question: "Dalam permainan bola sepak, menjaringkan gol biasanya dilakukan dengan menggunakan kaki atau ___.",
+            answer: "kepala"
+        },
+        {
+            id: "PJK_SA07",
+            question: "Dalam permainan bola baling, menghantar dan menerima bola dikawal sepenuhnya menggunakan anggota ___.",
+            options: ["Tangan", "Kaki", "Dada", "Kepala"],
+            answer: 0
+        },
+        {
+            id: "PJK_SA08",
+            question: "Pemain pertahanan terakhir yang ditugaskan menghalang bola daripada masuk ke dalam gawang dipanggil penjaga ___.",
+            answer: "gol"
+        },
+        {
+            id: "PJK_SA09",
+            question: "Satu-satunya posisi pemain dalam bola sepak yang dibenarkan memegang bola menggunakan tangan di dalam kawasan penaltinya sendiri ialah ___.",
+            options: ["Penyerang", "Pemain Tengah", "Pertahanan", "Penjaga Gol"],
+            answer: 3
+        },
+        {
+            id: "PJK_SA10",
+            question: "Kemahiran menggerakkan bola ke hadapan secara pantas sambil mengawal dan melepasi pemain lawan dipanggil ___ bola.",
+            answer: "menggelecek"
+        },
+        {
+            id: "PJK_SA11",
+            question: "Apakah istilah pinjaman bahasa Inggeris yang sering digunakan di Malaysia bagi perbuatan 'menggelecek'?",
+            options: ["Passing", "Tackling", "Dribbling", "Shooting"],
+            answer: 2
+        },
+        {
+            id: "PJK_SA12",
+            question: "Kemahiran melompat untuk memutuskan atau merebut hantaran bola pihak lawan di udara dipanggil kemahiran ___ bola.",
+            answer: "memintas"
+        },
+        {
+            id: "PJK_SA13",
+            question: "Dalam permainan bola jaring, pemain posisi manakah yang DIBENARKAN menjaringkan gol selain posisi Goal Attack (GA)?",
+            options: ["Goal Keeper (GK)", "Goal Shooter (GS)", "Center (C)", "Wing Attack (WA)"],
+            answer: 1
+        },
+        {
+            id: "PJK_SA14",
+            question: "Singkatan bagi nama kedudukan pemain 'Goal Shooter' yang tertulis pada 'bib' baju bola jaring ialah ___.",
+            answer: "GS"
+        },
+        {
+            id: "PJK_SA15",
+            question: "Adakah pemain bola jaring dibenarkan melantun bola sambil berlari (seperti bola keranjang) ke arah tiang gol?",
+            options: ["Ya, dibenarkan", "Tidak, bola mesti dipegang", "Hanya pemain Center dibenarkan", "Ya, sebanyak 3 kali lantunan"],
+            answer: 1
+        },
+        {
+            id: "PJK_SA16",
+            question: "Perbuatan berpusing memutar badan menggunakan sebelah kaki sebagai paksi (tanpa mengangkatnya) selepas menerima bola dalam bola jaring dipanggil ___ kaki.",
+            answer: "gerak"
+        },
+        {
+            id: "PJK_SA17",
+            question: "Apakah istilah bahasa Inggeris bagi pergerakan mengekalkan satu tapak kaki sebagai paksi putaran?",
+            options: ["Pivoting", "Dodging", "Landing", "Stepping"],
+            answer: 0
+        },
+        {
+            id: "PJK_SA18",
+            question: "Dalam permainan bola baling, pemain hanya dibenarkan mengambil maksimum ___ langkah sambil memegang bola sebelum melantun atau menghantar.",
+            answer: "tiga"
+        },
+        {
+            id: "PJK_SA19",
+            question: "Untuk hantaran leret yang lebih selamat dan tepat ke arah rakan, pemain bola sepak dinasihatkan menggunakan bahagian ___ kaki.",
+            options: ["Luar", "Hujung (Jari)", "Tumit", "Dalam"],
+            answer: 3
+        },
+        {
+            id: "PJK_SA20",
+            question: "Hantaran bola sepak yang melambung tinggi di udara (long pass) lebih mudah dilakukan menggunakan bahagian atas atau ___ kaki.",
+            answer: "kekura"
+        },
+        {
+            id: "PJK_SA21",
+            question: "Tindakan mengekori, menutup ruang, dan mengawal ketat pergerakan pemain lawan yang sedang membawa bola dipanggil kemahiran ___.",
+            options: ["Menggelecek", "Membayangi", "Melambung", "Merampas"],
+            answer: 1
+        },
+        {
+            id: "PJK_SA22",
+            question: "Apakah istilah sukan bahasa Inggeris bagi perbuatan mengawal rapat pemain lawan (membayangi)?",
+            answer: "marking"
+        },
+        {
+            id: "PJK_SA23",
+            question: "Kekasaran fizikal yang disengajakan seperti menendang kaki lawan dari belakang akan menyebabkan pemain diberikan amaran yang dipanggil ___.",
+            options: ["Foul", "Corner kick", "Throw in", "Offside"],
+            answer: 0
+        },
+        {
+            id: "PJK_SA24",
+            question: "Dalam permainan bola sepak, kad amaran peringkat pertama yang diberikan pengadil diwakili dengan kad berwarna ___.",
+            answer: "kuning"
+        },
+        {
+            id: "PJK_SA25",
+            question: "Pemain akan terus dibuang padang dan pasukan kekurangan seorang pemain sekiranya pengadil melayangkan kad berwarna ___.",
+            options: ["Biru", "Hitam", "Kuning", "Merah"],
+            answer: 3
+        },
+        {
+            id: "PJK_SA26",
+            question: "Bagi memastikan hantaran bola baling aras dada kuat dan laju, ia memerlukan kekuatan tolakan siku dan sendi ___ tangan.",
+            answer: "pergelangan"
+        },
+        {
+            id: "PJK_SA27",
+            question: "Hantaran bola jaring yang dilambung tinggi beralun melepasi capaian tangan pemain lawan dipanggil hantaran ___.",
+            options: ["Aras Dada", "Leret", "Loba (Lob)", "Sisi"],
+            answer: 2
+        },
+        {
+            id: "PJK_SA28",
+            question: "Kemahiran menyambut dan menangkap bola dengan kemas memerlukan kemahiran koordinasi antara mata dan ___.",
+            answer: "tangan"
+        },
+        {
+            id: "PJK_SA29",
+            question: "Tujuan utama membina strategi serangan dan formasi pemain yang baik adalah untuk mencipta ruang dan menghasilkan ___.",
+            options: ["Keceriaan", "Sorakan penyokong", "Jaringan (Gol)", "Kecederaan lawan"],
+            answer: 2
+        },
+        {
+            id: "PJK_SA30",
+            question: "Semangat positif menghormati undang-undang perlawanan, keputusan pengadil dan pihak lawan dipanggil semangat ___.",
+            answer: "kesukanan"
+        }
     ],
 
     "permainan_kategori_jaring": [
-        {"q": "Kategori permainan di mana dua pihak dipisahkan oleh jaring atau net dipanggil kategori ___?", "a": "jaring"},
-        {"q": "Sebutkan satu contoh permainan kategori jaring yang dimainkan menggunakan raket dan bulu tangkis?", "a": "badminton"},
-        {"q": "Sebutkan satu contoh permainan kategori jaring yang menggunakan tangan untuk menepis bola bersaiz besar?", "a": "bola tampar"},
-        {"q": "Sebutkan satu permainan jaring tradisional Malaysia yang menggunakan bola diperbuat daripada rotan?", "a": "sepak takraw"},
-        {"q": "Pukulan pertama yang dilakukan untuk memulakan permainan sukan jaring dipanggil ___?", "a": "servis"},
-        {"q": "Pukulan raket badminton dari sebelah bahagian tangan dominan dipanggil pukulan ___?", "a": "hadapan"},
-        {"q": "Apakah istilah bahasa Inggeris bagi pukulan hadapan?", "a": "forehand"},
-        {"q": "Pukulan raket badminton dengan bahagian belakang tangan menghala ke arah sasaran dipanggil pukulan ___?", "a": "kilas"},
-        {"q": "Apakah istilah bahasa Inggeris bagi pukulan kilas?", "a": "backhand"},
-        {"q": "Pukulan kuat menukik ke bawah di kawasan gelanggang lawan dalam badminton dipanggil ___?", "a": "smesh"},
-        {"q": "Apakah istilah tulisan bahasa Inggeris bagi pukulan smesh?", "a": "smash"},
-        {"q": "Pukulan badminton yang perlahan dan jatuh betul-betul di hadapan jaring lawan dipanggil pukulan ___?", "a": "pancung"},
-        {"q": "Apakah nama lain bagi pukulan pancung tepi jaring dalam badminton?", "a": "drop shot"},
-        {"q": "Dalam bola tampar, kemahiran menyangga bola menggunakan kedua-dua belah lengan dipanggil ___?", "a": "sangga"},
-        {"q": "Apakah istilah bahasa Inggeris bagi kemahiran menyangga bola tampar?", "a": "digging atau underarm pass"},
-        {"q": "Kemahiran menghantar bola tampar tinggi ke udara menggunakan hujung jari tangan untuk diserang rakan dipanggil ___?", "a": "mengumpan"},
-        {"q": "Apakah istilah bahasa Inggeris bagi kemahiran mengumpan bola tampar?", "a": "setting"},
-        {"q": "Pemain bola tampar yang melompat tinggi dan memukul bola dengan kuat ke gelanggang lawan dipanggil perejam atau ___?", "a": "spiker"},
-        {"q": "Tindakan melompat di jaring dengan mengangkat kedua-dua tangan untuk menyekat rejaman bola tampar pihak lawan dipanggil ___?", "a": "hadangan"},
-        {"q": "Apakah istilah bahasa Inggeris bagi tindakan menghadang bola tampar?", "a": "blocking"},
-        {"q": "Dalam sepak takraw, pukulan mula menggunakan kaki oleh pemain posisi tengah dipanggil servis ___?", "a": "tekong"},
-        {"q": "Pemain posisi tengah dalam sepak takraw yang melakukan servis dipanggil ___?", "a": "tekong"},
-        {"q": "Dua pemain lagi di sebelah kiri dan kanan tekong dalam sepak takraw dipanggil pemain ___?", "a": "apit"},
-        {"q": "Kemahiran menyambut bola sepak takraw menggunakan bahagian dalam kaki dipanggil sepakan ___?", "a": "sila"},
-        {"q": "Kemahiran menyambut bola sepak takraw menggunakan paha dipanggil ___ paha?", "a": "main"},
-        {"q": "Berapakah bilangan maksimum sentuhan bola yang dibenarkan untuk satu pasukan sebelum menghantar ke seberang dalam bola tampar?", "a": "tiga kali"},
-        {"q": "Adakah rambut atau anggota badan pemain dibenarkan menyentuh jaring semasa permainan berlangsung?", "a": "tidak"},
-        {"q": "Jika mata bulu tangkis badminton jatuh betul-betul di atas garisan gelanggang, adakah ia dikira masuk?", "a": "ya"},
-        {"q": "Cara memegang raket badminton menyerupai perbuatan bersalaman dinamakan pegangan ___?", "a": "jabat tangan"},
-        {"q": "Alat pemukul yang digunakan dalam permainan ping pong dipanggil ___?", "a": "bet"},
-        {"q": "Pukulan tinggi melambung ke bahagian belakang gelanggang lawan dalam badminton dipanggil pukulan ___?", "a": "lob"},
-        {"q": "Adakah pemain bola tampar dibenarkan menangkap atau memeluk bola semasa bermain?", "a": "tidak"},
-        {"q": "Sistem pengiraan mata di mana mana-mana pasukan yang memenangi rali akan mendapat mata dipanggil sistem ___ mata?", "a": "rali"},
-        {"q": "Bulu tangkis badminton berkualiti tinggi biasanya diperbuat daripada bulu haiwan ___?", "a": "angsa"},
-        {"q": "Permainan kategori jaring memerlukan fokus mata mengintai arah pergerakan ___?", "a": "objek"},
-        {"q": "Adakah kita dibenarkan melintas di bawah jaring ke kawasan lawan semasa perlawanan ping pong berlangsung?", "a": "tidak"},
-        {"q": "Servis badminton di mana bulu tangkis dilepaskan rendah hampir di atas jaring dipanggil servis ___?", "a": "rendah"},
-        {"q": "Servis badminton yang melambung tinggi jauh ke belakang gelanggang dipanggil servis ___?", "a": "tinggi"},
-        {"q": "Pergerakan tangkas kaki pemain ke depan, belakang, kiri dan kanan gelanggang dipanggil kerja ___?", "a": "kaki"},
-        {"q": "Apakah istilah bahasa Inggeris bagi kemahiran kerja kaki?", "a": "footwork"},
-        {"q": "Sebutkan satu kemahiran menamatkan rali dalam ping pong dengan pukulan laju?", "a": "smesh"},
-        {"q": "Adakah pemain sepak takraw dibenarkan menggunakan tangan secara sengaja untuk menyelamatkan bola?", "a": "tidak"},
-        {"q": "Pukulan smash dalam ping pong yang menghasilkan putaran bola ke hadapan dipanggil pukulan top___?", "a": "spin"},
-        {"q": "Hadangan bola tampar yang berjaya akan menyebabkan bola jatuh semula ke kawasan ___?", "a": "lawan"},
-        {"q": "Raket badminton diperbuat daripada bahan ringan seperti karbon grafiti atau ___?", "a": "aluminium"},
-        {"q": "Gelanggang badminton berbentuk empat segi tepat dipisahkan oleh jaring di bahagian ___?", "a": "tengah"},
-        {"q": "Adakah pemain dibenarkan mengetuk raket pada lantai gelanggang kerana marah?", "a": "tidak"},
-        {"q": "Pemain ping pong yang melakukan servis mesti melambungkan bola dari tapak tangan ___?", "a": "terbuka"},
-        {"q": "Kemahiran menanduk bola dalam sepak takraw dinamakan sandukan atau ___ kepala?", "a": "sundulan"},
-        {"q": "Kasut sukan yang mempunyai tapak getah cengkam baik wajib dipakai untuk mengelakkan ___ di gelanggang.", "a": "tergelincir"}
-    ],
-"permainan_kategori_padang": [
-        {"q": "Kategori permainan di mana pasukan memukul berusaha mengumpul mata dengan berlari selepas memukul bola dipanggil kategori ___?", "a": "padang"},
-        {"q": "Sebutkan satu permainan kategori padang yang menggunakan kayu pemukul berbentuk rata dan bola kecil tegar?", "a": "kriket"},
-        {"q": "Sebutkan satu sukan padang antarabangsa yang menyerupai pesbol tetapi mempunyai saiz bola lebih besar dan lembut?", "a": "sofbol"},
-        {"q": "Pemain yang bertugaskan membaling bola secara lurus kepada pemukul dalam kriket dipanggil ___?", "a": "pembaling"},
-        {"q": "Apakah istilah bahasa Inggeris bagi pemain membaling bola dalam kriket?", "a": "bowler"},
-        {"q": "Pemain sofbol yang bertugas membaling bola ke arah pemukul mengikut zon jaringan dipanggil ___?", "a": "pitcher"},
-        {"q": "Pemain sofbol yang memakai topeng pelindung muka dan duduk mencangkung di belakang pemukul dipanggil ___?", "a": "catcher"},
-        {"q": "Apakah istilah bahasa Melayu bagi tugasan seorang 'catcher'?", "a": "penangkap"},
-        {"q": "Alat pemukul bulat panjang yang digunakan dalam permainan sofbol atau pesbol dipanggil ___ pemukul.", "a": "bat"},
-        {"q": "Sarung tangan tebal yang dipasang pada tangan penangkap sofbol dipanggil ___?", "a": "glove"},
-        {"q": "Apakah istilah bahasa Melayu bagi sarung tangan sofbol?", "a": "mit"},
-        {"q": "Kawasan bertanda tempat pemukul sofbol berdiri untuk sedia memukul bola dipanggil ___ box?", "a": "batter"},
-        {"q": "Pembaling bola sofbol (pitcher) mestilah melakukan balingan dari bawah aras ___?", "a": "bahu"},
-        {"q": "Kemahiran memegang kayu pemukul sofbol memerlukan kedua-dua belah tangan ___ rapat.", "a": "menggenggam"},
-        {"q": "Pemain memukul yang berjaya memukul bola dengan jauh mesti segera berlari menuju ke ___?", "a": "pangkalan"},
-        {"q": "Apakah istilah bahasa Inggeris bagi pangkalan dalam permainan sofbol?", "a": "base"},
-        {"q": "Berapakah jumlah pangkalan utama yang ada dalam sebuah padang sofbol termasuk 'home plate'?", "a": "empat"},
-        {"q": "Pemain pemukul yang berjaya berlari melintasi kesemua pangkalan dan kembali ke home plate mendapat satu ___?", "a": "larian"},
-        {"q": "Apakah istilah bahasa Inggeris bagi larian mata penuh dalam sofbol?", "a": "run"},
-        {"q": "Kemahiran menangkap bola kriket yang tinggi melambung memerlukan koordinasi mata dan ___?", "a": "tangan"},
-        {"q": "Pemain padang yang bertugas mengejar dan membaling bola semula ke pangkalan dipanggil pemain ___?", "a": "luar"},
-        {"q": "Apakah istilah bahasa Inggeris bagi pemain padang luar?", "a": "fielder"},
-        {"q": "Tindakan mematikan pemain pelari dengan menyentuh bola pada badannya atau pada pangkalan dipanggil ___?", "a": "tag"},
-        {"q": "Adakah pemain pelari sofbol dibenarkan menolak pemain penjaga pangkalan secara sengaja?", "a": "tidak"},
-        {"q": "Pukulan kriket yang sangat kuat sehingga melepasi garisan sempadan padang terus mendapat ___ mata.", "a": "enam"},
-        {"q": "Dua keping kayu kecil yang diletakkan di atas tiang wiket kriket dipanggil ___?", "a": "bail"},
-        {"q": "Balingan kriket dikira sah sekiranya tangan pembaling berada dalam keadaan ___ semasa melepaskan bola.", "a": "lurus"},
-        {"q": "Balingan pitcher sofbol yang gagal dipukul dan tidak melalui zon jaringan dikira sebagai ___?", "a": "ball"},
-        {"q": "Balingan pitcher sofbol yang gagal dipukul tetapi berada dalam zon jaringan dikira sebagai ___?", "a": "strike"},
-        {"q": "Pemukul akan tersingkir mati sekiranya mengumpul jumlah sebanyak ___ kali strike.", "a": "tiga"},
-        {"q": "Tindakan meluncurkan badan ke atas tanah untuk menyentuh pangkalan dengan cepat dinamakan ___?", "a": "sliding"},
-        {"q": "Adakah topi keledar keselamatan wajib dipakai oleh pemukul semasa permainan kriket dan sofbol?", "a": "ya"},
-        {"q": "Alat pelindung kaki yang dipakai oleh pemukul kriket daripada impak bola keras dipanggil pelindung ___?", "a": "kaki"},
-        {"q": "Apakah istilah bahasa Inggeris bagi alat pelindung kaki?", "a": "pad"},
-        {"q": "Pemain sofbol yang memukul bola yang lambung tinggi dan terus ditangkap kemas oleh fielder dikira ___?", "a": "mati"},
-        {"q": "Apakah istilah bahasa Inggeris bagi situasi pemukul terus mati kerana bola lambung ditangkap?", "a": "fly out"},
-        {"q": "Kemahiran membaling bola sofbol aras dada memerlukan fasa ___ ikut lajak tangan.", "a": "lajak"},
-        {"q": "Padang permainan sofbol berbentuk seperti sepotong ___?", "a": "pai"},
-        {"q": "Sukan kategori padang memerlukan strategi komunikasi antara pelari dan ___ pangkalan.", "a": "penjaga"},
-        {"q": "Adakah pemukul dibenarkan melempar kayu pemukul secara merbahaya selepas memukul bola?", "a": "tidak"},
-        {"q": "Orang yang bertindak sebagai pengadil rasmi dalam sukan sofbol dan pesbol dipanggil ___?", "a": "umpire"},
-        {"q": "Isyarat umpire mendepakan kedua-dua belah tangan ke sisi secara mendatar membawa maksud bola ___?", "a": "selamat"},
-        {"q": "Isyarat umpire mengangkat ibu jari tangan ke atas secara menegak membawa maksud pemain ___?", "a": "mati"},
-        {"q": "Berapakah bilangan pemain bagi satu pasukan dalam padang sofbol semasa bertahan?", "a": "sembilan"},
-        {"q": "Pertukaran giliran memukul dan bertahan dalam kriket dinamakan ___?", "a": "innings"},
-        {"q": "Apakah istilah bahasa Melayu bagi 'innings'?", "a": "gilir atau siri"},
-        {"q": "Kemahiran membaling bola kriket dengan memantulkannya sekali di atas tanah dinamakan teknik balingan ___?", "a": "lantun"},
-        {"q": "Menangkap bola lereng di atas padang memerlukan murid merendahkan pusat ___ badan.", "a": "graviti"},
-        {"q": "Adakah kasut berpaku atau 'stud' sesuai digunakan di padang untuk cengkam larian?", "a": "ya"},
-        {"q": "Menjaga kebersihan dan menyimpan semula alatan sofbol ke dalam stor sukan melatih sikap ___.", "a": "bertanggungjawab"}
-    ],
-
-    "olahraga_asas": [
-        {"q": "Sukan olahraga asas terbahagi kepada tiga komponen utama iaitu acara larian, lompatan dan ___?", "a": "balingan"},
-        {"q": "Acara larian jarak pendek seperti lari 50 meter dan 100 meter diklasifikasikan sebagai larian ___?", "a": "pecut"},
-        {"q": "Semasa memulakan larian pecut tanpa blok permulaan, gaya gaya dekam atau gaya ___ digunakan?", "a": "berdiri"},
-        {"q": "Apakah istilah bahasa Inggeris bagi fasa pecutan di mana atlet memecut dengan kelajuan maksimum?", "a": "acceleration"},
-        {"q": "Acara larian di mana sekumpulan empat orang atlet berganti-ganti berlari membawa baton dipanggil lari ___?", "a": "berganti-ganti"},
-        {"q": "Alat silinder pendek berongga yang dibawa dan diserahkan dalam acara lari berganti-ganti dipanggil ___?", "a": "baton"},
-        {"q": "Zon khas sepanjang 20 meter di dalam balapan larian untuk menyerahkan baton dipanggil zon ___ baton.", "a": "pertukaran"},
-        {"q": "Teknik penyerahan baton tanpa pelari penerima melihat ke arah pelari penghantar dipanggil teknik ___ visual?", "a": "bukan"},
-        {"q": "Teknik penyerahan baton di mana pelari penerima melihat pergerakan baton dipanggil teknik ___?", "a": "visual"},
-        {"q": "Semasa menamatkan larian di garisan penamat, bahagian anggota badan manakah yang mesti melintasi garisan dahulu?", "a": "torso"},
-        {"q": "Apakah istilah bahasa Melayu bagi bahagian torso badan?", "a": "dada"},
-        {"q": "Acara lompatan di mana atlet berlari, melonjak dan mendarat sejauh mungkin di dalam kawasan pasir dipanggil lompat ___?", "a": "jauh"},
-        {"q": "Kawasan pendaratan bagi acara lompat jauh mestilah diisi dengan ___ yang bersih.", "a": "pasir"},
-        {"q": "Papan rata melintang tempat pelari melakukan lonjakan dalam lompat jauh dipanggil papan ___?", "a": "lonjakan"},
-        {"q": "Jika kaki atlet terpijak melepasi papan lonjakan semasa melompat, lompatan tersebut dikira ___?", "a": "batal"},
-        {"q": "Empat fasa utama dalam lompat jauh ialah fasa penujuan, fasa lonjakan, fasa layangan dan fasa ___?", "a": "pendaratan"},
-        {"q": "Tujuan fasa penujuan atau lari landas dalam lompat jauh adalah untuk membina ___ larian.", "a": "kelajuan"},
-        {"q": "Lonjakan dalam lompat jauh mestilah dilakukan dengan menggunakan kekuatan ___ kaki.", "a": "sebelah"},
-        {"q": "Semasa fasa pendaratan lompat jauh, kedua-dua belah tangan patut diayun ke ___ untuk mengelakkan badan jatuh ke belakang.", "a": "hadapan"},
-        {"q": "Jarak lompat jauh diukur dari kesan pendaratan anggota badan yang paling ___ dengan papan lonjakan.", "a": "hampir"},
-        {"q": "Acara balangan asas menggunakan peluru logam bulat tegar yang diletakkan di pangkal leher dipanggil ___ peluru?", "a": "lontar"},
-        {"q": "Teknik menolak peluru dari bahagian bahu dipanggil melontar, adakah kita dibenarkan melemparnya seperti bola?", "a": "tidak"},
-        {"q": "Mengapa perbuatan melempar peluru (throwing action) dilarang dalam acara lontar peluru?", "a": "boleh mencederakan sendi siku"},
-        {"q": "Kawasan tempat melontar peluru berbentuk sebuah ___ bertanda.", "a": "bulatan"},
-        {"q": "Sebelum melontar, peluru mestilah diletakkan rapat menyentuh bahagian bawah ___?", "a": "dagu atau telinga"},
-        {"q": "Peluru yang dilontar mestilah mendarat di dalam kawasan sektor ___ yang dibenarkan.", "a": "pendaratan"},
-        {"q": "Berat peluru yang digunakan untuk murid sekolah rendah (lelaki bawah 12 tahun) biasanya ialah ___ kilogram.", "a": "tiga"},
-        {"q": "Adakah atlet dibenarkan berjalan keluar dari bahagian hadapan bulatan lontaran selepas selesai melontar peluru?", "a": "tidak"},
-        {"q": "Atlet lontar peluru wajib keluar melalui bahagian ___ bulatan selepas lontaran dikira sah.", "a": "belakang"},
-        {"q": "Larian melepasi pagar penghalang setinggi paras tertentu di atas trek dipanggil acara lari ber___?", "a": "pagar"},
-        {"q": "Ayunan lengan yang kuat bersilang dengan rentak kaki membantu menambah ___ larian pecut.", "a": "kelajuan"},
-        {"q": "Aktiviti memanaskan badan sebelum acara olahraga bertujuan untuk mengelakkan ___ otot.", "a": "kecederaan"},
-        {"q": "Alat pengukur yang digunakan untuk mengukur jarak lontaran atau lompatan ialah ___?", "a": "pita pengukur"},
-        {"q": "Mendengar tembakan pistol permulaan menguji kepantasan masa ___ atlet.", "a": "tindak balas"},
-        {"q": "Lompatan tinggi melepasi palang melintang dengan pendaratan di atas tilam tebal dipanggil lompat ___?", "a": "tinggi"},
-        {"q": "Gaya lompat tinggi yang paling popular di mana belakang badan melintasi palang dahulu dipanggil gaya ___ flop?", "a": "fosbury"},
-        {"q": "Gaya lompat tinggi yang melompat seperti pergerakan gunting dipanggil gaya ___?", "a": "gunting"},
-        {"q": "Adakah kita dibenarkan memakai kasut biasa yang licin semasa menyertai larian pecut di balapan?", "a": "tidak"},
-        {"q": "Lorong khas tempat pelari berlari di dalam balapan dipanggil ___?", "a": "lorong larian"},
-        {"q": "Pelari yang keluar dari lorong larian sendiri secara sengaja dan mengganggu rakan boleh ___?", "a": "disingkirkan"},
-        {"q": "Apakah istilah bahasa Inggeris bagi penyingkiran pelari akibat melanggar peraturan?", "a": "disqualified"},
-        {"q": "Acara jalan laju memerlukan sebelah kaki atlet sentiasa ___ dengan tanah pada setiap masa.", "a": "bersentuhan"},
-        {"q": "Daya tahan otot dan ketangkasan merupakan komponen fizikal penting dalam acara ___?", "a": "olahraga"},
-        {"q": "Baton kriket atau sofbol adakah boleh digunakan untuk acara lari berganti-ganti?", "a": "tidak"},
-        {"q": "Penerima baton yang menjatuhkan baton semasa pertukaran mesti segera ___ semula untuk meneruskan larian.", "a": "mengambil"},
-        {"q": "Lari landas yang konsisten membantu atlet melompat dengan ___ yang tepat.", "a": "sudut"},
-        {"q": "Olahraga melatih sifat disiplin diri yang tinggi dan semangat ___ yang kuat.", "a": "juang"},
-        {"q": "Orang yang bertanggungjawab mencatat masa larian pelari menggunakan jam randik ialah ___ masa.", "a": "penjaga"},
-        {"q": "Sebutkan warna garisan penamat balapan standard sekolah?", "a": "putih"},
-        {"q": "Latihan larian berulang-ulang dengan kepantasan berbeza membantu membina sistem ___ kardiovaskular.", "a": "aerobik"}
+        {
+            id: "PJK_JR01",
+            question: "Kategori permainan sukan di mana dua pasukan dipisahkan oleh penghadang berupa net di tengah-tengah gelanggang dipanggil kategori ___.",
+            options: ["Padang", "Jaring", "Serangan", "Berhalangan"],
+            answer: 1
+        },
+        {
+            id: "PJK_JR02",
+            question: "Sebutkan satu contoh sukan kategori jaring popular di Malaysia yang dimainkan menggunakan raket dan bulu tangkis.",
+            answer: "badminton"
+        },
+        {
+            id: "PJK_JR03",
+            question: "Sebutkan satu contoh sukan jaring di mana pemain melompat tinggi dan memukul bola menggunakan tangan kosong melintasi jaring yang sangat tinggi.",
+            options: ["Bola Keranjang", "Tenis", "Sepak Takraw", "Bola Tampar"],
+            answer: 3
+        },
+        {
+            id: "PJK_JR04",
+            question: "Pukulan permulaan untuk menghantar bola (atau bulu tangkis) ke kawasan lawan bagi memulakan permainan dipanggil ___.",
+            answer: "servis"
+        },
+        {
+            id: "PJK_JR05",
+            question: "Pukulan raket badminton dari sebelah yang sama dengan bahagian tangan dominan yang memegang raket dipanggil pukulan ___.",
+            options: ["Kilas", "Hadapan (Forehand)", "Bawah", "Lajak"],
+            answer: 1
+        },
+        {
+            id: "PJK_JR06",
+            question: "Pukulan raket dengan kedudukan belakang tapak tangan menghala ke arah sasaran bulu tangkis dipanggil pukulan ___ (Backhand).",
+            answer: "kilas"
+        },
+        {
+            id: "PJK_JR07",
+            question: "Pukulan serangan yang kuat dan menjunam laju ke bawah di kawasan gelanggang lawan dalam badminton dipanggil ___.",
+            options: ["Smesh (Smash)", "Lob", "Drop", "Drive"],
+            answer: 0
+        },
+        {
+            id: "PJK_JR08",
+            question: "Pukulan badminton yang perlahan dan menyebabkan bulu tangkis jatuh mendarat betul-betul di belakang jaring lawan dipanggil pukulan ___ (Drop shot).",
+            answer: "pancung"
+        },
+        {
+            id: "PJK_JR09",
+            question: "Dalam bola tampar, kemahiran menyambut dan menahan bola pukulan kuat menggunakan kedua-dua belah lengan yang dirapatkan dipanggil ___.",
+            options: ["Smesh", "Hadangan", "Sangga (Digging)", "Servis Atas"],
+            answer: 2
+        },
+        {
+            id: "PJK_JR10",
+            question: "Kemahiran menghantar bola tampar melambung tinggi ke udara secara lembut menggunakan hujung jari tangan agar rakan mudah melakukan serangan dipanggil ___ (Setting).",
+            answer: "mengumpan"
+        },
+        {
+            id: "PJK_JR11",
+            question: "Pemain bola tampar yang bertindak melompat ke udara di hadapan net dan memukul bola dengan sangat kuat (perejam) dipanggil ___.",
+            options: ["Libero", "Spiker", "Setter", "Blocker"],
+            answer: 1
+        },
+        {
+            id: "PJK_JR12",
+            question: "Tindakan melompat berhampiran jaring dengan mengangkat kedua-dua tangan ke atas untuk menyekat bola rejaman lawan daripada melepasi net dipanggil ___ (Blocking).",
+            answer: "hadangan"
+        },
+        {
+            id: "PJK_JR13",
+            question: "Dalam sukan sepak takraw, pemain posisi tengah yang ditugaskan melakukan sepak mula (servis) dipanggil ___.",
+            options: ["Apit Kanan", "Apit Kiri", "Tekong", "Libero"],
+            answer: 2
+        },
+        {
+            id: "PJK_JR14",
+            question: "Dua orang pemain lagi yang berada berhampiran jaring (kiri dan kanan) dalam regu sepak takraw dipanggil pemain ___.",
+            answer: "apit"
+        },
+        {
+            id: "PJK_JR15",
+            question: "Kemahiran menimang atau mengawal bola sepak takraw yang dihantar menggunakan bahagian dalam kaki (tapak kaki) dipanggil ___.",
+            options: ["Sepakan Badek", "Sepakan Sila", "Guntingan", "Hadangan"],
+            answer: 1
+        },
+        {
+            id: "PJK_JR16",
+            question: "Dalam bola tampar, sebuah pasukan hanya dibenarkan membuat maksimum ___ kali sentuhan bola berturut-turut sebelum bola mesti dipulangkan ke gelanggang lawan.",
+            answer: "tiga"
+        },
+        {
+            id: "PJK_JR17",
+            question: "Semasa perlawanan bola tampar dan badminton sedang berlangsung, adakah mana-mana anggota tubuh pemain dibenarkan tersentuh pada net (jaring)?",
+            options: ["Ya, asalkan bola tidak jatuh", "Tidak dibenarkan sama sekali", "Boleh, jika tangan panjang", "Boleh pada awal perlawanan"],
+            answer: 1
+        },
+        {
+            id: "PJK_JR18",
+            question: "Jika bulu tangkis dipukul dan mendarat betul-betul jatuh di atas garisan putih tepi gelanggang badminton, ia dikira bulu tangkis ___ (masuk/keluar).",
+            answer: "masuk"
+        },
+        {
+            id: "PJK_JR19",
+            question: "Cara paling asas dan biasa diajarkan bagi memegang raket badminton diumpamakan seperti cara kita ___.",
+            options: ["Memegang cawan", "Memeluk bantal", "Berjabat tangan", "Memerah kain"],
+            answer: 2
+        },
+        {
+            id: "PJK_JR20",
+            question: "Alat pemukul kayu bersaiz kecil dan dilapik getah yang digunakan di dalam sukan ping pong dipanggil ___.",
+            answer: "bet"
+        },
+        {
+            id: "PJK_JR21",
+            question: "Pukulan defensif badminton yang melambungkan bulu tangkis tinggi jauh ke garisan belakang gelanggang lawan dipanggil pukulan ___.",
+            options: ["Smesh", "Pancung", "Lob (Clear)", "Servis Pendek"],
+            answer: 2
+        },
+        {
+            id: "PJK_JR22",
+            question: "Sistem pemarkahan antarabangsa (badminton & ping pong) di mana setiap kali bulu tangkis/bola mati satu pasukan akan mendapat markah dinamakan sistem ___ mata.",
+            answer: "rali"
+        },
+        {
+            id: "PJK_JR23",
+            question: "Untuk menipu pihak lawan dengan putaran bola laju dalam ping pong, pemain sering menggunakan pukulan 'top___'.",
+            options: ["Spin", "Jump", "Smash", "Block"],
+            answer: 0
+        },
+        {
+            id: "PJK_JR24",
+            question: "Pergerakan tangkas menukar-nukar kedudukan kaki (depan, belakang, sisi) di dalam gelanggang bulu tangkis dipanggil kerja kaki atau ___ (Footwork).",
+            answer: "langkah"
+        },
+        {
+            id: "PJK_JR25",
+            question: "Semasa permainan ping pong, pemain yang mahu melakukan pukulan servis diwajibkan melambung bola kecil tersebut lurus ke atas dari telapak tangannya yang ___.",
+            options: ["Digenggam", "Tertutup separuh", "Memegang bet", "Terbuka rata"],
+            answer: 3
+        }
     ],
 
-    "akuatik_asas_atau_rekreasi": [
-        {"q": "Komponen kemahiran yang membina keyakinan dan keselamatan murid di dalam air dipanggil kemahiran ___?", "a": "akuatik"},
-        {"q": "Sebelum masuk ke dalam kolam renang, murid mestilah melakukan aktiviti ___ badan.", "a": "memanaskan"},
-        {"q": "Peraturan utama di kolam renang melarang murid daripada ___ di tepi kolam kerana licin.", "a": "berlari"},
-        {"q": "Pakaian yang paling sesuai dan wajib dipakai untuk berenang ialah pakaian ___?", "a": "renang"},
-        {"q": "Apakah bahan kain yang paling biasa digunakan untuk baju renang?", "a": "nilon atau spandeks"},
-        {"q": "Alat pelindung mata yang digunakan semasa berenang di dalam air dipanggil ___ renang.", "a": "gogal"},
-        {"q": "Tindakan menolak udara keluar melalui hidung atau mulut semasa kepala berada di dalam air dipanggil teknik bual ___?", "a": "hembus nafas"},
-        {"q": "Apakah istilah bahasa Inggeris bagi latihan menghembus nafas menghasilkan buih di dalam air?", "a": "bobbing"},
-        {"q": "Kebolehan mengekalkan badan terapung secara mendatar di atas permukaan air dipanggil ___?", "a": "apungan"},
-        {"q": "Apungan mendatar di mana bahagian dada dan muka menghadap ke bawah lantai kolam dipanggil apungan ___?", "a": "tiarap"},
-        {"q": "Apungan mendatar di mana bahagian muka menghadap ke atas langit kolam dipanggil apungan ___?", "a": "lentang"},
-        {"q": "Alat bantuan berbentuk papan buih yang digunakan oleh pemula untuk belajar menendang kaki dipanggil papan ___?", "a": "kerencing"},
-        {"q": "Apakah istilah bahasa Inggeris bagi papan bantuan renang?", "a": "kickboard"},
-        {"q": "Pergerakan menggerakkan kaki ke atas dan ke bawah secara berselang-seli untuk bergerak di air dipanggil tendangan ___?", "a": "kerencing"},
-        {"q": "Gaya renangan asas yang menyerupai gaya seekor katak berenang dipanggil kuak ___?", "a": "katak"},
-        {"q": "Apakah nama rasmi antarabangsa bagi kuak katak?", "a": "kuak dada"},
-        {"q": "Apakah istilah bahasa Inggeris bagi kuak dada?", "a": "breaststroke"},
-        {"q": "Gaya renangan paling laju di mana tangan diayun bergantian ke depan secara kincir dipanggil kuak ___?", "a": "rangkak"},
-        {"q": "Apakah nama lain bagi gaya renangan kuak rangkak?", "a": "gaya bebas"},
-        {"q": "Apakah istilah bahasa Inggeris bagi gaya bebas renang?", "a": "freestyle"},
-        {"q": "Adakah kita dibenarkan mandi di kolam renang awam tanpa pengawasan penyelamat lemas atau guru?", "a": "tidak"},
-        {"q": "Orang terlatih yang bertugas mengawal keselamatan dan menyelamatkan mangsa lemas di kolam dipanggil ___?", "a": "penyelamat lemas"},
-        {"q": "Apakah istilah bahasa Inggeris bagi penyelamat lemas?", "a": "lifeguard"},
-        {"q": "Alat keselamatan berbentuk bulat seperti tayar yang dilempar untuk membantu mangsa lemas dipanggil pelampung ___?", "a": "keselamatan"},
-        {"q": "Aktiviti bermain permainan tradisional di padang sekolah dikategorikan sebagai komponen ___?", "a": "rekreasi"},
-        {"q": "Permainan tradisional yang memerlukan pasukan menyerang melepasi garisan kawalan pasukan bertahan tanpa disentuh ialah ___?", "a": "galah panjang"},
-        {"q": "Dalam galah panjang, ketua pasukan bertahan bertugas mengawal garisan penyerang di bahagian garisan ___?", "a": "tengah pembujur"},
-        {"q": "Permainan tradisional menggunakan balingan bola untuk menjatuhkan susunan selipar dinamakan permainan Baling ___?", "a": "selipar"},
-        {"q": "Permainan tradisional menggunakan biji guli atau buah saga yang dimainkan di atas papan berlubang kayu ialah ___?", "a": "congkak"},
-        {"q": "Lubang-lubang kecil yang mengandungi buah di dalam papan congkak dipanggil lubang ___?", "a": "anak"},
-        {"q": "Dua lubang besar yang terletak di kedua-dua hujung papan congkak dipanggil lubang ___?", "a": "rumah"},
-        {"q": "Aktiviti berjalan atau mendaki di dalam kawasan hutan semula jadi dipanggil aktiviti ___?", "a": "redah hutan"},
-        {"q": "Apakah istilah bahasa Inggeris bagi aktiviti redah hutan?", "a": "jungle trekking"},
-        {"q": "Alat petunjuk arah mata angin yang sangat penting dibawa semasa rekreasi di dalam hutan ialah ___?", "a": "kompas"},
-        {"q": "Membina khemah semasa aktiviti rekreasi mengajar murid kemahiran ___ diri.", "a": "kemandirian"},
-        {"q": "Adakah kita dibenarkan membuang sampah merata-rata semasa melawat taman rekreasi alam semula jadi?", "a": "tidak"},
-        {"q": "Aktiviti rekreasi masa lapang membantu mengurangkan tekanan mental dan menyihatkan ___.", "a": "tubuh badan"},
-        {"q": "Kemahiran mengikat simpulan tali yang betul melatih aspek kekuatan motor ___ murid.", "a": "halus"},
-        {"q": "Sebelum melakukan aktiviti akuatik, pastikan kedalaman kolam adalah ___ dengan ketinggian murid.", "a": "sesuai"},
-        {"q": "Jika mata terasa pedih akibat kandungan klorin kolam renang, bilas mata menggunakan air ___ bersih.", "a": "paip"},
-        {"q": "Permainan tradisional Tating Lawi Ayam dimainkan menggunakan sepakan bahagian ___ kaki.", "a": "dalam"},
-        {"q": "Apakah bahan utama yang digunakan untuk membuat lawi ayam selain getah bulat?", "a": "bulu ayam"},
-        {"q": "Permainan rekreasi aci sorok memerlukan seorang pemain menutup mata sambil mengira ___ detik waktu.", "a": "bilangan"},
-        {"q": "Adakah aktiviti rekreasi luar bilik darjah membina keberanian dan sifat kepimpinan murid?", "a": "ya"},
-        {"q": "Menghormati peraturan tempat rekreasi melambangkan sivik dan moral yang ___?", "a": "tinggi"},
-        {"q": "Latihan meluncur (gliding) di dalam air dilakukan dengan meluruskan kedua belah tangan ke ___?", "a": "hadapan"},
-        {"q": "Menggunakan tiub tayar sebagai pelampung improvisasi membantu menyokong daya ___ badan murid.", "a": "apungan"},
-        {"q": "Adakah air kencing dibenarkan dibuang di dalam kolam renang?", "a": "tidak"},
-        {"q": "Bilas badan dengan sabun di bilik mandi ___ dan selepas menggunakan kolam renang.", "a": "sebelum"},
-        {"q": "Mengekalkan kebersihan kolam renang tanggungjawab ___ pengguna.", "a": "bersama"}
+    "permainan_kategori_padang": [
+        {
+            id: "PJK_PD01",
+            question: "Kategori sukan di mana pasukan memukul bergilir-gilir cuba mengumpul mata melalui larian base selepas memukul bola dipanggil kategori ___.",
+            options: ["Jaring", "Padang", "Serangan", "Balapan"],
+            answer: 1
+        },
+        {
+            id: "PJK_PD02",
+            question: "Sebutkan satu sukan padang terkenal yang menyerupai 'baseball' tetapi menggunakan saiz bola balingan yang sedikit lebih besar dan lembut.",
+            answer: "sofbol"
+        },
+        {
+            id: "PJK_PD03",
+            question: "Dalam sukan kriket, pemain dari pasukan bertahan yang bertugas berlari jauh ke arah kayu wiket lalu membaling keras bola kayu kepada pemukul dipanggil ___ (Bowler).",
+            options: ["Penjaga pangkalan", "Penangkap", "Pemukul", "Pembaling"],
+            answer: 3
+        },
+        {
+            id: "PJK_PD04",
+            question: "Dalam sofbol, pemain tengah yang bertugas membaling laju bola lurus kepada pemukul di tempat Home Plate dipanggil ___ (Pitcher).",
+            answer: "pitcher"
+        },
+        {
+            id: "PJK_PD05",
+            question: "Pemain sofbol pasukan bertahan yang lengkap memakai topeng sangkar besi dan mencangkung duduk di belakang pemukul dipanggil ___ (Catcher).",
+            options: ["Penjaga garisan", "Penjaga Base Pertama", "Penangkap", "Pengadil"],
+            answer: 2
+        },
+        {
+            id: "PJK_PD06",
+            question: "Sarung tangan besar yang tebal dan mempunyai kocek penyerap hentakan yang disarungkan pada tangan pemain sofbol (catcher & fielder) dipanggil sarung ___ (Mit).",
+            answer: "tangan"
+        },
+        {
+            id: "PJK_PD07",
+            question: "Menurut undang-undang, balingan bola daripada seorang 'Pitcher' sofbol hendaklah dilakukan menggunakan balingan ___.",
+            options: ["Bawah bahu lengan lurus", "Dari sisi badan", "Di atas kepala", "Dua tangan dari dada"],
+            answer: 0
+        },
+        {
+            id: "PJK_PD08",
+            question: "Setelah pemain sofbol selesai memukul bola, dia hendaklah dengan pantas melepaskan kayu pemukul lalu memulakan ___ menuju ke tapak base.",
+            answer: "larian"
+        },
+        {
+            id: "PJK_PD09",
+            question: "Berapakah jumlah pangkalan (base) yang diatur berbentuk intan (diamond) dalam sebuah padang sofbol standard termasuk 'Home Plate'?",
+            options: ["Tiga base", "Empat base", "Lima base", "Enam base"],
+            answer: 1
+        },
+        {
+            id: "PJK_PD10",
+            question: "Sekiranya pemain pemukul sofbol berjaya berlari membuat satu pusingan melepasi kesemua Base 1, 2, 3 dan memijak Home Plate semula, pasukannya akan beroleh 1 ___ (Run).",
+            answer: "mata"
+        },
+        {
+            id: "PJK_PD11",
+            question: "Pemain padang yang bertaburan di padang rumput bertugas untuk mengejar bola yang dipukul jauh dinamakan pemain ___ (Fielder).",
+            options: ["Pangkalan", "Pemukul", "Dalaman", "Luar"],
+            answer: 3
+        },
+        {
+            id: "PJK_PD12",
+            question: "Sekiranya pemukul sofbol memukul bola tinggi melambung di udara, dan bola itu berjaya disauk masuk terus ke dalam sarung tangan pemain Fielder sebelum mendarat ke tanah, pemukul itu dikira telah ___ (Fly out).",
+            answer: "mati"
+        },
+        {
+            id: "PJK_PD13",
+            question: "Tindakan pasukan bertahan cuba menyentuhkan bola yang dipegang mereka pada badan pelari yang belum sampai ke pangkalan dipanggil men___ (Tag).",
+            options: ["Tampar", "Genggam", "Peluk", "Sentuh"],
+            answer: 3
+        },
+        {
+            id: "PJK_PD14",
+            question: "Dalam sukan kriket yang sebenar, sekiranya bola dipukul pemukul bergolek deras melepasi tali sempadan padang (boundary), pemukul akan dianugerahkan ___ mata.",
+            answer: "empat"
+        },
+        {
+            id: "PJK_PD15",
+            question: "Dalam sofbol, jika Pitcher membuat balingan ke arah pemukul, tetapi pemukul gagal menghayunkan kayunya, dan bola masuk dengan baik di dalam zon dada ke lututnya, balingan itu dikira sebagai 1 ___.",
+            options: ["Strike", "Ball", "Foul", "Run"],
+            answer: 0
+        },
+        {
+            id: "PJK_PD16",
+            question: "Tiga keping bongkah kayu pacak dan dua keping kecil melintang (bail) di atasnya yang dijaga oleh pemukul kriket di tengah padang dipanggil ___.",
+            answer: "wiket"
+        },
+        {
+            id: "PJK_PD17",
+            question: "Adakah topi keledar keras bercermin tebal, sarung tangan pemukul dan pad penutup kaki (leg pad) WAJIB dipakai oleh pemukul bola sukan kriket?",
+            options: ["Hanya jika padang basah", "Hanya untuk budak kecil", "Ya, diwajibkan", "Tidak, kriket sukan selamat"],
+            answer: 2
+        },
+        {
+            id: "PJK_PD18",
+            question: "Teknik agresif atlet sofbol di mana mereka tiba-tiba merebahkan dan meluncurkan badan ke atas debu tanah semata-mata untuk cepat sampai memijak base dipanggil ___ (Sliding).",
+            answer: "gelongsor"
+        },
+        {
+            id: "PJK_PD19",
+            question: "Sistem pusingan pertukaran peranan (siapa memukul, siapa masuk menjaga padang) selepas selesai pasukan tersebut mati tiga orang dalam kriket & sofbol dipanggil ___ (Innings).",
+            options: ["Wisel", "Ining (Giliran)", "Rali", "Rehat"],
+            answer: 1
+        },
+        {
+            id: "PJK_PD20",
+            question: "Orang dewasa berbaju gelap yang berdiri di belakang Catcher sofbol bertugas menjadi hakim atau ___ perlawanan (Umpire).",
+            answer: "pengadil"
+        }
+    ],
+"komponen_kecergasan": [
+        {
+            id: "PJK_KK01",
+            question: "Keupayaan tubuh badan melakukan aktiviti fizikal harian dengan cekap tanpa berasa letih keterlaluan dipanggil ___ fizikal.",
+            answer: "kecergasan"
+        },
+        {
+            id: "PJK_KK02",
+            question: "Keupayaan jantung, paru-paru dan sistem peredaran darah membekalkan oksigen ke otot secara berterusan dipanggil daya tahan ___.",
+            answer: "kardiovaskular"
+        },
+        {
+            id: "PJK_KK03",
+            question: "Sebutkan satu contoh senaman aerobik yang sangat berkesan membina daya tahan kardiovaskular selain berenang.",
+            answer: "berjoging"
+        },
+        {
+            id: "PJK_KK04",
+            question: "Keupayaan otot melakukan kerja atau penguncupan berulang-ulang kali dalam satu jangka masa yang panjang dipanggil daya tahan ___.",
+            answer: "otot"
+        },
+        {
+            id: "PJK_KK05",
+            question: "Aktiviti ringkuk tubi separa (bangkit tubi) yang dilakukan secara konsisten selama satu minit bertujuan menguji daya tahan otot bahagian ___.",
+            answer: "perut"
+        },
+        {
+            id: "PJK_KK06",
+            question: "Keupayaan sesuatu otot menghasilkan daya maksimum untuk mengatasi rintangan dalam satu usaha tunggal dipanggil ___ otot.",
+            answer: "kekuatan"
+        },
+        {
+            id: "PJK_KK07",
+            question: "Latihan menolak dinding atau mengangkat bebanan yang maksimum melatih komponen fizikal ___ otot.",
+            answer: "kekuatan"
+        },
+        {
+            id: "PJK_KK08",
+            question: "Kebolehan regangan sendi anggota badan bergerak bebas dalam julat pergerakan yang maksimum dipanggil ___.",
+            answer: "kelenturan"
+        },
+        {
+            id: "PJK_KK09",
+            question: "Apakah istilah pinjaman bahasa Inggeris (sains sukan) bagi komponen kelenturan tubuh badan?",
+            answer: "fleksibiliti"
+        },
+        {
+            id: "PJK_KK10",
+            question: "Ujian SEGAK 'jangkauan melunjur' yang dilakukan di atas lantai bertujuan menguji tahap kelenturan bahagian bawah ___ dan otot belakang paha (hamstring).",
+            answer: "belakang"
+        },
+        {
+            id: "PJK_KK11",
+            question: "Kadar nisbah perbandingan antara peratusan tisu lemak berbanding dengan tisu tanpa lemak (otot/tulang) dalam badan dipanggil ___ badan.",
+            answer: "komposisi"
+        },
+        {
+            id: "PJK_KK12",
+            question: "Dalam ujian SEGAK, alat pengukur berat penimbang dan pita pengukur tinggi digunakan untuk menilai profil ___ badan murid.",
+            answer: "komposisi"
+        },
+        {
+            id: "PJK_KK13",
+            question: "Kandungan lemak badan yang terlalu berlebihan akibat pemakanan tidak sihat boleh menyebabkan seseorang menghadapi masalah penyakit kegemukan yang kronik iaitu ___.",
+            answer: "obesiti"
+        },
+        {
+            id: "PJK_KK14",
+            question: "Kaedah formula matematik bagi mengukur status berat badan normal berbanding ketinggian seseorang dipanggil rumus ___ (singkatan).",
+            answer: "bmi"
+        },
+        {
+            id: "PJK_KK15",
+            question: "Apakah ejaan penuh bagi singkatan formula kesihatan 'BMI' dalam bahasa Inggeris?",
+            answer: "body mass index"
+        },
+        {
+            id: "PJK_KK16",
+            question: "Apakah terjemahan bahasa Melayu bagi perkataan 'Body Mass Index' yang digunakan dalam buku teks?",
+            answer: "indeks jisim badan"
+        },
+        {
+            id: "PJK_KK17",
+            question: "Senaman regangan otot secara statik dan dinamik wajib dilakukan sebelum bersukan untuk meningkatkan tahap ___ sendi dan mengelakkan kecederaan.",
+            answer: "kelenturan"
+        },
+        {
+            id: "PJK_KK18",
+            question: "Senaman berterusan yang memerlukan penggunaan oksigen yang tinggi di dalam badan dipanggil senaman ___.",
+            answer: "aerobik"
+        },
+        {
+            id: "PJK_KK19",
+            question: "Prinsip latihan kecergasan yang paling penting dalam Sains Sukan dipanggil prinsip F.I.T.T. Huruf 'F' merujuk kepada 'Frequency' atau ___ senaman.",
+            answer: "kekerapan"
+        },
+        {
+            id: "PJK_KK20",
+            question: "Prinsip F.I.T.T: Huruf 'I' merujuk kepada 'Intensity' iaitu tahap ___ sesuatu bebanan senaman yang dilakukan.",
+            answer: "intensiti"
+        },
+        {
+            id: "PJK_KK21",
+            question: "Prinsip F.I.T.T: Huruf 'T' yang pertama merujuk kepada 'Time' iaitu ___ atau tempoh masa senaman dijalankan.",
+            answer: "masa"
+        },
+        {
+            id: "PJK_KK22",
+            question: "Prinsip F.I.T.T: Huruf 'T' yang kedua merujuk kepada 'Type' iaitu ___ aktiviti senaman yang dipilih (contoh: aerobik, anaerobik).",
+            answer: "jenis"
+        },
+        {
+            id: "PJK_KK23",
+            question: "Aktiviti tekan tubi (push-up) ubah suai bagi murid perempuan di mana lutut menyentuh lantai membina kekuatan otot di bahagian ___.",
+            answer: "tangan"
+        },
+        {
+            id: "PJK_KK24",
+            question: "Aktiviti menyejukkan badan (cool down) amat penting selepas bersukan untuk menurunkan kadar denyutan ___ kembali ke tahap normal.",
+            answer: "jantung"
+        },
+        {
+            id: "PJK_KK25",
+            question: "Penumpukan asid laktik di dalam otot selepas bersukan yang kuat akan menyebabkan kita berasa sakit dan kejang otot. Ia boleh dikurangkan dengan aktiviti ___ badan.",
+            answer: "menyejukkan"
+        },
+        {
+            id: "PJK_KK26",
+            question: "Mengamalkan gaya hidup aktif bersukan setiap hari dapat mengurangkan risiko mendapat penyakit kronik pembunuh utama seperti serangan ___.",
+            answer: "jantung"
+        },
+        {
+            id: "PJK_KK27",
+            question: "Murid prasekolah dan sekolah rendah dinasihatkan mendapatkan sekurang-kurangnya 8 hingga 10 jam ___ yang berkualiti untuk pemulihan kecergasan otot.",
+            answer: "tidur"
+        },
+        {
+            id: "PJK_KK28",
+            question: "Individu yang mempunyai kekurangan berat badan lampau (underweight) menunjukkan profil komposisi badannya adalah tidak ___.",
+            answer: "seimbang"
+        },
+        {
+            id: "PJK_KK29",
+            question: "Ujian SEGAK: Ujian 'Naik Turun Bangku' setinggi 30.5 cm selama 3 minit mengikut detik metronom bertujuan menilai tahap kecergasan ___.",
+            answer: "kardiovaskular"
+        },
+        {
+            id: "PJK_KK30",
+            question: "Aktiviti menahan berat badan bergantung di palang memfokuskan kepada peningkatan kekuatan genggaman ___ tangan.",
+            answer: "jari"
+        },
+        {
+            id: "PJK_KK31",
+            question: "Kadar tenaga yang dibakar oleh otot sewaktu bersenam merujuk kepada peningkatan proses ___ di dalam sel tubuh.",
+            answer: "metabolisme"
+        },
+        {
+            id: "PJK_KK32",
+            question: "Kekurangan pengambilan air kosong yang mencukupi semasa melakukan larian maraton boleh menyebabkan tubuh mengalami kekurangan air yang kritikal atau ___.",
+            answer: "dehidrasi"
+        },
+        {
+            id: "PJK_KK33",
+            question: "Kekurangan kelenturan boleh menyebabkan masalah tisu otot terkoyak atau ___ sewaktu pergerakan yang mengejut.",
+            answer: "kejang"
+        },
+        {
+            id: "PJK_KK34",
+            question: "Senaman 'Plank' statik di mana badan meniarap dan ditahan secara mendatar melatih kekuatan isometrik pada otot ___ (core muscles).",
+            answer: "teras"
+        },
+        {
+            id: "PJK_KK35",
+            question: "Kecergasan fizikal dibahagikan kepada dua aspek utama: iaitu kecergasan berasaskan kesihatan dan kecergasan berasaskan perlakuan ___.",
+            answer: "motor"
+        },
+        {
+            id: "PJK_KK36",
+            question: "Keupayaan seseorang untuk menukar arah pergerakan badannya ke kiri dan kanan secara mengejut dengan tangkas dinamakan ___.",
+            answer: "ketangkasan"
+        },
+        {
+            id: "PJK_KK37",
+            question: "Aktiviti larian lari ulang-alik (shuttle run) 10 meter yang dilakukan semasa Larian Cergas menguji kemahiran motor ___.",
+            answer: "ketangkasan"
+        },
+        {
+            id: "PJK_KK38",
+            question: "Kapasiti badan untuk mengekalkan postur yang seimbang sewaktu berlari di atas laluan sempit dipengaruhi oleh komponen ___.",
+            answer: "imbangan"
+        },
+        {
+            id: "PJK_KK39",
+            question: "Pendedahan secara berterusan kepada cahaya matahari terik ketika bersukan tanpa perlindungan boleh mengakibatkan pitam haba atau strok ___.",
+            answer: "haba"
+        },
+        {
+            id: "PJK_KK40",
+            question: "Kadar degupan jantung paling minimum yang diukur sejurus sahaja murid bangun daripada tidur pada waktu pagi dipanggil kadar nadi ___.",
+            answer: "rehat"
+        },
+        {
+            id: "PJK_KK41",
+            question: "Atlet sukan yang mempunyai stamina tinggi biasanya akan merekodkan bacaan kadar nadi rehat yang lebih ___ berbanding orang biasa.",
+            answer: "rendah"
+        },
+        {
+            id: "PJK_KK42",
+            question: "Formula untuk mengira Kadar Nadi Maksimum (KNM) ialah: 220 ditolak dengan ___ individu tersebut.",
+            answer: "umur"
+        },
+        {
+            id: "PJK_KK43",
+            question: "Senaman regangan dinamik seperti lari lutut tinggi sebelum acara sukan membantu otot lebih bersedia dengan melancarkan pengaliran ___.",
+            answer: "darah"
+        },
+        {
+            id: "PJK_KK44",
+            question: "Pergerakan kordinasi yang tepat dan pantas antara mata dan tangan sangat diperlukan dalam sukan seperti sukan bola ___.",
+            answer: "jaring"
+        },
+        {
+            id: "PJK_KK45",
+            question: "Latihan rentas desa secara konsisten setiap minggu membantu merangsang paru-paru untuk mengambil masuk lebih banyak ___.",
+            answer: "oksigen"
+        },
+        {
+            id: "PJK_KK46",
+            question: "Penggunaan jam tangan pintar (smartwatch) ketika berjoging memudahkan kita memantau bacaan kadar denyutan ___.",
+            answer: "nadi"
+        },
+        {
+            id: "PJK_KK47",
+            question: "Semasa membuat rekod kecergasan, pengukuran 'Berat Badan' hendaklah dicatat dalam unit sukatan ___.",
+            answer: "kilogram"
+        },
+        {
+            id: "PJK_KK48",
+            question: "Selain komponen kekuatan otot, lari pecut 100 meter sangat menguji komponen masa tindak balas dan ___.",
+            answer: "kelajuan"
+        },
+        {
+            id: "PJK_KK49",
+            question: "Pergerakan lompat menegak (vertical jump) menguji kebolehan eksplosif otot kaki yang dikenali sebagai komponen ___ otot.",
+            answer: "kuasa"
+        },
+        {
+            id: "PJK_KK50",
+            question: "Selaras dengan slogan KPM yang terkenal, 'Badan Cergas, Minda ___'.",
+            answer: "cerdas"
+        }
     ],
 
-    "komponen_kecergasan": [
-        {"q": "Keupayaan tubuh badan melakukan aktiviti fizikal dengan cekap tanpa berasa letih keterlaluan dipanggil ___?", "a": "kecergasan"},
-        {"q": "Keupayaan jantung dan sistem peredaran darah membekalkan oksigen ke otot semasa kerja berterusan dipanggil daya tahan ___?", "a": "kardiovaskular"},
-        {"q": "Sebutkan satu contoh senaman yang sangat berkesan membina daya tahan kardiovaskular?", "a": "berjoging"},
-        {"q": "Keupayaan otot melakukan kerja atau kontraksi berulang-ulang dalam satu jangka masa dipanggil daya tahan ___?", "a": "otot"},
-        {"q": "Aktiviti bangkit ahli secara konsisten selama satu minit menguji daya tahan otot bahagian ___?", "a": "perut"},
-        {"q": "Keupayaan otot menghasilkan daya maksimum untuk mengatasi rintangan dalam satu usaha tunggal dipanggil ___ otot.", "a": "kekuatan"},
-        {"q": "Latihan menolak dinding atau mengangkat bebanan berat melatih komponen ___ otot.", "a": "kekuatan"},
-        {"q": "Kebolehan sendi anggota badan bergerak bebas dalam julat pergerakan yang maksimum dipanggil ___?", "a": "kelenturan"},
-        {"q": "Apakah istilah lain bagi komponen kelenturan tubuh badan?", "a": "fleksibiliti"},
-        {"q": "Aktiviti jangkauan melunjur di atas lantai menguji tahap kelenturan sendi ___ dan belakang.", "a": "pinggang"},
-        {"q": "Nisbah komponen tisu lemak berbanding dengan tisu tanpa lemak (otot/tulang) dalam badan dipanggil ___ badan.", "a": "komposisi"},
-        {"q": "Alat pengukur berat badan dan pengukur tinggi digunakan untuk menilai komposisi ___ murid.", "a": "badan"},
-        {"q": "Kandungan lemak badan yang berlebihan boleh menyebabkan seseorang menghadapi masalah kegemukan atau ___?", "a": "obesiti"},
-        {"q": "Indeks bagi mengukur status berat badan berbanding ketinggian seseorang dipanggil rumus ___?", "a": "bmi"},
-        {"q": "Kepanjangan bagi singkatan formula kesihatan 'BMI' ialah Body Mass ___?", "a": "index"},
-        {"q": "Apakah istilah bahasa Melayu bagi perkataan 'Body Mass Index'?", "a": "indeks jisim badan"},
-        {"q": "Senaman regangan otot statik dan dinamik sangat penting untuk meningkatkan tahap ___ sendi.", "a": "kelenturan"},
-        {"q": "Senaman yang memerlukan oksigen yang tinggi dijalankan dalam jangka masa lama dipanggil senaman ___?", "a": "aerobik"},
-        {"q": "Adakah aktiviti lompat tali (skipping) diklasifikasikan sebagai aktiviti kardiovaskular aerobik?", "a": "ya"},
-        {"q": "Daya tahan otot yang kuat membantu kita membawa beg sekolah yang berat tanpa cepat berasa ___?", "a": "lenguh"},
-        {"q": "Kekuatan otot bahagian tangan dan bahu boleh dibina melalui aktiviti senaman ___ tubi.", "a": "tekan"},
-        {"q": "Apakah istilah bahasa Inggeris bagi aktiviti senaman tekan tubi?", "a": "push up"},
-        {"q": "Aktiviti meregangkan otot paha hamstring dilakukan dengan meluruskan kaki ke ___?", "a": "hadapan"},
-        {"q": "Kekerapan melakukan senaman kecergasan yang baik dalam seminggu adalah sebanyak ___ hingga lima kali.", "a": "tiga"},
-        {"q": "Setiap sesi senaman kecergasan yang lengkap hendaklah diakhiri dengan aktiviti ___ badan.", "a": "menyejukkan"},
-        {"q": "Apakah istilah bahasa Inggeris bagi aktiviti menyejukkan badan?", "a": "cool down"},
-        {"q": "Latihan menyejukkan badan membantu menurunkan kadar denyutan ___ kembali ke tahap normal.", "a": "jantung"},
-        {"q": "Mengamalkan gaya hidup aktif membantu mengurangkan risiko penyakit kronik seperti penyakit ___?", "a": "jantung"},
-        {"q": "Adakah tidur dan rehat yang cukup sebahagian daripada proses pemulihan otot kecergasan?", "a": "ya"},
-        {"q": "Kekurangan berat badan yang lampau (underweight) menunjukkan komposisi badan yang tidak ___?", "a": "seimbang"},
-        {"q": "Senaman naik turun bangku bertingkat mengikut detik metronom menguji tahap kecergasan daya tahan ___?", "a": "kardiovaskular"},
-        {"q": "Aktiviti bergayut pada palang statik (hand hang) melatih kekuatan genggaman otot ___ tangan.", "a": "jari"},
-        {"q": "Otot yang cergas mempunyai keupayaan metabolisme yang lebih ___ untuk membakar lemak.", "a": "tinggi"},
-        {"q": "Adakah amalan minum air kosong semasa rehat senaman digalakkan untuk mengelakkan hidrasi?", "a": "ya"},
-        {"q": "Apakah nama organ utama yang mengepam darah beroksigen ke seluruh tubuh semasa kita aktif bersenam?", "a": "jantung"},
-        {"q": "Komponen kelenturan yang lemah boleh menyebabkan otot kita mudah mengalami masalah ___ semasa bersukan.", "a": "koyak atau kejang"},
-        {"q": "Senaman 'Plank' statik menahan berat badan menggunakan lengan melatih daya tahan otot ___ teras.", "a": "abdomen"},
-        {"q": "Kecergasan fizikal terbahagi kepada dua aspek iaitu kecergasan berasaskan kesihatan dan kecergasan berasaskan ___?", "a": "perlakuan"},
-        {"q": "Sebutkan satu contoh komponen kecergasan berasaskan perlakuan motor selain koordinasi?", "a": "ketangkasan"},
-        {"q": "Keupayaan menukar arah pergerakan badan dengan pantas dan cekap dipanggil ___?", "a": "ketangkasan"},
-        {"q": "Larian ulang-alik (shuttle run) menguji komponen tahap ___ murid.", "a": "ketangkasan"},
-        {"q": "Mengekalkan kecergasan badan memerlukan gabungan senaman konsisten dan amalan pemakanan ___.", "a": "seimbang"},
-        {"q": "Adakah bersenam di tengah panas terik tanpa topi dalam jangka masa lama selamat?", "a": "tidak"},
-        {"q": "Bahaya bersenam melampau di bawah cuaca terlampau panas boleh menyebabkan strok ___?", "a": "haba"},
-        {"q": "Apakah istilah bahasa Inggeris bagi strok haba?", "a": "heat stroke"},
-        {"q": "Kadar denyutan nadi yang diukur sejurus selepas bangun tidur pagi dipanggil kadar nadi ___?", "a": "rehat"},
-        {"q": "Murid yang mempunyai tahap kecergasan tinggi biasanya mempunyai kadar nadi rehat yang lebih ___?", "a": "rendah"},
-        {"q": "Senaman regangan sebelum sukan membantu melancarkan aliran ___ ke otot tubuh.", "a": "darah"},
-        {"q": "Menggunakan borang skor untuk mencatat kemajuan kecergasan kendiri melatih murid berfikir secara ___.", "a": "analitikal"},
-        {"q": "Badan cergas, otak ___.", "a": "cerdas"}
-    ],
-"ujian_segak_dan_keselamatan": [
-        {"q": "Program penilaian standard kecergasan fizikal kebangsaan untuk murid sekolah dipanggil ujian ___?", "a": "segak"},
-        {"q": "Kepanjangan bagi singkatan ujian kecergasan 'SEGAK' ialah Standard Kecergasan Fizikal Kebangsaan untuk Murid ___?", "a": "malaysia"},
-        {"q": "Ujian SEGAK di sekolah rendah biasanya ditadbirkan sebanyak ___ kali dalam setahun.", "a": "dua"},
-        {"q": "Bulan yang kebiasaannya dijalankan ujian SEGAK fasa pertama ialah bulan ___?", "a": "mac"},
-        {"q": "Bulan yang kebiasaannya dijalankan ujian SEGAK fasa kedua ialah bulan ___?", "a": "ogos"},
-        {"q": "Jenis ujian SEGAK yang bertujuan mengukur daya tahan otot menahan berat badan bagi murid lelaki ialah ___ tubi.", "a": "tekan"},
-        {"q": "Jenis ujian SEGAK yang diubah suai bagi mengukur daya tahan otot bahu murid perempuan ialah tekan tubi ___?", "a": "suami atau ubah suai"},
-        {"q": "Apakah istilah bahasa Inggeris bagi ujian tekan tubi ubah suai untuk perempuan?", "a": "modified push up"},
-        {"q": "Ujian kecergasan merentasi lantai yang menguji daya tahan otot bahagian abdomen perut dipanggil bangkit ___?", "a": "ahli"},
-        {"q": "Berapakah tempoh masa yang diberikan untuk murid melakukan ujian bangkit ahli secara berterusan?", "a": "satu minit"},
-        {"q": "Ujian SEGAK yang memerlukan murid melunjurkan kaki dan menjangkau pembaris mengukur tahap ___?", "a": "kelenturan"},
-        {"q": "Apakah nama alat kotak khas yang digunakan dalam ujian jangkauan melunjur?", "a": "kotak jangkauan"},
-        {"q": "Ujian naik turun bangku bertingkat mengikut rentak metronom bertujuan menilai daya tahan ___?", "a": "kardiovaskular"},
-        {"q": "Ketinggian bangku standard yang digunakan untuk ujian naik turun bangku SEGAK ialah ___ sentimeter.", "a": "tiga puluh"},
-        {"q": "Berapakah tempoh masa bagi murid melakukan pergerakan naik turun bangku sebelum bacaan nadi diambil?", "a": "tiga minit"},
-        {"q": "Selepas tamat ujian naik turun bangku, murid dikehendaki duduk serta-merta untuk dikira kadar ___?", "a": "nadi"},
-        {"q": "Kadar denyutan nadi selepas tamat senaman diukur dalam tempoh masa ___ saat sebagai petunjuk kecergasan.", "a": "enam puluh"},
-        {"q": "Sebelum menduduki ujian SEGAK, status fizikal murid dinilai melalui ukuran berat badan dan ___?", "a": "tinggi"},
-        {"q": "Murid yang disahkan sakit oleh doktor dikehendaki membawa surat akuan untuk mendapat ___ ujian.", "a": "pengecualian"},
-        {"q": "Pakaian wajib semasa menduduki ujian SEGAK ialah baju kemeja-T sukan sekolah dan seluar ___ panjang.", "a": "trek"},
-        {"q": "Adakah murid dibenarkan memakai kasut sekolah jenis kanvas biasa yang licin semasa ujian SEGAK?", "a": "tidak"},
-        {"q": "Semasa melakukan aktiviti fizikal di padang, kita mestilah mengikut ___ yang ditetapkan oleh guru.", "a": "peraturan"},
-        {"q": "Kawasan padang atau gelanggang yang basah dan berair hendaklah dielakkan untuk mengelakkan ___?", "a": "tergelincir"},
-        {"q": "Sebelum menggunakan alatan sukan seperti tiang atau gol, pastikan alatan tersebut dalam keadaan ___ dan selamat.", "a": "kukuh"},
-        {"q": "Adakah kita dibenarkan membawa keluar alatan sukan dari stor sukan tanpa kebenaran guru PJK?", "a": "tidak"},
-        {"q": "Perbuatan bergayut secara merbahaya pada tiang gol bola sepak boleh menyebabkan tiang tersebut ___ menghempap murid.", "a": "tumbang"},
-        {"q": "Sekiranya terjumpa serpihan kaca atau paku di atas padang, kita mestilah segera ___ kepada guru.", "a": "melapor"},
-        {"q": "Mengamalkan budaya beratur semasa mengambil dan memulangkan alatan sukan melatih sikap ___.", "a": "berdisiplin"},
-        {"q": "Adakah berseloroh atau bermain secara kasar semasa memegang kayu hoki atau pemukul sofbol dibenarkan?", "a": "tidak"},
-        {"q": "Amalan minum air secukupnya sebelum, semasa dan selepas sukan penting untuk mengelakkan de___.", "a": "hidrasi"},
-        {"q": "Apakah maksud istilah 'dehidrasi' tubuh badan?", "a": "kekurangan air"},
-        {"q": "Jika rakan anda mengalami kecederaan atau pengsan di padang, tindakan pertama ialah segera memanggil ___?", "a": "guru"},
-        {"q": "Peti bantuan kecemasan yang mengandungi ubat luka mestilah sentiasa diletakkan di tempat yang mudah ___.", "a": "dicapai"},
-        {"q": "Adakah kita digalakkan bersukan di padang terbuka semasa cuaca sedang hujan lebat berserta petir?", "a": "tidak"},
-        {"q": "Bunyi wisil panjang daripada guru di padang biasanya menandakan semua murid mesti ___ melakukan aktiviti.", "a": "berhenti"},
-        {"q": "Merekodkan keputusan ujian SEGAK secara jujur dalam borang markah melatih nilai ___.", "a": "integriti"},
-        {"q": "Ujian kecergasan membantu murid mengetahui tahap ___ kesihatan diri mereka sendiri.", "a": "prestasi"},
-        {"q": "Murid yang mendapat gred 'Cemerlang' dalam ujian SEGAK menunjukkan tahap kecergasan yang ___?", "a": "tinggi"},
-        {"q": "Aktiviti memanaskan badan (warm up) yang betul dilakukan sekurang-kurangnya ___ hingga 10 minit sebelum ujian.", "a": "lima"},
-        {"q": "Regangan leher, bahu, pinggang dan kaki dikategorikan sebagai regangan otot ___.", "a": "seluruh badan"},
-        {"q": "Adakah murid dibenarkan makan makanan yang berat sejurus sebelum menduduki ujian SEGAK?", "a": "tidak"},
-        {"q": "Makan makanan berat sebelum senaman aktif boleh menyebabkan perut berasa memulas atau ___?", "a": "senak"},
-        {"q": "Penyimpanan semula skital, bola dan kon ke dalam stor sukan selepas kelas PJK adalah tugas ___?", "a": "murid"},
-        {"q": "Memastikan kancing tali kasut diikat dengan kemas sebelum berlari bertujuan mengelakkan murid ___.", "a": "terjatuh"},
-        {"q": "Apakah nama bunyi alat elektronik berdetik yang digunakan untuk menetapkan tempo ujian naik turun bangku?", "a": "metronom"},
-        {"q": "Kadar metronom bagi ujian naik turun bangku SEGAK ditetapkan pada kelajuan ___ denyutan seminit.", "a": "sembilan puluh enam"},
-        {"q": "Posisi tangan semasa melakukan ujian bangkit ahli mestilah ___ di atas paha atau dada mengikut variasi borang.", "a": "silang"},
-        {"q": "Adakah guru dibenarkan memberikan gred lulus kepada murid yang tidak hadir ujian tanpa sebab?", "a": "tidak"},
-        {"q": "Menjaga keselamatan diri dan rakan semasa di padang melambangkan sikap bertoleransi dan ___.", "a": "prihatin"},
-        {"q": "Keputusan data ujian SEGAK sekolah akan dimasukkan ke dalam sistem pangkalan data kementerian secara ___.", "a": "atas talian"}
-    ],
-
-    "kesihatan_diri_dan_reproduktif": [
-        {"q": "Amalan menjaga kebersihan diri dan memahami sistem biologi tubuh manusia dikategorikan dalam komponen ___?", "a": "peers"},
-        {"q": "Peringkat perkembangan fizikal manusia di mana berlaku peralihan dari zaman kanak-kanak ke alam remaja dipanggil akil ___?", "a": "baligh"},
-        {"q": "Murid lelaki yang telah mencapai akil baligh biasanya akan mengalami petanda biologi iaitu ___?", "a": "ikhtilam"},
-        {"q": "Apakah istilah awam bagi fenomena ikhtilam yang berlaku kepada remaja lelaki?", "a": "mimpi basah"},
-        {"q": "Murid perempuan yang telah mencapai akil baligh pula akan mengalami petanda biologi iaitu ___?", "a": "haid"},
-        {"q": "Apakah istilah awam yang sering digunakan untuk merujuk kepada kedatangan haid perempuan?", "a": "datang bulan"},
-        {"q": "Haid ialah proses pelepasan lapisan dinding rahim dan darah yang berlaku secara ___ pada setiap bulan.", "a": "kitaran"},
-        {"q": "Purata tempoh pusingan kitaran haid yang normal bagi seorang wanita ialah sekitar ___ hari.", "a": "dua puluh lapan"},
-        {"q": "Sebutkan salah satu perubahan fizikal yang ketara berlaku pada bentuk badan murid lelaki selepas akil baligh?", "a": "tumbuh bulu dada atau suara garau"},
-        {"q": "Perubahan fizikal pada murid perempuan semasa akil baligh antaranya ialah pembesaran bahagian ___?", "a": "pinggul atau payudara"},
-        {"q": "Suara remaja lelaki yang berubah menjadi lebih dalam dan berat dipanggil suara ___?", "a": "garau"},
-        {"q": "Jerawat mula tumbuh di bahagian muka akibat daripada peningkatan rembesan ___ tubuh.", "a": "hormon"},
-        {"q": "Bulu halus mula tumbuh di kawasan ketiak dan bahagian ___ bagi kedua-dua jantina selepas akil baligh.", "a": "pubik"},
-        {"q": "Adakah perubahan emosi seperti mudah sensitif atau cepat marah normal berlaku semasa fasa akil baligh?", "a": "ya"},
-        {"q": "Alat kebersihan diri yang wajib digunakan oleh murid perempuan semasa mengalami haid dipanggil tuala ___?", "a": "wanita"},
-        {"q": "Apakah nama lain bagi tuala wanita kebersihan?", "a": "pad kebersihan"},
-        {"q": "Tuala wanita yang telah digunakan mestilah digulung, dibungkus dengan kemas dan dibuang ke dalam ___ sampah.", "a": "tong"},
-        {"q": "Adakah tuala wanita dibenarkan dibuang terus ke dalam mangkuk tandas kerana boleh menyebabkan tersumbat?", "a": "tidak"},
-        {"q": "Kerap mandi dan menggunakan sabun membantu mengurangkan masalah bau ___ akibat peluh berlebihan.", "a": "badan"},
-        {"q": "Cecair pembersih ketiak yang digunakan untuk menghalang bau badan dipanggil ___?", "a": "deodoran"},
-        {"q": "Bagi murid Muslim, individu yang telah mencapai akil baligh dikira telah ___ dan wajib menunaikan solat.", "a": "mukallaf"},
-        {"q": "Adakah mandi wajib perlu dilakukan oleh murid lelaki selepas mengalami ikhtilam?", "a": "ya"},
-        {"q": "Adakah mandi wajib perlu dilakukan oleh murid perempuan selepas darah haid kering sepenuhnya?", "a": "ya"},
-        {"q": "Tujuan utama mandi wajib atau mandi hadas besar adalah untuk menyucikan diri daripada ___ besar.", "a": "hadas"},
-        {"q": "Sebutkan salah satu organ reproduktif utama bagi seorang lelaki?", "a": "zakar atau testis"},
-        {"q": "Sebutkan salah satu organ reproduktif utama bagi seorang perempuan selain rahim?", "a": "ovari atau vagina"},
-        {"q": "Organ dalaman wanita tempat janin berkembang dan membesar dipanggil ___?", "a": "rahim"},
-        {"q": "Apakah nama lain bagi organ rahim wanita?", "a": "uterus"},
-        {"q": "Sel pembiakan jantan yang dihasilkan oleh organ testis lelaki dipanggil ___?", "a": "sperma"},
-        {"q": "Sel pembiakan betina yang dihasilkan oleh organ ovari perempuan dipanggil ___?", "a": "ovum"},
-        {"q": "Apakah nama lain bagi sel ovum perempuan?", "a": "sel telur"},
-        {"q": "Proses percantuman antara sel sperma dan sel ovum dipanggil proses ___?", "a": "persenyawaan"},
-        {"q": "Adakah remaja yang melakukan pergaulan bebas tanpa batas berisiko menghadapi masalah mengandung luar nikah?", "a": "ya"},
-        {"q": "Menjaga kehormatan diri dengan memakai pakaian yang menutup ___ melambangkan peribadi mulia.", "a": "aurat"},
-        {"q": "Adakah kita digalakkan berkongsi tuala mandi atau pakaian dalam dengan orang lain?", "a": "tidak"},
-        {"q": "Berkongsi pakaian dalam atau tuala boleh menyebabkan jangkitan kuman dan penyakit ___?", "a": "kulit"},
-        {"q": "Membasuh organ genital dengan air bersih setiap kali selepas membuang air penting untuk aspek ___ diri.", "a": "higienis"},
-        {"q": "Sentiasa merujuk kepada guru atau ___ sekiranya mempunyai kemusykilan tentang perubahan badan.", "a": "ibu bapa"},
-        {"q": "Malu bertanya tentang pendidikan kesihatan reproduktif boleh menyebabkan murid mendapat informasi yang ___.", "a": "salah"},
-        {"q": "Adakah menonton video lucah atau bahan pornografi mendatangkan kesan buruk kepada minda remaja?", "a": "ya"},
-        {"q": "Bahan pornografi boleh merosakkan akhlak dan mendorong kepada jenayah ___?", "a": "seksual"},
-        {"q": "Mengisi masa lapang dengan hobi yang sihat seperti bersukan menjauhkan kita daripada gejala ___.", "a": "negatif"},
-        {"q": "Kitab rujukan atau buku teks PJK menyediakan panduan kesihatan diri yang sahih dan ___.", "a": "saintifik"},
-        {"q": "Amalan menukar tuala wanita sekurang-kurangnya ___ kali sehari semasa haid penting untuk mengelakkan bakteria.", "a": "tiga"},
-        {"q": "Rasa sakit atau sengal di bahagian bawah perut yang dialami wanita sebelum atau semasa haid dipanggil ___?", "a": "senggugut"},
-        {"q": "Apakah istilah perubatan bagi masalah senggugut?", "a": "dismenorea"},
-        {"q": "Menghormati perubahan fizikal rakan sekelas dan tidak mengejek mereka merupakan nilai moral yang ___.", "a": "terpuji"},
-        {"q": "Akil baligh menandakan sistem reproduktif manusia telah ___ dan bersedia untuk pembiakan.", "a": "matang"},
-        {"q": "Adakah pemakanan seimbang mempengaruhi kelancaran sistem kitaran hormon badan?", "a": "ya"},
-        {"q": "Mencintai diri sendiri bermaksud kita sentiasa menjaga kesihatan fizikal dan ___.", "a": "mental"}
-    ],
-
-    "penyalahgunaan_bahan": [
-        {"q": "Perbuatan mengambil bahan yang merosakkan tubuh badan secara tidak sah atau berlebihan dipanggil penyalahgunaan ___?", "a": "bahan"},
-        {"q": "Sebutkan satu contoh bahan ketagihan silinder kecil berwujud asap yang dilarang keras penjualannya kepada remaja?", "a": "rokok"},
-        {"q": "Bahan kimia berbahaya yang terdapat di dalam rokok dan menyebabkan ketagihan tegar dipanggil ___?", "a": "nikotin"},
-        {"q": "Asap rokok mengandungi gas beracun karbon ___ yang mengurangkan bekalan oksigen dalam darah.", "a": "monoksida"},
-        {"q": "Alat merokok elektronik masa kini yang menggunakan bateri dan cecair berperisa dipanggil rokok elektronik atau ___?", "a": "vape"},
-        {"q": "Adakah menghisap vape atau pod dikira selamat dan bebas daripada sebarang risiko penyakit peparu?", "a": "tidak"},
-        {"q": "Cecair vape mengandungi bahan kimia yang boleh merosakkan tisu ___ manusia.", "a": "peparu"},
-        {"q": "Orang yang tidak merokok tetapi menyedut asap rokok daripada orang sekeliling dipanggil perokok ___?", "a": "pasif"},
-        {"q": "Adakah perokok pasif turut berisiko mendapat penyakit kanser peparu seperti perokok tegar?", "a": "ya"},
-        {"q": "Cecair beralkohol yang memabukkan dan boleh merosakkan fungsi otak dipanggil ___?", "a": "arak"},
-        {"q": "Apakah nama lain bagi minuman arak selain bir dan lias?", "a": "alkohol"},
-        {"q": "Pengambilan alkohol secara berlebihan boleh mencederakan organ dalaman utama iaitu ___?", "a": "hati"},
-        {"q": "Penyakit kronik kemusnahan sel hati akibat ketagihan alkohol tegar dipanggil ___ hati?", "a": "sirosis"},
-        {"q": "Adakah memandu kenderaan di bawah pengaruh alkohol dibenarkan di sisi undang-undang jalan raya?", "a": "tidak"},
-        {"q": "Memandu dalam keadaan mabuk boleh menyebabkan risiko kemalangan maut kerana hilangnya koordinasi ___?", "a": "motor"},
-        {"q": "Bahan terlarang yang merosakkan minda, sistem saraf dan membawa hukuman berat di Malaysia dipanggil ___?", "a": "dadah"},
-        {"q": "Sebutkan satu contoh dadah tiruan berbahaya jenis perangsang saraf?", "a": "syabu atau pil kuda"},
-        {"q": "Perbuatan menghidu gam atau pelarut cat untuk mendapatkan kesan khayal dipanggil aktiviti inhalan atau penyalahgunaan ___?", "a": "gam"},
-        {"q": "Bahan kimia inhalan yang dihidu boleh memusnahkan sel-sel ___ otak secara kekal.", "a": "saraf"},
-        {"q": "Kemahiran menyatakan pendirian 'TIDAK' dengan tegas terhadap pelawaan buruk rakan dipanggil kemahiran ___?", "a": "asertif"},
-        {"q": "Apabila rakan menghulurkan rokok atau vape, kita mestilah menolak dengan berkata ___?", "a": "tidak"},
-        {"q": "Adakah melarikan diri dari tempat rakan-rakan yang sedang menghisap dadah dikira sebagai tindakan bijak?", "a": "ya"},
-        {"q": "Penyalahgunaan dadah boleh merosakkan masa depan remaja dan membawa kepada keruntuhan ___?", "a": "institusi keluarga"},
-        {"q": "Agensi kerajaan di Malaysia yang bertanggungjawab memerangi penyalahgunaan dadah ialah ___?", "a": "adk"},
-        {"q": "Kepanjangan bagi singkatan agensi dadah 'AADK' ialah Agensi Antidadah ___?", "a": "kebangsaan"},
-        {"q": "Kempen antidadah yang sering diadakan di sekolah membawa slogan 'Dadah Membawa ___'.", "a": "padah"},
-        {"q": "Adakah ubat batuk yang diminum secara berlebihan tanpa preskripsi doktor dikira sebagai penyalahgunaan bahan?", "a": "ya"},
-        {"q": "Bahan ketagihan boleh menjejaskan tumpuan murid semasa berada di dalam ___.", "a": "kelas"},
-        {"q": "Seseorang yang telah ketagih dadah akan mengalami gejala merana badan sekiranya tidak mendapat bahan tersebut, gejala ini dipanggil ___?", "a": "gian"},
-        {"q": "Apakah istilah bahasa Inggeris bagi gejala gian dadah?", "a": "withdrawal syndrome"},
-        {"q": "Pengaruh ___ sebaya merupakan salah satu punca utama remaja terjerumus ke dalam gejala merokok.", "a": "rakan"},
-        {"q": "Ibu bapa bertindak sebagai pelindung utama anak-anak daripada terjebak dengan penyalahgunaan ___.", "a": "bahan"},
-        {"q": "Adakah undang-undang di Malaysia melarang penjualan rokok kepada individu di bawah umur 18 tahun?", "a": "ya"},
-        {"q": "Tanda amaran bergambar tentang bahaya penyakit kanser diletakkan pada setiap ___ rokok.", "a": "kotak"},
-        {"q": "Menghirup asap rokok boleh menyebabkan saluran penafasan menjadi sempit dan mencetuskan serangan ___?", "a": "asma"},
-        {"q": "Alkohol dikategorikan sebagai bahan pendepres yang boleh melambatkan fungsi masa ___ otak.", "a": "tindak balas"},
-        {"q": "Sebutkan institusi tempat penagih dadah dirawat dan dipulihkan semula?", "a": "pusat pemulihan"},
-        {"q": "Apakah nama pusar pemulihan dadah kendalian AADK?", "a": "puspen"},
-        {"q": "Penyalahgunaan bahan boleh menyebabkan seseorang hilang pertimbangan dan cenderung melakukan jenayah ___?", "a": "mencuri"},
-        {"q": "Adakah memiliki dadah dalam jumlah yang besar boleh membawa hukuman gantung sampai mati di Malaysia?", "a": "ya"},
-        {"q": "Kesihatan mental penagih dadah akan terjejas sehingga mengalami masalah halusinasi atau ___?", "a": "gila"},
-        {"q": "Inhalan bermaksud bahan kimia yang boleh meruap dan disedut melalui ___ atau mulut.", "a": "hidung"},
-        {"q": "Contoh bahan inhalan harian yang sering disalahgunakan selain gam ialah cecair ___ cat.", "a": "thinner"},
-        {"q": "Mengamalkan gaya hidup sihat tanpa rokok menjadikan tubuh kita sentiasa bertenaga dan ___.", "a": "cergas"},
-        {"q": "Adakah premis makanan dan restoran di Malaysia diwartakan sebagai kawasan larangan merokok?", "a": "ya"},
-        {"q": "Individu yang merokok di kawasan larangan boleh dikenakan tindakan ___ oleh pegawai kesihatan.", "a": "saman"},
-        {"q": "Kempen 'TAK NAK' merupakan salah satu usaha kerajaan untuk memerangi tabiat ___.", "a": "merokok"},
-        {"q": "Mempunyai pegangan agama yang kuat membentengi diri murid daripada godaan penyalahgunaan ___.", "a": "dadah"},
-        {"q": "Sayangi diri anda, jauhi ___.", "a": "dadah"},
-        {"q": "Muzik, sukan dan kerja kebajikan adalah contoh aktiviti alternatif yang jauh lebih ___ daripada dadah.", "a": "berfaedah"}
-    ],
-
-    "pengurusan_mental_dan_emosi": [
-        {"q": "Kemahiran mengawal perasaan, fikiran dan tindakan harian secara positif dipanggil pengurusan ___?", "a": "emosi"},
-        {"q": "Perasaan tertekan, risau atau bimbang akibat bebanan tugasan atau masalah dipanggil ___?", "a": "stres"},
-        {"q": "Apakah istilah bahasa Melayu bagi perkataan 'stress'?", "a": "stres atau tekanan"},
-        {"q": "Perasaan marah yang meluap-luap dan tidak terkawal boleh mencetuskan pergaduhan atau ___?", "a": "keganasan"},
-        {"q": "Sebutkan satu punca utama yang boleh menyebabkan murid mengalami stres di sekolah?", "a": "banyak kerja rumah atau peperiksaan"},
-        {"q": "Adakah menangis secara berlebihan dalam jangka masa panjang menunjukkan tahap kesihatan emosi yang baik?", "a": "tidak"},
-        {"q": "Rasa rendah diri dan tidak yakin dengan kebolehan diri sendiri dipanggil masalah kurang keyakinan ___?", "a": "diri"},
-        {"q": "Cara terbaik untuk meredakan perasaan marah yang meluap-luap adalah dengan menarik ___ secara dalam.", "a": "nafas"},
-        {"q": "Apabila menghadapi masalah pelajaran yang sukar, kita patut meminta bantuan daripada guru atau ___?", "a": "rakan"},
-        {"q": "Amalan memendam masalah seorang diri tanpa berkongsi boleh memburukkan lagi keadaan tekanan ___.", "a": "mental"},
-        {"q": "Perasaan takut atau cemas menghadapi sesuatu situasi seperti bercakap di khalayak ramai dipanggil ___?", "a": "gemas atau gementar"},
-        {"q": "Melakukan aktiviti fizikal seperti riadah atau bermain bola berkesan untuk mengurangkan ___.", "a": "stres"},
-        {"q": "Adakah tidur yang cukup selama 8 jam sehari penting untuk kestabilan emosi minda?", "a": "ya"},
-        {"q": "Pemikiran yang sentiasa melihat kebaikan dalam setiap situasi dipanggil pemikiran ___?", "a": "positif"},
-        {"q": "Sifat suka mengejek atau memanggil rakan dengan gelaran buruk boleh merosakkan emosi dan emosi ___ rakan.", "a": "mental"},
-        {"q": "Keadaan gangguan mental emosi yang parah di mana seseorang berasa sedih berpanjangan dipanggil ___?", "a": "kemurungan"},
-        {"q": "Apakah istilah bahasa Inggeris bagi gangguan emosi kemurungan?", "a": "depression"},
-        {"q": "Adakah mempunyai hobi membaca buku atau melukis membantu memberikan ketenangan emosi?", "a": "ya"},
-        {"q": "Apabila berasa terlalu sedih atau kecewa, luahkan perasaan anda kepada orang yang anda ___.", "a": "percayai"},
-        {"q": "Mendengar muzik yang berentak tenang boleh membantu menurunkan kadar denyutan jantung yang tinggi akibat ___?", "a": "marah"},
-        {"q": "Sifat sabar dan mengawal diri semasa diejek oleh orang lain menunjukkan kematangan ___ yang tinggi.", "a": "emosi"},
-        {"q": "Apakah singkatan bagi kecerdasan emosi manusia dalam bidang psikologi?", "a": "eq"},
-        {"q": "Saling memberikan kata-kata semangat kepada rakan yang gagal dalam ujian melatih sikap empati dan ___?", "a": "prihatin"},
-        {"q": "Adakah perbuatan membaling barang atau merosakkan harta benda semasa marah dikira etika yang baik?", "a": "tidak"},
-        {"q": "Tindakan merosakkan harta benda awam akibat amukan emosi dipanggil ___?", "a": "vandalisme"},
-        {"q": "Berjumpa dengan guru bimbingan dan kaunseling di sekolah membantu murid mendapat panduan jalan ___.", "a": "penyelesaian"},
-        {"q": "Menetapkan matlamat jadual belajar yang realistik membantu murid menguruskan masa dengan ___.", "a": "efektif"},
-        {"q": "Adakah perasaan cemburu yang keterlaluan terhadap pencapaian rakan sekelas dikira emosi yang sihat?", "a": "tidak"},
-        {"q": "Menerima kekurangan diri dan berusaha memperbaikinya secara berperingkat membina konsep kendiri yang ___.", "a": "positif"},
-        {"q": "Ketawa dan tersenyum merangsang otak merembeskan hormon endorfin yang membawa rasa ___?", "a": "gembira"},
-        {"q": "Keluarga yang bahagia menyediakan sokongan emosi yang paling ___ untuk anak-anak.", "a": "padat"},
-        {"q": "Adakah pemakanan junk food atau makanan ringan berlebihan boleh menjejaskan kestabilan mood emosi?", "a": "ya"},
-        {"q": "Amalan bertafakur atau berdoa mengikut kepercayaan agama masing-masing memberikan ketenteraman ___.", "a": "jiwa"},
-        {"q": "Apabila konflik berlaku antara dua rakan, kita patut bertindak sebagai orang tengah yang ___.", "a": "adil"},
-        {"q": "Mengekalkan komunikasi yang baik dengan adik-beradik mengurangkan risiko ketegangan emosi di ___.", "a": "rumah"},
-        {"q": "Rasa bersyukur dengan apa yang dimiliki menjauhkan diri kita daripada sifat ___ hati.", "a": "iri"},
-        {"q": "Adakah permainan video game berunsur keganasan secara keterlaluan baik untuk emosi kanak-kanak?", "a": "tidak"},
-        {"q": "Permainan video ganas boleh meningkatkan kebersandaran tingkah laku ___ murid.", "a": "agresif"},
-        {"q": "Kemahiran mengurus masa dengan menyediakan jadual harian mengelakkan murid daripada kelenturan kerja di saat ___?", "a": "akhir"},
-        {"q": "Menonton filem komedi atau membaca komik lucu merupakan teknik terapi ___ harian.", "a": "jenaka"},
-        {"q": "Adakah tanda-tanda stres fizikal termasuk sakit kepala dan ketegangan otot bahu?", "a": "ya"},
-        {"q": "Hilang selera makan atau makan secara berlebihan secara mendadak merupakan petanda gangguan ___.", "a": "emosi"},
-        {"q": "Setiap manusia mempunyai kelebihan dan kelemahan masing-masing yang unik, kita perlu ___ ia.", "a": "menerima"},
-        {"q": "Mengucapkan terima kasih atas bantuan rakan membina hubungan sosial yang ___.", "a": "harmoni"},
-        {"q": "Adakah guru bimbingan dan kaunseling sekolah sedia menjaga kerahsiaan masalah emosi murid?", "a": "ya"},
-        {"q": "Minda yang sihat berpunca daripada pengurusan emosi yang ___.", "a": "stabil"},
-        {"q": "Mengambil masa seketika untuk bersendiri bagi menenangkan fikiran dipanggil waktu ___ diri.", "a": "rehat"},
-        {"q": "Menghirup udara segar di taman rekreasi membantu membersihkan minda daripada bebanan ___ belajar.", "a": "stres"},
-        {"q": "Sifat pemaaf membersihkan hati kita daripada perasaan ___ dendam.", "a": "benci"},
-        {"q": "Kesihatan emosi yang baik mencerminkan keperibadian murid yang seimbang dari aspek jasmani, emosi, rohani dan ___.", "a": "intelek"}
-    ],
-"kekeluargaan_dan_perhubungan": [
-        {"q": "Kumpulan manusia yang tinggal bersama dan mempunyai ikatan darah atau perkahwinan dipanggil ___?", "a": "keluarga"},
-        {"q": "Ibu, bapa dan anak-anak yang tinggal dalam satu rumah membentuk sebuah keluarga ___?", "a": "asas"},
-        {"q": "Keluarga yang merangkumi datuk, nenek, bapa saudara dan sepupu dipanggil keluarga ___?", "a": "kembang"},
-        {"q": "Apakah istilah lain bagi ahli keluarga kembang?", "a": "keluarga besar"},
-        {"q": "Adakah anak bertanggungjawab untuk menghormati dan mendengar nasihat ibu bapa?", "a": "ya"},
-        {"q": "Sebutkan satu cara menunjukkan kasih sayang kepada ibu bapa di rumah?", "a": "membantu mengemas rumah"},
-        {"q": "Konflik atau pergaduhan antara adik-beradik di rumah patut diselesaikan dengan cara ___?", "a": "berbincang"},
-        {"q": "Batas jarak fizikal atau sentuhan yang boleh diamalkan untuk menjaga kehormatan diri dipanggil ___ sentuhan.", "a": "batas"},
-        {"q": "Sentuhan yang membuatkan kita berasa selesa, selamat dan dihargai oleh ibu bapa dipanggil sentuhan ___?", "a": "selamat"},
-        {"q": "Sentuhan pada anggota seksual yang membuatkan kita berasa tidak selesa, takut atau marah dipanggil sentuhan ___?", "a": "tidak selamat"},
-        {"q": "Sebutkan salah satu bahagian anggota badan yang dikategorikan sebagai kawasan sulit dan tidak boleh disentuh orang lain?", "a": "payudara atau dubur"},
-        {"q": "Kawasan sulit yang terletak di antara dua paha bagi lelaki dan perempuan dipanggil organ ___?", "a": "genital"},
-        {"q": "Sekiranya ada orang asing cuba menyentuh bahagian sulit anda, tindakan pertama ialah menjerit ___!", "a": "tidak"},
-        {"q": "Selepas melarikan diri daripada situasi sentuhan tidak selamat, kita mestilah segera ___ kepada ibu bapa atau guru.", "a": "melapor"},
-        {"q": "Adakah kita dibenarkan menyimpan rahsia tentang gangguan seksual yang dilakukan oleh orang lain walaupun diugut?", "a": "tidak"},
-        {"q": "Pergaulan sihat antara murid lelaki dan perempuan di sekolah mestilah mengekalkan batas ___?", "a": "sopan"},
-        {"q": "Sifat menghargai dan menerima perbezaan latar belakang rakan sekelas dipanggil sikap ___?", "a": "menghormati"},
-        {"q": "Adakah perbuatan memeluk rakan berlainan jantina secara keterlaluan dibenarkan dalam etika perhubungan sekolah?", "a": "tidak"},
-        {"q": "Membina hubungan persahabatan yang baik memerlukan kita mengamalkan tutur kata yang ___.", "a": "lembut atau sopan"},
-        {"q": "Suka membantu rakan yang dalam kesusahan merupakan ciri seorang sahabat yang ___.", "a": "baik"},
-        {"q": "Adakah wajar bagi seorang anak untuk meninggikan suara membentak ibu bapa?", "a": "tidak"},
-        {"q": "Suasana keluarga yang harmoni dapat membantu perkembangan emosi anak-anak menjadi lebih ___.", "a": "stabil"},
-        {"q": "Meraikan hari lahir ahli keluarga merupakan salah satu aktiviti untuk ___ ikatan kekeluargaan.", "a": "mengeratkan"},
-        {"q": "Apabila menerima hadiah daripada adik-beradik, kita mestilah mengucapkan ___?", "a": "terima kasih"},
-        {"q": "Adakah kita patut meminta izin terlebih dahulu sebelum menggunakan barang peribadi kepunyaan abang atau kakak?", "a": "ya"},
-        {"q": "Perbuatan mengambil barang ahli keluarga tanpa izin dikira sebagai tabiat yang ___.", "a": "buruk"},
-        {"q": "Setiap ahli keluarga mempunyai peranan dan ___ masing-masing untuk menjaga keharmonian rumah.", "a": "tanggungjawab"},
-        {"q": "Bapa bertindak sebagai ketua keluarga yang bertanggungjawab menyediakan nafkah dan ___.", "a": "perlindungan"},
-        {"q": "Remaja yang lari dari rumah biasanya berpunca daripada kurangnya komunikasi yang ___ antara ahli keluarga.", "a": "sihat"},
-        {"q": "Kemahiran mendengar dengan baik semasa ibu bapa bercakap menunjukkan kita ___ mereka.", "a": "menghormati"},
-        {"q": "Adakah melayari internet bersama keluarga boleh dijadikan aktiviti interaksi yang positif?", "a": "ya"},
-        {"q": "Kita mestilah berani berkata 'TIDAK' sekiranya diajak melakukan perkara yang melanggar ___ agama.", "a": "hukum"},
-        {"q": "Seseorang yang cuba menyentuh badan kita secara paksa boleh didakwa di bawah kesalahan jenayah ___?", "a": "seksual"},
-        {"q": "Mengadu kepada guru kelas sekiranya ada rakan sekolah yang cuba melakukan gangguan fizikal yang tidak ___.", "a": "sopan"},
-        {"q": "Adakah ibu bapa berhak tahu dengan siapa anak-anak mereka berkawan di luar rumah?", "a": "ya"},
-        {"q": "Menjaga nama baik keluarga merupakan tanggungjawab ___ ahli keluarga.", "a": "setiap"},
-        {"q": "Saling memaafkan kesilapan ahli keluarga dapat mengelakkan perasaan sakit ___.", "a": "hati"},
-        {"q": "Sentuhan tidak selesa yang dilakukan oleh orang yang dikenali tetap dikira sebagai suatu ___.", "a": "ancaman"},
-        {"q": "Meluangkan masa makan malam bersama seluruh ahli keluarga melatih budaya ___ yang baik.", "a": "berkumpul"},
-        {"q": "Adakah kita patut melayan tetamu yang datang ke rumah dengan mesra dan sopan?", "a": "ya"},
-        {"q": "Sifat amanah dalam perhubungan persahabatan bermaksud kita tidak membocorkan ___ rakan.", "a": "rahsia"},
-        {"q": "Menyindir atau menyebarkan fitnah tentang rakan boleh merosakkan ikatan ___.", "a": "persahabatan"},
-        {"q": "Keluarga merupakan institusi ___ dalam membentuk sahsiah diri seorang kanak-kanak.", "a": "asas"},
-        {"q": "Adakah kita perlu menghormati privasi adik-beradik dengan mengetuk pintu bilik sebelum masuk?", "a": "ya"},
-        {"q": "Sikap bertolak ansur dalam menggunakan kemudahan rumah seperti televisyen dapat mengelakkan ___.", "a": "pergaduhan"},
-        {"q": "Zaman kanak-kanak yang bahagia dipenuhi dengan sokongan moral keluarga yang ___.", "a": "padu"},
-        {"q": "Adakah pelukan kasih sayang daripada ibu bapa dikategorikan sebagai sentuhan selamat?", "a": "ya"},
-        {"q": "Tubuh badan anda adalah hak eksklusif diri anda, maka anda wajib ___ kehormatannya.", "a": "menjaga"},
-        {"q": "Kasih bapa berkorban tenaga, kasih ibu membawa ke ___.", "a": "syurga"},
-        {"q": "Membina perhubungan yang sihat melatih murid menjadi individu yang pandai ___ masyarakat.", "a": "menghormati"}
-    ],
-
-    "penyakit_berjangkit_dan_tidak_berjangkit": [
-        {"q": "Gangguan fungsi tubuh badan yang menyebabkan ketidakselesaan atau kesakitan dipanggil ___?", "a": "penyakit"},
-        {"q": "Penyakit yang boleh merebak daripada seorang individu kepada individu yang lain dipanggil penyakit ___?", "a": "berjangkit"},
-        {"q": "Penyakit yang tidak boleh merebak atau berpindah kepada orang lain dipanggil penyakit ___ berjangkit?", "a": "tidak"},
-        {"q": "Sebutkan satu contoh penyakit berjangkit saluran pernafasan yang kerap menyerang murid sekolah?", "a": "selesema atau influenza"},
-        {"q": "Penyakit berjangkit yang disebabkan oleh gigitan nyamuk Aedes dipanggil demam ___?", "a": "denggi"},
-        {"q": "Apakah nama ejen pembawa atau vektor bagi penyakit demam denggi?", "a": "nyamuk aedes"},
-        {"q": "Nyamuk Aedes membiak di dalam kawasan takungan air yang ___?", "a": "jernih atau tenang"},
-        {"q": "Sebutkan tanda fizikal luaran yang ketara pada kulit pesakit demam denggi?", "a": "bintik merah"},
-        {"q": "Penyakit kulit berjangkit yang menyebabkan tompok putih berwujud gatal akibat kulat dipanggil ___?", "a": "panau atau kurap"},
-        {"q": "Adakah amalan berkongsi pakaian atau stoking boleh menyebabkan jangkitan penyakit kulit?", "a": "ya"},
-        {"q": "Penyakit berjangkit yang menyebabkan bintik-bintik air gatal di seluruh badan kanak-kanak dipanggil cacar air atau ___?", "a": "chicken pox"},
-        {"q": "Bagaimanakah cara utama kuman penyakit selesema merebak di dalam udara bilik darjah?", "a": "melalui bersin atau batuk"},
-        {"q": "Semasa bersin atau batuk, kita mestilah menutup mulut dan hidung menggunakan ___?", "a": "tisu atau sapu tangan"},
-        {"q": "Amalan membasuh tangan menggunakan ___ secara kerap berkesan membunuh kuman virus.", "a": "sabun"},
-        {"q": "Sebutkan satu penyakit tidak berjangkit yang disebabkan oleh kandungan gula berlebihan dalam darah?", "a": "kencing manis"},
-        {"q": "Apakah istilah perubatan bagi penyakit kencing manis?", "a": "diabetes"},
-        {"q": "Penyakit tidak berjangkit yang melibatkan penyempitan saluran pernafasan dan sesak dada dipanggil ___?", "a": "asma"},
-        {"q": "Apakah nama lain bagi penyakit asma kronik?", "a": "lelah"},
-        {"q": "Penyakit jantung dikategorikan sebagai penyakit tidak berjangkit yang berpunca daripada gaya hidup yang tidak ___.", "a": "sihat"},
-        {"q": "Adakah amalan memakan makanan berlemak tinggi secara berlebihan boleh meningkatkan risiko penyakit tekanan darah tinggi?", "a": "ya"},
-        {"q": "Cecair kimia yang dimasukkan ke dalam tubuh untuk membina imuniti pertahanan melawan virus dipanggil ___?", "a": "vaksin"},
-        {"q": "Apakah istilah proses pemberian vaksin kepada kanak-kanak di sekolah?", "a": "imunisasi"},
-        {"q": "Murid yang disahkan menghidap penyakit berjangkit seperti kuarantin mata merah patut ___ daripada hadir ke sekolah.", "a": "bercuti"},
-        {"q": "Apakah nama penyakit mata berjangkit yang membuatkan mata kelihatan sangat merah dan berair?", "a": "konjunktivitis"},
-        {"q": "Adakah kita digalakkan menyapu minyak atau ubat pada luka kawan tanpa mengetahui fungsi ubat tersebut?", "a": "tidak"},
-        {"q": "Penyakit kurap disebabkan oleh jangkitan mikroorganisma jenis ___?", "a": "kulat"},
-        {"q": "Memastikan kawasan sekeliling rumah bebas daripada takungan air mencegah pembiakan nyamuk ___.", "a": "aedes"},
-        {"q": "Aktiviti menyembur gas kimia pembunuh nyamuk oleh pejabat kesihatan di sekolah dipanggil semburan ___?", "a": "fogging"},
-        {"q": "Apakah istilah bahasa Melayu bagi aktiviti 'fogging'?", "a": "semburan asap"},
-        {"q": "Penyakit obesiti atau kegemukan melampau boleh meningkatkan risiko mendapat penyakit tidak berjangkit yang ___.", "a": "kronik"},
-        {"q": "Adakah penyakit tidak berjangkit boleh diwarisi melalui faktor genetik keturunan keluarga?", "a": "ya"},
-        {"q": "Amalan bersukan sekurang-kurangnya 3 kali seminggu membantu membina sistem ___ badan melawan penyakit.", "a": "imuniti"},
-        {"q": "Kuman halus yang tidak boleh dilihat dengan mata kasar dan menyebabkan penyakit dipanggil mikro___.", "a": "organisma"},
-        {"q": "Adakah penyakit Covid-19 dikategorikan sebagai pandemik penyakit berjangkit saluran pernafasan?", "a": "ya"},
-        {"q": "Pemakaian pelindung ___ sangat penting semasa berada di kawasan tumpuan ramai untuk mengelakkan jangkitan udara.", "a": "muka atau pelitup muka"},
-        {"q": "Penggunaan cecair pembasmi kuman tangan dipanggil hand ___?", "a": "sanitizer"},
-        {"q": "Apakah istilah bahasa Melayu bagi 'hand sanitizer'?", "a": "pencuci tangan basmi kuman"},
-        {"q": "Makanan yang telah dihinggapi lalat boleh menyebabkan penyakit berjangkit sistem pencernaan iaitu keracunan ___?", "a": "makanan"},
-        {"q": "Gejala utama keracunan makanan termasuk sakit perut muntah-muntah dan cirit-___.", "a": "birit"},
-        {"q": "Adakah air mentah yang tidak dimasak selamat diminum terus daripada paip?", "a": "tidak"},
-        {"q": "Memasak air sehingga mendidih 100 darjah Celsius bertujuan untuk membunuh ___ di dalam air.", "a": "bakteria"},
-        {"q": "Menjaga kebersihan kuku tangan dengan memotongnya secara pendek mengelakkan kotoran kuman ___.", "a": "terselit"},
-        {"q": "Penyakit tidak berjangkit boleh dicegah awal melalui amalan pemeriksaan kesihatan secara ___.", "a": "berkala"},
-        {"q": "Adakah stres mental yang kronik boleh mencetuskan penyakit fizikal seperti serangan sakit jantung?", "a": "ya"},
-        {"q": "Gigi yang reput dan berlubang disebabkan oleh bakteria yang memakan sisa ___ yang manis.", "a": "makanan"},
-        {"q": "Amalan menggosok gigi sekurang-kurangnya ___ kali sehari mencegah penyakit pereputan gigi.", "a": "dua"},
-        {"q": "Mandi selepas pulang dari tempat awam yang sesak membersihkan badan kita daripada partikel ___.", "a": "habuk atau kuman"},
-        {"q": "Tidur yang berkualiti menguatkan sel-sel pertahanan tubuh untuk memulihkan ___ badan.", "a": "kesihatan"},
-        {"q": "Adakah udara yang bersih bebas daripada asap kilang membantu mengurangkan risiko penyakit peparu?", "a": "ya"},
-        {"q": "Mencegah lebih baik daripada ___.", "a": "merawat"}
-    ],
-
-    "keselamatan_diri_dan_buli": [
-        {"q": "Keadaan terpelihara daripada sebarang ancaman bahaya, kecederaan atau kerugian dipanggil ___ diri.", "a": "keselamatan"},
-        {"q": "Perbuatan membuli, mengejek atau mengasari rakan sekelas secara berulang kali dikategorikan sebagai gejala ___?", "a": "buli"},
-        {"q": "Buli yang melibatkan tindakan fizikal seperti memukul, menumbuk atau menendang dipanggil buli ___?", "a": "fizikal"},
-        {"q": "Buli yang menggunakan perkataan kasar, ejekan atau makian untuk menyakitkan hati dipanggil buli ___?", "a": "lisan"},
-        {"q": "Apakah istilah lain bagi perbuatan buli lisan menggunakan kata-kata?", "a": "buli verbal"},
-        {"q": "Perbuatan buli atau ugutan yang dilakukan melalui media sosial atau internet dipanggil buli ___?", "a": "siber"},
-        {"q": "Adakah mangsa buli siber boleh mengalami tekanan emosi dan stres yang parah?", "a": "ya"},
-        {"q": "Sekiranya anda menjadi mangsa buli di sekolah, tindakan utama ialah segera ___ kepada guru disiplin.", "a": "melapor atau mengadu"},
-        {"q": "Adakah kita patut berdiam diri sekiranya melihat rakan lain sedang dibuli oleh kumpulan murid gangster?", "a": "tidak"},
-        {"q": "Menonton aksi buli tanpa cuba melaporkannya dikira bersubahat mendukung perbuatan ___ tersebut.", "a": "buruk"},
-        {"q": "Tindakan menculik atau melarikan kanak-kanak secara haram oleh penjenayah dipanggil kes ___?", "a": "culik"},
-        {"q": "Apabila pulang dari sekolah, kita mestilah mengelakkan diri daripada berjalan di lorong yang sunyi seorang ___.", "a": "diri"},
-        {"q": "Adakah selamat untuk menerima pelawaan menaiki kereta atau memakan gula-gula daripada orang asing yang tidak dikenali?", "a": "tidak"},
-        {"q": "Apakah panggilan bagi individu yang sama sekali tidak kita kenali dalam konsep keselamatan diri?", "a": "orang asing"},
-        {"q": "Sekiranya diekori oleh orang yang mencurigakan, segera berlari menuju ke kawasan yang ___ orang.", "a": "ramai"},
-        {"q": "Talian kecemasan kebangsaan di Malaysia yang boleh dihubungi secara percuma untuk bantuan polis atau ambulans ialah ___?", "a": "sembilan sembilan sembilan"},
-        {"q": "Talian khas kementerian yang menjaga kebajikan dan keselamatan kanak-kanak daripada penderaan ialah Talian ___?", "a": "kasih"},
-        {"q": "Nombor telefon bagi Talian Kasih ialah ___?", "a": "satu lima sembilan sembilan sembilan"},
-        {"q": "Jenayah memperdagangkan manusia untuk eksploitasi kerja paksa atau pelacuran dipanggil ___ orang.", "a": "pemerdagangan"},
-        {"q": "Adakah kanak-kanak berisiko menjadi mangsa pemerdagangan orang sekiranya tidak diawasi dengan ketat?", "a": "ya"},
-        {"q": "Sentiasa mengunci pintu rumah secara rapat apabila tinggal bersendirian di rumah untuk mencegah kes ___ pecah rumah.", "a": "samun"},
-        {"q": "Alat keselamatan yang dipasang pada siling rumah untuk mengesan asap kebakaran peringkat awal dipanggil pengesan ___?", "a": "asap"},
-        {"q": "Semasa melintas jalan raya yang sibuk, gunakan kemudahan lintasan belang atau jejantas ___ kaki.", "a": "pejalan"},
-        {"q": "Apakah warna jalur garisan pada lintasan pejalan kaki di jalan raya?", "a": "putih hitam"},
-        {"q": "Apakah istilah bahasa Inggeris bagi lintasan belang pejalan kaki?", "a": "zebra crossing"},
-        {"q": "Adakah kita dibenarkan bermain bola atau kejar-mengejar di tepi jalan raya yang sibuk?", "a": "tidak"},
-        {"q": "Memakai topi keledar semasa menunggang basikal mengekang risiko kecederaan parah pada bahagian ___ sekiranya terjatuh.", "a": "kepala"},
-        {"q": "Memasang lampu pemantul cahaya pada basikal penting untuk keselamatan kayuhan di waktu ___?", "a": "malam"},
-        {"q": "Adakah amalan mendedahkan alamat rumah dan nombor telefon peribadi di media sosial selamat?", "a": "tidak"},
-        {"q": "Penjenayah siber boleh menggunakan maklumat peribadi anda untuk melakukan penipuan atau kes ___ identiti.", "a": "kecurian"},
-        {"q": "Sekiranya menerima mesej berbaur ugutan daripada orang asing di internet, segera beritahu ___.", "a": "ibu bapa"},
-        {"q": "Kempen 'Katakan TIDAK kepada Buli' bertujuan melahirkan sekolah yang selamat dan ___.", "a": "harmoni"},
-        {"q": "Murid yang membuli rakan boleh dikenakan hukuman gantung sekolah atau dibuang ___.", "a": "sekolah"},
-        {"q": "Sifat berani mempertahankan diri dengan cara yang betul membina ketahanan ___ murid.", "a": "mental"},
-        {"q": "Adakah kita dibenarkan masuk ke dalam kawasan pembinaan bangunan yang bertanda 'Dilarang Masuk'?", "a": "tidak"},
-        {"q": "Papan tanda keselamatan berwarna merah bulat biasanya membawa maksud isyarat ___.", "a": "larangan"},
-        {"q": "Papan tanda keselamatan berbentuk segi tiga berwarna kuning biasanya membawa maksud isyarat ___.", "a": "amaran"},
-        {"q": "Sentiasa berjalan melawan arus lalu lintas jalan raya sekiranya tiada kaki lima supaya kita dapat ___ kenderaan dari depan.", "a": "melihat"},
-        {"q": "Adakah pemandu kenderaan dibenarkan menggunakan telefon bimbit semasa memandu?", "a": "tidak"},
-        {"q": "Memakai tali pinggang keledar di dalam kereta mengurangkan impak impak ___ sekiranya berlaku kemalangan.", "a": "hentakan"},
-        {"q": "Mengetahui pelan laluan kecemasan kebakaran di sekolah melatih murid bertindak secara ___ semasa bencana.", "a": "pantas"},
-        {"q": "Semasa loceng kecemasan kebakaran berbunyi, murid mesti keluar dari kelas secara teratur tanpa perlu ___.", "a": "berebut-rebut"},
-        {"q": "Tempat berkumpul yang paling selamat semasa latihan kebakaran sekolah ialah di kawasan terbuka seperti ___.", "a": "padang"},
-        {"q": "Adakah lif boleh digunakan semasa berlaku kebakaran di dalam bangunan tinggi?", "a": "tidak"},
-        {"q": "Gunakan laluan tangga ___ untuk turun dengan selamat semasa kebakaran bangunan.", "a": "keselamatan"},
-        {"q": "Menjaga keselamatan diri memerlukan sikap peka dan berwaspada terhadap keadaan ___.", "a": "sekeliling"},
-        {"q": "Jangan mudah percaya dengan janji manis orang asing yang menawarkan pekerjaan dengan gaji ___.", "a": "lumayan"},
-        {"q": "Adakah kita patut menemani adik kecil semasa bermain di taman permainan awam?", "a": "ya"},
-        {"q": "Mengingat nombor telefon ibu bapa sangat penting sekiranya kita mengalami situasi ___ atau sesat.", "a": "cemas"},
-        {"q": "Keselamatan diri, tanggungjawab ___.", "a": "bersama"}
-    ],
-
-    "pemakanan_dan_pertolongan_cemas": [
-        {"q": "Panduan visual berbentuk segi tiga yang menunjukkan kumpulan makanan dan jumlah yang perlu dimakan dipanggil ___ makanan.", "a": "piramid"},
-        {"q": "Piramid Makanan Malaysia terbahagi kepada berapa aras utama?", "a": "empat"},
-        {"q": "Kumpulan makanan yang terletak di Aras 1 (paling bawah) piramid makanan ialah karbohidrat contohnya nashi dan ___?", "a": "roti"},
-        {"q": "Fungsi utama kumpulan makanan karbohidrat adalah untuk membekalkan ___ kepada tubuh badan.", "a": "tenaga"},
-        {"q": "Kumpulan makanan di Aras 2 piramid makanan terdiri daripada sayur-sayuran dan ___?", "a": "buah-buahan"},
-        {"q": "Sayur-sayuran dan buah-buahan kaya dengan kandungan vitamin dan ___ untuk mencegah penyakit.", "a": "mineral"},
-        {"q": "Kumpulan makanan di Aras 3 piramid makanan kaya dengan protein contohnya ikan, daging, ayam dan ___?", "a": "susu"},
-        {"q": "Fungsi utama makanan kumpulan protein adalah untuk pertumbuhan fizikal dan membaiki tisu badan yang ___?", "a": "rosak"},
-        {"q": "Kumpulan makanan di Aras 4 (paling atas) piramid makanan yang perlu dimakan dalam jumlah paling sedikit ialah lemak, minyak dan ___?", "a": "gula"},
-        {"q": "Pengambilan gula dan garam yang berlebihan boleh meningkatkan risiko penyakit kronik seperti penyakit darah ___.", "a": "tinggi"},
-        {"q": "Menu makanan yang mengandungi kesemua kumpulan makanan dalam kadar yang betul dipanggil pemakanan ___?", "a": "seimbang"},
-        {"q": "Kempen hidangan makanan kementerian yang menggalakkan formula suku-suku-separuh dipanggil Pinggan Sihat ___?", "a": "malaysia"},
-        {"q": "Berdasarkan Pinggan Sihat Malaysia, bahagian separuh pinggan hendaklah diisi dengan sayur dan ___?", "a": "buah"},
-        {"q": "Bahagian suku pinggan pertama diisi dengan karbohidrat, manakah suku pinggan kedua diisi dengan ___?", "a": "protein"},
-        {"q": "Makanan ringan yang diambil di antara waktu makan utama dipanggil makanan ___?", "a": "snek"},
-        {"q": "Sebutkan satu contoh snek berkhasiat dan sihat untuk murid sekolah?", "a": "biskut mil penuh atau buah oren"},
-        {"q": "Adakah jajan, snek bergas atau gula-gula dikategorikan sebagai snek yang sihat?", "a": "tidak"},
-        {"q": "Makanan ringan yang tidak mempunyai khasiat zat tetapi tinggi kalori dan bahan pengawet dipanggil junk ___?", "a": "food"},
-        {"q": "Apakah istilah bahasa Melayu bagi perkataan 'junk food'?", "a": "makanan ringan tak berkhasiat"},
-        {"q": "Membaca label maklumat pemakanan pada bungkusan makanan membantu kita mengetahui kandungan ___ produk.", "a": "nutrisi"},
-        {"q": "Tarikh akhir sesuatu makanan selamat untuk dimakan diletakkan pada label sebagai tarikh luput atau guna ___?", "a": "sebelum"},
-        {"q": "Adakah selamat memakan makanan daripada tin yang telah kemek, berkarat atau menggelembung?", "a": "tidak"},
-        {"q": "Tin makanan yang menggelembung menunjukkan kulat atau ___ telah membiak di dalamnya.", "a": "bakteria"},
-        {"q": "Bantuan awal yang diberikan kepada mangsa kecederaan sebelum ketibaan doktor dipanggil pertolongan ___?", "a": "cemas"},
-        {"q": "Apakah singkatan antarabangsa bagi unit bantuan pertolongan cemas?", "a": "pbt"},
-        {"q": "Kecederaan ringan pada kulit akibat bergeser dengan permukaan kasar dipanggil luka ___?", "a": "calar atau tersagat"},
-        {"q": "Tindakan pertama untuk merawat luka kecil yang berdarah ialah membersihkannya menggunakan air ___.", "a": "bersih"},
-        {"q": "Cecair pembasmi kuman berwarna kuning yang disapu pada luka kecil dipanggil ___?", "a": "iodin atau ubat kuning"},
-        {"q": "Alat pelekat kecil berubat yang ditampal untuk melindungi luka kecil daripada kuman dipanggil kain ___?", "a": "pembalut luka"},
-        {"q": "Apakah istilah awam bagi kain pelekat pembalut luka kecil?", "a": "plaster"},
-        {"q": "Kecederaan pada sendi atau otot akibat pergerakan mengejut yang menyebabkan bengkak tanpa pendarahan dipanggil ___?", "a": "terseliuh"},
-        {"q": "Kesan lebam berwarna biru keunguan pada kulit akibat hantaran objek tumpul disebabkan pecahnya salur ___ darah kecil.", "a": "darah"},
-        {"q": "Untuk merawat bengkak terseliuh atau lebam pada peringkat awal, kita patut menuam kawasan tersebut menggunakan ___?", "a": "ais"},
-        {"q": "Mengapakah tuaman ais digunakan untuk merawat cedera bengkak dalam?", "a": "mengecilkan salur darah dan mengurangkan sakit"},
-        {"q": "Adakah tuaman tuala air panas sesuai diletakkan pada bengkak terseliuh yang baru berlaku?", "a": "tidak"},
-        {"q": "Tuaman air panas pada bengkak baru boleh memburukkan lagi aliran darah dan menambah ___.", "a": "bengkak"},
-        {"q": "Kecederaan hidung yang mengeluarkan darah akibat cuaca terlalu panas dipanggil masalah ___?", "a": "darah hidung"},
-        {"q": "Apakah istilah awam bagi pendarahan hidung?", "a": "mimisan"},
-        {"q": "Cara merawat mangsa darah hidung ialah meminta mangsa duduk tegak dan menundukkan kepala ke ___.", "a": "hadapan"},
-        {"q": "Adakah kita dibenarkan mendongakkan kepala ke belakang semasa hidung sedang berdarah?", "a": "tidak"},
-        {"q": "Mendongakkan kepala semasa mimisan boleh menyebabkan darah mengalir masuk ke saluran ___.", "a": "pernafasan"},
-        {"q": "Picit bahagian cuping hidung yang lembut selama ___ hingga 10 minit untuk menghentikan pendarahan mimisan.", "a": "lima"},
-        {"q": "Kain berbentuk segi tiga yang digunakan untuk mengampu tangan yang patah atau terseliuh dipanggil kain ___?", "a": "anduh"},
-        {"q": "Apakah istilah bahasa Inggeris bagi kain anduh?", "a": "sling"},
-        {"q": "Adakah murid sekolah rendah dibenarkan memberikan ubat pil dos tinggi kepada rakan yang mengadu sakit kepala?", "a": "tidak"},
-        {"q": "Menyimpan peti pertolongan cemas di tempat yang selamat menghindarkannya daripada dicapai oleh kanak-kanak ___.", "a": "kecil"},
-        {"q": "Amalan sarapan pagi sebelum ke sekolah membekalkan tenaga yang cukup untuk tumpuan ___.", "a": "belajar"},
-        {"q": "Adakah amalan makan lewat malam (supper) berhampiran waktu tidur baik untuk sistem pencernaan?", "a": "tidak"},
-        {"q": "Mengunyah makanan secara perlahan membantu kelancaran proses ___ di dalam perut.", "a": "penghadaman"},
-        {"q": "Menjaga pemakanan dan mahir pertolongan cemas melahirkan generasi murid yang prihatin dan ___ kesihatan.", "a": "celik"}
+    "kekeluargaan_dan_perhubungan": [
+        {
+            id: "PJK_KP01",
+            question: "Batas jarak fizikal atau sentuhan yang boleh diterima secara sosial untuk menjaga kehormatan diri dipanggil ___ sentuhan.",
+            answer: "batas"
+        },
+        {
+            id: "PJK_KP02",
+            question: "Sentuhan berupa pelukan atau tepukan di bahu oleh ibu bapa yang membuatkan kita berasa tenang dihargai dipanggil sentuhan ___.",
+            answer: "selamat"
+        },
+        {
+            id: "PJK_KP03",
+            question: "Sebarang jenis sentuhan fizikal pada badan yang menimbulkan rasa tidak selesa, cemas, jijik atau marah dipanggil sentuhan tidak ___.",
+            answer: "selamat"
+        },
+        {
+            id: "PJK_KP04",
+            question: "Bahagian-bahagian peribadi pada tubuh badan manusia seperti dada, punggung dan alat kelamin diklasifikasikan sebagai kawasan ___ yang haram disentuh.",
+            answer: "sulit"
+        },
+        {
+            id: "PJK_KP05",
+            question: "Kawasan reproduktif sulit yang terletak di bahagian kelengkang bagi manusia dipanggil organ ___.",
+            answer: "genital"
+        },
+        {
+            id: "PJK_KP06",
+            question: "Sekiranya rakan sekolah atau orang dewasa secara tiba-tiba mencuba menyentuh bahagian sulit anda, langkah kecemasan pertama ialah bertindak menjerit perkataan ___ dengan kuat.",
+            answer: "tidak"
+        },
+        {
+            id: "PJK_KP07",
+            question: "Selepas berjaya menyelamatkan dan melarikan diri dari ancaman pencabulan gangguan seksual, mangsa mestilah segera bertindak ___ kejadian tersebut kepada orang dewasa yang dipercayai (ibu bapa/guru).",
+            answer: "melapor"
+        },
+        {
+            id: "PJK_KP08",
+            question: "Tindakan mendiamkan diri dan merahsiakan insiden jenayah amang seksual walaupun mangsa diugut dengan kekerasan adalah satu tindakan yang sangat ___.",
+            answer: "berbahaya"
+        },
+        {
+            id: "PJK_KP09",
+            question: "Remaja yang beralih ke alam akil baligh akan mula mengalami perasaan tarikan romantis atau naluri tertarik kepada rakan yang berlainan ___.",
+            answer: "jantina"
+        },
+        {
+            id: "PJK_KP10",
+            question: "Apabila berinteraksi dan bergaul dengan rakan-rakan berlainan jantina di sekolah, murid diwajibkan memelihara adab dan batas ___ yang tinggi.",
+            answer: "sopan"
+        },
+        {
+            id: "PJK_KP11",
+            question: "Keluarga yang terdiri daripada komponen ibu, bapa serta anak-anak kandung mereka sahaja di bawah satu bumbung didefinisikan sebagai struktur keluarga ___.",
+            answer: "asas"
+        },
+        {
+            id: "PJK_KP12",
+            question: "Struktur keluarga yang lebih besar yang mencakupi generasi datuk, nenek, ibu saudara, dan sepupu-sepapat dipanggil struktur keluarga ___.",
+            answer: "kembang"
+        },
+        {
+            id: "PJK_KP13",
+            question: "Institusi yang diiktiraf dari segi agama dan undang-undang sebagai pengikat sebuah keluarga yang sah dipanggil ikatan ___.",
+            answer: "perkahwinan"
+        },
+        {
+            id: "PJK_KP14",
+            question: "Sebagai individu yang paling berpengalaman dalam rumah tangga, bapa kebiasaannya bertindak dan memikul tanggungjawab sebagai ___ keluarga.",
+            answer: "ketua"
+        },
+        {
+            id: "PJK_KP15",
+            question: "Di dalam aspek psikologi, suasana keluarga yang porak-peranda akan menyebabkan perkembangan emosi anak-anak mengalami impak trauma atau tidak ___.",
+            answer: "stabil"
+        },
+        {
+            id: "PJK_KP16",
+            question: "Sebarang bentuk perbalahan, percanggahan pendapat atau perselisihan faham antara ahli keluarga patut ditangani secara rasional melalui kaedah ___.",
+            answer: "berbincang"
+        },
+        {
+            id: "PJK_KP17",
+            question: "Menganjurkan sambutan hari kelahiran dan makan malam beramai-ramai adalah salah satu pendekatan efektif untuk memupuk semangat ___ ahli keluarga.",
+            answer: "merapatkan"
+        },
+        {
+            id: "PJK_KP18",
+            question: "Sebarang insiden di mana seseorang ahli keluarga menggunakan kekerasan fizikal (memukul/menendang) terhadap ahli keluarga yang lain diklasifikasikan sebagai jenayah penderaan ___.",
+            answer: "domestik"
+        },
+        {
+            id: "PJK_KP19",
+            question: "Tindakan tidak sopan seperti menggunakan barang peribadi kepunyaan abang atau kakak tanpa sebarang keizinan menzahirkan masalah kurangnya ___ ruang privasi.",
+            answer: "menghormati"
+        },
+        {
+            id: "PJK_KP20",
+            question: "Dalam menyelesaikan konflik, tindakan memaafkan kesilapan dan kekhilafan ibu bapa atau adik-beradik merupakan satu bentuk terapi yang membersihkan rasa sakit ___.",
+            answer: "hati"
+        },
+        {
+            id: "PJK_KP21",
+            question: "Perkembangan teknologi membolehkan aktiviti interaksi yang positif antara ibu bapa dan anak-anak melalui perkongsian melayari maklumat berfaedah di ___ secara bersama-sama.",
+            answer: "internet"
+        },
+        {
+            id: "PJK_KP22",
+            question: "Bagi mencegah unsur-unsur negatif dari luar, anak-anak wajib menolak tawaran rakan yang cuba mengajak untuk terlibat dalam penyalahgunaan bahan terlarang seperti dadah dan ___.",
+            answer: "alkohol"
+        },
+        {
+            id: "PJK_KP23",
+            question: "Tanggungjawab membersihkan imej dan menjaga nama baik keturunan keluarga terletak di bahu ___ ahli keluarga tanpa terkecuali.",
+            answer: "setiap"
+        },
+        {
+            id: "PJK_KP24",
+            question: "Dalam prinsip etika persahabatan, rakan yang berstatus 'amanah' (trustworthy) sama sekali tidak akan cuba untuk membocorkan ___ rakan baiknya.",
+            answer: "rahsia"
+        },
+        {
+            id: "PJK_KP25",
+            question: "Tindakan menyebarkan keaiban (fitnah) dan memburuk-burukkan kawan di media sosial terbukti boleh memusnahkan kepercayaan dan ikatan ___.",
+            answer: "persahabatan"
+        },
+        {
+            id: "PJK_KP26",
+            question: "Sekiranya rakan anda mengalami masalah kemurungan (depresi), tindakan paling baik sebagai sahabat ialah memujuknya berjumpa dengan perkhidmatan unit ___ di sekolah.",
+            answer: "kaunseling"
+        },
+        {
+            id: "PJK_KP27",
+            question: "Budaya memberi ruang kepada jiran tetangga atau keluarga berkongsi pandangan dan menonton rancangan televisyen bersama-sama menunjukkan ciri permuafakatan dan sifat bertolak ___.",
+            answer: "ansur"
+        },
+        {
+            id: "PJK_KP28",
+            question: "Memaksa rakan memberikan wang saku, menyentuh secara fizikal atau melontarkan ejekan secara berterusan diklasifikasikan sebagai perbuatan siber atau mental iaitu ___.",
+            answer: "buli"
+        },
+        {
+            id: "PJK_KP29",
+            question: "Sekiranya anda terlihat rakan sekolah dibuli, pendekatan paling bijak bukanlah dengan masuk campur dan bergaduh, sebaliknya anda perlu bertindak segera melaporkan insiden itu kepada ___.",
+            answer: "guru"
+        },
+        {
+            id: "PJK_KP30",
+            question: "Remaja yang mengalami sindrom lari dari pangkuan rumah ibu bapa lazimnya berpunca daripada kecacatan atau kegagalan interaksi dan ___ yang sihat di antara ahli keluarga.",
+            answer: "komunikasi"
+        },
+        {
+            id: "PJK_KP31",
+            question: "Keluarga berperanan sebagai unit mikrosistem, iaitu sebuah institusi ___ dan paling awal dalam merangka acuan sahsiah diri seorang kanak-kanak.",
+            answer: "asas"
+        },
+        {
+            id: "PJK_KP32",
+            question: "Kemahiran komunikasi bukan lisan seperti tindakan memberikan tumpuan mata penuh serta pendengaran aktif semasa ibu bapa bercakap merupakan bukti konkrit bahawa kita ___ pandangan mereka.",
+            answer: "menghormati"
+        },
+        {
+            id: "PJK_KP33",
+            question: "Apabila individu mencapai usia akil baligh, perubahan emosi dan hormon akan menyebabkan mereka cenderung untuk terpengaruh dan lebih patuh kepada pendapat rakan ___ berbanding keluarga.",
+            answer: "sebaya"
+        },
+        {
+            id: "PJK_KP34",
+            question: "Tekanan persekitaran di mana seseorang remaja dipaksa melakukan perkara negatif (merokok/vape) supaya dilihat diterima atau 'cool' dalam sesuatu kumpulan sosial dipanggil tekanan rakan ___.",
+            answer: "sebaya"
+        },
+        {
+            id: "PJK_KP35",
+            question: "Murid yang mempunyai kemahiran 'asertif' yang baik berkebolehan tinggi untuk menuturkan perkataan ___ secara tegas tanpa rasa bersalah apabila diajak berbuat perkara salah.",
+            answer: "tidak"
+        },
+        {
+            id: "PJK_KP36",
+            question: "Menerima bimbingan pendidikan kesihatan reproduktif (PEERS) di sekolah mampu melahirkan murid yang cakna akan hak keselamatan tubuh badan demi mencegah ancaman jenayah eksploitasi ___.",
+            answer: "seksual"
+        },
+        {
+            id: "PJK_KP37",
+            question: "Sesetengah kes pencerobohan ruang fizikal dan sentuhan tidak selamat juga berkemungkinan boleh dilakukan oleh ahli terdekat atau individu yang amat ___ oleh mangsa sendiri.",
+            answer: "dikenali"
+        },
+        {
+            id: "PJK_KP38",
+            question: "Apabila seseorang menggunakan taktik manipulasi mempamerkan imej alim, memberikan pujian palsu dan hadiah sebagai perangkap mendapatkan mangsa kanak-kanak, perbuatan ini dipanggil jenayah 'child ___'.",
+            answer: "grooming"
+        },
+        {
+            id: "PJK_KP39",
+            question: "Langkah pencegahan utama apabila dihubungi pemangsa tidak dikenali di platform permainan dalam talian (online game) adalah dengan menggunakan fungsi laporan dan sekat akaun (___ account).",
+            answer: "block"
+        },
+        {
+            id: "PJK_KP40",
+            question: "Pertolongan cemas kognitif yang membolehkan remaja yang terjebak dalam tekanan mental mengurangkan kesakitan jiwa mereka adalah dengan mendapatkan rawatan terapi ___.",
+            answer: "psikologi"
+        },
+        {
+            id: "PJK_KP41",
+            question: "Talian kecemasan utama kerajaan Malaysia yang menghubungkan perkhidmatan pihak polis atau ambulans sekiranya wujud kes keganasan rumah tangga adalah talian ___.",
+            answer: "999"
+        },
+        {
+            id: "PJK_KP42",
+            question: "Talian Kasih kebangsaan khas bebas tol di bawah Jabatan Kebajikan Masyarakat (JKM) bagi mengadu kes pembuangan bayi, amang seksual atau penderaan ialah talian ___.",
+            answer: "15999"
+        },
+        {
+            id: "PJK_KP43",
+            question: "Memelihara kerukunan ahli masyarakat setempat dapat ditunjukkan melalui budi bahasa memuliakan dan menghormati tetamu yang datang melakukan program ___ rumah terbuka ke rumah kita.",
+            answer: "ziarah"
+        },
+        {
+            id: "PJK_KP44",
+            question: "Sentiasa memupuk rasa simpati dan tidak mempersendakan kawan-kawan berkeperluan khas (OKU) di dalam kelas adalah tanda pemupukan nilai keprihatinan dan rasa ___.",
+            answer: "empati"
+        },
+        {
+            id: "PJK_KP45",
+            question: "Adab dan batas sopan berinteraksi dengan berlainan jantina menggariskan panduan supaya pergaulan hanya bertujuan untuk hal-hal pelajaran tanpa adanya niat ___.",
+            answer: "serong"
+        },
+        {
+            id: "PJK_KP46",
+            question: "Sifat menghargai kebaikan rakan yang meminjamkan barangnya boleh disuarakan menerusi lafaz penghargaan yang paling asas, iaitu ___.",
+            answer: "terima kasih"
+        },
+        {
+            id: "PJK_KP47",
+            question: "Pengurusan emosi positif dalam perhubungan menuntut setiap pertengkaran wajib diselesaikan dengan saling meminta dan memberi kemaafan demi membersihkan sebarang dendam ___.",
+            answer: "kesumat"
+        },
+        {
+            id: "PJK_KP48",
+            question: "Penjagaan aspek keselamatan di luar sekolah menasihatkan agar anak-anak wajib memaklumkan terlebih dahulu tentang hala tuju dan masa pulangnya bagi tujuan mendapatkan ___.",
+            answer: "keizinan"
+        },
+        {
+            id: "PJK_KP49",
+            question: "Sifat toleransi menerima perbezaan amalan budaya rakan berbilang kaum seperti Melayu, Cina dan India menjadi paksi kepada ikatan kekuatan perpaduan masyarakat majmuk di ___.",
+            answer: "malaysia"
+        },
+        {
+            id: "PJK_KP50",
+            question: "Setiap tubuh badan remaja dikurniakan kehormatan privasi yang mulia. Ia merupakan hak eksklusif mutlak kepunyaan anda seorang, lantaran itu anda berhak dan wajib ___ kehormatannya daripada pencerobohan.",
+            answer: "mempertahankan"
+        }
     ]
 };
