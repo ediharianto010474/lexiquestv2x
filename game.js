@@ -81,9 +81,9 @@ const sejarahCategoryDifficulty = {
 // Kategori diletakkan di 'medium' untuk sepadan dengan +2 XP
 // -------------------------------------------------------------------------
 const paiCategoryDifficulty = {
-    easy: [],
-    medium: ['aqidah', 'ibadah', 'sirah', 'akhlak'],
-    hard: []
+    easy: ['aqidah'],
+    medium: ['ibadah', 'sirah'],
+    hard: ['akhlak']
 };
 
 const baCategoryDifficulty = {
@@ -3303,15 +3303,11 @@ async function loadLeaderboard() {
             </div>`;
     }
 
-try {
+    try {
         let query = db.collection("players");
         if (mySchool) {
             query = query.where("school", "==", mySchool);
         }
-
-        // 🔥 PERUBAHAN UTAMA DI SINI (JIMAT BERIBU READS!)
-        // Sistem hanya memuat turun 100 murid dengan markah tertinggi sahaja.
-        query = query.orderBy("totalScore", "desc").limit(100);
 
         const snapshot = await query.get();
         
@@ -3323,13 +3319,11 @@ try {
         window.leaderboardDataTemp = [];
         snapshot.forEach(doc => {
             const data = doc.data();
-            // Hanya masukkan data ke dalam senarai jika ia bukan ADMIN
             if (data.class !== "ADMIN" && data.totalScore && data.totalScore > 0) { 
                 window.leaderboardDataTemp.push(data);
             }
         });
 
-        // Kemaskini masa cache terakhir
         window.lastLeaderboardFetch = currentTime;
         renderLeaderboardData('all');
 
@@ -3338,10 +3332,11 @@ try {
         listContainer.innerHTML = `
             <div class='p-8 text-center text-red-500 font-bold'>
                 <i class='fas fa-exclamation-circle text-2xl mb-2'></i><br>
-                Ralat memuat turun data. (Semak console F12 jika perlukan Firebase Index)
+                Ralat memuat turun data.
             </div>`;
     }
-} // <--- INI DIA KURUNGAN KEDUA UNTUK MENUTUP FUNGSI loadLeaderboard()
+}
+
 // 🌟 FUNGSI PENUKAR TAHUN KHAS UNTUK USER DEV 🌟
 function changeDevYearView(year, currentTab) {
     window.currentDevYearView = year;
@@ -3659,11 +3654,11 @@ function endGame() {
     // 3. Kira peratus markah
     const percentage = Math.round((score / totalQuestions) * 100);
 
-    // ==========================================
+// ==========================================
     // LOGIK SIMPAN MARKAH, XP & KOIN 💰 (TERKEMASKINI LTE BOOST)
     // ==========================================
     
-    // Himpunkan semua tahap kesukaran merentas SEMUA subjek baharu
+    // 1. TAMBAHKAN PAI & BA KE DALAM ARRAY KESUKARAN
     const allMedium = [
         ...(typeof mathCategoryDifficulty !== 'undefined' ? mathCategoryDifficulty.medium : []),
         ...(typeof englishCategoryDifficulty !== 'undefined' ? englishCategoryDifficulty.medium : []),
@@ -3674,7 +3669,9 @@ function endGame() {
         ...(typeof muzikCategoryDifficulty !== 'undefined' ? muzikCategoryDifficulty.medium : []),
         ...(typeof moralCategoryDifficulty !== 'undefined' ? moralCategoryDifficulty.medium : []),
         ...(typeof psvCategoryDifficulty !== 'undefined' ? psvCategoryDifficulty.medium : []),
-        ...(typeof rbtCategoryDifficulty !== 'undefined' ? rbtCategoryDifficulty.medium : [])
+        ...(typeof rbtCategoryDifficulty !== 'undefined' ? rbtCategoryDifficulty.medium : []),
+        ...(typeof paiCategoryDifficulty !== 'undefined' ? paiCategoryDifficulty.medium : []), // TAMBAHAN PAI
+        ...(typeof baCategoryDifficulty !== 'undefined' ? baCategoryDifficulty.medium : [])  // TAMBAHAN BA
     ];
 
     const allHard = [
@@ -3687,7 +3684,9 @@ function endGame() {
         ...(typeof muzikCategoryDifficulty !== 'undefined' ? muzikCategoryDifficulty.hard : []),
         ...(typeof moralCategoryDifficulty !== 'undefined' ? moralCategoryDifficulty.hard : []),
         ...(typeof psvCategoryDifficulty !== 'undefined' ? psvCategoryDifficulty.hard : []),
-        ...(typeof rbtCategoryDifficulty !== 'undefined' ? rbtCategoryDifficulty.hard : [])
+        ...(typeof rbtCategoryDifficulty !== 'undefined' ? rbtCategoryDifficulty.hard : []),
+        ...(typeof paiCategoryDifficulty !== 'undefined' ? paiCategoryDifficulty.hard : []), // TAMBAHAN PAI
+        ...(typeof baCategoryDifficulty !== 'undefined' ? baCategoryDifficulty.hard : [])  // TAMBAHAN BA
     ];
 
     // Tentukan pengganda (multiplier) kesukaran
@@ -3810,7 +3809,7 @@ function endGame() {
             console.log("Merekod progres LTE ke Firebase...");
         }
 
-        // 🔥 MULTI-LEADERBOARD: SIMPAN XP MENGIKUT SUBJEK
+// 🔥 MULTI-LEADERBOARD: SIMPAN XP MENGIKUT SUBJEK
         let currentType = (typeof currentGameType !== 'undefined' && currentGameType !== "") ? currentGameType.toLowerCase() : "";
 
         const senaraiSubjekMaju = [
@@ -3823,7 +3822,11 @@ function endGame() {
             { field: 'score_muzik',     label: 'Muzik',     list: typeof muzikCategoryDifficulty !== 'undefined' ? [...muzikCategoryDifficulty.easy, ...muzikCategoryDifficulty.medium, ...muzikCategoryDifficulty.hard] : [] },
             { field: 'score_moral',     label: 'Moral',     list: typeof moralCategoryDifficulty !== 'undefined' ? [...moralCategoryDifficulty.easy, ...moralCategoryDifficulty.medium, ...moralCategoryDifficulty.hard] : [] },
             { field: 'score_psv',       label: 'PSV',       list: typeof psvCategoryDifficulty !== 'undefined' ? [...psvCategoryDifficulty.easy, ...psvCategoryDifficulty.medium, ...psvCategoryDifficulty.hard] : [] },
-            { field: 'score_rbt',       label: 'RBT',       list: typeof rbtCategoryDifficulty !== 'undefined' ? [...rbtCategoryDifficulty.easy, ...rbtCategoryDifficulty.medium, ...rbtCategoryDifficulty.hard] : [] }
+            { field: 'score_rbt',       label: 'RBT',       list: typeof rbtCategoryDifficulty !== 'undefined' ? [...rbtCategoryDifficulty.easy, ...rbtCategoryDifficulty.medium, ...rbtCategoryDifficulty.hard] : [] },
+            
+            // 🟢 TAMBAHAN BAHARU UNTUK PAI & BA 🟢
+            { field: 'score_pai',       label: 'PAI',       list: typeof paiCategoryDifficulty !== 'undefined' ? [...paiCategoryDifficulty.easy, ...paiCategoryDifficulty.medium, ...paiCategoryDifficulty.hard] : [] },
+            { field: 'score_ba',        label: 'B.Arab',    list: typeof baCategoryDifficulty !== 'undefined' ? [...baCategoryDifficulty.easy, ...baCategoryDifficulty.medium, ...baCategoryDifficulty.hard] : [] }
         ];
 
         let padananSubjek = senaraiSubjekMaju.find(subjek => subjek.list.includes(currentType));
@@ -3832,7 +3835,9 @@ function endGame() {
             localPlayerData[padananSubjek.field] = (parseInt(localPlayerData[padananSubjek.field]) || 0) + pointsEarned;
             console.log(`➕ Tambah ${pointsEarned} XP ${padananSubjek.label}. Jumlah: ${localPlayerData[padananSubjek.field]}`);
         } else {
-            localPlayerData.score_english = (parseInt(localPlayerData.score_english) || 0) + pointsEarned;
+            // Backup kecemasan (jika ada subjek lama yang belum dipetakan)
+            console.log("⚠️ Kategori tidak dijumpai dalam senaraiSubjekMaju:", currentType);
+            // Anda boleh buang baris 'score_english' jika tidak mahu ia masuk ke English secara rawak
         }
 
         // Hujung minggu checker
