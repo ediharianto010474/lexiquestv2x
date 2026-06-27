@@ -236,7 +236,7 @@ const pjkData = {
         {
             id: "PJK_SA14",
             question: "Singkatan bagi nama kedudukan pemain 'Goal Shooter' yang tertulis pada 'bib' baju bola jaring ialah ___.",
-            answer: "GS"
+            answer: "gs"
         },
         {
             id: "PJK_SA15",
@@ -325,6 +325,116 @@ const pjkData = {
             id: "PJK_SA30",
             question: "Semangat positif menghormati undang-undang perlawanan, keputusan pengadil dan pihak lawan dipanggil semangat ___.",
             answer: "kesukanan"
+        },
+        {
+            id: "PJK_SA31",
+            question: "Bagi permainan bola keranjang (Basketball), berapakah bilangan pemain bagi setiap pasukan yang bermain di dalam gelanggang?",
+            options: ["5", "7", "9", "11"],
+            answer: 0
+        },
+        {
+            id: "PJK_SA32",
+            question: "Kemahiran menggelecek di dalam bola keranjang dilakukan dengan melantun bola berulang kali menggunakan tekanan tapak ___ dan jari.",
+            answer: "tangan"
+        },
+        {
+            id: "PJK_SA33",
+            question: "Dalam sukan bola keranjang, kesalahan berjalan atau membawa bola melepasi dua langkah tanpa melantun ke lantai dipanggil ___.",
+            options: ["Dribbling", "Travelling", "Passing", "Shooting"],
+            answer: 1
+        },
+        {
+            id: "PJK_SA34",
+            question: "Hantaran bola yang ditolak secara lurus bermula dari dada pengirim ke arah dada penerima dalam bola keranjang dipanggil hantaran ___.",
+            answer: "dada"
+        },
+        {
+            id: "PJK_SA35",
+            question: "Apakah tujuan kemahiran menghantar secara lantunan (bounce pass) yang diaplikasikan dalam bola jaring?",
+            options: ["Supaya nampak kemas", "Mengelak daripada dihalang pemain lawan yang tinggi", "Supaya bola mudah pecah", "Bola boleh bergolek laju"],
+            answer: 1
+        },
+        {
+            id: "PJK_SA36",
+            question: "Dalam peraturan mengawal (Defending) sukan bola jaring, jarak halangan antara pemain dengan pihak yang memegang bola sekurang-kurangnya ialah 3 ___ (0.9 meter).",
+            answer: "kaki"
+        },
+        {
+            id: "PJK_SA37",
+            question: "Serangan yang dilakukan secara mengejut dan pantas ke kubu lawan selepas merampas bola dari penguasaan lawan dipanggil strategi serangan ___.",
+            options: ["Bertahan", "Sisi Padang", "Balas (Counter-attack)", "Gelap"],
+            answer: 2
+        },
+        {
+            id: "PJK_SA38",
+            question: "Sepakan sudut (Corner kick) dalam sukan bola sepak diberikan jika bola terkeluar melintasi garisan ___ oleh pemain pertahanan secara sengaja atau tidak.",
+            answer: "belakang"
+        },
+        {
+            id: "PJK_SA39",
+            question: "Sukan bola baling agak tegas. Sekiranya pemain melakukan kekasaran fizikal kepada lawan, pemain akan dikenakan penalti keluar berehat selama ___ minit.",
+            options: ["2", "5", "10", "15"],
+            answer: 0
+        },
+        {
+            id: "PJK_SA40",
+            question: "Sekiranya pemain bola sepak mengasari pihak penyerang di dalam kotak kawasan gawangnya, pengadil akan memberi sepakan daripada titik ___ (Penalty spot).",
+            answer: "penalti"
+        },
+        {
+            id: "PJK_SA41",
+            question: "Teknik melontar bola tinggi menggunakan kedua-dua belah tangan yang diangkat melepasi sasaran kepala pemain lain dipanggil hantaran ___.",
+            options: ["Leret", "Sisi", "Atas Kepala", "Bawah Ketiak"],
+            answer: 2
+        },
+        {
+            id: "PJK_SA42",
+            question: "Undang-undang bola sepak melarang penyerang untuk berada di belakang pertahanan terakhir pihak lawan sebelum bola dihantar kepadanya. Situasi haram ini dipanggil ___.",
+            answer: "ofsaid"
+        },
+        {
+            id: "PJK_SA43",
+            question: "Lontaran percuma (Free throw) tanpa sebarang gangguan di dalam bola keranjang akibat kekasaran pertahanan memberikan balasan markah sebanyak ___ mata.",
+            options: ["1", "2", "3", "4"],
+            answer: 0
+        },
+        {
+            id: "PJK_SA44",
+            question: "Bagi memastikan cengkaman yang kuat pada rumput sewaktu memecut, kasut khas pemain ragbi dan bola sepak dicipta berserta ___ di bahagian tapak (studs).",
+            answer: "paku"
+        },
+        {
+            id: "PJK_SA45",
+            question: "Mengapakah hantaran leret lebih relevan dan selalu digunakan sebagai kaedah hantaran paling asas dalam bola sepak?",
+            options: ["Cantik dilihat oleh penonton", "Hantaran lebih laju, pantas dan tepat", "Sukar ditangkap oleh penjaga gol", "Memang diwajibkan oleh undang-undang"],
+            answer: 1
+        },
+        {
+            id: "PJK_SA46",
+            question: "Pemain bola jaring yang memakai jersi berlilitkan huruf C di dada melambangkan bahawa peranan posisinya ialah pemain ___ (Center).",
+            answer: "tengah"
+        },
+        {
+            id: "PJK_SA47",
+            question: "Singkatan 'WA' pada dada pemain bola jaring melambangkan tanggungjawab khusus sebagai penyokong serangan iaitu ___.",
+            options: ["Wing Attack", "Wide Attack", "West Area", "Wing Assist"],
+            answer: 0
+        },
+        {
+            id: "PJK_SA48",
+            question: "Taktik bertahan di mana sekumpulan pemain berbaris rapat menghadap penyerang yang ingin membuat sepakan percuma dinamakan pertahanan ___.",
+            answer: "benteng"
+        },
+        {
+            id: "PJK_SA49",
+            question: "Dalam sukan Ragbi Sentuh (Touch Rugby) yang diubah suai bagi pelajar sekolah, kemaraan pelari dimatikan bukan dengan rempuhan kasar, tetapi dengan menggunakan kaedah ___.",
+            options: ["Tackle", "Pelukan Maut", "Sentuhan dua tangan", "Serkupan Jaring"],
+            answer: 2
+        },
+        {
+            id: "PJK_SA50",
+            question: "Apabila pemain berjaya menembusi pertahanan dan meletakkan bola ragbi ke lantai di dalam kawasan in-goal lawan, lakuan 'Try' ini memberikan ___ mata.",
+            answer: "lima"
         }
     ],
 
@@ -466,6 +576,143 @@ const pjkData = {
             question: "Semasa permainan ping pong, pemain yang mahu melakukan pukulan servis diwajibkan melambung bola kecil tersebut lurus ke atas dari telapak tangannya yang ___.",
             options: ["Digenggam", "Tertutup separuh", "Memegang bet", "Terbuka rata"],
             answer: 3
+        },
+        {
+            id: "PJK_JR26",
+            question: "Servis lambung tinggi (high serve) dalam badminton adalah tektik untuk menolak posisi pihak lawan berlari menuju ke bahagian ___ gelanggang.",
+            answer: "belakang"
+        },
+        {
+            id: "PJK_JR27",
+            question: "Pegangan bet ping pong yang merapatkan ibu jari dan jari telunjuk seperti posisi menulis dipanggil pegangan ___.",
+            options: ["Shakehand", "Penhold", "Backhand Grip", "Forehand Grip"],
+            answer: 1
+        },
+        {
+            id: "PJK_JR28",
+            question: "Pukulan gaya 'backhand' sangat berguna apabila bulu tangkis jatuh secara pantas menyilang ke arah bertentangan dengan tangan yang ___.",
+            answer: "dominan"
+        },
+        {
+            id: "PJK_JR29",
+            question: "Dalam mana-mana sukan berjaring, pukulan servis yang tidak melepasi had jaring akan diisytiharkan ___ dan mata diberikan kepada lawan.",
+            options: ["Seri", "Batal (Fault)", "Jaring Terputus", "Diteruskan"],
+            answer: 1
+        },
+        {
+            id: "PJK_JR30",
+            question: "Menurut undang-undang antarabangsa ping pong, bola servis wajib dilambung lurus sekurang-kurangnya sejauh 16 ___ (cm) ke udara.",
+            answer: "sentimeter"
+        },
+        {
+            id: "PJK_JR31",
+            question: "Permainan Sepak Takraw secara rasmi mempertandingkan format berpasukan di mana bilangan pemain bagi setiap regu yang masuk bermain ialah seramai ___.",
+            options: ["Dua orang", "Tiga orang", "Empat orang", "Lima orang"],
+            answer: 1
+        },
+        {
+            id: "PJK_JR32",
+            question: "Pemain penyambut servis khas yang digelar 'Libero' dalam bola tampar diwajibkan menyarungkan jersi yang berlainan ___ daripada pasukan rakan-rakannya.",
+            answer: "warna"
+        },
+        {
+            id: "PJK_JR33",
+            question: "Keberkesanan kuasa pukulan rejam atau 'smash' dalam bola tampar paling tajam apabila dilakukan ketika atlet berada pada ___ lompatannya di udara.",
+            options: ["Awal mula", "Pendaratan", "Puncak tertinggi", "Menjunam"],
+            answer: 2
+        },
+        {
+            id: "PJK_JR34",
+            question: "Alat pengadang melintang iaitu jaring di tengah-tengah meja ping pong menanda dan membahagikan ukuran kawasan meja tersebut kepada ___ bahagian bersaiz sama.",
+            answer: "dua"
+        },
+        {
+            id: "PJK_JR35",
+            question: "Sebutkan pukulan terbaik untuk menyelamatkan hantaran bola takraw yang jatuh dengan laju dan tepat tinggi di udara berhampiran badan atlet.",
+            options: ["Sangga dengan paha", "Sepakan kura kaki", "Tandukan dahi", "Blok dengan dada"],
+            answer: 2
+        },
+        {
+            id: "PJK_JR36",
+            question: "Tekong sepak takraw hanya dibenarkan melepaskan sepakan servis dari kedudukannya di dalam kawasan berpola ___ tengah yang dilukis di gelanggang.",
+            answer: "bulatan"
+        },
+        {
+            id: "PJK_JR37",
+            question: "Pukulan dorongan mendatar ('Drive') secara laju menyusur jaring dalam badminton amat berkesan untuk taktik ___ dan memberikan kesukaran lawan.",
+            options: ["Rehat sebentar", "Mempercepatkan tempoh rali", "Melambungkan rali", "Sukan persahabatan"],
+            answer: 1
+        },
+        {
+            id: "PJK_JR38",
+            question: "Mana-mana pihak yang berjaya mendahului dan mengumpul kutipan kemenangan sehingga mata ke-___ terlebih dahulu diisytiharkan sebagai pemenang set tersebut.",
+            answer: "21"
+        },
+        {
+            id: "PJK_JR39",
+            question: "Dalam peraturan BWF Badminton, para pemain akan dibenarkan mengambil waktu rehat singkat selama 60 saat pada pertengahan set (interval) apabila pungutan mata telah mencecah angka ___.",
+            options: ["11", "15", "18", "20"],
+            answer: 0
+        },
+        {
+            id: "PJK_JR40",
+            question: "Kesesuaian tapak kasut di gelanggang kayu dan polimer badminton menuntut pemain memakai pelapik bergetah supaya risiko cedera atau ___ dapat dielakkan.",
+            answer: "tergelincir"
+        },
+        {
+            id: "PJK_JR41",
+            question: "Tindakan kelalaian di mana kelengkapan atau pakaian rasmi atlet secara langsung terkena pada jaring ketika perlawanan masih belum mati dipanggil kesalahan ___.",
+            options: ["Out of boundary", "Carry over", "Touch net", "Fault service"],
+            answer: 2
+        },
+        {
+            id: "PJK_JR42",
+            question: "Bagi setiap fasa serangan berbalas, peraturan bola tampar menetapkan seorang pemain haram memukul bertindih sebanyak ___ kali berturut-turut secara peribadi.",
+            answer: "dua"
+        },
+        {
+            id: "PJK_JR43",
+            question: "Kejuruteraan geseran pukulan 'Backspin' membolehkan pergerakan bola ping pong berputar pusing secara ___ dan jatuh laju ke meja.",
+            options: ["Hadapan lawan", "Bawah dan perlahan pantul", "Pacak siling mendatar", "Berpusing kiri kanan (sidespin)"],
+            answer: 1
+        },
+        {
+            id: "PJK_JR44",
+            question: "Kerangka kayu pepejal bet ping pong dipertingkatkan keupayaan serangannya dengan melekatkan helaian lapisan berasaskan material ___ pada permukaan.",
+            answer: "getah"
+        },
+        {
+            id: "PJK_JR45",
+            question: "Tindak-tanduk Tekong takraw yang dengan sengaja melompat atau mengangkat tinggi tapak kaki pivot (paksi sokongan) sewaktu melakukan rejaman servis diisytiharkan sebagai ___.",
+            options: ["Sah permainan", "Berjaya", "Batal sepakan mula", "Tiada apa kesan"],
+            answer: 2
+        },
+        {
+            id: "PJK_JR46",
+            question: "Istilah universal 'Rali' ('Rally') diguna pakai untuk mendefinisikan waktu permainan bertukar-tukar ___ secara aktif antara lawan sebelum berhentinya bola jatuh.",
+            answer: "pukulan"
+        },
+        {
+            id: "PJK_JR47",
+            question: "Kebuntuan persaingan sengit 'Deuce' tercetus di hujung permainan akibat kedua-dua pesaing telah terikat mata dan menemui jalan seri seri pada kutipan ___.",
+            options: ["11-11", "20-20", "21-21", "25-25"],
+            answer: 1
+        },
+        {
+            id: "PJK_JR48",
+            question: "Dalam proses menamatkan konflik ketegangan 'Deuce', sistem markah moden mensyaratkan wajib ada penciptaan jurang kelebihan sejumlah ___ mata kemenangan tambahan.",
+            answer: "dua"
+        },
+        {
+            id: "PJK_JR49",
+            question: "Varian Sukan Bola Tampar Duduk (Sitting Volleyball) diklasifikasikan sebagai sukan kategori ___ peringkat elit dunia khusus membabitkan warga atlet fizikal terhad (OKU).",
+            options: ["Komuniti Remaja", "Kanak Kanak", "Sukan Kebangsaan Biasa", "Sukan Paralimpik"],
+            answer: 3
+        },
+        {
+            id: "PJK_JR50",
+            question: "Semangat perlawanan berlandaskan rasa saling memaafkan dan menjauhi permusuhan yang dizahirkan menerusi perbuatan salaman jabat tangan dipanggil etika ___ mulia.",
+            answer: "kesukanan"
         }
     ],
 
@@ -579,6 +826,171 @@ const pjkData = {
             id: "PJK_PD20",
             question: "Orang dewasa berbaju gelap yang berdiri di belakang Catcher sofbol bertugas menjadi hakim atau ___ perlawanan (Umpire).",
             answer: "pengadil"
+        },
+        {
+            id: "PJK_PD21",
+            question: "Taktik memukul bola melayang merentasi seluruh posisi pemain padang memerlukan gabungan kelajuan ayunan lengan yang padu serta pemindahan berat ___ secara dinamik.",
+            options: ["Baju dan seluar", "Berat badan keseluruhan", "Kasut bertumit", "Warna dan saiz bola"],
+            answer: 1
+        },
+        {
+            id: "PJK_PD22",
+            question: "Sesudah lakuan memukul bola, pemain dilarang membaling alat kayu pemukul sesuka hati di sekeliling pangkalan. Alat ini wajib dijatuhkan perlahan-lahan dalam keadaan yang ___.",
+            answer: "selamat"
+        },
+        {
+            id: "PJK_PD23",
+            question: "Sebelum pelancaran tenaga balingan bagi melepaskan bola ke arah pemukul, aksi pelempar Pitcher selalunya didahului ayunan tangan berputar ibarat gaya kincir ___.",
+            options: ["Air", "Angin (Windmill)", "Air terjun", "Tornado"],
+            answer: 1
+        },
+        {
+            id: "PJK_PD24",
+            question: "Serangan pukulan pendek serapan atau tampanan pepat (bunt) dipraktikkan oleh pemukul yang licik demi mengelirukan posisi penahan pasukan ___ agar tidak bersedia.",
+            answer: "bertahan"
+        },
+        {
+            id: "PJK_PD25",
+            question: "Pukulan tinggi kriket yang terus merentasi garisan jauh lingkungan batas sempadan luar tanpa memantul ke bawah tanah terlebih dahulu menjana perolehan ___.",
+            options: ["1 larian mata", "4 mata", "6 mata / Sixer", "Sifar (0) Mata"],
+            answer: 2
+        },
+        {
+            id: "PJK_PD26",
+            question: "Tembakan bola keras Bowler kriket melepasi bahagian paras atas kepala pemukul dikategorikan sebagai balingan luar kawasan dan didenda hukuman ___ (No ball/Wide).",
+            answer: "batal"
+        },
+        {
+            id: "PJK_PD27",
+            question: "Posisi fizikal Fielder semasa hendak menyambut lontaran bola parabola (Fly Ball) dengan kemas di padang mewajibkan paras sarung tangan mereka perlu berada sekurang-kurangnya setinggi atas ___.",
+            options: ["Peha", "Tulang pinggang", "Ubun-ubun / Aras Kepala", "Belakang tapak kasut"],
+            answer: 2
+        },
+        {
+            id: "PJK_PD28",
+            question: "Gaya renggangan jari tangan maksimum dan tegang di bahagian dalam kain sarung (glove) berfungsi untuk membuka rekaan poket buatan menjadi sebuah ___ pelindung yang lebih besar.",
+            answer: "poket"
+        },
+        {
+            id: "PJK_PD29",
+            question: "Kayu alat pukulan bagi permainan ringkas Rounders sekolah rendah berbentuk bat ___ lurus dan bukannya melengkung mekar.",
+            options: ["Sisi petak 4 persegi", "Bongkah Silinder pendek", "Papan Kayu Rata", "Segi Tiga Serong"],
+            answer: 1
+        },
+        {
+            id: "PJK_PD30",
+            question: "Peraturan penetapan ukuran meter jarak lari di lapangan di antara pangkalan (base to base) berbeza-beza kerana padang sukan harus disesuaikan mengikut peringkat ___ serta saiz fizikal kelompok pemain berbeza.",
+            answer: "umur"
+        },
+        {
+            id: "PJK_PD31",
+            question: "Lontaran sisi pantas ke bawah meleret berhampiran tanah sesuai digunakan pasukan padang bagi penghantaran umpanan secara ___ antara mereka.",
+            options: ["Pukulan panjang melambung", "Tepat dan meluncur pantas dekat", "Tidak stabil goyang", "Jauh beralun"],
+            answer: 1
+        },
+        {
+            id: "PJK_PD32",
+            question: "Syarat utama penganjuran pelontaran Bowler kriket sah apabila tenaga balingan bola dihentak supaya sentuhan tanah ___ kali wujud mendahului pemukul sasaran kayu wiket.",
+            answer: "satu"
+        },
+        {
+            id: "PJK_PD33",
+            question: "Pengumpulan jumlah merit kemenangan perlawanan bersandarkan larian berulang-alik dari sisi tiang wiket pemukul ke wiket penjaga seberang (satu larian dikira 1 run). Lakuan ini dipanggil membuat ___.",
+            options: ["Lemparan Batal", "Melompat Tali", "Mata Larian (Scoring Runs)", "Hentian Set"],
+            answer: 2
+        },
+        {
+            id: "PJK_PD34",
+            question: "Kelengkapan statik perlawanan bertindak sebagai sasaran pusat tembakan di padang kriket ialah binaan blok kayu tiang tiga palang terpasak dikenali nama rasmi sebagai struktur ___.",
+            answer: "wiket"
+        },
+        {
+            id: "PJK_PD35",
+            question: "Ganjaran pukulan sempurna yang merejam terbang jauh meninggalkan garisan padang membolehkan sang pemukul berlari lenggang di segenap base tanpa diganggu. Pukulan ikonik penamat ini termasyhur dengan sebutan ___.",
+            options: ["Fly Bunt", "Base Walk", "Homerun (Home Run)", "Foul Strike"],
+            answer: 2
+        },
+        {
+            id: "PJK_PD36",
+            question: "Bagi memastikan sasaran menangkap umpanan yang sempurna berdekatan zon gawang memukul, pemain pasukan pertahanan khas (Catcher) diarahkan berjaga tetap mencangkung bersembunyi persis di belakang badan si ___.",
+            answer: "pemukul"
+        },
+        {
+            id: "PJK_PD37",
+            question: "Permainan antarabangsa elit Kriket ini sangat popular di liga Asia Selatan tetapi akar penubuhan tamadun rekaan sistem sukannya mula wujud beribu tahun dahulu berasal jauh dari geografi negara ___.",
+            options: ["England / Great Britain", "Amerika Syarikat (USA)", "Persekutuan Rusia", "Republik China"],
+            answer: 0
+        },
+        {
+            id: "PJK_PD38",
+            question: "Corak mekanik pergerakan pelari untuk berhenti tergempar ke atas petak 'safe base' sambil kaki menahan seretan momentum kasut terus ke pangkalan padang secara memanjang dipanggil gelongsoran ___.",
+            answer: "lurus"
+        },
+        {
+            id: "PJK_PD39",
+            question: "Mana-mana lontaran sofbol yang cacat dan terbang melencong jauh terkeluar luar ruang kotak pergerakan pukul tanpa berjaya digapai, hakim pasti meniup wisel isytihar hukuman balingan sifar atau ___.",
+            options: ["Dead ball (Mati)", "Batal (Ball Call)", "Strike Sempurna", "Safe base"],
+            answer: 1
+        },
+        {
+            id: "PJK_PD40",
+            question: "Apabila pukulan berjaya dikenakan pada objek tetapi hala arah kelajuan bola jauh tercampak melepasi garis lingkungan sisi kiri luar bentuk V padang, ianya tidak sah lari sebaliknya batal atau 'bola ___'.",
+            answer: "foul"
+        },
+        {
+            id: "PJK_PD41",
+            question: "Manuver agresif pelari pangkalan mendadak menukar lokasi sebelum tamatnya detik bola dilepaskan sepenuhnya keluar dari genggaman jemari pembaling demi merampas masa digelar taktikal mencuri ___.",
+            options: ["Masa Umpire", "Bola Lawan", "Tapak Curi (Steal Base)", "Kesalahan Merampas"],
+            answer: 2
+        },
+        {
+            id: "PJK_PD42",
+            question: "Kerja berpasukan merangkumi kewaspadaan Fielder pangkalan menadah lontaran tepat demi tepat memintas nyawa lawan sangat mementingkan hantaran laju penjaga jarak belakang iaitu padang ___.",
+            answer: "luar"
+        },
+        {
+            id: "PJK_PD43",
+            question: "Beban ralat dan kepincangan tembakan si Pelempar (Pitcher) yang menyebabkan bola terpelanting ganas melanggar anatomi fizikal pemukul membolehkan ganjaran tebus rugi si pemukul berjalan menuju tapak Base ___ secara sukarela.",
+            options: ["Keempat Belakang", "Disingkir Keluar Permainan", "Pertama Secara Percuma (Walk / HBP)", "Lari Semua Base Home"],
+            answer: 2
+        },
+        {
+            id: "PJK_PD44",
+            question: "Rombongan taktik, komando strategi kumpulan, susun atur pemain di pelusuk posisi dan kata semangat perangsang di padang permainan banyak dipertanggungjawabkan kepada si pemakai pengenalan tofi lengan yang bergelar ___.",
+            answer: "kapten"
+        },
+        {
+            id: "PJK_PD45",
+            question: "Sebiji peluru sukan besbol / sofbol teras bulatannya ditenun mampat oleh ketulan pepejal ringan dari sarang balak atau lapisan ___ sambil ketat dihias balutan benang gumpal merah berputar.",
+            options: ["Spons Plastik", "Kerangka Kaca", "Gabus Mampat Berbalut", "Simen Tebal Berat"],
+            answer: 2
+        },
+        {
+            id: "PJK_PD46",
+            question: "Kecuaian larian pelari laluan tapak di luar jangkaan di mana tubuh fizikal sang pelari tanpa niat berlanggar meredah pukulan bola pantas rakan pasukannya sendiri yang sedang aktif bergolek di zon balapan automatik diisytiharkan ___ terkeluar.",
+            answer: "mati"
+        },
+        {
+            id: "PJK_PD47",
+            question: "Walau rupa tapak alas (base bag) 1, 2, 3 dirajut menggunakan bentuk potongan kanvas petak segi empat, sebaliknya kawasan pelindung tempat pijakan pemukul 'Home Plate' dibina tebal dengan struktur bersisi geografi sudut pentagon bernilai ___ bucu.",
+            options: ["Empat Sisi", "Lima Bucu", "Tiga Tepat", "Bulatan Lingkaran"],
+            answer: 1
+        },
+        {
+            id: "PJK_PD48",
+            question: "Demi mencedok gumpalan bola leret padang secara kilat meleret laju menuju tepat ke bumi, lutut pemain harus dilentur membongkok bagi objektif penyesuaian penurunan titik kestabilan tubuh ke bumi, iaitu merendahkan pusat ___ kinetiknya.",
+            answer: "graviti"
+        },
+        {
+            id: "PJK_PD49",
+            question: "Pemantauan sukan sofbol seliaan badan kebangsaan dibawahi entiti 'SAM', sementara legasi tradisi kriket Malaysia secara tersusun digerakkan pengurusan tadbir urus jaya menerusi Persatuan ___ Melayu Malaysia.",
+            options: ["Kriket", "Ragbi Sentuh Terbuka", "Olimpik Negara Asia", "Hoki Belia Tertutup"],
+            answer: 0
+        },
+        {
+            id: "PJK_PD50",
+            question: "Sorakan kod strategik pertahanan formasi gempur lapangan padang sofbol yang besar dan riuh rendah sangat berpusat kepada pemantauan ketangkasan visual, laras bunyi lantang serta isyarat komunikasi jalinan kolaborasi ___.",
+            answer: "suara"
         }
     ],
 "komponen_kecergasan": [
