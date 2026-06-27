@@ -2,461 +2,163 @@
 // DATA SOALAN PJK (4 Kategori Pertama)
 // ==========================================
 const pjkData = {
-    "gimnastik_asas": [
-        {
-            id: "PJK_GM01",
-            question: "Kebolehan mengekalkan kedudukan badan dalam keadaan stabil tanpa jatuh dipanggil ___.",
-            options: ["Lompatan", "Ayunan", "Imbangan", "Hambur"],
-            answer: 2
-        },
-        {
-            id: "PJK_GM02",
-            question: "Imbangan yang dilakukan dalam keadaan badan tidak bergerak (kaku) dipanggil imbangan ___.",
-            options: ["Dinamik", "Statik", "Lompatan", "Kreatif"],
-            answer: 1
-        },
-        {
-            id: "PJK_GM03",
-            question: "Imbangan yang dilakukan ketika badan sedang bergerak (contohnya meniti atas bangku) dipanggil imbangan ___.",
-            options: ["Dinamik", "Statik", "Berirama", "Simetri"],
-            answer: 0
-        },
-        {
-            id: "PJK_GM04",
-            question: "Melakukan 'Imbangan Bangau' memerlukan sokongan menggunakan berapa belah kaki?",
-            options: ["Satu kaki", "Dua kaki", "Tiga titik", "Tiada kaki"],
-            answer: 0
-        },
-        {
-            id: "PJK_GM05",
-            question: "Jika kamu melakukan imbangan dengan punggung sebagai tapak sokongan, badan akan membentuk posisi huruf ___.",
-            options: ["A", "O", "T", "V"],
-            answer: 3
-        },
-        {
-            id: "PJK_GM06",
-            question: "Semakin banyak bilangan tapak sokongan yang menyentuh lantai, semakin ___ imbangan badan kita.",
-            options: ["Bergoyang", "Stabil", "Laju", "Tinggi"],
-            answer: 1
-        },
-        {
-            id: "PJK_GM07",
-            question: "Antara berikut, posisi yang manakah merupakan tapak sokongan yang paling luas dan stabil?",
-            options: ["Berdiri dengan hujung kaki", "Berdiri satu kaki", "Berdiri kaki dirapatkan", "Berdiri tegak dengan kaki dibuka"],
-            answer: 3
-        },
-        {
-            id: "PJK_GM08",
-            question: "Aktiviti menolak badan ke atas dari lantai secara laju menggunakan kekuatan kaki dipanggil ___.",
-            options: ["Guling", "Hambur", "Ayunan", "Imbangan"],
-            answer: 1
-        },
-        {
-            id: "PJK_GM09",
-            question: "Dalam aktiviti hambur tangan, berat badan akan dipindahkan dari kaki ke arah ___ sebelum kembali ke kaki.",
-            options: ["Kepala", "Bahu", "Tangan", "Punggung"],
-            answer: 2
-        },
-        {
-            id: "PJK_GM10",
-            question: "Apakah tindakan yang perlu dilakukan pada bahagian lutut semasa mendarat dari tempat tinggi?",
-            options: ["Diluruskan keras", "Difleksi (dibengkokkan)", "Disilangkan", "Diangkat tinggi"],
-            answer: 1
-        },
-        {
-            id: "PJK_GM11",
-            question: "Tujuan membengkokkan lutut (fleksi lutut) semasa pendaratan adalah untuk ___.",
-            options: ["Menyerap daya gegaran", "Melonjak lebih tinggi", "Nampak lebih bergaya", "Mempercepatkan pendaratan"],
-            answer: 0
-        },
-        {
-            id: "PJK_GM12",
-            question: "Untuk pendaratan yang selamat, kedua-dua belah kaki mestilah menyentuh lantai secara ___.",
-            options: ["Serentak", "Bergilir-gilir", "Kaki kiri dahulu", "Kaki kanan dahulu"],
-            answer: 0
-        },
-        {
-            id: "PJK_GM13",
-            question: "Pergerakan menggulingkan badan ke hadapan bermula dari bahagian tengkuk dipanggil ___.",
-            options: ["Guling sisi", "Guling hadapan", "Guling belakang", "Guling balak"],
-            answer: 1
-        },
-        {
-            id: "PJK_GM14",
-            question: "Pergerakan memusingkan badan 360 darjah di atas lantai secara lurus mengikut paksi membujur dipanggil ___.",
-            options: ["Guling sisi", "Guling hadapan", "Guling belakang", "Guling balak"],
-            answer: 3
-        },
-        {
-            id: "PJK_GM15",
-            question: "Semasa melakukan guling hadapan, bahagian badan manakah yang PATUT menyentuh tilam selepas tangan?",
-            options: ["Dahi", "Ubun-ubun kepala", "Tengkuk (belakang leher)", "Dada"],
-            answer: 2
-        },
-        {
-            id: "PJK_GM16",
-            question: "Kenapa bahagian puncak kepala (ubun-ubun) tidak dibenarkan menjadi tumpuan menekan tilam semasa berguling?",
-            options: ["Boleh merosakkan rambut", "Menyukarkan gulingan", "Mencederakan tulang leher", "Boleh membatalkan gulingan"],
-            answer: 2
-        },
-        {
-            id: "PJK_GM17",
-            question: "Bagi memastikan guling hadapan selamat, dagu murid hendaklah sentiasa dirapatkan ke arah ___.",
-            options: ["Lutut", "Dada", "Bahu", "Perut"],
-            answer: 1
-        },
-        {
-            id: "PJK_GM18",
-            question: "Selepas selesai guling hadapan, murid biasanya akan berada dalam posisi akhir iaitu keadaan ___.",
-            options: ["Mencangkung", "Meniarap", "Baring telentang", "Berdiri sebelah kaki"],
-            answer: 0
-        },
-        {
-            id: "PJK_GM19",
-            question: "Alatan wajib yang beralas lembut dan mesti digunakan di atas lantai semasa gimnastik dipanggil ___.",
-            options: ["Papan anjal", "Papan imbangan", "Tikar getah biasa", "Tilam gimnastik"],
-            answer: 3
-        },
-        {
-            id: "PJK_GM20",
-            question: "Imbangan statik secara meniarap dengan tangan dan kaki lurus ke belakang dipanggil posisi ___.",
-            options: ["Kereta kebal", "Kapal selam", "Aeroplan (kapal terbang)", "Helikopter"],
-            answer: 2
-        },
-        {
-            id: "PJK_GM21",
-            question: "Sokongan badan menggunakan dua belah tangan dan sebelah kaki dikira sebagai imbangan ___ tapak sokongan.",
-            options: ["Satu", "Dua", "Tiga", "Empat"],
-            answer: 2
-        },
-        {
-            id: "PJK_GM22",
-            question: "Apakah nama kemahiran di mana murid bergantung pada palang menggunakan kekuatan genggaman?",
-            options: ["Hambur", "Ayunan / Gayut", "Guling", "Lompatan"],
-            answer: 1
-        },
-        {
-            id: "PJK_GM23",
-            question: "Adakah perbuatan memakai jam tangan atau rantai leher dibenarkan semasa kelas gimnastik?",
-            options: ["Ya, asalkan cantik", "Tidak, kerana membahayakan keselamatan", "Ya, jika disuruh guru", "Tidak, melainkan jam pintar"],
-            answer: 1
-        },
-        {
-            id: "PJK_GM24",
-            question: "Aktiviti memanaskan badan sebelum gimnastik sangat penting untuk ___.",
-            options: ["Mengelakkan kecederaan otot", "Memenatkan badan", "Membazir masa kelas", "Meningkatkan selera makan"],
-            answer: 0
-        },
-        {
-            id: "PJK_GM25",
-            question: "Selain kekuatan otot, gimnastik sangat melatih kebolehan sendi meregang yang dipanggil ___.",
-            options: ["Daya tahan", "Kelenturan", "Kelajuan", "Kapasiti aerobik"],
-            answer: 1
-        },
+"gimnastik_asas": [
+        { id: "PJK_GM01", question: "Kebolehan mengekalkan kedudukan badan dalam keadaan stabil dipanggil ___?", options: ["Lompatan", "Ayunan", "Imbangan", "Hambur"], answer: 2 },
+        { id: "PJK_GM02", question: "Imbangan yang dilakukan dalam keadaan badan tidak bergerak dipanggil imbangan ___?", options: ["Dinamik", "Statik", "Lompatan", "Kreatif"], answer: 1 },
+        { id: "PJK_GM03", question: "Imbangan yang dilakukan ketika badan sedang bergerak dipanggil imbangan ___?", options: ["Dinamik", "Statik", "Berirama", "Simetri"], answer: 0 },
+        { id: "PJK_GM04", question: "Melakukan imbangan dengan hanya menggunakan sebelah kaki dinamakan imbangan bangau atau ___ kaki?", options: ["Satu", "Dua", "Tiga", "Tiada"], answer: 0 },
+        { id: "PJK_GM05", question: "Imbangan statik menggunakan punggung sebagai tapak sokongan diletakkan sebagai posisi huruf ___?", options: ["A", "O", "T", "V"], answer: 3 },
+        { id: "PJK_GM06", question: "Semakin banyak bilangan tapak sokongan, semakin ___ sesuatu imbangan badan.", options: ["Bergoyang", "Stabil", "Laju", "Tinggi"], answer: 1 },
+        { id: "PJK_GM07", question: "Antara imbangan satu tapak sokongan dan tiga tapak sokongan, manakah yang lebih stabil?", options: ["Satu tapak sokongan", "Dua tapak sokongan", "Tiga tapak sokongan", "Sama sahaja"], answer: 2 },
+        { id: "PJK_GM08", question: "Sebutkan kedudukan tapak sokongan yang paling luas antara berdiri berkaki rapat atau berdiri tegak berkaki buka?", options: ["Berkaki rapat", "Berdiri satu kaki", "Berdiri menjengket", "Berkaki buka"], answer: 3 },
+        { id: "PJK_GM09", question: "Aktiviti menolak badan ke atas dari lantai dengan kekuatan kaki secara cepat dipanggil ___?", options: ["Guling", "Hambur", "Ayunan", "Imbangan"], answer: 1 },
+        { id: "PJK_GM10", question: "Aktiviti memindahkan berat badan dari kaki ke tangan dan kembali ke kaki semula dipanggil hambur ___?", options: ["Kepala", "Bahu", "Tangan", "Punggung"], answer: 2 },
+        { id: "PJK_GM11", question: "Semasa melakukan pendaratan dari tempat tinggi, lutut hendaklah ___ untuk menyerap daya gegaran.", options: ["Diluruskan keras", "Difleksi (dibengkokkan)", "Disilangkan", "Diangkat tinggi"], answer: 1 },
+        { id: "PJK_GM12", question: "Apakah istilah bagi perbuatan membengkokkan lutut semasa mendarat?", options: ["Fleksi lutut", "Ekstensi lutut", "Kunci lutut", "Pusing lutut"], answer: 0 },
+        { id: "PJK_GM13", question: "Pendaratan yang selamat memerlukan kedua-dua belah ___ menyentuh lantai secara serentak.", options: ["Tangan", "Lutut", "Kaki", "Siku"], answer: 2 },
+        { id: "PJK_GM14", question: "Pergerakan memusingkan badan 360 darjah di atas lantai mengikut paksi membujur dipanggil ___ balak?", options: ["Guling", "Lompat", "Ayun", "Pusing"], answer: 0 },
+        { id: "PJK_GM15", question: "Pergerakan menggulingkan badan ke hadapan bermula dari tengkuk, belakang dan punggung dipanggil guling ___?", options: ["Belakang", "Sisi", "Hadapan", "Balak"], answer: 2 },
+        { id: "PJK_GM16", question: "Semasa melakukan guling hadapan, bahagian anggota badan manakah yang patut menyentuh tilam dahulu selepas tangan?", options: ["Dahi", "Tengkuk", "Dada", "Ubun-ubun"], answer: 1 },
+        { id: "PJK_GM17", question: "Adakah bahagian dahi atau kepala dibenarkan menjadi tumpuan utama semasa memulakan guling hadapan?", options: ["Ya", "Tidak", "Bergantung pada saiz badan", "Boleh jika perlahan"], answer: 1 },
+        { id: "PJK_GM18", question: "Mengapakah kepala tidak boleh ditekan pada tilam semasa berguling?", options: ["Boleh merosakkan rambut", "Boleh mencederakan leher", "Melambatkan gulingan", "Membatalkan markah"], answer: 1 },
+        { id: "PJK_GM19", question: "Pergerakan menggulingkan badan ke arah belakang dipanggil guling ___?", options: ["Sisi", "Hadapan", "Balak", "Belakang"], answer: 3 },
+        { id: "PJK_GM20", question: "Semasa posisi akhir guling hadapan, murid berada dalam keadaan ___ sebelum berdiri.", options: ["Mencangkung", "Baring", "Meniarap", "Melompat"], answer: 0 },
+        { id: "PJK_GM21", question: "Aktiviti berjalan di atas bangku gimnastik melatih kemahiran imbangan ___?", options: ["Dinamik", "Statik", "Duduk", "Keras"], answer: 0 },
+        { id: "PJK_GM22", question: "Alat beralas lembut yang wajib digunakan dalam semua aktiviti gimnastik asas dipanggil ___?", options: ["Papan anjal", "Tikar getah", "Tilam gimnastik", "Karpet"], answer: 2 },
+        { id: "PJK_GM23", question: "Apakah nama lain bagi tilam gimnastik yang tebal dan lembut?", options: ["Mat", "Bed", "Cushion", "Board"], answer: 0 },
+        { id: "PJK_GM24", question: "Imbangan statik secara meniarap dengan tangan dan sebelah kaki lurus ke belakang menyerupai bentuk pesawat dipanggil imbangan ___?", options: ["Kapal layar", "Helikopter", "Kereta kebal", "Aeroplan"], answer: 3 },
+        { id: "PJK_GM25", question: "Melakukan pusingan badan di udara selepas melompat dari papan anjal dipanggil lompatan ___?", options: ["Udara", "Air", "Bumi", "Api"], answer: 0 },
+        { id: "PJK_GM26", question: "Adakah kita dibenarkan melakukan gimnastik di atas lantai simen keras tanpa tilam?", options: ["Ya", "Boleh jika pandai", "Tidak", "Bergantung cuaca"], answer: 2 },
+        { id: "PJK_GM27", question: "Sokongan badan menggunakan dua belah tangan dan dua belah kaki dikira mempunyai berapa tapak sokongan?", options: ["Dua", "Tiga", "Empat", "Lima"], answer: 2 },
+        { id: "PJK_GM28", question: "Sokongan badan menggunakan kepala dan dua belah tangan membentuk imbangan ___?", options: ["Tiga segi", "Empat segi", "Bulat", "Sisi"], answer: 0 },
+        { id: "PJK_GM29", question: "Aktiviti gimnastik dapat meningkatkan koordinasi dan ___ otot badan.", options: ["Kekuatan", "Lemak", "Tinggi", "Berat"], answer: 0 },
+        { id: "PJK_GM30", question: "Sebelum memulakan aktiviti gimnastik, murid mestilah memakai pakaian sukan yang ___?", options: ["Ketat", "Sesuai", "Tebal", "Bercorak"], answer: 1 },
+        { id: "PJK_GM31", question: "Fleksi lutut semasa mendarat penting untuk mengelakkan kecederaan pada sendi ___?", options: ["Siku", "Bahu", "Lutut", "Pinggang"], answer: 2 },
+        { id: "PJK_GM32", question: "Adakah murid dibenarkan menolak rakan secara sengaja semasa melakukan gulingan?", options: ["Ya", "Boleh untuk bergurau", "Tidak", "Hanya rakan baik"], answer: 2 },
+        { id: "PJK_GM33", question: "Mengekalkan imbangan badan di atas papan imbangan memerlukan fokus mata memandang ke ___?", options: ["Bawah", "Atas", "Belakang", "Hadapan"], answer: 3 },
+        { id: "PJK_GM34", question: "Kedudukan pusat graviti yang rendah menjadikan tubuh badan kita lebih ___?", options: ["Stabil", "Goyang", "Tinggi", "Lemah"], answer: 0 },
+        { id: "PJK_GM35", question: "Merendahkan badan dengan membengkokkan lutut membantu menurunkan pusat ___.", options: ["Udara", "Graviti", "Jisim", "Otot"], answer: 1 },
+        { id: "PJK_GM36", question: "Gimnastik yang melibatkan pergerakan kreatif bersandarkan alatan seperti reben atau bola dipanggil gimnastik ___?", options: ["Keras", "Lantai", "Irama", "Artistik"], answer: 2 },
+        { id: "PJK_GM37", question: "Gimnastik peringkat sekolah rendah memfokuskan kepada pergerakan ___?", options: ["Asas", "Ekstrem", "Pertandingan", "Profesional"], answer: 0 },
+        { id: "PJK_GM38", question: "Hambur menggunakan bantuan peti lombol memerlukan kekuatan otot tangan dan ___?", options: ["Mata", "Kaki", "Telinga", "Kepala"], answer: 1 },
+        { id: "PJK_GM39", question: "Semasa berguling, posisi dagu hendaklah dirapatkan ke bahagian ___?", options: ["Perut", "Dada", "Bahu", "Lutut"], answer: 1 },
+        { id: "PJK_GM40", question: "Adakah perbuatan memakai jam tangan atau aksesori tajam dibenarkan semasa gimnastik?", options: ["Ya", "Boleh jika mahal", "Tidak", "Ikut suka"], answer: 2 },
+        { id: "PJK_GM41", question: "Kemahiran mengawal pergerakan anggota badan dengan cekap dipanggil ___ motor.", options: ["Halangan", "Kawalan", "Laluan", "Kuasa"], answer: 1 },
+        { id: "PJK_GM42", question: "Pendaratan yang tidak stabil boleh menyebabkan murid terjatuh atau ___?", options: ["Terseliuh", "Tinggi", "Cepat lapar", "Cepat habis"], answer: 0 },
+        { id: "PJK_GM43", question: "Aktiviti gayut dan ayun pada palang menguji kekuatan genggaman tangan serta otot ___?", options: ["Bahu", "Kaki", "Lutut", "Perut"], answer: 0 },
+        { id: "PJK_GM44", question: "Semasa mendarat dari lompatan, pastikan tangan dibuka ke sisi untuk mengimbangi ___?", options: ["Tilam", "Rakan", "Badan", "Angin"], answer: 2 },
+        { id: "PJK_GM45", question: "Gulingan sisi di atas tilam gimnastik dipanggil juga guling ___?", options: ["Balak", "Sisi", "Hadapan", "Tegak"], answer: 1 },
+        { id: "PJK_GM46", question: "Adakah arahan guru wajib dipatuhi sebelum mencuba sebarang gaya gimnastik baharu?", options: ["Ya", "Tidak", "Kadang-kadang", "Abaikan"], answer: 0 },
+        { id: "PJK_GM47", question: "Imbangan 'handstand' ialah imbangan statik tegak menggunakan tapak ___?", options: ["Kaki", "Tangan", "Kepala", "Lutut"], answer: 1 },
+        { id: "PJK_GM48", question: "Sokongan satu lutut dan dua tapak tangan di atas lantai memberikan bilangan ___ tapak sokongan.", options: ["Dua", "Tiga", "Empat", "Lima"], answer: 1 },
+        { id: "PJK_GM49", question: "Aktiviti meniru pergerakan ulat bulu bergerak di atas tilam dikategorikan sebagai pergerakan ___?", options: ["Bukan lokomotor", "Lokomotor", "Statik", "Pasif"], answer: 1 },
+        { id: "PJK_GM50", question: "Gimnastik melatih kebolehan melentur badan atau komponen ___.", options: ["Kekuatan", "Kelajuan", "Kelenturan", "Kardio"], answer: 2 },
+    ],
 
-        // Pergerakan Berirama (25 Soalan)
-        {
-            id: "PJK_PB01",
-            question: "Pergerakan fizikal yang dilakukan dengan langkah bersusun mengikut rentak muzik dipanggil ___.",
-            options: ["Larian asas", "Pergerakan berirama", "Gimnastik", "Senaman bebas"],
-            answer: 1
-        },
-        {
-            id: "PJK_PB02",
-            question: "Pergerakan lokomotor bermaksud pergerakan yang ___.",
-            options: ["Tidak berubah tempat", "Hanya menggunakan tangan", "Berpindah dari satu tempat ke tempat lain", "Bergerak sangat perlahan"],
-            answer: 2
-        },
-        {
-            id: "PJK_PB03",
-            question: "Pergerakan bukan lokomotor pula bermaksud pergerakan yang ___.",
-            options: ["Berlaku setempat tanpa berubah lokasi", "Melompat jauh ke hadapan", "Berpindah dari kiri ke kanan", "Berenang dalam kolam"],
-            answer: 0
-        },
-        {
-            id: "PJK_PB04",
-            question: "Antara berikut, yang manakah contoh pergerakan LOKOMOTOR?",
-            options: ["Membongkok", "Mengilas badan", "Meregang tangan", "Berjalan ke hadapan"],
-            answer: 3
-        },
-        {
-            id: "PJK_PB05",
-            question: "Antara berikut, yang manakah contoh pergerakan BUKAN LOKOMOTOR?",
-            options: ["Membongkokkan badan", "Berlari anak", "Melompat katak", "Berjalan ke sisi"],
-            answer: 0
-        },
-        {
-            id: "PJK_PB06",
-            question: "Tepukan tangan boleh digunakan dalam aktiviti berirama sebagai penanda ___ tanpa muzik.",
-            options: ["Larian", "Masa rehat", "Detik atau tempo", "Penamat kelas"],
-            answer: 2
-        },
-        {
-            id: "PJK_PB07",
-            question: "Kelajuan sesuatu muzik atau rentak yang mengawal kelajuan langkah tarian dipanggil ___.",
-            options: ["Melodi", "Vokal", "Tempo", "Nada"],
-            answer: 2
-        },
-        {
-            id: "PJK_PB08",
-            question: "Langkah asas dengan sebelah kaki dibuka ke sisi dan satu lagi kaki ditarik rapat kepadanya dipanggil ___.",
-            options: ["V-step", "Langkah sisi (Side-step)", "Grapevine", "Skipping"],
-            answer: 1
-        },
-        {
-            id: "PJK_PB09",
-            question: "Corak langkah menari yang menyerupai bentuk huruf 'V' pada lantai dipanggil ___.",
-            options: ["V-step", "A-step", "Langkah sisi", "Langkah lurus"],
-            answer: 0
-        },
-        {
-            id: "PJK_PB10",
-            question: "Aktiviti meniru pergerakan haiwan seperti burung terbang mengikut muzik merupakan sebahagian daripada pergerakan ___.",
-            options: ["Statik", "Kreatif", "Lompatan", "Keras"],
-            answer: 1
-        },
-        {
-            id: "PJK_PB11",
-            question: "Tarian Inang dan Joget merupakan contoh tarian tradisional kaum ___ di Malaysia.",
-            options: ["Cina", "India", "Kadazan", "Melayu"],
-            answer: 3
-        },
-        {
-            id: "PJK_PB12",
-            question: "Tarian tradisional manakah yang biasanya mempunyai rentak yang sangat rancak dan gembira?",
-            options: ["Zapin", "Inang", "Joget", "Mak Yong"],
-            answer: 2
-        },
-        {
-            id: "PJK_PB13",
-            question: "Tarian Sumazau yang sering diiringi paluan gong merupakan tarian tradisi kaum dari negeri ___.",
-            options: ["Sarawak", "Sabah", "Kelantan", "Johor"],
-            answer: 1
-        },
-        {
-            id: "PJK_PB14",
-            question: "Tarian Ngajat yang terkenal dengan pakaian tradisional berbulu burung enggang berasal dari negeri ___.",
-            options: ["Sarawak", "Pahang", "Sabah", "Melaka"],
-            answer: 0
-        },
-        {
-            id: "PJK_PB15",
-            question: "Jika tempo muzik dimainkan dengan perlahan, kita mestilah menggerakkan badan dengan ___.",
-            options: ["Pantas dan melompat", "Kasar dan agresif", "Perlahan dan lembut", "Berhenti terus"],
-            answer: 2
-        },
-        {
-            id: "PJK_PB16",
-            question: "Penggunaan alat tambahan seperti selendang, reben, atau gelung rotan dalam pergerakan dipanggil sebagai ___.",
-            options: ["Senjata", "Props (Alatan)", "Beban", "Halangan"],
-            answer: 1
-        },
-        {
-            id: "PJK_PB17",
-            question: "Pergerakan berirama secara berkumpulan di dalam kelas PJK sangat membantu memupuk semangat ___.",
-            options: ["Mementingkan diri", "Berlawan", "Kerjasama", "Tertidur"],
-            answer: 2
-        },
-        {
-            id: "PJK_PB18",
-            question: "Aktiviti senamrobik sekolah yang diiringi muzik rancak adalah bertujuan untuk membina daya tahan ___.",
-            options: ["Otak", "Mata", "Tulang", "Kardiovaskular (Jantung)"],
-            answer: 3
-        },
-        {
-            id: "PJK_PB19",
-            question: "Bolehkah arahan wisil (wisel) menggantikan muzik untuk menandakan pertukaran pergerakan kreatif?",
-            options: ["Boleh", "Tidak boleh sama sekali", "Hanya untuk larian", "Hanya jika hujan"],
-            answer: 0
-        },
-        {
-            id: "PJK_PB20",
-            question: "Melompat berterusan dengan sebelah kaki dinamakan ___.",
-            options: ["Lari", "Jalan", "Hopping (Lompat sebelah kaki)", "Guling"],
-            answer: 2
-        },
-        {
-            id: "PJK_PB21",
-            question: "Langkah mengejar corak langkah rakan di hadapan tanpa muzik dipanggil pergerakan ___.",
-            options: ["Pusingan", "Mengikut bayang (Shadowing)", "Lompat bintang", "Tarian lurus"],
-            answer: 1
-        },
-        {
-            id: "PJK_PB22",
-            question: "Adakah pakaian baju sekolah rasmi (uniform) sesuai digunakan untuk kelas pergerakan berirama?",
-            options: ["Ya, sangat sesuai", "Tidak, baju sukan lebih sesuai", "Ya, jika menari tarian rasmi", "Bergantung kepada cuaca"],
-            answer: 1
-        },
-        {
-            id: "PJK_PB23",
-            question: "Menari mengikut formasi bulatan memerlukan murid peka dengan ___ agar tidak berlanggar.",
-            options: ["Ruang dan jarak rakan", "Warna baju rakan", "Kasut guru", "Kipas siling"],
-            answer: 0
-        },
-        {
-            id: "PJK_PB24",
-            question: "Langkah menari yang menyilangkan kaki ke belakang kaki yang lain dipanggil pergerakan ___.",
-            options: ["Grapevine", "V-step", "Langkah sisi", "Berjalan lurus"],
-            answer: 0
-        },
-        {
-            id: "PJK_PB25",
-            question: "Kecantikan gerakan, senyuman, dan gaya tubuh semasa persembahan berirama dinilai dari segi apresiasi ___.",
-            options: ["Estetik (Kesenian)", "Matematik", "Sains", "Sejarah"],
-            answer: 0
-        },
+    "pergerakan_berirama": [
+        { id: "PJK_PB01", question: "Pergerakan fizikal yang dilakukan mengikut rentak, tempo atau muzik dipanggil pergerakan ___?", options: ["Kasar", "Berirama", "Pantas", "Gimnastik"], answer: 1 },
+        { id: "PJK_PB02", question: "Kelajuan rentak irama atau muzik yang mengawal pergerakan dipanggil ___?", options: ["Melodi", "Vokal", "Tempo", "Nada"], answer: 2 },
+        { id: "PJK_PB03", question: "Pergerakan yang menyebabkan badan berpindah dari satu tempat ke tempat yang lain dipanggil pergerakan ___?", options: ["Bukan lokomotor", "Setempat", "Lokomotor", "Kaku"], answer: 2 },
+        { id: "PJK_PB04", question: "Sebutkan satu contoh pergerakan lokomotor dalam aktiviti berirama?", options: ["Berdiri tegak", "Membongkok", "Berjalan", "Memusing kepala"], answer: 2 },
+        { id: "PJK_PB05", question: "Pergerakan yang dilakukan dalam keadaan badan kekal berada di tempat yang sama dipanggil pergerakan ___?", options: ["Lokomotor", "Bukan lokomotor", "Lari pecut", "Terbang"], answer: 1 },
+        { id: "PJK_PB06", question: "Sebutkan satu contoh pergerakan bukan lokomotor dalam pergerakan berirama?", options: ["Berlari", "Melompat katak", "Berjalan bersilang", "Membengkok"], answer: 3 },
+        { id: "PJK_PB07", question: "Langkah asas berjalan ke hadapan, ke belakang, atau ke sisi mengikut detik dipanggil pergerakan ___ lurus?", options: ["Tarian", "Langkah", "Lompat", "Pusing"], answer: 1 },
+        { id: "PJK_PB08", question: "Langkah menari mengikut corak langkah huruf 'V' dipanggil langkah ___?", options: ["Z-step", "U-step", "V-step", "W-step"], answer: 2 },
+        { id: "PJK_PB09", question: "Pergerakan mengikut irama muzik dengan ekspresi emosi bebas dipanggil pergerakan ___?", options: ["Kreatif", "Arahan", "Robot", "Statik"], answer: 0 },
+        { id: "PJK_PB10", question: "Aktiviti meniru pergerakan haiwan seperti burung terbang mengikut muzik menguji daya ___ murid.", options: ["Kekuatan", "Kreativiti", "Kelajuan", "Kekerasan"], answer: 1 },
+        { id: "PJK_PB11", question: "Tarian tradisional kaum Melayu yang ditarikan dengan tempo sederhana laju meter 4/4 ialah tarian ___?", options: ["Inang", "Zapin", "Ngajat", "Sumazau"], answer: 0 },
+        { id: "PJK_PB12", question: "Tarian tradisional kaum Melayu yang mempunyai rentak sangat rancak dan ceria ialah tarian ___?", options: ["Mak Yong", "Inang", "Joget", "Kuda Kepang"], answer: 2 },
+        { id: "PJK_PB13", question: "Alat perkusi atau tepukan tangan boleh digunakan sebagai penanda ___ irama.", options: ["Penamat", "Rehat", "Detik", "Suara"], answer: 2 },
+        { id: "PJK_PB14", question: "Mendengar muzik terlebih dahulu sebelum melakukan pergerakan membantu murid menyelaraskan ___ badan.", options: ["Berat", "Koordinasi", "Ketinggian", "Warna baju"], answer: 1 },
+        { id: "PJK_PB15", question: "Pergerakan melangkah sebelah kaki ke sisi dan menarik kaki sebelah lagi rapat ke arahnya dipanggil langkah ___?", options: ["Sisi", "Lurus", "Belakang", "Depan"], answer: 0 },
+        { id: "PJK_PB16", question: "Apakah istilah bahasa Inggeris bagi pergerakan langkah sisi rapat?", options: ["Forward-step", "Back-step", "Side-step", "Jump-step"], answer: 2 },
+        { id: "PJK_PB17", question: "Langkah menari bersilang kaki ke hadapan atau ke belakang dipanggil langkah ___ vin?", options: ["Apple", "Orange", "Grapevine", "Banana"], answer: 2 },
+        { id: "PJK_PB18", question: "Adakah tempo muzik yang laju memerlukan kita bergerak dengan lebih pantas?", options: ["Ya", "Tidak", "Ikut suka", "Tidak bergerak langsung"], answer: 0 },
+        { id: "PJK_PB19", question: "Adakah tempo muzik yang perlahan sesuai diiringi dengan pergerakan melompat pecut?", options: ["Ya", "Boleh cuba", "Tidak", "Bergantung pada kasut"], answer: 2 },
+        { id: "PJK_PB20", question: "Aktiviti pergerakan berirama secara berkumpulan melatih nilai bekerjasama dan ___?", options: ["Pementingan diri", "Keseragaman", "Permusuhan", "Ketidaksamaan"], answer: 1 },
+        { id: "PJK_PB21", question: "Melakukan pergerakan fleksi dan ekstensi tangan mengikut detik lagu ialah contoh pergerakan ___ lokomotor.", options: ["Bukan", "Campuran", "Bebas", "Penuh"], answer: 0 },
+        { id: "PJK_PB22", question: "Pergerakan melonjak dengan sebelah kaki dan mendarat dengan kaki yang sama dipanggil ___?", options: ["Running", "Skipping", "Hopping", "Walking"], answer: 1 },
+        { id: "PJK_PB23", question: "Pergerakan berlari anak dengan langkah berenjut-enjut mengikut rentak lagu kanak-kanak dinamakan langkah ___?", options: ["Pecut", "Jalan", "Enjut", "Lompat"], answer: 2 },
+        { id: "PJK_PB24", question: "Adakah pakaian ketat atau jeans sesuai dipakai semasa melakukan aktiviti pergerakan berirama?", options: ["Ya, sangat sesuai", "Tidak", "Boleh jika sejuk", "Boleh jika mahal"], answer: 1 },
+        { id: "PJK_PB25", question: "Menggunakan props seperti reben, gelung rotan, atau selendang menambah tarikan estetik dalam pergerakan ___?", options: ["Kreatif", "Lompatan", "Kasar", "Tidur"], answer: 0 },
+        { id: "PJK_PB26", question: "Membongkokkan badan ke kiri dan kanan mengikut alunan muzik melatih komponen kecergasan ___.", options: ["Kekuatan", "Kelenturan", "Kelajuan", "Kardiovaskular"], answer: 1 },
+        { id: "PJK_PB27", question: "Langkah berpusing di tempat yang sama mengikut rentak muzik ialah pergerakan ___?", options: ["Lompatan", "Lurus", "Pusingan", "Sisi"], answer: 2 },
+        { id: "PJK_PB28", question: "Tarian tradisional etnik Kadazandusun dari Sabah yang popular diajar dalam PJK ialah tarian ___?", options: ["Ngajat", "Sumazau", "Zapin", "Inang"], answer: 1 },
+        { id: "PJK_PB29", question: "Tarian tradisional etnik Iban dari Sarawak yang diajar dalam komponen pergerakan berirama ialah tarian ___?", options: ["Ngajat", "Joget", "Sumazau", "Kuda Kepang"], answer: 0 },
+        { id: "PJK_PB30", question: "Sebutkan rentak irama tradisional yang sering digunakan untuk senamrobik sekolah?", options: ["Perlahan", "Rancak", "Menyedihkan", "Menakutkan"], answer: 1 },
+        { id: "PJK_PB31", question: "Pergerakan berjalan sambil melambai-lambaikan tangan mengikut tempo melatih kemahiran motor ___?", options: ["Kasar", "Halus", "Mata", "Mulut"], answer: 0 },
+        { id: "PJK_PB32", question: "Detik lagu yang berulang secara stabil menyamai rentak degupan ___ manusia.", options: ["Mata", "Jantung", "Perut", "Rambut"], answer: 1 },
+        { id: "PJK_PB33", question: "Aktiviti berirama yang dilakukan di awal pagi untuk kecergasan seluruh sekolah dipanggil ___?", options: ["Tidur", "Makan pagi", "Senamrobik", "Gotong-royong"], answer: 2 },
+        { id: "PJK_PB34", question: "Adakah kita perlu menghormati keunikan tarian dan pergerakan tradisional kaum lain?", options: ["Tidak", "Bergantung", "Ya", "Hanya jika disuruh"], answer: 2 },
+        { id: "PJK_PB35", question: "Pergerakan mengilas badan tanpa mengubah kedudukan kaki ialah pergerakan ___ lokomotor.", options: ["Penuh", "Campuran", "Cepat", "Bukan"], answer: 3 },
+        { id: "PJK_PB36", question: "Muzik berentak perlahan biasanya mempunyai nilai kesan emosi yang ___ dan tenang.", options: ["Syahdu", "Marah", "Tertekan", "Gelisah"], answer: 0 },
+        { id: "PJK_PB37", question: "Menari mengikut formasi bulatan memerlukan murid peka dengan jarak ___ di sebelah mereka.", options: ["Rakan", "Tingkap", "Kipas", "Guru"], answer: 0 },
+        { id: "PJK_PB38", question: "Langkah bergerak maju tiga langkah ke hadapan dan diakhiri dengan tepukan tangan mengikut detik ___?", options: ["Pertama", "Kedua", "Ketiga", "Keempat"], answer: 3 },
+        { id: "PJK_PB39", question: "Adakah koordinasi mata, telinga, dan kaki penting dalam pergerakan berirama?", options: ["Ya", "Tidak", "Kurang penting", "Hanya telinga penting"], answer: 0 },
+        { id: "PJK_PB40", question: "Tujuan utama aktiviti pergerakan berirama adalah untuk membina keyakinan diri dan apresiasi ___.", options: ["Matematik", "Sains", "Estetik", "Sejarah"], answer: 2 },
+        { id: "PJK_PB41", question: "Melompat melepasi halangan mengikut rentak muzik menguji aspek ___ halangan.", options: ["Ketinggian", "Berat", "Warna", "Anggaran"], answer: 3 },
+        { id: "PJK_PB42", question: "Sebutkan isyarat visual yang boleh digunakan oleh guru untuk menukar pergerakan selain muzik?", options: ["Lampu suluh", "Wisil", "Menjerit", "Baling bola"], answer: 1 },
+        { id: "PJK_PB43", question: "Langkah mengejar corak langkah rakan di hadapan dinamakan pergerakan ___ bayang.", options: ["Mengikut", "Melawan", "Memukul", "Memijak"], answer: 0 },
+        { id: "PJK_PB44", question: "Suku kata ritma 'Ta' dalam tepukan detik biasanya mewakili ketukan nota ___?", options: ["Kuaver", "Krochet", "Minim", "Semibrif"], answer: 1 },
+        { id: "PJK_PB45", question: "Adakah senyuman dan ekspresi muka yang ceria sebahagian daripada markah pergerakan kreatif?", options: ["Ya", "Tidak", "Hanya jika cantik", "Hanya untuk guru"], answer: 0 },
+        { id: "PJK_PB46", question: "Pergerakan berirama membantu membakar kalori dan meningkatkan daya tahan ___.", options: ["Otot", "Kardiovaskular", "Tulang", "Gigi"], answer: 1 },
+        { id: "PJK_PB47", question: "Membentuk gaya patung membeku apabila muzik dihentikan secara tiba-tiba melatih fungsi ___?", options: ["Daya tahan otot", "Imbangan statik", "Kelajuan", "Kekuatan"], answer: 1 },
+        { id: "PJK_PB48", question: "Langkah tarian singa tradisional menggunakan rentak paluan ___ yang kuat.", options: ["Gitar", "Dram", "Piano", "Seruling"], answer: 1 },
+        { id: "PJK_PB49", question: "Pergerakan menolak tapak tangan ke depan mengikut irama ialah contoh pergerakan ___ lokomotor.", options: ["Sedia ada", "Lokomotor", "Bukan", "Menyerang"], answer: 2 },
+        { id: "PJK_PB50", question: "Hasil gubahan gerakan kreatif murid boleh dipersembahkan semasa Hari ___ sekolah.", options: ["Sukan", "Hujan", "Kantin", "Peperiksaan"], answer: 0 },
+    ],
 
-        // Olahraga Asas (25 Soalan)
-        {
-            id: "PJK_OA01",
-            question: "Olahraga asas di sekolah rendah terbahagi kepada tiga komponen utama iaitu acara balingan, lompatan dan ___.",
-            options: ["Tendangan", "Renangan", "Larian", "Tumbukan"],
-            answer: 2
-        },
-        {
-            id: "PJK_OA02",
-            question: "Acara berlari dalam jarak yang pendek (seperti 50m atau 100m) pada kelajuan maksimum dipanggil lari ___.",
-            options: ["Jauh", "Pecut", "Berhalangan", "Rentas desa"],
-            answer: 1
-        },
-        {
-            id: "PJK_OA03",
-            question: "Untuk lari pecut tanpa menggunakan alat 'blok permulaan', murid perlu menggunakan gaya permulaan ___.",
-            options: ["Duduk baring", "Gaya berdiri", "Meniarap", "Tidur"],
-            answer: 1
-        },
-        {
-            id: "PJK_OA04",
-            question: "Semasa mula berlari pecut (fasa pecutan), kedudukan badan pelari seharusnya ___.",
-            options: ["Condong ke hadapan", "Ditegakkan 90 darjah", "Membongkok ke lantai", "Kaku"],
-            answer: 0
-        },
-        {
-            id: "PJK_OA05",
-            question: "Ayunan tangan semasa berlari pecut perlulah bersilang dengan rentak kaki untuk menambah ___.",
-            options: ["Berat badan", "Halangan angin", "Daya dan kelajuan", "Gaya estetik"],
-            answer: 2
-        },
-        {
-            id: "PJK_OA06",
-            question: "Acara larian yang melibatkan empat orang pelari bertukar-tukar baton dipanggil acara lari ___.",
-            options: ["Jarak Jauh", "Pecut Individu", "Berpagar", "Berganti-ganti"],
-            answer: 3
-        },
-        {
-            id: "PJK_OA07",
-            question: "Alat berbentuk silinder berongga yang wajib dibawa dan dihulurkan kepada rakan sepasukan dipanggil ___.",
-            options: ["Kayu rotan", "Wisel", "Baton", "Lembing"],
-            answer: 2
-        },
-        {
-            id: "PJK_OA08",
-            question: "Penyerahan baton dalam lari berganti-ganti MESTILAH dilakukan di dalam zon yang ditetapkan iaitu zon ___.",
-            options: ["Pertukaran baton", "Rehat", "Tamat", "Permulaan"],
-            answer: 0
-        },
-        {
-            id: "PJK_OA09",
-            question: "Jika pelari terjatuhkan baton semasa pertukaran, pelari tersebut WAJIB ___.",
-            options: ["Membiarkannya", "Berlari mengambilnya semula", "Meminta baton baharu", "Menamatkan perlumbaan"],
-            answer: 1
-        },
-        {
-            id: "PJK_OA10",
-            question: "Teknik memberikan baton di mana penerima TIDAK melihat ke belakang dipanggil teknik pertukaran ___.",
-            options: ["Bukan Visual", "Visual", "Pecutan", "Campuran"],
-            answer: 0
-        },
-        {
-            id: "PJK_OA11",
-            question: "Lari berpagar merupakan acara di mana pelari perlu berlari sambil ___.",
-            options: ["Membawa baton", "Melompat melepasi halangan (pagar)", "Membaling peluru", "Merangkak di bawah jaring"],
-            answer: 1
-        },
-        {
-            id: "PJK_OA12",
-            question: "Acara lompatan di mana atlet berlari, memijak papan lonjakan, dan mendarat sejauh mungkin dipanggil lompat ___.",
-            options: ["Tinggi", "Kijang", "Galah", "Jauh"],
-            answer: 0
-        },
-        {
-            id: "PJK_OA13",
-            question: "Dalam acara lompat jauh, fasa permulaan di mana atlet memecut mencari kelajuan dipanggil fasa ___.",
-            options: ["Lonjakan", "Pendaratan", "Lari Landas (Penujuan)", "Layangan"],
-            answer: 2
-        },
-        {
-            id: "PJK_OA14",
-            question: "Lonjakan di papan lonjakan lompat jauh mestilah menggunakan kekuatan ___.",
-            options: ["Kedua-dua belah kaki", "Sebelah kaki sahaja", "Tangan", "Lutut"],
-            answer: 1
-        },
-        {
-            id: "PJK_OA15",
-            question: "Jika tapak kasut atlet terpijak tanah melebihi garisan papan lonjakan, lompatan tersebut dikira ___.",
-            options: ["Batal", "Sah", "Terbaik", "Seri"],
-            answer: 0
-        },
-        {
-            id: "PJK_OA16",
-            question: "Bagi memastikan keselamatan, kawasan pendaratan lompat jauh mestilah sebuah kotak yang diisi penuh dengan ___.",
-            options: ["Air", "Batu kerikil", "Pasir bersih", "Lumpur"],
-            answer: 2
-        },
-        {
-            id: "PJK_OA17",
-            question: "Lompat tinggi ialah acara yang memerlukan atlet melompat melepasi sebatang ___.",
-            options: ["Tali tali", "Palang melintang", "Tembok bata", "Gelung rotan"],
-            answer: 1
-        },
-        {
-            id: "PJK_OA18",
-            question: "Antara gaya yang terkenal dalam acara lompat tinggi ialah gaya membelakangi palang yang dipanggil gaya ___.",
-            options: ["Gunting", "Guling perut", "Fosbury Flop", "Terjun junam"],
-            answer: 2
-        },
-        {
-            id: "PJK_OA19",
-            question: "Pendaratan acara lompat tinggi wajib dilakukan di atas ___ yang tebal dan empuk.",
-            options: ["Pasir", "Tilam pendaratan", "Rumput", "Karpet nipis"],
-            answer: 1
-        },
-        {
-            id: "PJK_OA20",
-            question: "Acara balingan menggunakan bebola besi yang berat dan keras menolak dari leher dipanggil ___.",
-            options: ["Lempar cakera", "Baling tukul besi", "Merejam lembing", "Lontar peluru"],
-            answer: 3
-        },
-        {
-            id: "PJK_OA21",
-            question: "Sebelum melakukan tolakan lontar peluru, bebola besi mestilah dirapatkan ke kawasan pangkal leher atau di bawah ___.",
-            options: ["Dagu", "Ketiak", "Telinga / Rahang", "Dada"],
-            answer: 2
-        },
-        {
-            id: "PJK_OA22",
-            question: "Adakah atlet dibenarkan 'membaling' (throw) peluru tersebut seperti membaling bola lisut?",
-            options: ["Ya", "Tidak, ia mesti 'ditolak' (put)", "Ya, jika peluru ringan", "Boleh, jika tangan panjang"],
-            answer: 1
-        },
-        {
-            id: "PJK_OA23",
-            question: "Selepas selesai membuat lontaran peluru, atlet WAJIB berjalan keluar melalui bahagian ___ bulatan lontaran.",
-            options: ["Hadapan", "Sisi kanan", "Sisi kiri", "Belakang"],
-            answer: 3
-        },
-        {
-            id: "PJK_OA24",
-            question: "Acara balingan yang menggunakan kayu panjang berhujung tajam dinamakan merejam ___.",
-            options: ["Cakera", "Peluru", "Lembing", "Tukul besi"],
-            answer: 2
-        },
-        {
-            id: "PJK_OA25",
-            question: "Tembakan pistol bermula di padang balapan digunakan untuk menguji tahap kepekaan dan masa ___ atlet.",
-            options: ["Rehat", "Tindak balas (Reaction)", "Tidur", "Kelajuan maksimum"],
-            answer: 1
-        }
+    "olahraga_asas": [
+        { id: "PJK_OA01", question: "Sukan olahraga asas terbahagi kepada tiga komponen utama iaitu acara larian, lompatan dan ___?", options: ["Tendangan", "Pukulan", "Balingan", "Renangan"], answer: 2 },
+        { id: "PJK_OA02", question: "Acara larian jarak pendek seperti lari 50 meter dan 100 meter diklasifikasikan sebagai larian ___?", options: ["Jauh", "Pecut", "Rentas Desa", "Berganti-ganti"], answer: 1 },
+        { id: "PJK_OA03", question: "Semasa memulakan larian pecut tanpa blok permulaan, gaya dekam atau gaya ___ digunakan?", options: ["Tidur", "Duduk", "Melompat", "Berdiri"], answer: 3 },
+        { id: "PJK_OA04", question: "Apakah istilah bahasa Inggeris bagi fasa pecutan di mana atlet memecut dengan kelajuan maksimum?", options: ["Deceleration", "Acceleration", "Stopping", "Jumping"], answer: 1 },
+        { id: "PJK_OA05", question: "Acara larian di mana sekumpulan empat orang atlet berganti-ganti berlari membawa baton dipanggil lari ___?", options: ["Jarak Sederhana", "Pecut", "Berhalangan", "Berganti-ganti"], answer: 3 },
+        { id: "PJK_OA06", question: "Alat silinder pendek berongga yang dibawa dan diserahkan dalam acara lari berganti-ganti dipanggil ___?", options: ["Baton", "Kayu", "Papan", "Wisel"], answer: 0 },
+        { id: "PJK_OA07", question: "Zon khas sepanjang 20 meter di dalam balapan larian untuk menyerahkan baton dipanggil zon ___ baton.", options: ["Rehat", "Pertukaran", "Penamat", "Larian"], answer: 1 },
+        { id: "PJK_OA08", question: "Teknik penyerahan baton tanpa pelari penerima melihat ke arah pelari penghantar dipanggil teknik ___ visual?", options: ["Campuran", "Separuh", "Penuh", "Bukan"], answer: 3 },
+        { id: "PJK_OA09", question: "Teknik penyerahan baton di mana pelari penerima melihat pergerakan baton dipanggil teknik ___?", options: ["Visual", "Bukan visual", "Bebas", "Meneka"], answer: 0 },
+        { id: "PJK_OA10", question: "Semasa menamatkan larian di garisan penamat, bahagian anggota badan manakah yang mesti melintasi garisan dahulu?", options: ["Kaki", "Tangan", "Kepala", "Torso"], answer: 3 },
+        { id: "PJK_OA11", question: "Apakah istilah bahasa Melayu bagi bahagian torso badan?", options: ["Dada", "Pinggang", "Punggung", "Lutut"], answer: 0 },
+        { id: "PJK_OA12", question: "Acara lompatan di mana atlet berlari, melonjak dan mendarat sejauh mungkin di dalam kawasan pasir dipanggil lompat ___?", options: ["Tinggi", "Kijang", "Galah", "Jauh"], answer: 3 },
+        { id: "PJK_OA13", question: "Kawasan pendaratan bagi acara lompat jauh mestilah diisi dengan ___ yang bersih.", options: ["Span", "Lumpur", "Batu", "Pasir"], answer: 3 },
+        { id: "PJK_OA14", question: "Papan rata melintang tempat pelari melakukan lonjakan dalam lompat jauh dipanggil papan ___?", options: ["Larian", "Mendarat", "Lonjakan", "Ukuran"], answer: 2 },
+        { id: "PJK_OA15", question: "Jika kaki atlet terpijak melepasi papan lonjakan semasa melompat, lompatan tersebut dikira ___?", options: ["Sah", "Batal", "Diulang", "Berjaya"], answer: 1 },
+        { id: "PJK_OA16", question: "Empat fasa utama dalam lompat jauh ialah fasa penujuan, fasa lonjakan, fasa layangan dan fasa ___?", options: ["Rehat", "Berhenti", "Pendaratan", "Berlari"], answer: 2 },
+        { id: "PJK_OA17", question: "Tujuan fasa penujuan atau lari landas dalam lompat jauh adalah untuk membina ___ larian.", options: ["Kepenatan", "Ketinggian", "Kelajuan", "Kekuatan"], answer: 2 },
+        { id: "PJK_OA18", question: "Lonjakan dalam lompat jauh mestilah dilakukan dengan menggunakan kekuatan ___ kaki.", options: ["Sebelah", "Kedua-dua", "Tiga", "Tiada"], answer: 0 },
+        { id: "PJK_OA19", question: "Semasa fasa pendaratan lompat jauh, kedua-dua belah tangan patut diayun ke ___ untuk mengelakkan badan jatuh ke belakang.", options: ["Bawah", "Sisi", "Atas", "Hadapan"], answer: 3 },
+        { id: "PJK_OA20", question: "Jarak lompat jauh diukur dari kesan pendaratan anggota badan yang paling ___ dengan papan lonjakan.", options: ["Jauh", "Hampir", "Tengah", "Tepi"], answer: 1 },
+        { id: "PJK_OA21", question: "Acara balangan asas menggunakan peluru logam bulat tegar yang diletakkan di pangkal leher dipanggil ___ peluru?", options: ["Baling", "Lempar", "Lontar", "Rejam"], answer: 2 },
+        { id: "PJK_OA22", question: "Teknik menolak peluru dari bahagian bahu dipanggil melontar, adakah kita dibenarkan melemparnya seperti bola?", options: ["Ya", "Boleh jika bola ringan", "Tidak", "Bergantung cara pegang"], answer: 2 },
+        { id: "PJK_OA23", question: "Mengapa perbuatan melempar peluru (throwing action) dilarang dalam acara lontar peluru?", options: ["Terlalu jauh", "Boleh mencederakan sendi siku", "Bukan gaya yang cantik", "Bola akan pecah"], answer: 1 },
+        { id: "PJK_OA24", question: "Kawasan tempat melontar peluru berbentuk sebuah ___ bertanda.", options: ["Segi empat", "Segi tiga", "Bulatan", "Bujur"], answer: 2 },
+        { id: "PJK_OA25", question: "Sebelum melontar, peluru mestilah diletakkan rapat menyentuh bahagian bawah ___?", options: ["Ketiak", "Dagu atau telinga", "Dada", "Siku"], answer: 1 },
+        { id: "PJK_OA26", question: "Peluru yang dilontar mestilah mendarat di dalam kawasan sektor ___ yang dibenarkan.", options: ["Rehat", "Larian", "Pendaratan", "Khas"], answer: 2 },
+        { id: "PJK_OA27", question: "Berat peluru yang digunakan untuk murid sekolah rendah (lelaki bawah 12 tahun) biasanya ialah ___ kilogram.", options: ["Dua", "Tiga", "Empat", "Lima"], answer: 1 },
+        { id: "PJK_OA28", question: "Adakah atlet dibenarkan berjalan keluar dari bahagian hadapan bulatan lontaran selepas selesai melontar peluru?", options: ["Ya", "Tidak", "Bergantung situasi", "Boleh jika juri benarkan"], answer: 1 },
+        { id: "PJK_OA29", question: "Atlet lontar peluru wajib keluar melalui bahagian ___ bulatan selepas lontaran dikira sah.", options: ["Sisi kanan", "Sisi kiri", "Hadapan", "Belakang"], answer: 3 },
+        { id: "PJK_OA30", question: "Larian melepasi pagar penghalang setinggi paras tertentu di atas trek dipanggil acara lari ber___?", options: ["Pagar", "Halangan", "Tiang", "Dinding"], answer: 0 },
+        { id: "PJK_OA31", question: "Ayunan lengan yang kuat bersilang dengan rentak kaki membantu menambah ___ larian pecut.", options: ["Gaya", "Berat", "Kelajuan", "Ketinggian"], answer: 2 },
+        { id: "PJK_OA32", question: "Aktiviti memanaskan badan sebelum acara olahraga bertujuan untuk mengelakkan ___ otot.", options: ["Kecederaan", "Kelembutan", "Kekuatan", "Kepantasan"], answer: 0 },
+        { id: "PJK_OA33", question: "Alat pengukur yang digunakan untuk mengukur jarak lontaran atau lompatan ialah ___?", options: ["Pembaris", "Jangka sudut", "Pita pengukur", "Tali"], answer: 2 },
+        { id: "PJK_OA34", question: "Mendengar tembakan pistol permulaan menguji kepantasan masa ___ atlet.", options: ["Berjalan", "Tindak balas", "Lompatan", "Rehat"], answer: 1 },
+        { id: "PJK_OA35", question: "Lompatan tinggi melepasi palang melintang dengan pendaratan di atas tilam tebal dipanggil lompat ___?", options: ["Jauh", "Tinggi", "Galah", "Kijang"], answer: 1 },
+        { id: "PJK_OA36", question: "Gaya lompat tinggi yang paling popular di mana belakang badan melintasi palang dahulu dipanggil gaya ___ flop?", options: ["Fosbury", "Gunting", "Guling", "Lurus"], answer: 0 },
+        { id: "PJK_OA37", question: "Gaya lompat tinggi yang melompat seperti pergerakan gunting dipanggil gaya ___?", options: ["Pisau", "Lompat sisi", "Gunting", "Tegak"], answer: 2 },
+        { id: "PJK_OA38", question: "Adakah kita dibenarkan memakai kasut biasa yang licin semasa menyertai larian pecut di balapan?", options: ["Ya", "Boleh jika selesa", "Tidak", "Bergantung cuaca"], answer: 2 },
+        { id: "PJK_OA39", question: "Lorong khas tempat pelari berlari di dalam balapan dipanggil ___?", options: ["Laluan jalan", "Jalan raya", "Lorong larian", "Laluan pejalan kaki"], answer: 2 },
+        { id: "PJK_OA40", question: "Pelari yang keluar dari lorong larian sendiri secara sengaja dan mengganggu rakan boleh ___?", options: ["Dipuji", "Disingkirkan", "Dibantu", "Diberi markah"], answer: 1 },
+        { id: "PJK_OA41", question: "Apakah istilah bahasa Inggeris bagi penyingkiran pelari akibat melanggar peraturan?", options: ["Qualified", "Winner", "Disqualified", "Runner-up"], answer: 2 },
+        { id: "PJK_OA42", question: "Acara jalan laju memerlukan sebelah kaki atlet sentiasa ___ dengan tanah pada setiap masa.", options: ["Berjauhan", "Diangkat", "Terbang", "Bersentuhan"], answer: 3 },
+        { id: "PJK_OA43", question: "Daya tahan otot dan ketangkasan merupakan komponen fizikal penting dalam acara ___?", options: ["Catur", "E-sukan", "Olahraga", "Berenang"], answer: 2 },
+        { id: "PJK_OA44", question: "Baton kriket atau sofbol adakah boleh digunakan untuk acara lari berganti-ganti?", options: ["Ya", "Tidak", "Boleh jika terdesak", "Boleh jika ringan"], answer: 1 },
+        { id: "PJK_OA45", question: "Penerima baton yang menjatuhkan baton semasa pertukaran mesti segera ___ semula untuk meneruskan larian.", options: ["Tinggalkan", "Mengambil", "Tendang", "Biar"], answer: 1 },
+        { id: "PJK_OA46", question: "Lari landas yang konsisten membantu atlet melompat dengan ___ yang tepat.", options: ["Sudut", "Bentuk", "Baju", "Kasut"], answer: 0 },
+        { id: "PJK_OA47", question: "Olahraga melatih sifat disiplin diri yang tinggi dan semangat ___ yang kuat.", options: ["Bermusuhan", "Juang", "Cepat putus asa", "Mementingkan diri"], answer: 1 },
+        { id: "PJK_OA48", question: "Orang yang bertanggungjawab mencatat masa larian pelari menggunakan jam randik ialah ___ masa.", options: ["Penjaga", "Pengukur", "Peniup wisil", "Penonton"], answer: 0 },
+        { id: "PJK_OA49", question: "Sebutkan warna garisan penamat balapan standard sekolah?", options: ["Merah", "Biru", "Kuning", "Putih"], answer: 3 },
+        { id: "PJK_OA50", question: "Latihan larian berulang-ulang dengan kepantasan berbeza membantu membina sistem ___ kardiovaskular.", options: ["Anaerobik", "Otot", "Aerobik", "Tulang"], answer: 2 },
     ],
 "permainan_kategori_serangan": [
         {
