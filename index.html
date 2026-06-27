@@ -2066,24 +2066,49 @@ window.showScreen = function(screenId) {
         <h2 class="text-3xl font-black text-purple-800 text-center flex-1 mr-20">PAI Arena 🕌</h2>
     </div>
 
-    <div class="space-y-8">
-        <section class="bg-purple-50 p-6 rounded-2xl border-2 border-purple-200">
-            <h3 class="text-purple-700 font-black uppercase text-lg mb-4">🟣 KATEGORI UTAMA (+2 XP)</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="list-pai-main">
-                <button onclick="initGame('aqidah')" class="bg-white p-4 rounded-xl shadow-sm border border-purple-100 hover:shadow-md hover:border-purple-400 hover:-translate-y-1 transition-all text-left group">
-                    <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">🕌</div>
+    <div class="space-y-6">
+        <section class="bg-green-50 p-6 rounded-2xl border-2 border-green-200">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-green-700 font-black uppercase text-lg">🟢 MUDAH</h3>
+                <span class="bg-green-200 text-green-800 text-xs font-bold px-3 py-1 rounded-full">+1 XP</span>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button onclick="initGame('aqidah')" class="bg-white p-4 rounded-xl shadow-sm border border-green-100 hover:shadow-md hover:border-green-400 hover:-translate-y-1 transition-all text-left group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">RUMI & JAWI</div>
+                    <div class="text-3xl mb-2 mt-2 group-hover:scale-110 transition-transform">🕌</div>
                     <div class="font-bold text-slate-700 text-sm">Aqidah</div>
                 </button>
-                <button onclick="initGame('ibadah')" class="bg-white p-4 rounded-xl shadow-sm border border-purple-100 hover:shadow-md hover:border-purple-400 hover:-translate-y-1 transition-all text-left group">
-                    <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">📿</div>
+            </div>
+        </section>
+
+        <section class="bg-yellow-50 p-6 rounded-2xl border-2 border-yellow-200">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-yellow-700 font-black uppercase text-lg">🟡 SEDERHANA</h3>
+                <span class="bg-yellow-200 text-yellow-800 text-xs font-bold px-3 py-1 rounded-full">+2 XP</span>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button onclick="initGame('ibadah')" class="bg-white p-4 rounded-xl shadow-sm border border-yellow-100 hover:shadow-md hover:border-yellow-400 hover:-translate-y-1 transition-all text-left group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-yellow-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">MIXED</div>
+                    <div class="text-3xl mb-2 mt-2 group-hover:scale-110 transition-transform">📿</div>
                     <div class="font-bold text-slate-700 text-sm">Ibadah</div>
                 </button>
-                <button onclick="initGame('sirah')" class="bg-white p-4 rounded-xl shadow-sm border border-purple-100 hover:shadow-md hover:border-purple-400 hover:-translate-y-1 transition-all text-left group">
-                    <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">📜</div>
+                <button onclick="initGame('sirah')" class="bg-white p-4 rounded-xl shadow-sm border border-yellow-100 hover:shadow-md hover:border-yellow-400 hover:-translate-y-1 transition-all text-left group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-yellow-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">MIXED</div>
+                    <div class="text-3xl mb-2 mt-2 group-hover:scale-110 transition-transform">📜</div>
                     <div class="font-bold text-slate-700 text-sm">Sirah</div>
                 </button>
-                <button onclick="initGame('akhlak')" class="bg-white p-4 rounded-xl shadow-sm border border-purple-100 hover:shadow-md hover:border-purple-400 hover:-translate-y-1 transition-all text-left group">
-                    <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">🤝</div>
+            </div>
+        </section>
+
+        <section class="bg-red-50 p-6 rounded-2xl border-2 border-red-200">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-red-700 font-black uppercase text-lg">🔴 SUKAR</h3>
+                <span class="bg-red-200 text-red-800 text-xs font-bold px-3 py-1 rounded-full">+3 XP</span>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button onclick="initGame('akhlak')" class="bg-white p-4 rounded-xl shadow-sm border border-red-100 hover:shadow-md hover:border-red-400 hover:-translate-y-1 transition-all text-left group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">FULL JAWI</div>
+                    <div class="text-3xl mb-2 mt-2 group-hover:scale-110 transition-transform">🤝</div>
                     <div class="font-bold text-slate-700 text-sm">Akhlak</div>
                 </button>
             </div>
@@ -2099,33 +2124,55 @@ window.showScreen = function(screenId) {
         <h2 class="text-3xl font-black text-emerald-800 text-center flex-1 mr-20">BA Arena 🇸🇦</h2>
     </div>
 
-    <div class="space-y-8">
-        <section class="bg-emerald-50 p-6 rounded-2xl border-2 border-emerald-200">
-            <h3 class="text-emerald-700 font-black uppercase text-lg mb-4">🟢 KATEGORI UTAMA (+2 XP)</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="list-ba-main">
-                <button onclick="initGame('mufrodat')" class="bg-white p-4 rounded-xl shadow-sm border border-emerald-100 hover:shadow-md hover:border-emerald-400 hover:-translate-y-1 transition-all text-left group">
-                    <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">📚</div>
+    <div class="space-y-6">
+        <section class="bg-green-50 p-6 rounded-2xl border-2 border-green-200">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-green-700 font-black uppercase text-lg">🟢 MUDAH</h3>
+                <span class="bg-green-200 text-green-800 text-xs font-bold px-3 py-1 rounded-full">+1 XP</span>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button onclick="initGame('mufrodat')" class="bg-white p-4 rounded-xl shadow-sm border border-green-100 hover:shadow-md hover:border-green-400 hover:-translate-y-1 transition-all text-left group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">RUMI</div>
+                    <div class="text-3xl mb-2 mt-2 group-hover:scale-110 transition-transform">📚</div>
                     <div class="font-bold text-slate-700 text-sm">Mufrodat</div>
                 </button>
-                <button onclick="initGame('qawaid')" class="bg-white p-4 rounded-xl shadow-sm border border-emerald-100 hover:shadow-md hover:border-emerald-400 hover:-translate-y-1 transition-all text-left group">
-                    <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">📝</div>
+                <button onclick="initGame('arqam')" class="bg-white p-4 rounded-xl shadow-sm border border-green-100 hover:shadow-md hover:border-green-400 hover:-translate-y-1 transition-all text-left group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">RUMI</div>
+                    <div class="text-3xl mb-2 mt-2 group-hover:scale-110 transition-transform">🔢</div>
+                    <div class="font-bold text-slate-700 text-sm">Arqam</div>
+                </button>
+            </div>
+        </section>
+
+        <section class="bg-yellow-50 p-6 rounded-2xl border-2 border-yellow-200">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-yellow-700 font-black uppercase text-lg">🟡 SEDERHANA</h3>
+                <span class="bg-yellow-200 text-yellow-800 text-xs font-bold px-3 py-1 rounded-full">+2 XP</span>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button onclick="initGame('qawaid')" class="bg-white p-4 rounded-xl shadow-sm border border-yellow-100 hover:shadow-md hover:border-yellow-400 hover:-translate-y-1 transition-all text-left group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-yellow-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">MIXED</div>
+                    <div class="text-3xl mb-2 mt-2 group-hover:scale-110 transition-transform">📝</div>
                     <div class="font-bold text-slate-700 text-sm">Qawaid</div>
                 </button>
-                <button onclick="initGame('hiwar')" class="bg-white p-4 rounded-xl shadow-sm border border-emerald-100 hover:shadow-md hover:border-emerald-400 hover:-translate-y-1 transition-all text-left group">
-                    <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">💬</div>
+            </div>
+        </section>
+
+        <section class="bg-red-50 p-6 rounded-2xl border-2 border-red-200">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-red-700 font-black uppercase text-lg">🔴 SUKAR</h3>
+                <span class="bg-red-200 text-red-800 text-xs font-bold px-3 py-1 rounded-full">+3 XP</span>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button onclick="initGame('hiwar')" class="bg-white p-4 rounded-xl shadow-sm border border-red-100 hover:shadow-md hover:border-red-400 hover:-translate-y-1 transition-all text-left group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">FULL ARAB</div>
+                    <div class="text-3xl mb-2 mt-2 group-hover:scale-110 transition-transform">💬</div>
                     <div class="font-bold text-slate-700 text-sm">Hiwar</div>
-                </button>
-                <button onclick="initGame('arqam')" class="bg-white p-4 rounded-xl shadow-sm border border-emerald-100 hover:shadow-md hover:border-emerald-400 hover:-translate-y-1 transition-all text-left group">
-                    <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">🔢</div>
-                    <div class="font-bold text-slate-700 text-sm">Arqam</div>
                 </button>
             </div>
         </section>
     </div>
 </div>
-    </div>
-</div>
-
         <script>
             // --- Fungsi Kawalan Modal Subjek ---
             function openSubjectModal() {
