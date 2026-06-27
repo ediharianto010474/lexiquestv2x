@@ -1,324 +1,329 @@
 // data-pai.js - Pangkalan Data Pendidikan Agama Islam LexiQuest V2
 const paiQuestions = {
-    "aqidah": [
+"aqidah": [
         {
             id: "AQ01",
-            question: "روکون إيمان مڠندوڠي براڤ ڤرکارا؟",
+            question: "Rukun Iman mengandungi berapa perkara?",
             options: ["ليم ڤرکارا", "امڤت ڤرکارا", "انم ڤرکارا", "توجوه ڤرکارا"],
             answer: 2
         },
         {
             id: "AQ02",
-            question: "اڤاکه روکون إيمان يڠ ڤرتام؟",
+            question: "Apakah rukun Iman yang pertama?",
             options: ["إيمان کڤد کتاب", "إيمان کڤد الله", "إيمان کڤد رسول", "إيمان کڤد هاري قيامة"],
             answer: 1
         },
         {
             id: "AQ03",
-            question: "ارتي إسلام دري سڬي بهاس اياله ڤاتوه دان ___ .",
+            question: "Erti Islam dari segi bahasa ialah patuh dan ___ .",
             options: ["ملاون", "طاعة", "لاري", "ماراه"],
             answer: 1
         },
         {
             id: "AQ04",
-            question: "براڤاکه بيلڠن صيفت واجب باڬي الله SWT؟",
+            question: "Berapakah bilangan sifat wajib bagi Allah SWT?",
             options: ["٢٥ صيفت", "١٠ صيفت", "٤ صيفت", "٢٠ صيفت"],
             answer: 3
         },
         {
             id: "AQ05",
-            question: "صيفت واجب 'وجود' باڬي الله برارتي ___ .",
+            question: "Sifat wajib 'Wujud' bagi Allah bererti ___ .",
             options: ["اد", "تيدق اد", "سديا", "بينسا"],
             answer: 0
         },
         {
             id: "AQ06",
-            question: "لاون باڬي صيفت وجود اياله 'عدم' يڠ برارتي ___ .",
+            question: "Lawan bagi sifat Wujud ialah 'Adam' yang bererti ___ .",
             options: ["ککل", "ماتي", "تياد", "لمه"],
             answer: 2
         },
         {
             id: "AQ07",
-            question: "صيفت 'قدم' bagi الله برمقصود ___ .",
+            question: "Sifat 'Qidam' bagi Allah bermaksud ___ .",
             options: ["سديا اد", "بهارو", "بربيذا", "بهاڬيا"],
             answer: 0
         },
         {
             id: "AQ08",
-            question: "براڤاکه صيفت مستحيل يڠ wajib دکتاهوءي باڬي الله؟",
+            question: "Berapakah sifat mustahil yang wajib diketahui bagi Allah?",
             options: ["٢٠ صيفت", "٥٠ صيفت", "٣ صيفت", "١٣ صيفت"],
             answer: 0
         },
         {
             id: "AQ09",
-            question: "براڤاکه صيفت هارس باڬي الله SWT؟",
+            question: "Berapakah sifat harus bagi Allah SWT?",
             options: ["دوءا صيفت", "ساتو صيفت", "تيدق اد", "باڽق"],
             answer: 1
         },
         {
             id: "AQ10",
-            question: "نام الله 'الخالق' برارتي مها ___ .",
+            question: "Nama Allah 'Al-Khaliq' bererti Maha ___ .",
             options: ["مڠتاهوءي", "مليهت", "منچيڤتا", "مندڠر"],
             answer: 2
         },
         {
             id: "AQ11",
-            question: "ملائکة دچيڤتاکن اوليه الله درڤد ___ .",
-            options: ["تانه", "اڤي", "أڠين", "نور اوتارا چهاي"],
+            question: "Malaikat diciptakan oleh Allah daripada ___ .",
+            options: ["تانه", "اڤي", "أڠين", "نور اتاو چهاي"],
             answer: 3
         },
         {
             id: "AQ12",
-            question: "براڤاکه بيلڠن ملائکة يڠ wajib دکتاهوءي؟",
+            question: "Berapakah bilangan malaikat yang wajib diketahui?",
             options: ["٢٥ ملائکة", "١٠ ملائکة", "٥ ملائکة", "٥٠ ملائکة"],
             answer: 1
         },
         {
             id: "AQ13",
-            question: "ملائکة يڠ برتوڬس ممباوا وحي اياله ___ .",
+            question: "Malaikat yang bertugas membawa wahyu ialah ___ .",
             options: ["ميکائيل", "إسرافيل", "جبريل", "عزرائيل"],
             answer: 2
         },
         {
             id: "AQ14",
-            question: "ملائکة ميکائيل برتوڬس لنتوق ___ .",
-            options: ["منورونکن حوجن دان رزقي", "منچابوت ڽاوا", "منجاڬ شرڬ", "تيوڤ سڠکاکالا"],
+            question: "Malaikat Mikail bertugas untuk ___ .",
+            options: ["منورونکن هوجن دان رزقي", "منچابوت ڽاوا", "منجاڬ شرڬ", "تيوڤ سڠکاکالا"],
             answer: 0
         },
         {
             id: "AQ15",
-            question: "ملائکة يڠ برتوڬس منچاتت عملن باءيق اياله ___ .",
+            question: "Malaikat yang bertugas mencatat amalan baik ialah ___ .",
             options: ["عتيد", "رقيب", "منکر", "نکير"],
             answer: 1
         },
         {
             id: "AQ16",
-            question: "ملائکة يڠ برتوڬس منچاتت عملن بوروق اياله ___ .",
+            question: "Malaikat yang bertugas mencatat amalan buruk ialah ___ .",
             options: ["رقيب", "رضوان", "مالك", "عتيد"],
             answer: 3
         },
         {
             id: "AQ17",
-            question: "ملائکة إسرافيل برتوڬس اونتوق ___ .",
-            options: ["منچابوت ڽاوا", "منجاڬ نراک", "مسبوتسو تيوڤ سڠکاکالا", "سوءال دالم قبور"],
+            question: "Malaikat Israfil bertugas untuk ___ .",
+            options: ["منچابوت ڽاوا", "منجاڬ نراک", "منييوڤ سڠکاکالا", "منونجوقکن جالن"],
             answer: 2
         },
         {
             id: "AQ18",
-            question: "ملائکة عزرائيل برتوڬس اونتوق ___ .",
+            question: "Malaikat Izrail bertugas untuk ___ .",
             options: ["منچابوت ڽاوا", "ممباوا وحي", "منجاڬ شرڬ", "منورونکن هوجن"],
             answer: 0
         },
         {
             id: "AQ19",
-            question: "ملائکة يڠ برتوڬس منجاڬ شرڬ اياله ___ .",
+            question: "Malaikat yang bertugas menjaga syurga ialah ___ .",
             options: ["مالك", "رضوان", "منکر", "نکير"],
             answer: 1
         },
         {
             id: "AQ20",
-            question: "ملائکة يڠ برتوڬس منجاڬ نراک اياله ___ .",
+            question: "Malaikat yang bertugas menjaga neraka ialah ___ .",
             options: ["رضوان", "جبريل", "مالك", "ميکائيل"],
             answer: 2
         },
         {
             id: "AQ21",
-            question: "براڤاکه بيلڠن کتاب يڠ واجب دکتاهوءي؟",
+            question: "Berapakah bilangan kitab yang wajib diketahui?",
             options: ["امڤت کتاب", "ليم کتاب", "تڬ کتاب", "سڤولوه کتاب"],
             answer: 0
         },
         {
             id: "AQ22",
-            question: "کتاب توراة ديتورونکن کڤد نبي ___ .",
+            question: "Kitab Taurat diturunkan kepada Nabi ___ .",
             options: ["نبي عيسى", "نبي داود", "نبي موسى", "نبي محمد"],
             answer: 2
         },
         {
             id: "AQ23",
-            question: "کتاب زبور ديتورونکن کڤد نبي ___ .",
+            question: "Kitab Zabur diturunkan kepada Nabi ___ .",
             options: ["نبي داود", "نبي ابراهيم", "نبي نوح", "نبي موسى"],
             answer: 0
         },
         {
             id: "AQ24",
-            question: "کتاب إنجيل ديتورونکن کڤd نبي ___ .",
+            question: "Kitab Injil diturunkan kepada Nabi ___ .",
             options: ["نبي محمد", "نبي عيسى", "نبي يوسف", "نبي سليمان"],
             answer: 1
         },
         {
             id: "AQ25",
-            question: "کتاب القرءان ديتورونکن کڤد نبي ___ .",
+            question: "Kitab Al-Quran diturunkan kepada Nabi ___ .",
             options: ["نبي ادم", "نبي موسى", "نبي داود", "نبي محمد"],
             answer: 3
         },
         {
             id: "AQ26",
-            question: "القرءان ديتورونکن دالم بهاس ___ .",
+            question: "Al-Quran diturunkan dalam bahasa ___ .",
             options: ["ملايو", "عرب", "إڠڬريس", "ڤرسيا"],
             answer: 1
         },
         {
             id: "AQ27",
-            question: "براڤاکه بيلڠن رسول يڠ واجب دکتاهوءي؟",
+            question: "Berapakah bilangan rasul yang wajib diketahui?",
             options: ["١٠ رسول", "٢٥ رسول", "٥٠ رسول", "٣١٣ رسول"],
             answer: 1
         },
         {
             id: "AQ28",
-            question: "سياڤاکه رسول يڠ ڤرتام؟",
+            question: "Siapakah rasul yang pertama?",
             options: ["نبي نوح", "نبي ابراهيم", "نبي ادم", "نبي ادريس"],
             answer: 2
         },
         {
             id: "AQ29",
-            question: "سياڤاکه رسول يڠ تراخير؟",
+            question: "Siapakah rasul yang terakhir?",
             options: ["نبي عيسى", "نبي موسى", "نبي محمد صلي الله عليه وسلم", "نبي اسماعيل"],
             answer: 2
         },
         {
             id: "AQ30",
-            question: "براڤاکه صيفت واجب باڬي رسول؟",
+            question: "Berapakah sifat wajib bagi rasul?",
             options: ["امڤت صيفت", "ليم صيفت", "تڬ صيفت", "صيفت٢٠"],
             answer: 0
         },
         {
             id: "AQ31",
-            question: "صيفت واجب 'صديق' باڬي رسول برارتي ___ .",
+            question: "Sifat wajib 'Siddiq' bagi rasul bererti ___ .",
             options: ["جوجور", "بيجقسان", "بنر", "مڽمڤايکن"],
             answer: 2
         },
         {
             id: "AQ32",
-            question: "صيفت واجب 'أمانة' باڬي رسول برارتي ___ .",
+            question: "Sifat wajib 'Amanah' bagi rasul bererti ___ .",
             options: ["دوستا", "دڤرچاياءي / جوجور", "بودوه", "مڽمبوڽيکن"],
             answer: 1
         },
         {
             id: "AQ33",
-            question: "صيفت واجب 'تبليغ' باڬي رسول برارتي ___ .",
+            question: "Sifat wajib 'Tabligh' bagi rasul bererti ___ .",
             options: ["مڽمڤايکن", "بيجقسان", "بنر", "امانة"],
             answer: 0
         },
         {
             id: "AQ34",
-            question: "صيفت واجب 'فطانة' باڬي رسول برارتي ___ .",
+            question: "Sifat wajib 'Fatanah' bagi rasul bererti ___ .",
             options: ["لمه", "دوستا", "بيجقسان", "جوجور"],
             answer: 2
         },
         {
             id: "AQ35",
-            question: "لاون باڬي صيفت صديق اياله 'کذب' يڠ برارتي ___ .",
+            question: "Lawan bagi sifat Siddiq ialah 'Kizib' yang bererti ___ .",
             options: ["خيانة", "دوستا / بوهوڠ", "بودوه", "مڽمبوڽيکن"],
             answer: 1
         },
         {
             id: "AQ36",
-            question: "لاون باڬي صيفت أمانة اياله 'خيانة' يڠ برارتي ___ .",
+            question: "Lawan bagi sifat Amanah ialah 'Khianat' yang bererti ___ .",
             options: ["تيدق جوجور", "بنر", "بيجق", "طاعة"],
             answer: 0
         },
         {
             id: "AQ37",
-            question: "لاون باڬي صيفت تبليغ اياله 'کتمان' يڠ برارتي ___ .",
+            question: "Lawan bagi sifat Tabligh ialah 'Kitman' yang bererti ___ .",
             options: ["مڽمبوڽيکن", "مڽمڤايکن", "بوهوڠ", "بودوه"],
             answer: 0
         },
         {
             id: "AQ38",
-            question: "لاون باڬي صيفت فطانة اياله 'بلادة' يڠ برارتي ___ .",
+            question: "Lawan bagi sifat Fatanah ialah 'Baladah' yang bererti ___ .",
             options: ["بيجقسان", "بنر", "بودوه", "امانة"],
             answer: 2
         },
         {
             id: "AQ39",
-            question: "براڤاکه بيلڠن رسول يڠ منداڤت ڬلرن اولوا العزم؟",
+            question: "Berapakah bilangan rasul yang mendapat gelaran Ulul Azmi?",
             options: ["تڬ رسول", "امڤت رسول", "ليم رسول", "توجوه رسول"],
             answer: 2
         },
         {
             id: "AQ40",
-            question: "اڤاکه نام لاءين باڬي هاري قيامة؟",
+            question: "Apakah nama lain bagi hari kiamat?",
             options: ["يوم الدين", "يوم الجمعة", "يوم الاثنين", "يوم العيد"],
             answer: 0
         },
         {
             id: "AQ41",
-            question: "إيمان کڤد قضاء دان قدر اياله روکون إيمان يڠ ک- ___ .",
+            question: "Beriman kepada Qada' dan Qadar ialah rukun iman yang ke- ___ .",
             options: ["امڤت", "ليم", "انم", "تڬ"],
             answer: 2
         },
         {
             id: "AQ42",
-            question: "مقصود 'قضاء' اياله کتتڤن الله سبحانه وتعالى سجق ___ .",
+            question: "Maksud 'Qada'' ialah ketetapan Allah SWT sejak ___ .",
             options: ["ازلي", "سماليم", "هاري اين", "تامت دونيا"],
             answer: 0
         },
         {
             id: "AQ43",
-            question: "مقصود 'قدر' اياله ___ کتتڤن يڠ تله دتتڤکن اوليه الله .",
+            question: "Maksud 'Qadar' ialah ___ ketetapan yang telah ditetapkan oleh Allah.",
             options: ["ڤلقساناءن", "ڤمبطالن", "ڤراوبهن", "ڤراراڠن"],
             answer: 0
         },
         {
             id: "AQ44",
-            question: "صيفت واجب 'بقاء' باڬي الله برارتي ___ .",
+            question: "Sifat wajib 'Baqa'' bagi Allah bererti ___ .",
             options: ["بينسا", "بهارو", "ککل", "اد"],
             answer: 2
         },
         {
             id: "AQ45",
-            question: "صيفت 'مخالفته للحوادث' برارتي الله ___ دڠن يڠ بهارو.",
+            question: "Sifat 'Mukhalafatuhu Lilhawadith' bererti Allah ___ dengan yang baharu.",
             options: ["سام", "بربيذا", "همڤير", "سنتياس"],
             answer: 1
         },
         {
             id: "AQ46",
-            question: "صيفت واجب 'وحدانية' باڬي الله برارتي الله سبحانه وتعالى اءو اياله ___ .",
+            question: "Sifat wajib 'Wahdaniyat' bagi Allah bererti Allah SWT itu Maha ___ .",
             options: ["اسا / ساتو", "باڽق", "دوءا", "لمه"],
             answer: 0
         },
         {
             id: "AQ47",
-            question: "کسن برإيمان کڤd الله اياله سنتياس ___ ڤرينتهڽا.",
+            question: "Kesan beriman kepada Allah ialah sentiasa ___ perintah-Nya.",
             options: ["منيڠڬلکن", "ملاون", "ماتوهي / طاعة", "ملوڤاکن"],
             answer: 2
         },
         {
             id: "AQ48",
-            question: "عملن مڽوتوکن الله سبحانه وتعالى دڠن يڠ لاءين دکنلي كبهاس ___ .",
+            question: "Amalan menyekutukan Allah SWT dengan yang lain dikenali sebagai ___ .",
             options: ["شيريك", "نفاق", "فاسق", "کفور"],
             answer: 0
         },
         {
             id: "AQ49",
-            question: "دوسا بسر يڠ تيدق اكن دأمڤونکن تانڤا توبة نصوحا اياله دوسا ___ .",
+            question: "Dosa besar yang tidak akan diampunkan tanpa taubat nasuha ialah dosa ___ .",
             options: ["منچوري", "شيريك", "بوهوڠ", "ماري ماراه"],
             answer: 1
         },
         {
             id: "AQ50",
-            question: "أسماء الحسنى برارتي نام٢ الله سبحانه وتعالى يڠ ___ .",
+            question: "Asmaul Husna bererti nama-nama Allah SWT yang ___ .",
             options: ["بوروق", "اينده دان باءيق", "بياسا", "سديريجت"],
             answer: 1
         }
     ],
+
+    // ==========================================
+    // 🟡 KATEGORI 2: IBADAH (MEDIUM - PvP Arena)
+    // Format: Ganjil (Sepenuhnya RUMI) | Genap (Sepenuhnya JAWI)
+    // ==========================================
     "ibadah": [
         {
             id: "IB01",
-            question: "روکون إسلام مڠندوڠي براڤ ڤرکارا؟",
-            options: ["امڤت ڤرکارا", "ليم ڤرکارا", "انم ڤرکارا", "توجوه ڤرکارا"],
+            question: "Rukun Islam mengandungi berapa perkara?",
+            options: ["Empat perkara", "Lima perkara", "Enam perkara", "Tujuh perkara"],
             answer: 1
         },
         {
             id: "IB02",
             question: "اڤاکه روکون إسلام يڠ ڤرتام؟",
-            options: ["مڠوچڤ دوا کلمة شهادة", "منوperiodکن صلاة", "برڤواسا", "منونايرکن زکوة"],
+            options: ["مڠوچڤ دوا کلمة شهادة", "منونايکن صلاة", "برڤواسا", "منونايکن زکوة"],
             answer: 0
         },
         {
             id: "IB03",
-            question: "براڤاکه بيلڠن صلاة فرض دالم سهاري سمالم؟",
-            options: ["تڬ وقتو", "امڤت وقتو", "ليم وقتو", "انم وقتو"],
+            question: "Berapakah bilangan solat fardu dalam sehari semalam?",
+            options: ["Tiga waktu", "Empat waktu", "Lima waktu", "Enam waktu"],
             answer: 2
         },
         {
@@ -329,8 +334,8 @@ const paiQuestions = {
         },
         {
             id: "IB05",
-            question: "براڤاکه بيلڠن رکعة باڬي صلاة مغرب؟",
-            options: ["دوا رکعة", "تڬ رکعة", "امڤت رکعة", "ليم رکعة"],
+            question: "Berapakah bilangan rakaat bagi solat Maghrib?",
+            options: ["Dua rakaat", "Tiga rakaat", "Empat rakaat", "Lima rakaat"],
             answer: 1
         },
         {
@@ -341,32 +346,32 @@ const paiQuestions = {
         },
         {
             id: "IB07",
-            question: "توجوان اوتام کيت بردستور دان بروضوء اياله اونتوق ___ .",
-            options: ["مڠهيلڠکن هادست", "امبرسيهکن باجو", "مڽڬرکن بادن", "منونجوق-نونجوق"],
+            question: "Tujuan utama kita mandi hadas dan berwuduk ialah untuk ___ .",
+            options: ["Menghilangkan hadas", "Membersihkan baju", "Menyegarkan badan", "Menunjuk-nunjuk"],
             answer: 0
         },
         {
             id: "IB08",
-            question: "اڤاکه ممرلواکن أءير مطلق اونتوق بروضوء؟",
-            options: ["أءير سوڠاي", "أءير تابه", "أءير کلاڤ", "أءير کوڤي"],
+            question: "اڤاکه يڠ دڤرلوکن اونتوق بروضوء؟",
+            options: ["أءير مطلق", "أءير تابه", "أءير کلاڤ", "أءير کوڤي"],
             answer: 0
         },
         {
             id: "IB09",
-            question: "أءير يڠ برچمڤور دڠن بندا نجس دکنلي سباڬاي ___ .",
-            options: ["أءير مطلق", "أءير مستعمل", "أءير متنجس", "أءير مشمس"],
+            question: "Air yang bercampur dengan najis dikenali sebagai ___ .",
+            options: ["Air mutlak", "Air musta'mal", "Air mutanajjis", "Air musyammas"],
             answer: 2
         },
         {
             id: "IB10",
-            question: "براڤاکه روکون وضوء يڠ واجب دلاکوکن؟",
+            question: "براڤاکه روکون وضوء يڠ wajib دلاکوکن؟",
             options: ["امڤت روکون", "ليم روکون", "انم روکون", "توجوه روکون"],
             answer: 2
         },
         {
             id: "IB11",
-            question: "ممباسوه تڠن هيڠڬ کو چوڤوڠ سيکو ترماسوق دالم ___ وضوء.",
-            options: ["روکون", "سنة", "مکروه", "حرام"],
+            question: "Membasuh tangan hingga ke siku termasuk dalam ___ wuduk.",
+            options: ["Rukun", "Sunat", "Makruh", "Haram"],
             answer: 0
         },
         {
@@ -377,20 +382,20 @@ const paiQuestions = {
         },
         {
             id: "IB13",
-            question: "اڤاکه ڤرکارا يڠ ممبطالکن وضوء؟",
-            options: ["برچاکڤ", "مکان", "کلوار سسواتو دري دوبور/قبول", "تيدور سچارا دودوق"],
+            question: "Apakah perkara yang membatalkan wuduk?",
+            options: ["Bercakap", "Makan", "Keluar sesuatu dari dubur/qubul", "Tidur secara duduk tetap"],
             answer: 2
         },
         {
             id: "IB14",
-            question: "الأن چست کلوار ڤولق يڠ مڽرتاءي صلاة دسبوت ___ .",
+            question: "لاءوڠن اونتوق مڽرو اومت إسلام منونايکن صلاة دسبوت ___ .",
             options: ["أذان", "إقامة", "ذکر", "تکبير"],
             answer: 0
         },
         {
             id: "IB15",
-            question: "حکوم ملاءوڠکن أذان باڬي صلاة فرض اياله ___ .",
-            options: ["سنة مؤکد", "فرض عين", "فرض کفاية", "هارس"],
+            question: "Hukum melaungkan azan bagi solat fardu ialah ___ .",
+            options: ["Sunat muakkad", "Fardu ain", "Fardu kifayah", "Harus"],
             answer: 2
         },
         {
@@ -401,20 +406,20 @@ const paiQuestions = {
         },
         {
             id: "IB17",
-            question: "اڤاکه علامة ماسوقڽ وقتو صلاة صبح؟",
-            options: ["تربيت فجر صادق", "تڠڬلم matahari", "ماتهاري داتس کڤالا", "تربيت ماتهاري"],
+            question: "Apakah tanda masuknya waktu solat Subuh?",
+            options: ["Terbit fajar sadiq", "Tenggelam matahari", "Matahari di atas kepala", "Terbit matahari"],
             answer: 0
         },
         {
             id: "IB18",
-            question: "روکون صلاة ترهادڤ بهاڬين تيندقن باچاءن دسبوت روکون ___ .",
+            question: "روکون صلاة يڠ مليبتکن باچاءن دسبوت روکون ___ .",
             options: ["قولي (باچاءن)", "فعلي (ڤربواتن)", "قلبي (هاتي)", "صوري"],
             answer: 0
         },
         {
             id: "IB19",
-            question: "روکون صلاة ترهادڤ ڤربواتن بادن دسبوت روکون ___ .",
-            options: ["قولي", "فعلي (ڤربواتن)", "قلبي", "معنوي"],
+            question: "Rukun solat yang melibatkan pergerakan anggota badan disebut rukun ___ .",
+            options: ["Qauli (Bacaan)", "Fi'li (Perbuatan)", "Qalbi (Hati)", "Maknawi"],
             answer: 1
         },
         {
@@ -425,8 +430,8 @@ const paiQuestions = {
         },
         {
             id: "IB21",
-            question: "براڤاکه بيلڠن روکون صلاة کسمووهنڽا؟",
-            options: ["١٠ روکون", "١٣ روکون", "١٥ روکون", "٢٠ روکون"],
+            question: "Berapakah bilangan rukun solat kesemuanya?",
+            options: ["10 rukun", "13 rukun", "15 rukun", "20 rukun"],
             answer: 1
         },
         {
@@ -437,8 +442,8 @@ const paiQuestions = {
         },
         {
             id: "IB23",
-            question: "تونينيڠ (توقف سبنتر) سماس رکوع دان سجود دسبوت ___ .",
-            options: ["طمأنينة", "جلسه", "اعتدا", "قنوت"],
+            question: "Berhenti seketika (tenang) semasa rukuk dan sujud disebut ___ .",
+            options: ["Tamninah", "Jalsah", "Iktidal", "Qunut"],
             answer: 0
         },
         {
@@ -449,8 +454,8 @@ const paiQuestions = {
         },
         {
             id: "IB25",
-            question: "برڤرکتان يڠ سڠاج دالم صلاة بوليه ___ .",
-            options: ["ممبطالکن صلاة", "منمبهکن ڤاهالا", "منمبهکن رکعة", "سنة"],
+            question: "Bercakap dengan sengaja semasa solat boleh ___ .",
+            options: ["Membatalkan solat", "Menambahkan pahala", "Menambahkan rakaat", "Dimaafkan"],
             answer: 0
         },
         {
@@ -461,56 +466,56 @@ const paiQuestions = {
         },
         {
             id: "IB27",
-            question: "صلاة برجميعه ممڤوڽاءي کليبيهن ___ درجات بربنديڠ صلاة سأورڠ ديري.",
-            options: ["١٠ درجات", "١٧ درجات", "٢٧ درجات", "٥٠ درجات"],
+            question: "Solat berjemaah mempunyai kelebihan ___ darjat berbanding solat bersendirian.",
+            options: ["10 darjat", "17 darjat", "27 darjat", "50 darjat"],
             answer: 2
         },
         {
             id: "IB28",
-            question: "اورڠ يڠ مڠمور ايمين دالم صلاة برجميعه دسبوت ___ .",
+            question: "اورڠ يڠ مڠتواءي صلاة برجميعه دسبوت ___ .",
             options: ["امام", "مأموم", "بلال", "قاري"],
             answer: 0
         },
         {
             id: "IB29",
-            question: "اورڠ يڠ مڠيکوت امام دالم صلاة برجميعه دسبوت ___ .",
-            options: ["مکي", "مأموم", "والي", "مؤذن"],
+            question: "Orang yang mengikut imam dalam solat berjemaah disebut ___ .",
+            options: ["Wali", "Makmum", "Khatib", "Muazin"],
             answer: 1
         },
         {
             id: "IB30",
-            question: "مأموم يڠ تلمبت دان تيدق دانت مڠيکوت باچاءن الفاتحة امام دسبوت ___ .",
+            question: "مأموم يڠ ترلمبت دان تيدق سمڤت ممباچ الفاتحة برسام امام دسبوت ___ .",
             options: ["مأموم موافق", "مأموم مسبوق", "مأموم مسافر", "مأموم مريض"],
             answer: 1
         },
         {
             id: "IB31",
-            question: "صلاة دوا رکعة يڠ دلاکوکن ڤد هاري راي عيد الفطري حکومڽا ___ .",
-            options: ["واجب", "سنة مؤکد", "هارس", "فرض کفاية"],
+            question: "Solat dua rakaat yang dilakukan pada pagi Hari Raya Aidilfitri hukumnya ___ .",
+            options: ["Wajib", "Sunat Muakkad", "Harus", "Fardu Kifayah"],
             answer: 1
         },
         {
             id: "IB32",
-            question: "براڤاکه بيلڠن خطبة باڬي صلاة هاري راي دان صلاة جعة؟",
+            question: "براڤاکه بيلڠن خطبة باڬي صلاة هاري راي دان صلاة جمعة؟",
             options: ["ساتو خطبة", "دوا خطبة", "تڬ خطبة", "تياد خطبة"],
             answer: 1
         },
         {
             id: "IB33",
-            question: "صلاة فرض جمعة دلاکوکن ڤد هاري جمعة باڬي کاوم ___ .",
-            options: ["وانيتا", "للاکي", "کانق٢", "مسافر وانيتا"],
+            question: "Solat fardu Jumaat diwajibkan ke atas kaum ___ .",
+            options: ["Wanita", "Lelaki", "Kanak-kanak", "Musafir wanita"],
             answer: 1
         },
         {
             id: "IB34",
-            question: "منجاموقکن دوا صلاة فرض دالم ساتو وقتو دسبوت صلاة ___ .",
+            question: "مڠهيمڤونکن دوا صلاة فرض دالم ساتو وقتو دسبوت صلاة ___ .",
             options: ["قصر", "جمع", "وتر", "تراويح"],
             answer: 1
         },
         {
             id: "IB35",
-            question: "مڠورڠکن رکعة صلاة فرض درڤد امڤت منجادي دوا رکعة دسبوت ___ .",
-            options: ["جمع", "قصر", "سجود سهوي", "تيمم"],
+            question: "Mengurangkan rakaat solat fardu daripada empat menjadi dua rakaat disebut ___ .",
+            options: ["Jamak", "Qasar", "Sujud Sahwi", "Tayamum"],
             answer: 1
         },
         {
@@ -521,20 +526,20 @@ const paiQuestions = {
         },
         {
             id: "IB37",
-            question: "حکوم منونايرکن عبادة ڤواسا دبلن رمضان اياله ___ .",
-            options: ["سنة", "فرض عين", "فرض کفاية", "هارس"],
+            question: "Hukum menunaikan ibadah puasa di bulan Ramadan ialah ___ .",
+            options: ["Sunat", "Fardu Ain", "Fardu Kifayah", "Harus"],
             answer: 1
         },
         {
             id: "IB38",
-            question: "براتور مکان سبلوم ماسوق وقتو صبح دسبوت ___ .",
-            options: ["بربکال", "برصحور", "افتطار", "تراويح"],
+            question: "بڠون مکان سبلوم ماسوق وقتو صبح دسبوت ___ .",
+            options: ["بربکال", "برسحور", "إفطار", "تراويح"],
             answer: 1
         },
         {
             id: "IB39",
-            question: "مکان دان مينوم دڠن سڠاج بوليه ___ ڤواسا.",
-            options: ["ممبطالکن", "مڠصحکن", "منمبه ڤاهالا", "ميوتوکن"],
+            question: "Makan dan minum dengan sengaja pada siang hari boleh ___ puasa.",
+            options: ["Membatalkan", "Mengabsahkan", "Menambah pahala", "Meneruskan"],
             answer: 0
         },
         {
@@ -545,20 +550,20 @@ const paiQuestions = {
         },
         {
             id: "IB41",
-            question: "مڠلوارکن هرتا ترتنتو کڤد اسناف يڠ لایق دسبوت ___ .",
-            options: ["صدقة", "زکوة", "وقاف", "هدية"],
+            question: "Mengeluarkan harta tertentu kepada asnaf yang layak disebut ___ .",
+            options: ["Sedekah", "Zakat", "Wakaf", "Hadiah"],
             answer: 1
         },
         {
             id: "IB42",
             question: "زکوة يڠ wajib دکلوارکن سبلوم صلاة عيد الفطري اياله زکوة ___ .",
-            options: ["هرتا", "Fitrah (فطرة)", "امس", "ڤرنياڬاءن"],
+            options: ["هرتا", "فطرة (Fitrah)", "امس", "ڤرنياڬاءن"],
             answer: 1
         },
         {
             id: "IB43",
-            question: "براڤاکه بيلڠن ڬولوڠن (اسناف) يڠ لایق منريما زکوة؟",
-            options: ["ليم ڬولوڠن", "انم ڬولوڠن", "توجوه ڬولوڠن", "لڤن ڬولوڠن"],
+            question: "Berapakah bilangan golongan (asnaf) yang layak menerima zakat?",
+            options: ["Lima golongan", "Enam golongan", "Tujuh golongan", "Lapan golongan"],
             answer: 3
         },
         {
@@ -569,8 +574,8 @@ const paiQuestions = {
         },
         {
             id: "IB45",
-            question: "مڠليليڠي کعبة سوباڽق توجوه کالي دسبوت ___ .",
-            options: ["سعي", "طواف", "وقوف", "تحلل"],
+            question: "Mengelilingi Kaabah sebanyak tujuh kali pusingan disebut ___ .",
+            options: ["Sa'i", "Tawaf", "Wukuf", "Tahallul"],
             answer: 1
         },
         {
@@ -581,595 +586,601 @@ const paiQuestions = {
         },
         {
             id: "IB47",
-            question: "براد دڤادڠ عرفة ڤد ٩ ذوالحجة دسبوت ___ .",
-            options: ["وقوف", "تحلل", "إحرام", "طواف"],
+            question: "Berada di padang Arafah pada 9 Zulhijjah disebut ___ .",
+            options: ["Wukuf", "Tahallul", "Ihram", "Tawaf"],
             answer: 0
         },
         {
             id: "IB48",
-            question: "برچوکر اتاو مڠونتيڠ رامبوت سبلوم سليسائي حج دسبوت ___ .",
+            question: "برچوکور اتاو مڠڬونتيڠ رامبوت سبلوم سليسائي حج دسبوت ___ .",
             options: ["تحلل", "سعي", "وقوف", "رمي"],
             answer: 0
         },
         {
             id: "IB49",
-            question: "مڽومبليه بيناتڠ ترناري سباڬاي تندا شکور کڤد الله دسمڤيڠ هاري راي قربان دسبوت ___ .",
-            options: ["عقيقة", "قربان", "صدقة", "وليمة"],
+            question: "Menyembelih haiwan ternakan sebagai tanda syukur sempena Hari Raya Haji disebut ___ .",
+            options: ["Akikah", "Korban", "Sedekah", "Walimah"],
             answer: 1
         },
         {
             id: "IB50",
-            question: "مڽومبليه بيناتڠ ترناري سسبنا جنيس سيمڤنا کلاهيرن باي دسبوت ___ .",
+            question: "مڽمبليه بيناتڠ ترنقن سيمڤنا کلاهيرن باي دسبوت ___ .",
             options: ["قربان", "عقيقة", "نذر", "هدية"],
             answer: 1
         }
     ],
-    "sirah": [
+
+"sirah": [
         {
             id: "SR01",
-            question: "دکوت مناکاه نبي محمد صلي الله عليه وسلم دلاهرکن؟",
-            options: ["مدينة", "مکه", "طائف", "شام"],
-            answer: 1
+            question: "Siapakah nama bapa Nabi Muhammad SAW?",
+            options: ["Abdullah", "Abu Talib", "Abdul Muttalib", "Abu Lahab"],
+            answer: 0
         },
         {
             id: "SR02",
-            question: "اڤاکه ڬلرن يڠ دبريري اوليه مڠتاهوءي قريش کڤد نبي محمد کران کجوجورن بڬيندا؟",
-            options: ["الصديق", "الأمين", "الفاروق", "ذوالنورين"],
-            answer: 1
+            question: "سياڤاکه ايبو نبي محمد صلي الله عليه وسلم؟",
+            options: ["امينة", "خديجة", "عائشة", "حليمة"],
+            answer: 0
         },
         {
             id: "SR03",
-            question: "بيلاراکه تاريخ کلاهيرن نبي Muhammad SAW؟",
-            options: ["١٢ ربيع الأول", "١٠ محرم", "١٧ رمضان", "١ Syawal"],
+            question: "Di manakah Nabi Muhammad SAW dilahirkan?",
+            options: ["Makkah", "Madinah", "Taif", "Syam"],
             answer: 0
         },
         {
             id: "SR04",
-            question: "نبي محمد صلي الله عليه وسلم دلاهرکن ڤد تاهون ___ .",
-            options: ["تاهون ليمو", "تاهون ڬاجه", "تاهون أڠين", "تاهون کوده"],
+            question: "ڤد تاهون اڤاکه نبي محمد دلاهيرکن؟",
+            options: ["تاهون هجره", "تاهون ڬاجه", "تاهون ايكن", "تاهون ايبو"],
             answer: 1
         },
         {
             id: "SR05",
-            question: "سياڤاکه نام باڤ نبي محمد صلي الله عليه وسلم؟",
-            options: ["ابو طالب", "عبد المطلب", "عبد الله", "ابو لهب"],
-            answer: 2
+            question: "Berapakah tarikh kelahiran Nabi Muhammad SAW?",
+            options: ["10 Muharam", "12 Rabiulawal", "27 Rejab", "1 Syawal"],
+            answer: 1
         },
         {
             id: "SR06",
-            question: "سياڤاکه نام ايبو نبي محمد صلي الله عليه وسلم؟",
-            options: ["أمنة بنت وهب", "خديجة بنت خويلد", "فاطمة بنت اسد", "حليمة السعدية"],
-            answer: 0
+            question: "سياڤاکه وانيتا ڤرتام يڠ مڽوسوکن نبي محمد؟",
+            options: ["خديجة", "حليمة السعدية", "ثويبة", "فاطمة"],
+            answer: 2
         },
         {
             id: "SR07",
-            question: "سياڤاکه نام داتوق نبي محمد يڠ مڠمبل عليه تڠڬوڠجاواب منجاڬ بڬيندا سلڤس ايبوڽا وافة؟",
-            options: ["ابو طالب", "عبد المطلب", "حمزة", "عباس"],
-            answer: 1
+            question: "Siapakah nama ibu susuan Nabi Muhammad SAW yang memelihara Baginda di perkampungan Bani Saad?",
+            options: ["Aminah", "Thuwaibah", "Halimah As-Sa'diah", "Ummu Aiman"],
+            answer: 2
         },
         {
             id: "SR08",
-            question: "سياڤاکه ايبو سوسوان نبي محمد يڠ ڤاليڠ لاما منجاڬ بڬيندا دڤدومن دوقون؟",
-            options: ["ثويبة الأسلمية", "حليمة السعدية", "ام اءيمن", "فاطمة"],
-            answer: 1
-        },
-        {
-            id: "SR09",
-            question: "براڤاکه عمور نبي محمد سماس ايبو بڬيندا، أمنة، وافة دالأبواء؟",
+            question: "براڤاکه عمور نبي محمد کتيک ايبوڽ وفاة (منيڠڬل دونيا)؟",
             options: ["٤ تاهون", "٦ تاهون", "٨ تاهون", "١٠ تاهون"],
             answer: 1
         },
         {
+            id: "SR09",
+            question: "Siapakah datuk yang memelihara Nabi Muhammad SAW selepas ibunya meninggal dunia?",
+            options: ["Abu Talib", "Abdul Muttalib", "Abu Lahab", "Abu Jahal"],
+            answer: 1
+        },
+        {
             id: "SR10",
-            question: "براڤاکه عمور نبي محمد سماس داتوق بڬيندا، عبد المطلب، وافة؟",
-            options: ["٦ تاهون", "٨ تاهون", "١٢ تاهون", "٢٥ تاهون"],
+            question: "براڤاکه عمور نبي محمد کتيک داتوقڽ منيڠڬل دونيا؟",
+            options: ["٦ تاهون", "٨ تاهون", "١٠ تاهون", "١٢ تاهون"],
             answer: 1
         },
         {
             id: "SR11",
-            question: "سياڤاکه نام باڤ ساودارا يڠ منجاڬ نبي محمد سلڤس وافة داتوق بڬيندا؟",
-            options: ["ابو لهب", "ابو طالب", "حمزة", "العباس"],
-            answer: 1
-        },
-        {
-            id: "SR12",
-            question: "اڤاکه ڤکرجاءن نبي محمد سماس موده دان تيڠڬل برسام باڤ ساودارا بڬيندا؟",
-            options: ["مڠمبالا کامبيڠ دان برنياڬا", "منوجو", "ممليهارا اءيکن", "تاني"],
+            question: "Siapakah bapa saudara yang memelihara Nabi Muhammad SAW selepas datuknya meninggal dunia?",
+            options: ["Abu Talib", "Hamzah", "Abbas", "Abu Lahab"],
             answer: 0
         },
         {
-            id: "SR13",
-            question: "سياڤاکه نام ايسستري ڤرتام نبي محمد صلي الله عليه وسلم؟",
-            options: ["عائشة بنت ابي بکر", "خديجة بنت خويلد", "حفصة بنت عمر", "زينب"],
+            id: "SR12",
+            question: "اڤاکه ڤکرجاءن نبي محمد سماس رماج اونتوق ممبنتو باڤ ساوداراڽ؟",
+            options: ["ڤتاني", "ڤڠمبالا کمبيڠ", "نلاين", "تکراڠ کايو"],
             answer: 1
         },
         {
+            id: "SR13",
+            question: "Ke manakah Nabi Muhammad SAW pergi untuk berniaga membawa barang dagangan Khadijah?",
+            options: ["Yaman", "Taif", "Syam", "Habsyah"],
+            answer: 2
+        },
+        {
             id: "SR14",
-            question: "براڤاکه عمور نبي محمد سماس برکهوين دڠن سيتي خديجة؟",
-            options: ["٢٠ تاهون", "٢٥ تاهون", "٣٠ تاهون", "٤٠ تاهون"],
+            question: "اڤاکه ڬلرن يڠ دبريکن کڤد نبي محمد کران کجوجورنڽ؟",
+            options: ["الفاروق", "الأمين", "الصديق", "أسد الله"],
             answer: 1
         },
         {
             id: "SR15",
-            question: "براڤاکه عمور سيتي خديجة سماس برکهوين دڠن نبي محمد؟",
-            options: ["٢٥ تاهون", "٣٠ تاهون", "٣٥ تاهون", "٤٠ تاهون"],
+            question: "Siapakah isteri pertama Nabi Muhammad SAW?",
+            options: ["Aisyah", "Saudah", "Hafsah", "Khadijah"],
             answer: 3
         },
         {
             id: "SR16",
-            question: "دکوت مناکاه نبي محمد منريما وحي يڠ ڤرتام؟",
-            options: ["ڬوا ثور", "ڬوا حراء", "مسجد الحرام", "بوکيت صفا"],
+            question: "براڤاکه عمور نبي محمد کتيک برکهوين دڠن خديجة؟",
+            options: ["٢٠ تاهون", "٢٥ تاهون", "٣٠ تاهون", "٤٠ تاهون"],
             answer: 1
         },
         {
             id: "SR17",
-            question: "براڤاکه عمور نبي محمد صلي الله عليه وسلم سماس دلقبتکن منجادي رسول؟",
-            options: ["٢٥ تاهون", "٣٠ تاهون", "٤٠ تاهون", "٦٣ تاهون"],
-            answer: 2
+            question: "Di manakah Nabi Muhammad SAW menerima wahyu yang pertama?",
+            options: ["Gua Hira'", "Gua Thur", "Bukit Safa", "Bukit Marwah"],
+            answer: 0
         },
         {
             id: "SR18",
-            question: "اڤاکه سورة ڤرتام يڠ ديتورونکن اوليه الله کڤد نبي محمد؟",
-            options: ["سورة الفاتحة", "سورة العلق", "سورة الإخلاص", "سورة الکوثر"],
-            answer: 1
+            question: "اڤاکه سورة ڤرتام يڠ دتورونکن کڤد نبي محمد؟",
+            options: ["سورة الفاتحة", "سورة الإخلاص", "سورة العلق", "سورة البقرة"],
+            answer: 2
         },
         {
             id: "SR19",
-            question: "سياڤاکه وانيتا ڤرتام يڠ مملوق إسلام؟",
-            options: ["عائشة", "سيتي خديجة", "فاطمة", "ام سلمه"],
-            answer: 1
+            question: "Berapakah umur Nabi Muhammad SAW ketika dilantik menjadi Rasul?",
+            options: ["25 tahun", "30 tahun", "35 tahun", "40 tahun"],
+            answer: 3
         },
         {
             id: "SR20",
-            question: "سياڤاکه للاکي ديواسا ڤرتام يڠ مملوق إسلام؟",
-            options: ["عمر بن الخطاب", "ابو بکر الصديق", "عثمان بن عفان", "علي بن ابي طالب"],
-            answer: 1
-        },
-        {
-            id: "SR21",
-            question: "سياڤاکه کانق٢ ڤرتام يڠ مملوق إسلام؟",
-            options: ["زيد بن حارثة", "علي بن ابي طالب", "عبد الله بن عباس", "حسن بن علي"],
-            answer: 1
-        },
-        {
-            id: "SR22",
-            question: "سياڤاکe همبا ڤرتام يڠ مملوق إسلام؟",
-            options: ["بلال بن رباح", "زيد بن حارثة", "ياسر", "عمار"],
-            answer: 1
-        },
-        {
-            id: "SR23",
-            question: "براڤ تاهونکه نبي محمد منجالنکن دعوه سچارا رهسيا؟",
+            question: "براڤ تاهونکه نبي محمد بردعوه سچارا رهسيا؟",
             options: ["٢ تاهون", "٣ تاهون", "٥ تاهون", "١٠ تاهون"],
             answer: 1
         },
         {
-            id: "SR24",
-            question: "دکوت مناکاه مرکز ڤروندوڠن دعوه سچارا رهسيا دجالنکن؟",
-            options: ["رومه ارقم بن ابي الارقم", "رومه ابو بکر", "ڬوا حراء", "دار الندوة"],
+            id: "SR21",
+            question: "Di manakah pusat dakwah rahsia pada awal Islam?",
+            options: ["Rumah Abu Bakar", "Rumah Khadijah", "Rumah Al-Arqam", "Rumah Abu Talib"],
+            answer: 2
+        },
+        {
+            id: "SR22",
+            question: "سياڤاکه للاکي ديواس ڤرتام يڠ مملوق إسلام؟",
+            options: ["علي بن ابي طالب", "ابو بکر الصديق", "عمر بن الخطاب", "عثمان بن عفان"],
+            answer: 1
+        },
+        {
+            id: "SR23",
+            question: "Siapakah wanita pertama yang memeluk Islam?",
+            options: ["Khadijah binti Khuwailid", "Fatimah binti Muhammad", "Aisyah binti Abu Bakar", "Sumayyah"],
             answer: 0
         },
         {
+            id: "SR24",
+            question: "سياڤاکه کانق-کانق ڤرتام يڠ مملوق إسلام؟",
+            options: ["حسن", "حسين", "علي بن ابي طالب", "زيد بن حارثة"],
+            answer: 2
+        },
+        {
             id: "SR25",
-            question: "اڤاکه معجزة تربسر نبي محمد صلي الله عليه وسلم؟",
-            options: ["بله ماتهاري", "القرءان الکريم", "کلوار اءير دري چله جاري", "مڠهيدوڤکن اورڠ ماتي"],
+            question: "Siapakah hamba yang diseksa di padang pasir kerana mempertahankan Islam?",
+            options: ["Zaid bin Harithah", "Bilal bin Rabah", "Salman Al-Farisi", "Ammar bin Yasir"],
             answer: 1
         },
         {
             id: "SR26",
-            question: "ڤريستيوا مالام نبي محمد دباوا دري مکة کبيت المقدس دان کلاڠيت دسبوت ___ .",
-            options: ["هجرة", "إسراء دان معراج", "فتح مکه", "بعثة"],
-            answer: 1
+            question: "ڤريستيوا إسراء دان معراج برلاکو ڤد بولن اڤ؟",
+            options: ["رمضان", "شوال", "رجب", "محرم"],
+            answer: 2
         },
         {
             id: "SR27",
-            question: "اڤاکه ڤرينته واجب يڠ دتريما نبي سماس ڤريستيوا إسراء دان معراج؟",
-            options: ["ڤواسا رمضان", "صلاة فرض ليم وقتو", "منونايرکن حج", "زکوة"],
-            answer: 1
+            question: "Ibadah apakah yang difardukan secara terus kepada Nabi semasa Israk Mikraj?",
+            options: ["Puasa", "Zakat", "Haji", "Solat 5 waktu"],
+            answer: 3
         },
         {
             id: "SR28",
-            question: "اومت إسلام برهجرة دري مکة کمدينة اونتوق ___ .",
-            options: ["برنياڬا", "منيلقکن ديري دري تيندس فوريس دان مپيبرکن إسلام", "ملنچوڠ", "ملاون امام"],
+            question: "نبي محمد برهجره دري مکه ک مان؟",
+            options: ["شام", "مدينة", "طائف", "حبشة"],
             answer: 1
         },
         {
             id: "SR29",
-            question: "سياڤاکه صحابت يڠ منيڠڬلکن نبي محمد سماس برهجرة کمدينة؟",
-            options: ["عمر بن الخطاب", "ابو بکر الصديق", "عثمان بن عفان", "علي بن ابي طالب"],
-            answer: 1
+            question: "Siapakah sahabat yang menemani Nabi Muhammad SAW berhijrah?",
+            options: ["Abu Bakar As-Siddiq", "Umar bin Al-Khattab", "Ali bin Abi Talib", "Uthman bin Affan"],
+            answer: 0
         },
         {
             id: "SR30",
-            question: "دکوت مناکاه نبي دان ابو بکر برسمبوڽي دري بوروان کافر قريش سماس هجرة؟",
-            options: ["ڬوا حراء", "ڬوا ثور", "بوکيت احد", "مدين"],
+            question: "دماناکه نبي دان ابو بکر برسمبوڽي دري کجرن قريش سماس هجره؟",
+            options: ["ڬوا حراء", "ڬوا ثور", "بوکيت احد", "بوکيت صفا"],
             answer: 1
         },
         {
             id: "SR31",
-            question: "اڤاکه نام اصل کوتا مدينة سبلوم کچاتتن هجرة نبي؟",
-            options: ["طائف", "يثرب", "خيبر", "جدة"],
-            answer: 1
+            question: "Apakah masjid pertama yang dibina oleh Nabi Muhammad SAW dalam perjalanan hijrah?",
+            options: ["Masjidil Haram", "Masjid Nabawi", "Masjid Quba'", "Masjidil Aqsa"],
+            answer: 2
         },
         {
             id: "SR32",
-            question: "اڤاکه مسجد ڤرتام يڠ دبينا اوليه نبي محمد سماس دالم ڤرجالنن هجرة؟",
-            options: ["مسجد الحرام", "مسجد قباء", "مسجد النبي", "مسجد الأقصى"],
-            answer: 1
+            question: "اڤاکه نام مسجد يڠ دبينا اوليه نبي د مدينة؟",
+            options: ["مسجد قباء", "مسجد الحرام", "مسجد النبوي", "مسجد الأقصى"],
+            answer: 2
         },
         {
             id: "SR33",
-            question: "ڬولوڠن ڤندودوق اصل مدينة يڠ ممبنتو اومت إسلام يڠ برهجرة دسبوت ڬولوڠن ___ .",
-            options: ["مهاجرين", "انصار", "قريش", "يهودي"],
-            answer: 1
+            question: "Apakah peperangan pertama dalam sejarah Islam?",
+            options: ["Perang Badar", "Perang Uhud", "Perang Khandaq", "Perang Khaibar"],
+            answer: 0
         },
         {
             id: "SR34",
-            question: "ڬولوڠن اومت إسلام يڠ برهجرة دري مکة کمدينة دسبوت ڬولوڠن ___ .",
-            options: ["انصار", "مهاجرين", "خوارج", "منافق"],
+            question: "ڤرڠ بدر برلاکو ڤد بولن اڤ؟",
+            options: ["شوال", "رمضان", "محرم", "صفر"],
             answer: 1
         },
         {
             id: "SR35",
-            question: "اڤاکه ڤڤراڠن ڤرتام دالم سجاره إسلام؟",
-            options: ["ڤڤراڠن احد", "ڤڤراڠن بدر", "ڤڤراڠن خندق", "ڤڤراڠن حنين"],
-            answer: 1
+            question: "Dalam Perang Uhud, bapa saudara Nabi SAW yang syahid ialah ___ .",
+            options: ["Abu Talib", "Abbas", "Hamzah", "Abu Lahab"],
+            answer: 2
         },
         {
             id: "SR36",
-            question: "براڤاکه بيلڠن خيبر / تنترا إسلام دالم ڤڤراڠن بدر؟",
-            options: ["١,٠٠٠ اورڠ", "٣١٣ اورڠ", "٧٠٠ اورڠ", "٣,٠٠٠ اورڠ"],
+            question: "اڤاکه نام ڤرجنجين داماي انتارا اومت إسلام دان قريش مکه؟",
+            options: ["ڤرجنجين عقبة", "ڤرجنجين حديبية", "ڤرجنجين مدينة", "ڤرجنجين طائف"],
             answer: 1
         },
         {
             id: "SR37",
-            question: "ڤڤراڠن يڠ مان اومت إسلام مڠکامي ککالهن کران ايڠکر ارهن نبي سباڬاي ڤمانه؟",
-            options: ["ڤڤراڠن بدر", "ڤڤراڠن احد", "ڤڤراڠن خندق", "ڤڤراڠن تبوك"],
-            answer: 1
-        },
-        {
-            id: "SR38",
-            question: "ڤڤراڠن خندق جوڬ دکنلي سباڬاي ڤڤراڠن ___ کران ڤرڬابوڠن موسوه.",
-            options: ["احزاب", "مؤتة", "يرموك", "حنين"],
+            question: "Peristiwa pembukaan semula Kota Makkah dipanggil sebagai ___ .",
+            options: ["Fathu Makkah", "Hijrah", "Israk Mikraj", "Haji Wida'"],
             answer: 0
         },
         {
+            id: "SR38",
+            question: "اڤاکه نام حج تراخير يڠ دلاکوکن اوليه نبي محمد؟",
+            options: ["حج عمرة", "حج تمتع", "حجة الوداع", "حج مبرور"],
+            answer: 2
+        },
+        {
             id: "SR39",
-            question: "سياڤاکه صحابت يڠ منچادڠکنستراتيڬي مڠڬالي ڤاريت (خندق) دالم ڤڤراڠن خندق؟",
-            options: ["بلال بن رباح", "سلمان الفارس", "خالد بن الوليد", "ابو هريرة"],
+            question: "Berapakah umur Nabi Muhammad SAW ketika wafat?",
+            options: ["60 tahun", "63 tahun", "65 tahun", "70 tahun"],
             answer: 1
         },
         {
             id: "SR40",
-            question: "اڤاکه نام ڤرجنجين داماي انتارا اومت إسلام دان کافر قريش مکة؟",
-            options: ["ڤرجنجين عقبة", "ڤرجنجين حديبية", "ڤياڬم مدينة", "صالح حديبية"],
-            answer: 1
-        },
-        {
-            id: "SR41",
-            question: "ڤريستيوا ڤمبوکاءن سمولا کوتا مکة اوليه اومت إسلام دسبوت ___ .",
-            options: ["هجرة", "فتح مکه", "غزوة", "حجة الوداع"],
-            answer: 1
-        },
-        {
-            id: "SR42",
-            question: "ڤد تاهون کبراڤاکه هجرة برلاکوڽا ڤريستيوا فتح مکه؟",
-            options: ["٢ هجرة", "٥ هجرة", "٨ هجرة", "١٠ هجرة"],
+            question: "دماناکه نبي محمد صلي الله عليه وسلم دوافاتکن دان دکبوميکن؟",
+            options: ["مکه", "طائف", "مدينة", "شام"],
             answer: 2
         },
         {
+            id: "SR41",
+            question: "Siapakah khalifah pertama selepas kewafatan Rasulullah SAW?",
+            options: ["Umar bin Al-Khattab", "Ali bin Abi Talib", "Uthman bin Affan", "Abu Bakar As-Siddiq"],
+            answer: 3
+        },
+        {
+            id: "SR42",
+            question: "سياڤاکه خليفة کدوءا دالم خولفاء الراشدين؟",
+            options: ["ابو بکر", "عمر بن الخطاب", "عثمان بن عفان", "علي بن ابي طالب"],
+            answer: 1
+        },
+        {
             id: "SR43",
-            question: "اڤاکه تيندقن ڤرتام نبي سلڤس دافت ممبوک کوتا مکة؟",
-            options: ["مڠهنچورکن برهالا دکليليڠ کعبة", "ملاکوکن ڤڤراڠن", "ممليهارا هرتا", "موجودکن چوکاي"],
-            answer: 0
+            question: "Siapakah khalifah ketiga dalam Khulafa Ar-Rasyidin?",
+            options: ["Abu Bakar", "Umar", "Uthman bin Affan", "Ali"],
+            answer: 2
         },
         {
             id: "SR44",
-            question: "اڤاکه نام ڤروندوڠن اوتام يڠ دتوليس اونتوق مپاتوکن ڤندودوق مدينة؟",
-            options: ["ڤرجنجين حديبية", "ڤياڬم مدينة", "خطبة الوداع", "لوح محفوظ"],
-            answer: 1
+            question: "سياڤاکه خليفة کأمڤت دالم خولفاء الراشدين؟",
+            options: ["علي بن ابي طالب", "عمر", "عثمان", "معاوية"],
+            answer: 0
         },
         {
             id: "SR45",
-            question: "سياڤاکه نام انق ڤرمڤوان نبي يڠ برکهوين دڠن سيئدينا علي بن ابي طالب؟",
-            options: ["زينب", "فاطمة الزهراء", "رقمة", "ام کلثوم"],
-            answer: 1
+            question: "Perang Khandaq (Parit) juga dikenali sebagai perang ___ .",
+            options: ["Badar", "Uhud", "Ahzab", "Hunain"],
+            answer: 2
         },
         {
             id: "SR46",
-            question: "حج تراخير يڠ دلاکوکن اوليه نبي محمد سبلوم وافة دسبوت ___ .",
-            options: ["حج اکبر", "حجة الوداع", "حج مبرور", "عمرة"],
+            question: "سياڤاکه صحابت يڠ منچادڠکن اڬر ڤاريت دڬالي دالم ڤرڠ خندق؟",
+            options: ["خالد بن الوليد", "سلمان الفارسي", "بلال بن رباح", "زيد بن ثابت"],
             answer: 1
         },
         {
             id: "SR47",
-            question: "براڤاکه عمور نبي محمد صلي الله عليه وسلم سماس بڬيندا وافة؟",
-            options: ["٢٥ تاهون", "٤٠ تاهون", "٦٠ تاهون", "٦٣ تاهون"],
-            answer: 3
-        },
-        {
-            id: "SR48",
-            question: "دکوت مناکاه نبي محمد صلي الله عليه وسلم وافة دان دميقمکن؟",
-            options: ["مکه", "مدينة", "شام", "بيت المقدس"],
+            question: "Siapakah panglima Islam yang mendapat gelaran 'Pedang Allah yang Terhunus'?",
+            options: ["Hamzah bin Abdul Muttalib", "Khalid bin Al-Walid", "Tariq bin Ziyad", "Salahuddin Al-Ayyubi"],
             answer: 1
         },
         {
+            id: "SR48",
+            question: "دماناکه ايبو نبي محمد دکبوميکن؟",
+            options: ["مکه", "مدينة", "طائف", "ابواء"],
+            answer: 3
+        },
+        {
             id: "SR49",
-            question: "نبي محمد وافة ددالم رومه ايسستري بڬيندا يڠ برنام ___ .",
-            options: ["خديجة", "عائشة بنت ابي بکر", "سودة", "حفصة"],
+            question: "Di manakah bapa Nabi Muhammad SAW (Abdullah) wafat dan dimakamkan?",
+            options: ["Makkah", "Yathrib (Madinah)", "Syam", "Taif"],
             answer: 1
         },
         {
             id: "SR50",
-            question: "مقام نبي محمد صلي الله عليه وسلم کيني ترلتق ددالم ___ دمدينة.",
-            options: ["مسجد قباء", "مسجد النبي (النبوي)", "مسجد الأقصى", "مسجد قبتين"],
+            question: "اڤاکه نام اصل باڬي کوتا مدينة سبلوم نبي برهجره؟",
+            options: ["بکه", "يثرب", "طائف", "خيبر"],
             answer: 1
         }
     ],
+
+    // ==========================================
+    // 🔴 KATEGORI 4: AKHLAK (HARD - Boss Battle)
+    // Format: Keseluruhan Soalan & Jawapan dalam JAWI
+    // ==========================================
     "akhlak": [
         {
             id: "AK01",
-            question: "اڤاکه مقصود اخلاق دري سڬي بهاس؟",
-            options: ["ڤاکاين يڠ چنتيق", "بودي ڤکرتي / تيڠکه لاکو", "هرتا يڠ باڽق", "علمو ڤڠتاهوان"],
+            question: "اڤاکه مقصود اخلاق محمودة؟",
+            options: ["اخلاق بوروق", "اخلاق ترڤوجي (باءيق)", "اخلاق ترکجي", "اخلاق بياسا"],
             answer: 1
         },
         {
             id: "AK02",
-            question: "اخلاق يڠ باءيق دان دتونتوت دالم إسلام دسبوت اخلاق ___ .",
-            options: ["مذمومة", "محمودة", "سيئة", "کاذبة"],
-            answer: 1
+            question: "اڤاکه مقصود اخلاق مذمومة؟",
+            options: ["اخلاق ترڤوجي", "اخلاق باءيق", "اخلاق ترکجي (بوروق)", "اخلاق مليا"],
+            answer: 2
         },
         {
             id: "AK03",
-            question: "اخلاق يڠ بوروق دان دبنچي اوليه الله دسبوت اخلاق ___ .",
-            options: ["محمودة", "مذمومة", "حسنة", "کريمة"],
+            question: "سبلوم ماکن، کيت مستيله ممولاکن دڠن باچاءن ___ .",
+            options: ["الحمد لله", "بسم الله", "سبحان الله", "الله أکبر"],
             answer: 1
         },
         {
             id: "AK04",
-            question: "انتارا بريکوت، يڠ ماناکه چونتوه اخلاق محمودة (ترڤوجي)؟",
-            options: ["سومبوڠ", "حسد دڠکي", "جوجور دان امانة", "کدکوت"],
-            answer: 2
+            question: "سماس ماکن دان مينوم، کيت دسونتکن مڠڬوناکن تاڠن ___ .",
+            options: ["کيري", "کانن", "کدوا-دواڽ", "سجاري"],
+            answer: 1
         },
         {
             id: "AK05",
-            question: "انتارا بريکوت، يڠ ماناکه چونتوه اخلاق مذمومة (ترکجي)؟",
-            options: ["برصبر", "تکاثر / ريال", "رياء دان منونجوق-نونجوق", "تولوڠ-منولوڠ"],
+            question: "سلڤس سليسائي ماکن، کيت هندقله مڠوچڤکن ___ كڤد الله.",
+            options: ["بسم الله", "استغفر الله", "الحمد لله", "ما شاء الله"],
             answer: 2
         },
         {
             id: "AK06",
-            question: "اڤاکه يڠ ڤرلو کيت باچ سبلوم ممولاکن مکان اتاو مينوم؟",
-            options: ["الحمد لله", "بسم الله الرحمن الرحيم", "استغفر الله", "الله اکبر"],
-            answer: 1
+            question: "سماس تيدور، کيت دسونتکن مڠيريڠ ک سبله ___ .",
+            options: ["کانن", "کيري", "تيارڤ", "تلنتڠ"],
+            answer: 0
         },
         {
             id: "AK07",
-            question: "کيت دسونتکن مکان دان مينوم مڠڬوناکن تڠن ___ .",
-            options: ["کيري", "کانن", "کدوا-دواڽ", "تڠن سبلها"],
-            answer: 1
-        },
-        {
-            id: "AK08",
-            question: "سلڤس سليسائي مکان، کيت دأنجورکن مڠوچڤ ___ سباڬاي تندا شکور.",
-            options: ["الحمد لله", "سبحان الله", "بسم الله", "ما شاء الله"],
-            answer: 0
-        },
-        {
-            id: "AK09",
-            question: "انتارا ادب سبلوم تيدور اياله ___ .",
-            options: ["مکان دڠن کڽڠ", "بروضوء دان ممباچ دعاء", "منونتون تيۏي", "برماءين تليفون"],
-            answer: 1
-        },
-        {
-            id: "AK10",
-            question: "اڤاکه اوچڤن يڠ سسواي اڤابيلا کيت باڠون دري تيدور؟",
-            options: ["الحمد لله الذي أحيانا", "بسم الله مجراها", "إنا لله وإنا إليه راجعون", "لا حول ولا قوة إلا بالله"],
-            answer: 0
-        },
-        {
-            id: "AK11",
-            question: "سباڬاي سأورڠ انق، کيت wajib ___ کڤد ايبو باڤ.",
-            options: ["طاعة دان بربقتي", "ملاون چاکڤ", "منڠيڠڬلکن", "مميايکن"],
-            answer: 0
-        },
-        {
-            id: "AK12",
-            question: "مقصود 'بر الوالدين' اياله ___ کڤد ايبو باڤ.",
-            options: ["بربوات جاهت", "بربوات باءيق (بربقتي)", "مڠهينا", "برکاسر"],
-            answer: 1
-        },
-        {
-            id: "AK13",
-            question: "مندرهاک کڤد ايبو باڤ مروڤاکن ساله ساتو دوسا ___ دالم إسلام.",
-            options: ["کچيل", "بياسا", "بسر", "هارس"],
+            question: "ممباچ دعاء سبلوم تيدور داڤت مڠيلقکن ڬڠڬوان ___ .",
+            options: ["ماءنسي", "حيوان", "شيطان", "مالم"],
             answer: 2
         },
         {
-            id: "AK14",
-            question: "اڤاکه يڠ ڤرلو کيت لکوکن اڤابيلا برجلان ملسي اتاو برتمو ڬورو؟",
-            options: ["لاري دان سمبوڽي", "ممبري سلام دان مانسيپ", "منجليت", "بربوال دڠن کاون"],
+            id: "AK08",
+            question: "کتيک ماسوق ک تاندس، کيت دسونتکن ملڠکه دڠن کاکي ___ .",
+            options: ["کانن", "کيري", "کدوا-دواڽ", "لومڤت"],
             answer: 1
         },
         {
+            id: "AK09",
+            question: "کتيک کلوار دري تاندس، کيت دسونتکن ملڠکه دڠن کاکي ___ .",
+            options: ["کانن", "کيري", "کدوا-دواڽ", "لومڤت"],
+            answer: 0
+        },
+        {
+            id: "AK10",
+            question: "ادب منونتوت علمو اياله ممبتولکن نيت سمات-مات کران ___ .",
+            options: ["ڬورو", "ايبو باڤ", "الله", "کاون"],
+            answer: 2
+        },
+        {
+            id: "AK11",
+            question: "سماس ڬورو سدڠ مڠاجر د هادڤن کلاس، موريد مستيله ___ .",
+            options: ["برچاکڤ", "تيدور", "بوات بيسيڠ", "ممبري تومڤوان (فوکوس)"],
+            answer: 3
+        },
+        {
+            id: "AK12",
+            question: "حکوم مندرحاک اتاو مڠڬوناکن ڤرکتاءن 'أه' کڤد ايبو باڤ اياله ___ .",
+            options: ["حرام دان بردوسا بسر", "مکروه", "سنة", "هارس"],
+            answer: 0
+        },
+        {
+            id: "AK13",
+            question: "دعاء ايبو باڤ ترهادڤ انق-انقڽ ساڠت ___ اوليه الله.",
+            options: ["دبوات-بوات", "مستجاب (دماقبولکن)", "دطولق", "دبيارکن"],
+            answer: 1
+        },
+        {
+            id: "AK14",
+            question: "اڤابيلا برتمو دڠن راکن سأڬام، کيت دڬالقکن ممبري ___ .",
+            options: ["دوءيت", "حرمت", "سلام", "هدية"],
+            answer: 2
+        },
+        {
             id: "AK15",
-            question: "مڠحرمتي ڬورو سڠت ڤنتيڠ سوڤايا کيت منداڤت ___ دالم منونتوت علمو.",
-            options: ["کبرکتن", "ککايأن", "کڬاڬلن", "کسوساهن"],
+            question: "سلالو برچاکڤ بوهوڠ مروڤاکن ساله ساتو تندا اورڠ ___ .",
+            options: ["منافق", "مؤمن", "صالح", "جوجور"],
             answer: 0
         },
         {
             id: "AK16",
-            question: "برچاکڤ دڠن سوارا يڠ تيڠڬي اتاو منجرتيه دالمبادن ڬورو اياله ڤربواتن ___ .",
-            options: ["ترڤوجي", "تيدق برادب", "باڬوس", "واجب"],
+            question: "صيفت 'امانة' دالم اخلاق برمقصود ___ .",
+            options: ["ڤنيمڤو", "بوليه دڤرچاياءي (جوجور)", "ڤنچوري", "کدکوت"],
             answer: 1
         },
         {
             id: "AK17",
-            question: "سماس ماسوق کتاندس، کيت دسونتکن ملڠکه ماسوق دڠن کاکي ___ .",
-            options: ["کانن", "کيري", "کدوا-دواڽ", "تيدق کيسه"],
-            answer: 1
+            question: "لاون باڬي صيفت امانة اياله 'خيانة' يڠ برمقصود ___ .",
+            options: ["ڤيچه امانة / تيدق جوجور", "منجاڬ هرتا", "بربوات باءيق", "راجين"],
+            answer: 0
         },
         {
             id: "AK18",
-            question: "سماس کلوار دري تاندس، کيت دسونتکن ملڠکه کلوار دڠن کاکي ___ .",
-            options: ["کيري", "کدوا-دواڽ", "کانن", "ملومڤت"],
+            question: "اورڠ يڠ بخيل (کدکوت) اکن دبنچي اوليه ماءنسي دان ___ .",
+            options: ["شيطان", "حيوان", "الله", "ملائکة"],
             answer: 2
         },
         {
             id: "AK19",
-            question: "سبلوم ماسوق تاندس کيت ڤرلو ممباچ دعاء موهون ڤرليندوڠن درڤد ڬڠڬوان ___ .",
-            options: ["ماءنسي", "ملائکة", "شيطان", "حيوات"],
+            question: "صيفت ڤموره (سوک برصدقه) اکن ممباوا ماءنسي ک جڤان ک ___ .",
+            options: ["نراک", "کمسکينن", "شرڬ", "کروڬين"],
             answer: 2
         },
         {
             id: "AK20",
-            question: "اڤاکه يڠ دسونتکن باڬي سأورڠ اونتوق سبوت اڤابيلا دي برسين؟",
-            options: ["الله اکبر", "الحمد لله", "سبحان الله", "استغفر الله"],
+            question: "کتيک براد د دالم مسجد، کيت دسونتکن برنيت ___ .",
+            options: ["تيدور", "اعتكاف", "ماکن", "بربوال"],
             answer: 1
         },
         {
             id: "AK21",
-            question: "اڤاکه اوچڤن کيت اڤابيلا مندڠر راکن کيت برسين دان ممباچ 'الحمد لله'؟",
-            options: ["يرحمك الله", "ما شاء الله", "تبارك الله", "جزاك الله"],
-            answer: 0
-        },
-        {
-            id: "AK22",
-            question: "اورڠ إسلام واجب منوتوڤ ___ ترأوتاما اڤابيلا براد دلور رومه.",
-            options: ["موک", "مات", "عورة", "تليڠا"],
+            question: "انتارا ڤرکارا يڠ ديلارڠ سماس براد د مسجد اياله ___ .",
+            options: ["صلاة سنة", "ممباچ القرآن", "بوات بيسيڠ دان برلاري", "برذکر"],
             answer: 2
         },
         {
+            id: "AK22",
+            question: "سبلوم ممباچ دان ممڬڠ القرآن، کيت ديواجبکن براد دالم کأداءن ___ .",
+            options: ["سوچي دري حدس (بروضوء)", "لاڤر", "برکاين ڤليکت", "دالم کلاس"],
+            answer: 0
+        },
+        {
             id: "AK23",
-            question: "بواتاسن عورة باڬي للاکي اياله دري ڤوست هيڠڬ ___ .",
-            options: ["بتاهيس", "لوتوت", "دادا", "کڤالا"],
+            question: "منجاڬ کبرسيهن ديري دان ڤرکيترن مروڤاکن سبهاڬين درڤد ___ .",
+            options: ["بودايا", "ايمان", "هوبي", "تکبر"],
             answer: 1
         },
         {
             id: "AK24",
-            question: "عورة وانيتا اياله سلوروه بادن کچوالي موک دان ___ .",
-            options: ["رامبوت", "تاڤق کاکي", "تاڤق تڠن", "تليڠا"],
+            question: "اورڠ يڠ 'صبر' کتيک دتيمڤا اوجين دان موسيڤه اکن منداڤت ___ الله.",
+            options: ["عذاب", "کماراهن", "ڤهالا دان رحمة", "کبوروڤن"],
             answer: 2
         },
         {
             id: "AK25",
-            question: "ڤراسان ماراه يڠ تيدق دکاول بياساڽ برڤونچا دري هاشوتن ___ .",
-            options: ["شيطان", "کاون", "نفسو", "حيوات"],
+            question: "نبي برسبدا، تيدق ماسوق شرڬ سسياڤا يڠ اد دالم هاتيڽ سظره درڤد صيفت ___ .",
+            options: ["تکبر (سومبوڠ)", "صبر", "جوجور", "کاسيه سايڠ"],
             answer: 0
         },
         {
             id: "AK26",
-            question: "انتارا چارا دأنجورکن نبي اونتوق ممريداکن ماراه اياله دڠن مڠمبيل ___ .",
-            options: ["مکانن", "وضوء", "تيدور", "هيبورن"],
+            question: "اڤابيلا برجنجي دڠن سسأورڠ، کيت دسارنکن مڠوچڤ ___ .",
+            options: ["استغفر الله", "إن شاء الله", "الحمد لله", "سبحان الله"],
             answer: 1
         },
         {
             id: "AK27",
-            question: "انتارا ادب برڬاءول دڠن راکن اياله ___ دالم ڤرکارا يڠ باءيق.",
-            options: ["ساليڠ برڬادوه", "ساليڠ ممبنتو", "ساليڠ مڠهينا", "ساليڠ بربوهوڠ"],
+            question: "اڤابيلا کيت برسين، کيت دسونتکن مڠوچڤ ___ .",
+            options: ["الله أکبر", "الحمد لله", "ما شاء الله", "يرحمك الله"],
             answer: 1
         },
         {
             id: "AK28",
-            question: "ممڠڬيل راکن دڠن ڬلرن يڠ بوروق دان مڽاکيتکن هاتي حکومڽا ___ .",
-            options: ["حرام", "هارس", "سنة", "مکروه"],
-            answer: 0
+            question: "اڤابيلا کيت مندڠر اورڠ برسين دان مموجي الله، کيت مستي منجواب ___ .",
+            options: ["الحمد لله", "الله أکبر", "يرحمك الله", "إن شاء الله"],
+            answer: 2
         },
         {
             id: "AK29",
-            question: "سسياڤا يڠ برصبر اڤابيلا دتيمڤا اوجين دان مصيبة اکن منداڤت ___ درڤد الله.",
-            options: ["دوسا", "ڤاهالا يڠ بسر", "ککايأن", "کسيحتن"],
+            question: "اڤابيلا کيت تله ملقوکن کسيلڤن اتاو دوسا، کيت مستيله مڠوچڤ ___ .",
+            options: ["الحمد لله", "استغفر الله", "بسم الله", "الله أکبر"],
             answer: 1
         },
         {
             id: "AK30",
-            question: "کيت دأرهکن تولوڠ-منولوڠ دالم ڤرکارا کباجيقن دان تقوى، تتاڤي دلارڠ بکتو دالم ڤرکارا ___ .",
-            options: ["کباءيقن", "دوسا دان ڤرموسوهن", "منونتوت علمو", "برنياڬا"],
+            question: "سنتياس برباءيق سڠکا ترهادڤ اورڠ لاءين دسبوت سباڬاي ___ .",
+            options: ["سوء الظن", "حسن الظن", "تکبر", "حسد دڠکي"],
             answer: 1
         },
         {
             id: "AK31",
-            question: "اڤاکه ادب يڠ ڤرلو دلاکوکن سبلوم ماسوق کرومه اورڠ لاءين؟",
-            options: ["منرجاه ماسوق", "مڠتوق ڤينتو دان ممبري سلام", "مڠينتيڤ دري تيڠکڤ", "ممبواڠ کاست"],
+            question: "بربوروق سڠکا ترهادڤ اورڠ لاءين تنڤا بوقتي دسبوت سباڬاي ___ .",
+            options: ["حسن الظن", "سوء الظن", "جوجور", "اخلاص"],
             answer: 1
         },
         {
             id: "AK32",
-            question: "توجوان اوتام منزيارهي اورڠ يڠ ساكيت اياله اونتوق ممبري سماڠت دان ___ .",
-            options: ["مماکن مکاننڽ", "مندعاکن کسمبوهنڽا", "ممبوات بيسيڠ", "منونجوقکن کسيحتن کيت"],
-            answer: 1
-        },
-        {
-            id: "AK33",
-            question: "نبي برسبدا، صيفت حسد دڠکي اکن مماکن ڤاهالا سڤرتي اڤي مماکن ___ .",
-            options: ["اءير", "کايو کريڠ", "باتو", "بسي"],
-            answer: 1
-        },
-        {
-            id: "AK34",
-            question: "ڤربواتن ممينتا معاف اڤابيلا ڤرنه ملاکوکن کسيلاڤن اياله چيري اورڠ يڠ ___ .",
-            options: ["لمه", "ڤناکوت", "مليا دان برتڠڬوڠجاواب", "بودوه"],
+            question: "سبلوم ماسوق ک رومه اورڠ، کيت دأجر اونتوق ممبري سلام دان ممينتا ايذين سباڽق ___ .",
+            options: ["ساتو کالي", "دوا کالي", "تڬ کالي", "ليم کالي"],
             answer: 2
         },
         {
-            id: "AK35",
-            question: "مڠوچڤکن 'تريما کاسيه' کڤد ماءنسي مروڤاکن تندا کيت ___ کڤد نعمت الله.",
-            options: ["لالی", "برشکور", "سومبوڠ", "ماره"],
+            id: "AK33",
+            question: "منزيارهي جيرن يڠ ساكيت مروڤاکن ___ کيت سباڬاي اومت إسلام.",
+            options: ["تڠڬوڠجواب (حق جيرن)", "ڤيليهن", "لارڠن", "کبوروڤن"],
+            answer: 0
+        },
+        {
+            id: "AK34",
+            question: "حکوم مڠحرمتي جيرن يڠ بوکن برأڬام إسلام (بوکن مسلم) اياله ___ .",
+            options: ["حرام", "واجب", "مکروه", "سنة"],
             answer: 1
         },
         {
+            id: "AK35",
+            question: "ممبنتو اورڠ بوتا ملينتس جالن اکن منداڤت ___ .",
+            options: ["کماراهن", "دوءيت", "کريضاءن الله دان ڤهالا", "ککايأن"],
+            answer: 2
+        },
+        {
             id: "AK36",
-            question: "إسلام مڠاجر بهاوا منجاڬ کبرسيهن اياله سبهاڬين درڤد ___ .",
-            options: ["ککايأن", "إيمان", "کصيحتن", "کچنتيقن"],
+            question: "مروسقکن هرتا عوام (Vandalism) مروڤاکن ڤربواتن ___ .",
+            options: ["محمودة", "حرام / مذمومة", "سنة", "واجب"],
             answer: 1
         },
         {
             id: "AK37",
-            question: "سبلوم ممباچ القرءان، کيت دسونتکن اونتوق مڠمبيل وضوء دان مڠهادڤ ___ .",
-            options: ["بلکڠ", "أوتارا", "قبلة", "سلاتن"],
+            question: "انتارا ادب ماکن يڠ دأجرکن اوليه نبي اياله جاڠن ماکن اتاو مينوم سمبيل ___ .",
+            options: ["دودوق", "بربوال باءيق", "برديري", "ممباچ دعاء"],
             answer: 2
         },
         {
             id: "AK38",
-            question: "اڤابيلا ماسوق کمسجد، کيت دأنجورکن برنيت ___ .",
-            options: ["تيدور", "إعتکاف", "برماءين", "بربوال"],
+            question: "اڤابيلا کيت سدڠ ماراه، نبي مڠڬالقکن کيت اونتوق مڠمبيل ___ .",
+            options: ["ماکنن", "وضوء", "تيڠکڤ", "کايو"],
             answer: 1
         },
         {
             id: "AK39",
-            question: "بربوال کوسوڠ اتاو ممبوات بيسيڠ سهيڠڬ مڠڬڠڬو اورڠ صلاة دمسجد حکومڽا ___ .",
-            options: ["مکروه / حرام", "سنة", "هارس", "واجب"],
+            question: "سنپومن يڠ دبريکن کڤد سساودارا مسلم کيت اياله ساتو ___ .",
+            options: ["صدقة", "دوسا", "رياء", "کبوروقن"],
             answer: 0
         },
         {
             id: "AK40",
-            question: "سماس برجالن، خوصوڽ دتمڤت عوام، کيت هندقله سنتياس منوندوقکن ___ .",
-            options: ["کڤالا", "ڤندڠن (مات)", "تڠن", "کاکي"],
-            answer: 1
+            question: "اورڠ يڠ سنتياس مڠهوبوڠکن صلة الرحيم اکن دڤنجڠکن عمور دان دمورهکن ___ .",
+            options: ["عذاب", "مسأله", "رزقي", "ڤڽاکيت"],
+            answer: 2
         },
         {
             id: "AK41",
-            question: "سبلوم ممولاکن ڤرجالنن (مسافر)، کيت دسونتکن ممباچ ___ .",
-            options: ["بوکو", "دعاء مناءيقي کندرأن", "ڤويسي", "بريتا"],
+            question: "ڤربواتن منچوري هرتا اورڠ لاءين اياله ڤربواتن يڠ بردوسا ___ .",
+            options: ["کچيل", "بسر", "تياد دوسا", "بياسا"],
             answer: 1
         },
         {
             id: "AK42",
-            question: "ممبواڠ سمڤه دمراتا-رات تمڤت دان مڠوتورکن عالم مروڤاکن ڤربواتن يڠ ___ .",
-            options: ["ترڤوجي", "تيدق برتڠڬوڠجاواب (مذمومة)", "باءيق", "دڬالقکن"],
-            answer: 1
+            question: "ممبولي دان مڠيچيق راکن د سکوله اياله ڤربواتن يڠ ___ .",
+            options: ["مذمومة (ترکجي)", "محمودة (ترڤوجي)", "سنة", "هارس"],
+            answer: 0
         },
         {
             id: "AK43",
-            question: "منجاڬ هرتا عوام سڤرتي تاندس دان تمڤت تومڤڠن اياله تڠڬوڠجاواب ___ .",
-            options: ["کراجاءن سهاج", "سموا مشارکت", "ڤکرجا ڤمبرسيهن", "کتوا کامڤوڠ"],
-            answer: 1
+            question: "اڤابيلا دبريکن نعمة درڤد الله، کيت هندقله ___ .",
+            options: ["تکبر", "مڠلوه", "برشکور", "سومبوڠ"],
+            answer: 2
         },
         {
             id: "AK44",
-            question: "نبي محمد منجللکن بهاوا برچاکڤ بوهوڠ مروڤاکن ساله ساتو تندا اورڠ ___ .",
-            options: ["مؤمن", "منافق", "صالح", "متّقين"],
-            answer: 1
+            question: "اڤابيلا دتيمڤا موسيڤه اتاو کماتين، اوچڤن يڠ ڤرلو دسبوت اياله ___ .",
+            options: ["إنا لله وإنا إليه راجعون", "سبحان الله", "الله أکبر", "الحمد لله"],
+            answer: 0
         },
         {
             id: "AK45",
@@ -1180,7 +1191,7 @@ const paiQuestions = {
         {
             id: "AK46",
             question: "مڠخياناتي امانة (تيدق جوجور دالم توڬس) اکن منداڤت ___ الله.",
-            options: ["کريضاءن", "کمورکاءن", "کبهاڬيأن", "کأمتن"],
+            options: ["کريضاءن", "کمورکاءن", "کبهاڬيأن", "کأمنن"],
             answer: 1
         },
         {
@@ -1192,19 +1203,19 @@ const paiQuestions = {
         {
             id: "AK48",
             question: "عملن برصدقه تيدق مڠورڠکن هرتا، ماله بوليه ممادمکن ___ الله.",
-            options: ["رحمة", "کمورکاءن / کماهارهن", "کاسيه سايڠ", "رضا"],
+            options: ["رحمة", "کمورکاءن / کماهارهن", "کاسيه سايڠ", "رضاء"],
             answer: 1
         },
         {
             id: "AK49",
-            question: "نبي محمد صلي الله عليه وسلم دأوتوسکن کڤد ماءنسي اونتوق مڽمڤورناکن ___ يڠ مليا.",
-            options: ["اخلاق", "ڤاکاين", "رومه", "ڤکرجاءن"],
-            answer: 0
+            question: "کيت واجب طاعة کڤد ايبو باڤ سلاڬي مريك تيدق مڽوروه کيت ملقوکن ___ .",
+            options: ["کباءيقن", "معصية / دوسا", "سنه", "عملن باءيق"],
+            answer: 1
         },
         {
             id: "AK50",
-            question: "سباءيق-باءيق اخلاق باڬي سأورڠ مسلم اياله دڠن منچونتوهي اخلاق ___ .",
-            options: ["نبي محمد صلي الله عليه وسلم", "ارتيس", "ڤميمڤين دونيا", "کاون٢"],
+            question: "اخلاق رسول الله صلي الله عليه وسلم اداله برڤندوکن کڤد ___ .",
+            options: ["القرآن", "عقل", "ککايأن", "بنجير"],
             answer: 0
         }
     ]
