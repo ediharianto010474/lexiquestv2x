@@ -3103,40 +3103,65 @@ function initGame(type) {
                 <input type="hidden" class="game-input" data-answer="${jawapanTeks}" value="">
             `;
         } 
-        else if (item.options && Array.isArray(item.options)) {
+else if (item.options && Array.isArray(item.options)) {
             // ====================================================================
-            // 🟢 MAGIS BUTANG MCQ (UNTUK PAI & BA - SOKONGAN JAWI RTL)
+            // 🟢 BUTANG MCQ DINAMIK (SOKONG RTL JAWI & LTR RUMI)
             // ====================================================================
+         
+            // Senarai kategori yang guna Jawi/Arab (Perlu RTL)
+            const rtlCategories = ["aqidah", "ibadah", "sirah", "akhlak", "mufrodat", "qawaid", "hiwar", "arqam"];
+            const isRTL = rtlCategories.includes(type);
             let butangPilihanHTML = '';
             item.options.forEach((opt, optIndex) => {
+                // Reka bentuk butang (checkbox/radio) - Kedudukan butang bergantung pada isRTL
                 butangPilihanHTML += `
-                    <label class="block p-4 mb-3 border-2 border-gray-100 rounded-xl cursor-pointer hover:bg-indigo-50 hover:border-indigo-300 transition-all flex items-center gap-4">
-                        <input type="radio" name="soalan_${index}" value="${optIndex}" onchange="document.getElementById('hidden_jawapan_${index}').value = this.value" class="w-6 h-6 text-indigo-600 focus:ring-indigo-500 ml-2 cursor-pointer">
-                        <span class="flex-1 text-xl font-bold text-gray-800">${opt}</span>
+                    <label class="block p-4 mb-3 border-2 border-gray-100 rounded-xl cursor-pointer hover:bg-indigo-50 hover:border-indigo-300 transition-all flex items-center ${isRTL ? 'flex-row-reverse gap-4' : 'gap-4'}">
+                        <input type="radio" name="soalan_${index}" value="${optIndex}" onchange="document.getElementById('hidden_jawapan_${index}').value = this.value" class="w-6 h-6 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+                        <span class="flex-1 text-xl font-bold text-gray-800 ${isRTL ? 'text-right' : 'text-left'}">${opt}</span>
                     </label>
                 `;
             });
 
-            div.innerHTML = `
-                <div dir="rtl" class="text-right">
-                    <p class="font-bold text-indigo-900 mb-5 text-2xl leading-relaxed">${soalanTeks} .${index + 1}</p>
-                    <div class="space-y-2 mt-4">
-                        ${butangPilihanHTML}
+            // Susunan Nombor & Teks Soalan (Kiri atau Kanan)
+            if (isRTL) {
+                // FORMAT JAWI/ARAB (RTL)
+                div.innerHTML = `
+                    <div dir="rtl" class="text-right">
+                        <p class="font-bold text-indigo-900 mb-5 text-2xl leading-relaxed">${soalanTeks} .${index + 1}</p>
+                        <div class="space-y-2 mt-4">
+                            ${butangPilihanHTML}
+                        </div>
+                        <input type="hidden" id="hidden_jawapan_${index}" class="game-input" data-answer="${jawapanTeks}" value="">
                     </div>
-                    <input type="hidden" id="hidden_jawapan_${index}" class="game-input" data-answer="${jawapanTeks}" value="">
-                </div>
-            `;
+                `;
+            } else {
+
+                // FORMAT RUMI/PJK/LAIN-LAIN (LTR)
+                div.innerHTML = `
+                    <div dir="ltr" class="text-left">
+                        <p class="font-bold text-indigo-900 mb-5 text-xl leading-relaxed">${index + 1}. ${soalanTeks}</p>
+                        <div class="space-y-2 mt-4">
+                            ${butangPilihanHTML}
+                        </div>
+                        <input type="hidden" id="hidden_jawapan_${index}" class="game-input" data-answer="${jawapanTeks}" value="">
+                    </div>
+                `;
+           }
         } 
         else {
-            // Format Biasa (Taip Jawapan)
+            // ====================================================================
+            // 🟡 FORMAT FILL IN THE BLANKS (Taip Jawapan)
+            // ====================================================================
             div.innerHTML = `
-                <p class="font-bold text-gray-700 mb-3">${index + 1}. ${soalanTeks}</p>
-                <input type="text" class="game-input w-full p-3 rounded-lg bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-indigo-400" placeholder="Taip jawapan anda di sini..." data-answer="${jawapanTeks}">
+                <div class="text-left">
+                    <p class="font-bold text-gray-700 mb-3 text-lg">${index + 1}. ${soalanTeks}</p>
+                    <input type="text" class="game-input w-full p-4 rounded-xl bg-gray-50 border-2 border-gray-200 outline-none focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 transition-all font-bold text-lg" placeholder="Taip jawapan anda di sini..." data-answer="${jawapanTeks}">
+                </div>
             `;
         }
         container.appendChild(div);
     });
-
+} 
 
 // ==========================================
     // 4. PENGURUSAN MASA (DINAMIK GLOBAL)
