@@ -87,9 +87,9 @@ const paiCategoryDifficulty = {
 };
 
 const baCategoryDifficulty = {
-    easy: [],
-    medium: ['mufrodat', 'qawaid', 'hiwar', 'arqam'],
-    hard: []
+    easy: ['mufrodat', 'arqam'],
+    medium: ['qawaid'],
+    hard: ['hiwar']
 };
 
 // ==========================================
