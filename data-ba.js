@@ -1,1210 +1,1213 @@
 // data-ba.js - Pangkalan Data Bahasa Arab LexiQuest V2
 const baQuestions = {
-    "mufrodat": [
+"mufrodat": [
         {
             id: "BA_MF01",
-            question: "اڤاکه ارتي 'كِتَابٌ'؟",
-            options: ["بوکو", "ڤينسيل", "ڤمباريس", "ڤمادام"],
+            question: "Apakah maksud perkataan 'كِتَابٌ' (Kitaabun)?",
+            options: ["Buku", "Pensel", "Pembaris", "Pemadam"],
             answer: 0
         },
         {
             id: "BA_MF02",
-            question: "اڤاکه ارتي 'قَلَمٌ'؟",
-            options: ["ڤمادام", "ڤينسيل / ڤينا", "ميج", "کروسي"],
+            question: "Apakah maksud perkataan 'قَلَمٌ' (Qalamun)?",
+            options: ["Pemadam", "Pensel / Pena", "Meja", "Kerusi"],
             answer: 1
         },
         {
             id: "BA_MF03",
-            question: "اڤاکه ارتي 'مِسْطَرَةٌ'؟",
-            options: ["ڤمباريس", "ڤمادام", "بوکو", "بيڬ"],
+            question: "Apakah maksud perkataan 'مِسْطَرَةٌ' (Mistaratun)?",
+            options: ["Pembaris", "Pemadam", "Buku", "Beg"],
             answer: 0
         },
         {
             id: "BA_MF04",
-            question: "اڤاکه ارتي 'مِمْحَاةٌ'؟",
-            options: ["ڤينسيل", "بوکو", "ڤمادام", "ميج"],
+            question: "Apakah maksud perkataan 'مِمْحَاةٌ' (Mimhaatun)?",
+            options: ["Pensel", "Buku", "Pemadam", "Meja"],
             answer: 2
         },
         {
             id: "BA_MF05",
-            question: "اڤاکه ارتي 'حَقِيبَةٌ'؟",
-            options: ["بيڬ", "کلاس", "ڤمباريس", "کروسي"],
+            question: "Apakah maksud perkataan 'حَقِيبَةٌ' (Haqiibatun)?",
+            options: ["Beg", "Kelas", "Pembaris", "Kerusi"],
             answer: 0
         },
         {
             id: "BA_MF06",
-            question: "اڤاکه ارتي 'مَكْتَبٌ'؟",
-            options: ["کروسي", "ميج", "ڤينتو", "تيڠکڤ"],
+            question: "Apakah maksud perkataan 'مَكْتَبٌ' (Maktabun)?",
+            options: ["Kerusi", "Meja", "Pintu", "Tingkap"],
             answer: 1
         },
         {
             id: "BA_MF07",
-            question: "اڤاکه ارتي 'كُرْسِيٌّ'؟",
-            options: ["ميج", "ڤينتو", "کروسي", "ڤاڤن توليس"],
+            question: "Apakah maksud perkataan 'كُرْسِيٌّ' (Kursiyyun)?",
+            options: ["Meja", "Pintu", "Kerusi", "Papan Tulis"],
             answer: 2
         },
         {
             id: "BA_MF08",
-            question: "اڤاکه ارتي 'سَبُّورَةٌ'؟",
-            options: ["ڤاڤن توليس", "ميج", "بوکو", "ڤمباريس"],
+            question: "Apakah maksud perkataan 'سَبُّورَةٌ' (Sabburatun)?",
+            options: ["Papan Tulis", "Meja", "Buku", "Pembaris"],
             answer: 0
         },
         {
             id: "BA_MF09",
-            question: "اڤاکه ارتي 'مِقْلَمَةٌ'؟",
-            options: ["بيڬ", "بکس ڤينسيل", "بوکو", "ڤمادام"],
+            question: "Apakah maksud perkataan 'مِقْلَمَةٌ' (Miqlamatun)?",
+            options: ["Beg", "Bekas Pensel", "Buku", "Pemadam"],
             answer: 1
         },
         {
             id: "BA_MF10",
-            question: "اڤاکه ارتي 'دَفْتَرٌ'؟",
-            options: ["بوکو توليس", "بوکو تيكس", "ڤينا", "ميج"],
+            question: "Apakah maksud perkataan 'دَفْتَرٌ' (Daftarun)?",
+            options: ["Buku Tulis", "Buku Teks", "Pena", "Meja"],
             answer: 0
         },
         {
             id: "BA_MF11",
-            question: "اڤاکه ارتي 'رَأْسٌ'؟",
-            options: ["کڤالا", "رامبوت", "مات", "تليڠا"],
+            question: "Apakah maksud anggota badan 'رَأْسٌ' (Ra'sun)?",
+            options: ["Kepala", "Rambut", "Mata", "Telinga"],
             answer: 0
         },
         {
             id: "BA_MF12",
-            question: "اڤاکه ارتي 'عَيْنٌ'؟",
-            options: ["هيدوڠ", "مات", "تليڠا", "ملوت"],
+            question: "Apakah maksud anggota badan 'عَيْنٌ' ('Aynun)?",
+            options: ["Hidung", "Mata", "Telinga", "Mulut"],
             answer: 1
         },
         {
             id: "BA_MF13",
-            question: "اڤاکه ارتي 'أَنْفٌ'؟",
-            options: ["هيدوڠ", "مات", "ملوت", "ليده"],
+            question: "Apakah maksud anggota badan 'أَنْفٌ' (Anfun)?",
+            options: ["Hidung", "Mata", "Mulut", "Lidah"],
             answer: 0
         },
         {
             id: "BA_MF14",
-            question: "اڤاکه ارتي 'أُذُنٌ'؟",
-            options: ["مات", "تليڠا", "ڤيڤي", "داڬو"],
+            question: "Apakah maksud anggota badan 'أُذُنٌ' (Uzunun)?",
+            options: ["Mata", "Telinga", "Pipi", "Dagu"],
             answer: 1
         },
         {
             id: "BA_MF15",
-            question: "اڤاکه ارتي 'فَمٌ'؟",
-            options: ["ملوت", "ليده", "ڬيڬي", "تاڠن"],
+            question: "Apakah maksud anggota badan 'فَمٌ' (Famun)?",
+            options: ["Mulut", "Lidah", "Gigi", "Tangan"],
             answer: 0
         },
         {
             id: "BA_MF16",
-            question: "اڤاکه ارتي 'لِسَانٌ'؟",
-            options: ["ڬيڬي", "ليده", "ڤيڤي", "تاڠن"],
+            question: "Apakah maksud anggota badan 'لِسَانٌ' (Lisaanun)?",
+            options: ["Gigi", "Lidah", "Pipi", "Tangan"],
             answer: 1
         },
         {
             id: "BA_MF17",
-            question: "اڤاکه ارتي 'يَدٌ'؟",
-            options: ["کاکي", "تاڠن", "ڤروت", "دادa"],
+            question: "Apakah maksud anggota badan 'يَدٌ' (Yadun)?",
+            options: ["Kaki", "Tangan", "Perut", "Dada"],
             answer: 1
         },
         {
             id: "BA_MF18",
-            question: "اڤاکه ارتي 'رِجْلٌ'؟",
-            options: ["تاڠن", "کاکي", "کڤالا", "لوتوت"],
+            question: "Apakah maksud anggota badan 'رِجْلٌ' (Rijlun)?",
+            options: ["Tangan", "Kaki", "Kepala", "Lutut"],
             answer: 1
         },
         {
             id: "BA_MF19",
-            question: "اڤاکه ارتي 'شَعْرٌ'؟",
-            options: ["رامبوت", "مات", "کniڠ", "ڬيڬي"],
+            question: "Apakah maksud anggota badan 'شَعْرٌ' (Sya'run)?",
+            options: ["Rambut", "Mata", "Kening", "Gigi"],
             answer: 0
         },
         {
             id: "BA_MF20",
-            question: "اڤاکه ارتي 'أَسْنَانٌ'؟",
-            options: ["ليده", "ڬيڬي", "رامبوت", "ملوت"],
+            question: "Apakah maksud anggota badan 'أَسْنَانٌ' (Asnaanun)?",
+            options: ["Lidah", "Gigi", "Rambut", "Mulut"],
             answer: 1
         },
         {
             id: "BA_MF21",
-            question: "اڤاکه ارتي 'قِطٌّ'؟",
-            options: ["کوچيڠ", "انجيڠ", "ارنب", "کودا"],
+            question: "Apakah maksud haiwan 'قِطٌّ' (Qittun)?",
+            options: ["Kucing", "Anjing", "Arnab", "Kuda"],
             answer: 0
         },
         {
             id: "BA_MF22",
-            question: "اڤاکه ارتي 'أَسَدٌ'؟",
-            options: ["سيڠا", "هاريماءو", "ڬاجه", "زير افه"],
+            question: "Apakah maksud haiwan 'أَسَدٌ' (Asadun)?",
+            options: ["Singa", "Harimau", "Gajah", "Zirafah"],
             answer: 0
         },
         {
             id: "BA_MF23",
-            question: "اڤاکه ارتي 'فِيلٌ'؟",
-            options: ["کوچيڠ", "ڬاجه", "اونتا", "لمبو"],
+            question: "Apakah maksud haiwan 'فِيلٌ' (Fiilun)?",
+            options: ["Kucing", "Gajah", "Unta", "Lembu"],
             answer: 1
         },
         {
             id: "BA_MF24",
-            question: "اڤاکه ارتي 'أَرْنَبٌ'؟",
-            options: ["ارنب", "تيکوس", "مڠکارو", "بوروڠ"],
+            question: "Apakah maksud haiwan 'أَرْنَبٌ' (Arnabun)?",
+            options: ["Arnab", "Tikus", "Monyet", "Burung"],
             answer: 0
         },
         {
             id: "BA_MF25",
-            question: "اڤاکه ارتي 'طَائِرٌ'؟",
-            options: ["ايکن", "بوروڠ", "ايام", "ايتيك"],
+            question: "Apakah maksud haiwan 'طَائِرٌ' (Too'irun)?",
+            options: ["Ikan", "Burung", "Ayam", "Itik"],
             answer: 1
         },
         {
             id: "BA_MF26",
-            question: "اڤاکه ارتي 'سَمَكٌ'؟",
-            options: ["ايکن", "کاتق", "أوچيڠ", "بروق"],
+            question: "Apakah maksud haiwan 'سَمَكٌ' (Samakun)?",
+            options: ["Ikan", "Katak", "Kucing", "Beruk"],
             answer: 0
         },
         {
             id: "BA_MF27",
-            question: "اڤاکه ارتي 'بَقَرَةٌ'؟",
-            options: ["کمبيڠ", "لمبو", "کودا", "اونتا"],
+            question: "Apakah maksud haiwan 'بَقَرَةٌ' (Baqarotun)?",
+            options: ["Kambing", "Lembu", "Kuda", "Unta"],
             answer: 1
         },
         {
             id: "BA_MF28",
-            question: "اڤاکه ارتي 'غَنَمٌ'؟",
-            options: ["کمبيڠ", "لمبو", "روسا", "ايام"],
+            question: "Apakah maksud haiwan 'غَنَمٌ' (Ghanamun)?",
+            options: ["Kambing", "Lembu", "Rusa", "Ayam"],
             answer: 0
         },
         {
             id: "BA_MF29",
-            question: "اڤاکه ارتي 'حِصَانٌ'؟",
-            options: ["کودا", "ڬاجه", "سيڠا", "اونتا"],
+            question: "Apakah maksud haiwan 'حِصَانٌ' (Hisaanun)?",
+            options: ["Kuda", "Gajah", "Singa", "Unta"],
             answer: 0
         },
         {
             id: "BA_MF30",
-            question: "اڤاکه ارتي 'جَمَلٌ'؟",
-            options: ["لمبو", "کودا", "اونتا", "کمبيڠ"],
+            question: "Apakah maksud haiwan 'جَمَلٌ' (Jamalun)?",
+            options: ["Lembu", "Kuda", "Unta", "Kambing"],
             answer: 2
         },
         {
             id: "BA_MF31",
-            question: "اڤاکه ارتي 'أَبٌ'؟",
-            options: ["باڤ", "ايبo", "داتوق", "نينيك"],
+            question: "Dalam keluarga, apakah maksud 'أَبٌ' (Abun)?",
+            options: ["Bapa", "Ibu", "Datuk", "Nenek"],
             answer: 0
         },
         {
             id: "BA_MF32",
-            question: "اڤاکه ارتي 'أُمٌّ'؟",
-            options: ["باڤ", "ايبو", "کاکق", "ابڠ"],
+            question: "Dalam keluarga, apakah maksud 'أُمٌّ' (Ummun)?",
+            options: ["Bapa", "Ibu", "Kakak", "Abang"],
             answer: 1
         },
         {
             id: "BA_MF33",
-            question: "اڤاکه ارتي 'أَخٌ'؟",
-            options: ["ساودارا للاکي", "ساودارا ڤرمڤوان", "ايبو", "باڤ"],
+            question: "Dalam keluarga, apakah maksud 'أَخٌ' (Akhun)?",
+            options: ["Saudara Lelaki", "Saudara Perempuan", "Ibu", "Bapa"],
             answer: 0
         },
         {
             id: "BA_MF34",
-            question: "اڤاکه ارتي 'أُخْتٌ'؟",
-            options: ["ساودارا للاکي", "ساودارا ڤرمڤوان", "ايبو", "داتوق"],
+            question: "Dalam keluarga, apakah maksud 'أُخْتٌ' (Ukhtun)?",
+            options: ["Saudara Lelaki", "Saudara Perempuan", "Ibu", "Datuk"],
             answer: 1
         },
         {
             id: "BA_MF35",
-            question: "اڤاکه ارتي 'جَدٌّ'؟",
-            options: ["داتوق", "نينيك", "باڤ ساودارا", "ايبو ساودارا"],
+            question: "Dalam keluarga, apakah maksud 'جَدٌّ' (Jaddun)?",
+            options: ["Datuk", "Nenek", "Bapa Saudara", "Ibu Saudara"],
             answer: 0
         },
         {
             id: "BA_MF36",
-            question: "اڤاکه ارتي 'جَدَّةٌ'؟",
-            options: ["داتوق", "نينيك", "ايبو", "باڤ"],
+            question: "Dalam keluarga, apakah maksud 'جَدَّةٌ' (Jaddatun)?",
+            options: ["Datuk", "Nenek", "Ibu", "Bapa"],
             answer: 1
         },
         {
             id: "BA_MF37",
-            question: "اڤاکه ارتي 'بَيْتٌ'؟",
-            options: ["رومه", "سکوله", "کدائي", "مسجد"],
+            question: "Apakah maksud perkataan 'بَيْتٌ' (Baitun)?",
+            options: ["Rumah", "Sekolah", "Kedai", "Masjid"],
             answer: 0
         },
         {
             id: "BA_MF38",
-            question: "اڤاکه ارتي 'غُرْفَةٌ'؟",
-            options: ["روان", "بيليق", "داڤور", "روان تامو"],
+            question: "Apakah maksud perkataan 'غُرْفَةٌ' (Ghurfatun)?",
+            options: ["Ruang", "Bilik", "Dapur", "Ruang Tamu"],
             answer: 1
         },
         {
             id: "BA_MF39",
-            question: "اڤاکه ارتي 'مَطْبَخٌ'؟",
-            options: ["تاندس", "داڤور", "روan ماکن", "هلامن"],
+            question: "Apakah maksud perkataan 'مَطْبَخٌ' (Matbakhun)?",
+            options: ["Tandas", "Dapur", "Ruang Makan", "Halaman"],
             answer: 1
         },
         {
             id: "BA_MF40",
-            question: "اڤاکه ارتي 'بَابٌ'؟",
-            options: ["ڤينتو", "تيڠکڤ", "دينديڠ", "لانتاي"],
+            question: "Apakah maksud perkataan 'بَابٌ' (Baabun)?",
+            options: ["Pintu", "Tingkap", "Dinding", "Lantai"],
             answer: 0
         },
         {
             id: "BA_MF41",
-            question: "اڤاکه ارتي 'سَيَّارَةٌ'؟",
-            options: ["کريتا", "بس", "موتوسيكل", "باسيکل"],
+            question: "Apakah maksud kenderaan 'سَيَّارَةٌ' (Sayyaarotun)?",
+            options: ["Kereta", "Bas", "Motosikal", "Basikal"],
             answer: 0
         },
         {
             id: "BA_MF42",
-            question: "اڤاکه ارتي 'حَافِلَةٌ'؟",
-            options: ["کريتا", "بس", "لوري", "کريتا اڤي"],
+            question: "Apakah maksud kenderaan 'حَافِلَةٌ' (Haafilatun)?",
+            options: ["Kereta", "Bas", "Lori", "Kereta Api"],
             answer: 1
         },
         {
             id: "BA_MF43",
-            question: "اڤاکه ارتي 'دَرَّاجَةٌ'؟",
-            options: ["باسيکل", "کريتا", "کاڤل تيربڠ", "کريتا اڤي"],
+            question: "Apakah maksud kenderaan 'دَرَّاجَةٌ' (Darraajatun)?",
+            options: ["Basikal", "Kereta", "Kapal Terbang", "Kereta Api"],
             answer: 0
         },
         {
             id: "BA_MF44",
-            question: "اڤاکه ارتي 'طَائِرَةٌ'؟",
-            options: ["کاڤل تيربڠ", "کاڤل لاءوت", "بس", "کريتا"],
+            question: "Apakah maksud kenderaan 'طَائِرَةٌ' (Too'irotun)?",
+            options: ["Kapal Terbang", "Kapal Laut", "Bas", "Kereta"],
             answer: 0
         },
         {
             id: "BA_MF45",
-            question: "اڤاکه ارتي 'قِطَارٌ'؟",
-            options: ["کريتا اڤي", "کريتا", "بس", "باسيکل"],
+            question: "Apakah maksud kenderaan 'قِطَارٌ' (Qitoorun)?",
+            options: ["Kereta Api", "Kereta", "Bas", "Basikal"],
             answer: 0
         },
         {
             id: "BA_MF46",
-            question: "اڤاکه ارتي 'أَحْمَرُ'؟",
-            options: ["ميره", "بيرو", "هيجاو", "کونيڠ"],
+            question: "Apakah maksud warna 'أَحْمَرُ' (Ahmaru)?",
+            options: ["Merah", "Biru", "Hijau", "Kuning"],
             answer: 0
         },
         {
             id: "BA_MF47",
-            question: "اڤاکه ارتي 'أَزْرَقُ'؟",
-            options: ["ميره", "بيرو", "کونيڠ", "هيتام"],
+            question: "Apakah maksud warna 'أَزْرَقُ' (Azraqu)?",
+            options: ["Merah", "Biru", "Kuning", "Hitam"],
             answer: 1
         },
         {
             id: "BA_MF48",
-            question: "اڤاکه ارتي 'أَخْضَرُ'؟",
-            options: ["هيجاو", "ميره", "بيرو", "ڤوتيه"],
+            question: "Apakah maksud warna 'أَخْضَرُ' (Akhdhoru)?",
+            options: ["Hijau", "Merah", "Biru", "Putih"],
             answer: 0
         },
         {
             id: "BA_MF49",
-            question: "اڤاکه ارتي 'أَصْفَرُ'؟",
-            options: ["بيرو", "کونيڠ", "هيجاو", "ميره"],
+            question: "Apakah maksud warna 'أَصْفَرُ' (Asfaru)?",
+            options: ["Biru", "Kuning", "Hijau", "Merah"],
             answer: 1
         },
         {
             id: "BA_MF50",
-            question: "اڤاکه ارتي 'أَبْيَضُ'؟",
-            options: ["ڤوتيه", "هيتام", "بيرو", "کونيڠ"],
+            question: "Apakah maksud warna 'أَبْيَضُ' (Abyadhu)?",
+            options: ["Putih", "Hitam", "Biru", "Kuning"],
             answer: 0
         }
     ],
-    "qawaid": [
+
+"qawaid": [
         {
             id: "BA_QW01",
-            question: "اڤاکه ڤرکتاءن عرب باڬي 'اين' (للاکي / مذكر)؟",
-            options: ["هَذَا", "هَذِهِ", "ذَلِكَ", "تِلْكَ"],
+            question: "Pilih kata tunjuk Arab bagi 'Ini' untuk lelaki (Muzakkar).",
+            options: ["هَذَا (Haza)", "هَذِهِ (Hazihi)", "ذَلِكَ (Zalika)", "تِلْكَ (Tilka)"],
             answer: 0
         },
         {
             id: "BA_QW02",
-            question: "اڤاکه ڤرکتاءن عرب باڬي 'اين' (ڤرمڤوان / مؤنث)؟",
-            options: ["هَذَا", "هَذِهِ", "ذَلِكَ", "تِلْكَ"],
+            question: "مَا هُوَ اسْمُ الإِشَارَةِ العَرَبِيُّ لِـ 'Ini' (لِلْمُؤَنَّثِ)؟",
+            options: ["هَذَا (Haza)", "هَذِهِ (Hazihi)", "ذَلِكَ (Zalika)", "تِلْكَ (Tilka)"],
             answer: 1
         },
         {
             id: "BA_QW03",
-            question: "اڤاکه ڤرکتاءن عرب باڬي 'ايت' (للاکي / مذكر)؟",
-            options: ["هَذَا", "هَذِهِ", "ذَلِكَ", "تِلْكَ"],
+            question: "Pilih kata tunjuk Arab bagi 'Itu' untuk lelaki (Muzakkar).",
+            options: ["هَذَا (Haza)", "هَذِهِ (Hazihi)", "ذَلِكَ (Zalika)", "تِلْكَ (Tilka)"],
             answer: 2
         },
         {
             id: "BA_QW04",
-            question: "اڤاکه ڤرکتاءن عرب باڬي 'ايت' (ڤرمڤوان / مؤنث)؟",
-            options: ["هَذَا", "هَذِهِ", "ذَلِكَ", "تِلْكَ"],
+            question: "مَا هُوَ اسْمُ الإِشَارَةِ العَرَبِيُّ لِـ 'Itu' (لِلْمُؤَنَّثِ)؟",
+            options: ["هَذَا (Haza)", "هَذِهِ (Hazihi)", "ذَلِكَ (Zalika)", "تِلْكَ (Tilka)"],
             answer: 3
         },
         {
             id: "BA_QW05",
-            question: "اڤاکه ڬنتي نام ديري عرب باڬي 'دي' (للاکي)؟",
-            options: ["هُوَ", "هِيَ", "أَنَا", "نَحْنُ"],
+            question: "Apakah kata ganti nama Arab bagi 'Dia' (Lelaki)?",
+            options: ["هُوَ (Huwa)", "هِيَ (Hiya)", "أَنَا (Ana)", "نَحْنُ (Nahnu)"],
             answer: 0
         },
         {
             id: "BA_QW06",
-            question: "اڤاکه ڬنتي نام ديري عرب باڬي 'دي' (ڤرمڤوان)؟",
-            options: ["هُوَ", "هِيَ", "أَنَا", "نَحْنُ"],
+            question: "مَا هُوَ الضَّمِيرُ العَرَبِيُّ لِـ 'Dia' (لِلْمُؤَنَّثِ)؟",
+            options: ["هُوَ (Huwa)", "هِيَ (Hiya)", "أَنَا (Ana)", "نَحْنُ (Nahnu)"],
             answer: 1
         },
         {
             id: "BA_QW07",
-            question: "اڤاکه ڬنتي نام ديري عرب باڬي 'ساي'؟",
-            options: ["هُوَ", "هِيَ", "أَنَا", "نَحْنُ"],
+            question: "Apakah kata ganti nama Arab bagi 'Saya'?",
+            options: ["هُوَ (Huwa)", "هِيَ (Hiya)", "أَنَا (Ana)", "نَحْنُ (Nahnu)"],
             answer: 2
         },
         {
             id: "BA_QW08",
-            question: "اڤاکه ڬنتي نام ديري عرب باڬي 'کامي / کيت'؟",
-            options: ["هُمْ", "هُنَّ", "أَنَا", "نَحْنُ"],
+            question: "مَا هُوَ الضَّمِيرُ العَرَبِيُّ لِـ 'Kami / Kita'؟",
+            options: ["هُمْ (Hum)", "هُنَّ (Hunna)", "أَنَا (Ana)", "نَحْنُ (Nahnu)"],
             answer: 3
         },
         {
             id: "BA_QW09",
-            question: "اڤاکه ڬنتي نام ديري عرب باڬي 'کامو' (للاکي)؟",
-            options: ["أَنْتَ", "أَنْتِ", "أَنْتُمَا", "أَنْتُمْ"],
+            question: "Apakah kata ganti nama Arab bagi 'Awak' (Lelaki)?",
+            options: ["أَنْتَ (Anta)", "أَنْتِ (Anti)", "أَنْتُمَا (Antuma)", "أَنْتُمْ (Antum)"],
             answer: 0
         },
         {
             id: "BA_QW10",
-            question: "اڤاکه ڬنتي نام ديري عرب باڬي 'کامو' (ڤرمڤوان)؟",
-            options: ["أَنْتَ", "أَنْتِ", "أَنْتُمَا", "أَنْتُمْ"],
+            question: "مَا هُوَ الضَّمِيرُ العَرَبِيُّ لِـ 'Awak' (لِلْمُؤَنَّثِ)؟",
+            options: ["أَنْتَ (Anta)", "أَنْتِ (Anti)", "أَنْتُمَا (Antuma)", "أَنْتُمْ (Antum)"],
             answer: 1
         },
         {
             id: "BA_QW11",
-            question: "حروف جر 'فِي' برمقصود ___ .",
-            options: ["ددالم", "دأتس", "دري", "کڤد"],
+            question: "Kata sendi 'فِي' (Fi) bermaksud ___ .",
+            options: ["Di dalam", "Di atas", "Dari", "Kepada"],
             answer: 0
         },
         {
             id: "BA_QW12",
-            question: "حروف جر 'عَلَى' برمقصود ___ .",
-            options: ["ددالم", "دأتس", "دري", "کڤد"],
+            question: "مَا مَعْنَى حَرْفِ الجَرِّ 'عَلَى'؟",
+            options: ["Di dalam", "Di atas (bersentuh)", "Dari", "Kepada"],
             answer: 1
         },
         {
             id: "BA_QW13",
-            question: "حروف جر 'مِنْ' برمقصود ___ .",
-            options: ["ددالم", "دأتس", "دري", "کڤد"],
+            question: "Kata sendi 'مِنْ' (Min) bermaksud ___ .",
+            options: ["Di dalam", "Di atas", "Dari", "Kepada"],
             answer: 2
         },
         {
             id: "BA_QW14",
-            question: "حروف جر 'إِلَى' برمقصود ___ .",
-            options: ["ددالم", "دأتس", "دري", "کڤد / ک"],
+            question: "مَا مَعْنَى حَرْفِ الجَرِّ 'إِلَى'؟",
+            options: ["Di dalam", "Di atas", "Dari", "Ke / Kepada"],
             answer: 3
         },
         {
             id: "BA_QW15",
-            question: "ڤرکتاءن 'مَعَ' دالم بهاس عرب برمقصود ___ .",
-            options: ["برسام / دڠن", "تنڤا", "کران", "هيڠڬ"],
+            question: "Kata sendi 'مَعَ' (Ma'a) bermaksud ___ .",
+            options: ["Bersama / Dengan", "Tanpa", "Kerana", "Hingga"],
             answer: 0
         },
         {
             id: "BA_QW16",
-            question: "کات تاڽ 'مَنْ' برمقصود ___ .",
-            options: ["اڤ", "سياڤ", "بيل", "دمان"],
+            question: "مَا مَعْنَى أَدَاةِ الاِسْتِفْهَامِ 'مَنْ'؟",
+            options: ["Apa", "Siapa", "Bila", "Di mana"],
             answer: 1
         },
         {
             id: "BA_QW17",
-            question: "کات تاڽ 'مَا' اتاو 'مَاذَا' برمقصود ___ .",
-            options: ["اڤ", "سياڤ", "بيل", "دمان"],
+            question: "Kata tanya 'مَا' (Ma) atau 'مَاذَا' (Maza) bermaksud ___ .",
+            options: ["Apa", "Siapa", "Bila", "Di mana"],
             answer: 0
         },
         {
             id: "BA_QW18",
-            question: "کات تاڽ 'أَيْنَ' برمقصود ___ .",
-            options: ["اڤ", "سياڤ", "بيل", "دمان"],
+            question: "مَا مَعْنَى أَدَاةِ الاِسْتِفْهَامِ 'أَيْنَ'؟",
+            options: ["Apa", "Siapa", "Bila", "Di mana"],
             answer: 3
         },
         {
             id: "BA_QW19",
-            question: "کات تاڽ 'مَتَى' برمقصود ___ .",
-            options: ["اڤ", "سياڤ", "بيل", "باڬايمانا"],
+            question: "Kata tanya 'مَتَى' (Mata) bermaksud ___ .",
+            options: ["Apa", "Siapa", "Bila", "Bagaimana"],
             answer: 2
         },
         {
             id: "BA_QW20",
-            question: "کات تاڽ 'كَيْفَ' برمقصود ___ .",
-            options: ["براڤ", "سياڤ", "بيل", "باڬايمانا"],
+            question: "مَا مَعْنَى أَدَاةِ الاِسْتِفْهَامِ 'كَيْفَ'؟",
+            options: ["Berapa", "Siapa", "Bila", "Bagaimana"],
             answer: 3
         },
         {
             id: "BA_QW21",
-            question: "کات تاڽ 'هَلْ' برمقصود ___ .",
-            options: ["اداکه", "کناڤ", "بيل", "براڤ"],
+            question: "Kata tanya 'هَلْ' (Hal) bermaksud ___ .",
+            options: ["Adakah", "Kenapa", "Bila", "Berapa"],
             answer: 0
         },
         {
             id: "BA_QW22",
-            question: "کات تاڽ 'كَمْ' برمقصود ___ .",
-            options: ["اداکه", "کناڤ", "بيل", "براڤ"],
+            question: "مَا مَعْنَى أَدَاةِ الاِسْتِفْهَامِ 'كَمْ'؟",
+            options: ["Adakah", "Kenapa", "Bila", "Berapa"],
             answer: 3
         },
         {
             id: "BA_QW23",
-            question: "کات تاڽ 'لِمَاذَا' برمقصود ___ .",
-            options: ["اداکه", "کناڤ / مڠاڤ", "بيل", "براڤ"],
+            question: "Kata tanya 'لِمَاذَا' (Limaza) bermaksud ___ .",
+            options: ["Adakah", "Kenapa / Mengapa", "Bila", "Berapa"],
             answer: 1
         },
         {
             id: "BA_QW24",
-            question: "اڤاکه تندا اوتاما باڬي کلمة 'مؤنث' (ڤرمڤوان) دالم بهاس عرب؟",
-            options: ["اليف لام (ال)", "تاء مربوطة (ة)", "واو نون (ون)", "ياء نون (ين)"],
+            question: "مَا هُوَ الحَرْفُ الَّذِي يُعْتَبَرُ عَلَامَةً لِلتَّأْنِيثِ فِي آخِرِ الكَلِمَةِ؟",
+            options: ["Alif Lam (ال)", "Ta' Marbuthah (ة)", "Waw Nun (ون)", "Ya' Nun (ين)"],
             answer: 1
         },
         {
             id: "BA_QW25",
-            question: "انتارا بريکوت، کلمة ماناکه مروڤاکن 'مؤنث' (ڤرمڤوان)؟",
+            question: "Antara berikut, perkataan manakah yang merujuk kepada perempuan (Muannath)?",
             options: ["قَلَمٌ", "كِتَابٌ", "مَدْرَسَةٌ", "مَكْتَبٌ"],
             answer: 2
         },
         {
             id: "BA_QW26",
-            question: "انتارا بريکوت، کلمة ماناکه مروڤاکن 'مذكر' (للاکي)؟",
-            options: ["سَبُّورَةٌ", "مِسْطَرَةٌ", "حَقِيبَةٌ", "قَلَمٌ"],
+            question: "أَيٌّ مِنَ الكَلِمَاتِ التَّالِيَةِ هِيَ 'مُذَكَّرٌ'؟",
+            options: ["سَبُّورَةٌ", "مِسْطَرَةٌ", "حَقِيبَةٌ", "قَلَمٌ"],
             answer: 3
         },
         {
             id: "BA_QW27",
-            question: "کلمة 'مُسْلِمٌ' اڤابيلا دتولکارکن کڤد مؤنث منجادي ___ .",
+            question: "Perkataan 'مُسْلِمٌ' (Seorang lelaki Islam) apabila ditukar kepada perempuan menjadi ___ .",
             options: ["مُسْلِمَاتٌ", "مُسْلِمَةٌ", "مُسْلِمَانِ", "مُسْلِمُونَ"],
             answer: 1
         },
         {
             id: "BA_QW28",
-            question: "'فِعْلُ المَاضِي' برمقصود کات کرجا ___ .",
-            options: ["سدڠ برلاکو", "تله برلاکو (Past)", "ارهن", "لارڠن"],
+            question: "مَا مَعْنَى 'فِعْلُ المَاضِي'؟",
+            options: ["Sedang berlaku", "Telah berlaku (Past Tense)", "Arahan", "Larangan"],
             answer: 1
         },
         {
             id: "BA_QW29",
-            question: "'فِعْلُ المُضَارِع' برمقصود کات کرجا ___ .",
-            options: ["سدڠ / اکن برلاکو", "تله برلاکو", "ارهن", "لارڠن"],
+            question: "Pilih kata kerja yang bermaksud perbuatan 'Sedang berlaku' (Fi'il Mudhari').",
+            options: ["Sedang / Akan berlaku", "Telah berlaku", "Arahan", "Larangan"],
             answer: 0
         },
         {
             id: "BA_QW30",
-            question: "'فِعْلُ الأَمْرِ' برمقصود کات کرجا ___ .",
-            options: ["سدڠ برلاکو", "تله برلاکو", "ارهن (Imperative)", "لارڠن"],
+            question: "مَا مَعْنَى 'فِعْلُ الأَمْرِ'؟",
+            options: ["Sedang berlaku", "Telah berlaku", "Arahan (Imperative)", "Larangan"],
             answer: 2
         },
         {
             id: "BA_QW31",
-            question: "کلمة 'ذَهَبَ' برمقصود ___ .",
-            options: ["دي تله ڤرڬي", "دي سدڠ ڤرڬي", "ڤرڬيله", "ساي ڤرڬي"],
+            question: "Perkataan 'ذَهَبَ' (Zahaba) bermaksud ___ .",
+            options: ["Dia telah pergi", "Dia sedang pergi", "Pergilah!", "Saya pergi"],
             answer: 0
         },
         {
             id: "BA_QW32",
-            question: "کلمة 'يَذْهَبُ' برمقصود ___ .",
-            options: ["دي تله ڤرڬي", "دي سدڠ ڤرڬي", "ڤرڬيله", "ساي ڤرڬي"],
+            question: "مَا مَعْنَى الكَلِمَةِ 'يَذْهَبُ'؟",
+            options: ["Dia telah pergi", "Dia sedang pergi", "Pergilah!", "Saya pergi"],
             answer: 1
         },
         {
             id: "BA_QW33",
-            question: "کلمة 'اِذْهَبْ' برمقصود ___ .",
-            options: ["دي تله ڤرڬي", "دي سدڠ ڤرڬي", "ڤرڬيله", "ساي ڤرڬي"],
+            question: "Perkataan 'اِذْهَبْ' (Izhab) bermaksud ___ .",
+            options: ["Dia telah pergi", "Dia sedang pergi", "Pergilah!", "Saya pergi"],
             answer: 2
         },
         {
             id: "BA_QW34",
-            question: "اڤابيلا 'أَنَا' (ساي) سدڠ ملقوکن سسواتو، فعل المضارع برملا دڠن حروف ___ .",
-            options: ["ي", "ت", "أ (اليف)", "ن"],
+            question: "إِذَا كَانَ الفَاعِلُ 'أَنَا'، يَبْدَأُ الفِعْلُ المُضَارِعُ بِحَرْفِ ___ .",
+            options: ["ي (Ya)", "ت (Ta)", "أ (Alif)", "ن (Nun)"],
             answer: 2
         },
         {
             id: "BA_QW35",
-            question: "اڤابيلا 'نَحْنُ' (کامي) سدڠ ملقوکن سسواتو، فعل المضارع برملا دڠن حروف ___ .",
-            options: ["ي", "ت", "أ", "ن (نون)"],
+            question: "Jika 'Kami' (نَحْنُ) sedang melakukan sesuatu, kata kerja tersebut mesti bermula dengan huruf ___ .",
+            options: ["ي (Ya)", "ت (Ta)", "أ (Alif)", "ن (Nun)"],
             answer: 3
         },
         {
             id: "BA_QW36",
-            question: "'أَنَا ___ إِلَى المَدْرَسَةِ'. ڤيليه کات کرجا يڠ بتول.",
+            question: "أَكْمِلِ الجُمْلَةَ: 'أَنَا ___ إِلَى المَدْرَسَةِ'.",
             options: ["يَذْهَبُ", "تَذْهَبُ", "أَذْهَبُ", "نَذْهَبُ"],
             answer: 2
         },
         {
             id: "BA_QW37",
-            question: "'نَحْنُ ___ القُرْآنَ'. ڤيليه کات کرجا يڠ بتول.",
+            question: "Lengkapkan ayat: 'نَحْنُ ___ القُرْآنَ' (Kami ___ Al-Quran).",
             options: ["يَقْرَأُ", "نَقْرَأُ", "أَقْرَأُ", "تَقْرَأُ"],
             answer: 1
         },
         {
             id: "BA_QW38",
-            question: "کلمة 'كَتَبَ' برمقصود ___ .",
-            options: ["تله باچ", "تله توليس", "تله دودوق", "تله ماکن"],
+            question: "مَا مَعْنَى الكَلِمَةِ 'كَتَبَ'؟",
+            options: ["Telah membaca", "Telah menulis", "Telah duduk", "Telah makan"],
             answer: 1
         },
         {
             id: "BA_QW39",
-            question: "کلمة 'قَرَأَ' برمقصود ___ .",
-            options: ["تله باچ", "تله توليس", "تله دودوق", "تله ماکن"],
+            question: "Perkataan 'قَرَأَ' (Qara'a) bermaksud ___ .",
+            options: ["Telah membaca", "Telah menulis", "Telah duduk", "Telah makan"],
             answer: 0
         },
         {
             id: "BA_QW40",
-            question: "کلمة 'جَلَسَ' برمقصود ___ .",
-            options: ["تله باچ", "تله توليس", "تله دودوق", "تله ماکن"],
+            question: "مَا مَعْنَى الكَلِمَةِ 'جَلَسَ'؟",
+            options: ["Telah membaca", "Telah menulis", "Telah duduk", "Telah makan"],
             answer: 2
         },
         {
             id: "BA_QW41",
-            question: "حروف حبوڠ 'وَ' (واو) دالم بهاس عرب برمقصود ___ .",
-            options: ["اتاو", "دان", "تتاڤي", "کمودين"],
+            question: "Kata hubung 'وَ' (Waw) dalam Bahasa Arab bermaksud ___ .",
+            options: ["Atau", "Dan", "Tetapi", "Kemudian"],
             answer: 1
         },
         {
             id: "BA_QW42",
-            question: "حروف حبوڠ 'أَوْ' دالم بهاس عرب برمقصود ___ .",
-            options: ["اتاو", "دان", "تتاڤي", "کمودين"],
+            question: "مَا مَعْنَى حَرْفِ العَطْفِ 'أَوْ'؟",
+            options: ["Atau", "Dan", "Tetapi", "Kemudian"],
             answer: 0
         },
         {
             id: "BA_QW43",
-            question: "کلمة يڠ منونجوقکن بيلڠن 'ساتو' دسبوت ___ .",
-            options: ["مُفْرَد (Mufrad)", "مُثَنَّى (Muthanna)", "جَمْع (Jama')", "فِعْل (Fi'il)"],
+            question: "Perkataan 'مُفْرَد' (Mufrad) merujuk kepada bilangan benda yang berjumlah ___ .",
+            options: ["Satu", "Dua", "Tiga atau lebih", "Tiada"],
             answer: 0
         },
         {
             id: "BA_QW44",
-            question: "کلمة يڠ منونجوقکن بيلڠن 'دوا' دسبوت ___ .",
-            options: ["مُفْرَد", "مُثَنَّى (Muthanna)", "جَمْع", "فِعْل"],
+            question: "إِلَى أَيِّ عَدَدٍ تُشِيرُ كَلِمَةُ 'مُثَنَّى'؟",
+            options: ["Satu", "Dua", "Tiga atau lebih", "Tiada"],
             answer: 1
         },
         {
             id: "BA_QW45",
-            question: "کلمة يڠ منونجوقکن بيلڠن 'باڽق' (تيڬ اتاو لبيه) دسبوت ___ .",
-            options: ["مُفْرَد", "مُثَنَّى", "جَمْع (Jama')", "فِعْل"],
+            question: "Perkataan 'جَمْع' (Jama') merujuk kepada bilangan benda yang berjumlah ___ .",
+            options: ["Satu", "Dua", "Banyak (Tiga atau lebih)", "Tiada"],
             answer: 2
         },
         {
             id: "BA_QW46",
-            question: "کات اره 'أَمَامَ' برمقصود ___ .",
-            options: ["دبلکڠ", "دهادڤن / ددڤن", "دباوه", "دسيسي"],
+            question: "مَا مَعْنَى ظَرْفِ المَكَانِ 'أَمَامَ'؟",
+            options: ["Di belakang", "Di hadapan / Di depan", "Di bawah", "Di sisi"],
             answer: 1
         },
         {
             id: "BA_QW47",
-            question: "کات اره 'وَرَاءَ' اتاو 'خَلْفَ' برمقصود ___ .",
-            options: ["دبلکڠ", "دهادڤن", "دباوه", "دسيسي"],
+            question: "Kata arah 'وَرَاءَ' (Wara'a) atau 'خَلْفَ' (Kholfa) bermaksud ___ .",
+            options: ["Di belakang", "Di hadapan", "Di bawah", "Di sisi"],
             answer: 0
         },
         {
             id: "BA_QW48",
-            question: "کات اره 'تَحْتَ' برمقصود ___ .",
-            options: ["دأتس", "دهادڤن", "دباوه", "دسيسي"],
+            question: "مَا مَعْنَى ظَرْفِ المَكَانِ 'تَحْتَ'؟",
+            options: ["Di atas", "Di hadapan", "Di bawah", "Di sisi"],
             answer: 2
         },
         {
             id: "BA_QW49",
-            question: "کات اره 'بَيْنَ' برمقصود ___ .",
-            options: ["دأنتارا", "دهادڤن", "دباوه", "دسيسي"],
+            question: "Kata arah 'بَيْنَ' (Bayna) bermaksud ___ .",
+            options: ["Di antara", "Di hadapan", "Di bawah", "Di sisi"],
             answer: 0
         },
         {
             id: "BA_QW50",
-            question: "کات اره 'جَانِبَ' برمقصود ___ .",
-            options: ["دأنتارا", "دهادڤن", "دباوه", "دسبله / دسيسي"],
+            question: "مَا مَعْنَى ظَرْفِ المَكَانِ 'جَانِبَ'؟",
+            options: ["Di antara", "Di hadapan", "Di bawah", "Di sebelah / Di sisi"],
             answer: 3
         }
     ],
-    "hiwar": [
+
+"hiwar": [
         {
             id: "BA_HW01",
-            question: "اڤاکه جوابن يڠ بتول باڬي اوچڤن 'السَّلَامُ عَلَيْكُمْ'؟",
-            options: ["وَعَلَيْكُمُ السَّلَامُ", "صَبَاحَ النُّورِ", "شُكْرًا", "عَفْوًا"],
+            question: "مَا هُوَ الرَّدُّ الصَّحِيحُ لِتَحِيَّةِ 'السَّلَامُ عَلَيْكُمْ'؟",
+            options: ["وَعَلَيْكُمُ السَّلَامُ (Wa'alaikumussalam)", "صَبَاحَ النُّورِ (Sabahan Nur)", "شُكْرًا (Syukran)", "عَفْوًا ('Afwan)"],
             answer: 0
         },
         {
             id: "BA_HW02",
-            question: "اڤاکه جوابن باڬي اوچڤن 'صَبَاحَ الخَيْرِ' (سلامت ڤاڬي)؟",
-            options: ["مَسَاءَ النُّورِ", "صَبَاحَ النُّورِ", "أَهْلًا بِكَ", "مَعَ السَّلَامَةِ"],
+            question: "مَا هُوَ الرَّدُّ لِتَحِيَّةِ 'صَبَاحَ الخَيْرِ'؟",
+            options: ["مَسَاءَ النُّورِ (Masa'an Nur)", "صَبَاحَ النُّورِ (Sabahan Nur)", "أَهْلًا بِكَ (Ahlan bika)", "مَعَ السَّلَامَةِ (Ma'as salamah)"],
             answer: 1
         },
         {
             id: "BA_HW03",
-            question: "اڤاکه جوابن باڬي اوچڤن 'مَسَاءَ الخَيْرِ' (سلامت ڤتڠ)؟",
-            options: ["صَبَاحَ النُّورِ", "مَسَاءَ النُّورِ", "شُكْرًا", "إِلَى اللِّقَاءِ"],
+            question: "مَا هُوَ الرَّدُّ لِتَحِيَّةِ 'مَسَاءَ الخَيْرِ'؟",
+            options: ["صَبَاحَ النُّورِ (Sabahan Nur)", "مَسَاءَ النُّورِ (Masa'an Nur)", "شُكْرًا (Syukran)", "إِلَى اللِّقَاءِ (Ilalliqa')"],
             answer: 1
         },
         {
             id: "BA_HW04",
-            question: "اڤاکه جوابن باڬي اوچڤن 'أَهْلًا وَسَهْلًا' (سلامت داتڠ)؟",
-            options: ["أَهْلًا بِكَ", "مَسَاءَ النُّورِ", "صَبَاحَ النُّورِ", "عَفْوًا"],
+            question: "مَا هُوَ الرَّدُّ لِتَحِيَّةِ 'أَهْلًا وَسَهْلًا'؟",
+            options: ["أَهْلًا بِكَ (Ahlan bika)", "مَسَاءَ النُّورِ (Masa'an Nur)", "صَبَاحَ النُّورِ (Sabahan Nur)", "عَفْوًا ('Afwan)"],
             answer: 0
         },
         {
             id: "BA_HW05",
-            question: "اڤاکه مقصود سوءالن 'كَيْفَ حَالُكَ؟'؟",
-            options: ["سياڤاکه نام کامو؟", "اڤ خبر کامو؟", "دماناکه کامو؟", "براڤاکه عمور کامو؟"],
+            question: "مَا مَعْنَى السُّؤَالِ 'كَيْفَ حَالُكَ؟'؟",
+            options: ["Siapakah nama kamu?", "Apa khabar kamu?", "Di manakah kamu?", "Berapakah umur kamu?"],
             answer: 1
         },
         {
             id: "BA_HW06",
-            question: "اڤاکه جوابن يڠ بتول باڬي سوءالن 'كَيْفَ حَالُكَ؟'؟",
-            options: ["اِسْمِي أَحْمَد", "أَنَا مِنْ مَالِيزِيَا", "أَنَا بِخَيْرٍ، الحَمْدُ لِلَّهِ", "عُمْرِي عَشَرَة"],
+            question: "مَا هِيَ الإِجَابَةُ الصَّحِيحَةُ لِسُؤَالِ 'كَيْفَ حَالُكَ؟'؟",
+            options: ["اِسْمِي أَحْمَد (Ismi Ahmad)", "أَنَا مِنْ مَالِيزِيَا (Ana min Malaysia)", "أَنَا بِخَيْرٍ، الحَمْدُ لِلَّهِ (Ana bikhair, Alhamdulillah)", "عُمْرِي عَشَرَة (Umri 'asyarah)"],
             answer: 2
         },
         {
             id: "BA_HW07",
-            question: "اڤاکه مقصود 'مَا اسْمُكَ؟'؟",
-            options: ["اڤ خبر کامو؟", "دماناکه کامو؟", "سياڤاکه نام کامو؟", "دري ماناکه کامو؟"],
+            question: "مَا مَعْنَى السُّؤَالِ 'مَا اسْمُكَ؟'؟",
+            options: ["Apa khabar kamu?", "Di manakah kamu?", "Siapakah nama kamu?", "Dari manakah kamu?"],
             answer: 2
         },
         {
             id: "BA_HW08",
-            question: "اڤاکه جوابن يڠ بتول باڬي 'مَا اسْمُكَ؟'؟",
-            options: ["أَنَا بِخَيْرٍ", "اِسْمِي...", "أَنَا مِنْ...", "شُكْرًا"],
+            question: "مَا هِيَ الإِجَابَةُ الصَّحِيحَةُ لِـ 'مَا اسْمُكَ؟'؟",
+            options: ["أَنَا بِخَيْرٍ (Ana bikhair)", "اِسْمِي... (Ismi...)", "أَنَا مِنْ... (Ana min...)", "شُكْرًا (Syukran)"],
             answer: 1
         },
         {
             id: "BA_HW09",
-            question: "اڤاکه مقصود 'مَنْ أَنْتَ؟'؟",
-            options: ["سياڤاکه کامو؟", "اڤاکه اين؟", "بيلکه کامو داتڠ؟", "کناڤاکه کامو ماراه؟"],
+            question: "مَا مَعْنَى 'مَنْ أَنْتَ؟'؟",
+            options: ["Siapakah kamu?", "Apakah ini?", "Bilakah kamu datang?", "Kenapakah kamu marah?"],
             answer: 0
         },
         {
             id: "BA_HW10",
-            question: "اڤاکه مقصود 'مِنْ أَيْنَ أَنْتَ؟'؟",
-            options: ["سياڤاکه نام کامو؟", "دري ماناکه کامو براصل؟", "اڤاکه ڤکرجاءن کامو؟", "براڤاکه عمور کامو؟"],
+            question: "مَا مَعْنَى 'مِنْ أَيْنَ أَنْتَ؟'؟",
+            options: ["Siapakah nama kamu?", "Dari manakah kamu berasal?", "Apakah pekerjaan kamu?", "Berapakah umur kamu?"],
             answer: 1
         },
         {
             id: "BA_HW11",
-            question: "اڤاکه جوابن يڠ بتول باڬي 'مِنْ أَيْنَ أَنْتَ؟'؟",
-            options: ["اِسْمِي عَلِيّ", "أَنَا بِخَيْرٍ", "أَنَا مِنْ مَالِيزِيَا", "شُكْرًا"],
+            question: "مَا هِيَ الإِجَابَةُ الصَّحِيحَةُ لِـ 'مِنْ أَيْنَ أَنْتَ؟'؟",
+            options: ["اِسْمِي عَلِيّ (Ismi 'Ali)", "أَنَا بِخَيْرٍ (Ana bikhair)", "أَنَا مِنْ مَالِيزِيَا (Ana min Malaysia)", "شُكْرًا (Syukran)"],
             answer: 2
         },
         {
             id: "BA_HW12",
-            question: "اڤاکه مقصود 'أَيْنَ تَسْكُنُ؟'؟",
-            options: ["دماناکه کامو تيڠڬل؟", "کماناکه کامو ڤرڬي؟", "دري ماناکه کامو؟", "سياڤاکه کامو؟"],
+            question: "مَا مَعْنَى 'أَيْنَ تَسْكُنُ؟'؟",
+            options: ["Di manakah kamu tinggal?", "Ke manakah kamu pergi?", "Dari manakah kamu?", "Siapakah kamu?"],
             answer: 0
         },
         {
             id: "BA_HW13",
-            question: "اڤاکه مقصود 'كَمْ عُمْرُكَ؟'؟",
-            options: ["براڤاکه هرڬ اين؟", "براڤاکه بيلڠن مريك؟", "براڤاکه عمور کامو؟", "ڤوکول براڤاکه سکارڠ؟"],
+            question: "مَا مَعْنَى 'كَمْ عُمْرُكَ؟'؟",
+            options: ["Berapakah harga ini?", "Berapakah bilangan mereka?", "Berapakah umur kamu?", "Pukul berapakah sekarang?"],
             answer: 2
         },
         {
             id: "BA_HW14",
-            question: "اڤاکه مقصود اوچڤن 'شُكْرًا'؟",
-            options: ["تريما کاسيه", "سام-سام", "مينتا معاف", "سلامت ڤاڬي"],
+            question: "مَا مَعْنَى كَلِمَةِ 'شُكْرًا'؟",
+            options: ["Terima kasih", "Sama-sama", "Minta maaf", "Selamat pagi"],
             answer: 0
         },
         {
             id: "BA_HW15",
-            question: "اڤاکه جوابن يڠ سسواي اڤابيلا سسأورڠ مڠوچڤکن 'شُكْرًا'؟",
-            options: ["آسِفٌ", "عَفْوًا (سام-سام)", "مَعَ السَّلَامَةِ", "أَهْلًا بِكَ"],
+            question: "مَاذَا تَرُدُّ عِنْدَمَا يَقُولُ شَخْصٌ 'شُكْرًا'؟",
+            options: ["آسِفٌ (Asifun)", "عَفْوًا ('Afwan / Sama-sama)", "مَعَ السَّلَامَةِ (Ma'as salamah)", "أَهْلًا بِكَ (Ahlan bika)"],
             answer: 1
         },
         {
             id: "BA_HW16",
-            question: "اڤاکه مقصود اوچڤن 'آسِفٌ'؟",
-            options: ["ساي ڤرڬي", "ساي ستوجو", "ساي ڬمبيرا", "ساي مينتا معاف"],
+            question: "مَا مَعْنَى كَلِمَةِ 'آسِفٌ'؟",
+            options: ["Saya pergi", "Saya setuju", "Saya gembira", "Saya minta maaf"],
             answer: 3
         },
         {
             id: "BA_HW17",
-            question: "اڤاکه مقصود 'إِلَى اللِّقَاءِ'؟",
-            options: ["سلامت داتڠ", "سلامت هاري راي", "جومڤا لاڬي", "سلامت مالم"],
+            question: "مَا مَعْنَى العِبَارَةِ 'إِلَى اللِّقَاءِ'؟",
+            options: ["Selamat datang", "Selamat hari raya", "Jumpa lagi", "Selamat malam"],
             answer: 2
         },
         {
             id: "BA_HW18",
-            question: "اڤاکه جوابن يڠ سسواي باڬي 'إِلَى اللِّقَاءِ'؟",
-            options: ["مَعَ السَّلَامَةِ", "عَفْوًا", "صَبَاحَ النُّورِ", "أَهْلًا بِكَ"],
+            question: "مَا هُوَ الرَّدُّ المُنَاسِبُ لِـ 'إِلَى اللِّقَاءِ'؟",
+            options: ["مَعَ السَّلَامَةِ (Ma'as salamah)", "عَفْوًا ('Afwan)", "صَبَاحَ النُّورِ (Sabahan Nur)", "أَهْلًا بِكَ (Ahlan bika)"],
             answer: 0
         },
         {
             id: "BA_HW19",
-            question: "اڤاکه مقصود 'مَعَ السَّلَامَةِ'؟",
-            options: ["تريما کاسيه", "سلامت تيڠڬل / سموڬ سلامت", "مينتا معاف", "سام-سام"],
+            question: "مَا مَعْنَى 'مَعَ السَّلَامَةِ'؟",
+            options: ["Terima kasih", "Selamat tinggal / Semoga selamat", "Minta maaf", "Sama-sama"],
             answer: 1
         },
         {
             id: "BA_HW20",
-            question: "اڤاکه مقصود 'مَاذَا تَفْعَلُ؟'؟",
-            options: ["اڤ يڠ سدڠ کامو لکوکن؟", "کماناکه کامو ڤرڬي؟", "دماناکه کامو تيڠڬل؟", "سياڤاکه يڠ ملقوکنڽ؟"],
+            question: "مَا مَعْنَى 'مَاذَا تَفْعَلُ؟'؟",
+            options: ["Apa yang sedang kamu lakukan?", "Ke manakah kamu pergi?", "Di manakah kamu tinggal?", "Siapakah yang melakukannya?"],
             answer: 0
         },
         {
             id: "BA_HW21",
-            question: "اڤاکه مقصود کلمة 'نَعَمْ'؟",
-            options: ["تيدق", "يا", "مڠکين", "تيدق تاهو"],
+            question: "مَا مَعْنَى كَلِمَةِ 'نَعَمْ'؟",
+            options: ["Tidak", "Ya", "Mungkin", "Tidak tahu"],
             answer: 1
         },
         {
             id: "BA_HW22",
-            question: "اڤاکه مقصود کلمة 'لَا'؟",
-            options: ["يا", "بوليه", "تيدق", "اوکى"],
+            question: "مَا مَعْنَى كَلِمَةِ 'لَا'؟",
+            options: ["Ya", "Boleh", "Tidak", "Okey"],
             answer: 2
         },
         {
             id: "BA_HW23",
-            question: "اڤاکه مقصود 'تَفَضَّلْ'؟",
-            options: ["توڠڬو سبنتر", "مينتا ديري", "سيلاکن (جمڤوت)", "تريما کاسيه"],
+            question: "مَا مَعْنَى 'تَفَضَّلْ'؟",
+            options: ["Tunggu sebentar", "Minta diri", "Silakan (Jemput)", "Terima kasih"],
             answer: 2
         },
         {
             id: "BA_HW24",
-            question: "اڤاکه مقصود 'لَحْظَةً مِنْ فَضْلِكَ'؟",
-            options: ["تريما کاسيه باڽق٢", "توڠڬو سبنتر", "سيلاکن ماسوق", "ساي مينتا معاف"],
+            question: "مَا مَعْنَى عِبَارَةِ 'لَحْظَةً مِنْ فَضْلِكَ'؟",
+            options: ["Terima kasih banyak-banyak", "Tunggu sebentar", "Silakan masuk", "Saya minta maaf"],
             answer: 1
         },
         {
             id: "BA_HW25",
-            question: "اڤاکه مقصود 'أَنَا طَالِبٌ'؟",
-            options: ["ساي سأورڠ ڬورو", "ساي سأورڠ ڤلاجر", "ساي سأورڠ دوکتور", "ساي سأورڠ ڤوليس"],
+            question: "مَا مَعْنَى 'أَنَا طَالِبٌ'؟",
+            options: ["Saya seorang guru", "Saya seorang pelajar", "Saya seorang doktor", "Saya seorang polis"],
             answer: 1
         },
         {
             id: "BA_HW26",
-            question: "اڤاکه مقصود 'أَنَا مُعَلِّمٌ'؟",
-            options: ["ساي سأورڠ ڤلاجر", "ساي سأورڠ ڬورو", "ساي سأورڠ ڤوليس", "ساي سأورڠ جوروترواتم"],
+            question: "مَا مَعْنَى 'أَنَا مُعَلِّمٌ'؟",
+            options: ["Saya seorang pelajar", "Saya seorang guru", "Saya seorang polis", "Saya seorang jururawat"],
             answer: 1
         },
         {
             id: "BA_HW27",
-            question: "اڤاکه مقصود 'هَلْ أَنْتَ مَرِيضٌ؟'؟",
-            options: ["اداکه کامو ساكيت؟", "اداکه کامو سديه؟", "اداکه کامو سيهت؟", "اداکه کامو لاڤر؟"],
+            question: "مَا مَعْنَى 'هَلْ أَنْتَ مَرِيضٌ؟'؟",
+            options: ["Adakah kamu sakit?", "Adakah kamu sedih?", "Adakah kamu sihat?", "Adakah kamu lapar?"],
             answer: 0
         },
         {
             id: "BA_HW28",
-            question: "اڤاکه مقصود اوچڤن 'شَفَاكَ اللهُ' اڤابيلا منزيارهي اورڠ ساكيت؟",
-            options: ["سموڬ الله ممريداکن کامو", "سموڬ الله مڽمبوهکن کامو", "سموڬ الله ممبري رزقي", "سموڬ الله ممبرکتي کامو"],
+            question: "مَا مَعْنَى دُعَاءِ 'شَفَاكَ اللهُ' عِنْدَ زِيَارَةِ المَرِيضِ؟",
+            options: ["Semoga Allah merahmati kamu", "Semoga Allah menyembuhkan kamu", "Semoga Allah memberi rezeki", "Semoga Allah memberkati kamu"],
             answer: 1
         },
         {
             id: "BA_HW29",
-            question: "اڤاکه مقصود 'مَبْرُوكٌ'؟",
-            options: ["تهنيئه", "تکزيه", "تريما کاسيه", "سلامت داتڠ"],
+            question: "مَا مَعْنَى كَلِمَةِ 'مَبْرُوكٌ'؟",
+            options: ["Tahniah", "Takziah", "Terima kasih", "Selamat datang"],
             answer: 0
         },
         {
             id: "BA_HW30",
-            question: "اڤاکه جوابن باڬي اوچڤن 'مَبْرُوكٌ'؟",
-            options: ["عَفْوًا", "بَارَكَ اللهُ فِيكَ", "أَهْلًا بِكَ", "مَسَاءَ النُّورِ"],
+            question: "مَا هُوَ الرَّدُّ المُنَاسِبُ لِـ 'مَبْرُوكٌ'؟",
+            options: ["عَفْوًا ('Afwan)", "بَارَكَ اللهُ فِيكَ (Barakallahu fiika)", "أَهْلًا بِكَ (Ahlan bika)", "مَسَاءَ النُّورِ (Masa'an Nur)"],
             answer: 1
         },
         {
             id: "BA_HW31",
-            question: "اڤاکه مقصود 'أَيْنَ المِرْحَاضُ؟'؟",
-            options: ["دماناکه کلاس؟", "دماناکه کانتين؟", "دماناکه تاندس؟", "دماناکه ڤجابت؟"],
+            question: "مَا مَعْنَى السُّؤَالِ 'أَيْنَ المِرْحَاضُ؟'؟",
+            options: ["Di manakah kelas?", "Di manakah kantin?", "Di manakah tandas?", "Di manakah pejabat?"],
             answer: 2
         },
         {
             id: "BA_HW32",
-            question: "اڤاکه مقصود 'أُرِيدُ أَنْ أَشْرَبَ'؟",
-            options: ["ساي ماهو ماکن", "ساي ماهو تيدور", "ساي ماهو مينوم", "ساي ماهو ڤولڠ"],
+            question: "مَا مَعْنَى 'أُرِيدُ أَنْ أَشْرَبَ'؟",
+            options: ["Saya mahu makan", "Saya mahu tidur", "Saya mahu minum", "Saya mahu pulang"],
             answer: 2
         },
         {
             id: "BA_HW33",
-            question: "اڤاکه مقصود 'أُرِيدُ أَنْ آكُلَ'؟",
-            options: ["ساي ماهو ماکن", "ساي ماهو مينوم", "ساي ماهو برماءين", "ساي ماهو باچ"],
+            question: "مَا مَعْنَى 'أُرِيدُ أَنْ آكُلَ'؟",
+            options: ["Saya mahu makan", "Saya mahu minum", "Saya mahu bermain", "Saya mahu baca"],
             answer: 0
         },
         {
             id: "BA_HW34",
-            question: "اڤاکه مقصود 'أَنَا جَوْعَانُ'؟",
-            options: ["ساي دهاڬ", "ساي کڽڠ", "ساي مڠنتوق", "ساي لاڤر"],
+            question: "مَا مَعْنَى 'أَنَا جَوْعَانُ'؟",
+            options: ["Saya dahaga", "Saya kenyang", "Saya mengantuk", "Saya lapar"],
             answer: 3
         },
         {
             id: "BA_HW35",
-            question: "اڤاکه مقصود 'أَنَا عَطْشَانُ'؟",
-            options: ["ساي دهاڬ", "ساي لاڤر", "ساي ساكيت", "ساي ڤنت"],
+            question: "مَا مَعْنَى 'أَنَا عَطْشَانُ'؟",
+            options: ["Saya dahaga", "Saya lapar", "Saya sakit", "Saya penat"],
             answer: 0
         },
         {
             id: "BA_HW36",
-            question: "اڤاکه مقصود 'مَا هَذَا؟'؟",
-            options: ["سياڤاکه اين؟", "اڤاکه اين؟", "دماناکه اين؟", "بيلکه اين؟"],
+            question: "مَا مَعْنَى السُّؤَالِ 'مَا هَذَا؟'؟",
+            options: ["Siapakah ini?", "Apakah ini?", "Di manakah ini?", "Bilakah ini?"],
             answer: 1
         },
         {
             id: "BA_HW37",
-            question: "اڤاکه مقصود 'أَحْسَنْتَ'؟",
-            options: ["باڬوس / شابس (للاکي)", "تيدق باڬوس", "چوبا لاڬي", "صبرله"],
+            question: "مَا مَعْنَى كَلِمَةِ 'أَحْسَنْتَ'؟",
+            options: ["Bagus / Syabas (Lelaki)", "Tidak bagus", "Cuba lagi", "Sabarlah"],
             answer: 0
         },
         {
             id: "BA_HW38",
-            question: "اڤاکه مقصود 'لَا أَدْرِي'؟",
-            options: ["ساي تاهو", "ساي تيدق تاهو", "ساي لوڤا", "ساي ايڠت"],
+            question: "مَا مَعْنَى عِبَارَةِ 'لَا أَدْرِي'؟",
+            options: ["Saya tahu", "Saya tidak tahu", "Saya lupa", "Saya ingat"],
             answer: 1
         },
         {
             id: "BA_HW39",
-            question: "اڤاکه مقصود 'مَا مَعْنَى هَذَا؟'؟",
-            options: ["اڤاکه نام اين؟", "اڤاکه هرڬ اين؟", "اڤاکه ارتي اين؟", "اڤاکه ورنا اين؟"],
+            question: "مَا مَعْنَى العِبَارَةِ 'مَا مَعْنَى هَذَا؟'؟",
+            options: ["Apakah nama ini?", "Apakah harga ini?", "Apakah erti ini?", "Apakah warna ini?"],
             answer: 2
         },
         {
             id: "BA_HW40",
-            question: "اڤاکه ارتي ارهن 'اِفْتَحِ الكِتَابَ'؟",
-            options: ["توتوڤ بوکو", "بوك بوکو", "باچ بوکو", "توليس دبوکو"],
+            question: "مَا مَعْنَى الأَمْرِ 'اِفْتَحِ الكِتَابَ'؟",
+            options: ["Tutup buku", "Buka buku", "Baca buku", "Tulis di buku"],
             answer: 1
         },
         {
             id: "BA_HW41",
-            question: "اڤاکه ارتي ارهن 'اِقْرَأْ'؟",
-            options: ["توليسله", "دڠرله", "باچله", "دودوقله"],
+            question: "مَا مَعْنَى الأَمْرِ 'اِقْرَأْ'؟",
+            options: ["Tulislah", "Dengarlah", "Bacalah", "Duduklah"],
             answer: 2
         },
         {
             id: "BA_HW42",
-            question: "اڤاکه ارتي ارهن 'اُكْتُبْ'؟",
-            options: ["توليسله", "باچله", "ڤادامله", "لوکيسله"],
+            question: "مَا مَعْنَى الأَمْرِ 'اُكْتُبْ'؟",
+            options: ["Tulislah", "Bacalah", "Padamlah", "Lukislah"],
             answer: 0
         },
         {
             id: "BA_HW43",
-            question: "اڤاکه ارتي ارهن 'اِسْمَعْ جَيِّدًا'؟",
-            options: ["ليهت دڠن تليتي", "باچ دڠن قوات", "توليس دڠن کمس", "دڠر دڠن تليتي"],
+            question: "مَا مَعْنَى الأَمْرِ 'اِسْمَعْ جَيِّدًا'؟",
+            options: ["Lihat dengan teliti", "Baca dengan kuat", "Tulis dengan kemas", "Dengar dengan teliti"],
             answer: 3
         },
         {
             id: "BA_HW44",
-            question: "اڤاکه ارتي ارهن 'اِجْلِسْ'؟",
-            options: ["باڠون", "دودوق", "برجالن", "لاري"],
+            question: "مَا مَعْنَى الأَمْرِ 'اِجْلِسْ'؟",
+            options: ["Bangun", "Duduk", "Berjalan", "Lari"],
             answer: 1
         },
         {
             id: "BA_HW45",
-            question: "اڤاکه ارتي ارهن 'قِفْ'؟",
-            options: ["باڠون / برديري", "دودوق", "تيدور", "لاري"],
+            question: "مَا مَعْنَى الأَمْرِ 'قِفْ'؟",
+            options: ["Bangun / Berdiri", "Duduk", "Tidur", "Lari"],
             answer: 0
         },
         {
             id: "BA_HW46",
-            question: "اڤاکه ارتي 'اِرْفَعْ يَدَكَ'؟",
-            options: ["توتوڤ مات کامو", "اڠکت تاڠن کامو", "تورونکن تاڠن کامو", "بوك ملوت کامو"],
+            question: "مَا مَعْنَى الأَمْرِ 'اِرْفَعْ يَدَكَ'؟",
+            options: ["Tutup mata kamu", "Angkat tangan kamu", "Turunkan tangan kamu", "Buka mulut kamu"],
             answer: 1
         },
         {
             id: "BA_HW47",
-            question: "اڤاکه ارتي 'اُنْظُرْ إِلَى السَّبُّورَةِ'؟",
-            options: ["ليهت کڤاڤن توليس", "ليهت کبوکو", "ليهت کتيڠکڤ", "ليهت کڤينتو"],
+            question: "مَا مَعْنَى الأَمْرِ 'اُنْظُرْ إِلَى السَّبُّورَةِ'؟",
+            options: ["Lihat ke papan tulis", "Lihat ke buku", "Lihat ke tingkap", "Lihat ke pintu"],
             answer: 0
         },
         {
             id: "BA_HW48",
-            question: "اڤاکه ارتي 'تَعَالَ هُنَا'؟",
-            options: ["ڤرڬيله سانا", "دودوق دسيني", "ماري کماسيني", "کلوارله"],
+            question: "مَا مَعْنَى الأَمْرِ 'تَعَالَ هُنَا'؟",
+            options: ["Pergilah sana", "Duduk di sini", "Mari ke mari / Datang sini", "Keluarlah"],
             answer: 2
         },
         {
             id: "BA_HW49",
-            question: "اڤاکه ارتي 'اُسْكُتْ'؟",
-            options: ["برچاکڤله", "ديم", "باچله", "کتاوا"],
+            question: "مَا مَعْنَى الأَمْرِ 'اُسْكُتْ'؟",
+            options: ["Bercakaplah", "Diam", "Bacalah", "Ketawa"],
             answer: 1
         },
         {
             id: "BA_HW50",
-            question: "اڤاکه مقصود اوچڤن 'كُلُّ عَامٍ وَأَنْتُمْ بِخَيْرٍ'؟",
-            options: ["سلامت هاري لاهير", "سلامت ڤاڬي", "سلامت هاري راي / تاهون بهارو", "سلامت برجاي"],
+            question: "مَا مَعْنَى التَّهْنِئَةِ 'كُلُّ عَامٍ وَأَنْتُمْ بِخَيْرٍ'؟",
+            options: ["Selamat hari lahir", "Selamat pagi", "Selamat Hari Raya / Tahun Baharu", "Selamat berjaya"],
             answer: 2
         }
     ],
+
     "arqam": [
         {
             id: "BA_AR01",
-            question: "اڤاکه ارتي نومبور 'وَاحِدٌ'؟",
-            options: ["ساتو", "دوا", "تيڬ", "امڤت"],
+            question: "Apakah maksud nombor 'وَاحِدٌ' (Waahidun)?",
+            options: ["Satu", "Dua", "Tiga", "Empat"],
             answer: 0
         },
         {
             id: "BA_AR02",
-            question: "اڤاکه ارتي نومبور 'اِثْنَانِ'؟",
-            options: ["ساتو", "دوا", "تيڬ", "امڤت"],
+            question: "Apakah maksud nombor 'اِثْنَانِ' (Ithnaani)?",
+            options: ["Satu", "Dua", "Tiga", "Empat"],
             answer: 1
         },
         {
             id: "BA_AR03",
-            question: "اڤاکه ارتي نومبور 'ثَلَاثَةٌ'؟",
-            options: ["ليم", "امڤت", "تيڬ", "دوا"],
+            question: "Apakah maksud nombor 'ثَلَاثَةٌ' (Thalaathatun)?",
+            options: ["Lima", "Empat", "Tiga", "Dua"],
             answer: 2
         },
         {
             id: "BA_AR04",
-            question: "اڤاکه ارتي نومبور 'أَرْبَعَةٌ'؟",
-            options: ["تيڬ", "امڤت", "ليم", "انم"],
+            question: "Apakah maksud nombor 'أَرْبَعَةٌ' (Arba'atun)?",
+            options: ["Tiga", "Empat", "Lima", "Enam"],
             answer: 1
         },
         {
             id: "BA_AR05",
-            question: "اڤاکه ارتي نومبور 'خَمْسَةٌ'؟",
-            options: ["امڤت", "ليم", "انم", "توجوه"],
+            question: "Apakah maksud nombor 'خَمْسَةٌ' (Khamsatun)?",
+            options: ["Empat", "Lima", "Enam", "Tujuh"],
             answer: 1
         },
         {
             id: "BA_AR06",
-            question: "اڤاکه ارتي نومبور 'سِتَّةٌ'؟",
-            options: ["ليم", "انم", "توجوه", "لاڤن"],
+            question: "Apakah maksud nombor 'سِتَّةٌ' (Sittatun)?",
+            options: ["Lima", "Enam", "Tujuh", "Lapan"],
             answer: 1
         },
         {
             id: "BA_AR07",
-            question: "اڤاکه ارتي نومبور 'سَبْعَةٌ'؟",
-            options: ["انم", "توجوه", "لاڤن", "سمبيلن"],
+            question: "Apakah maksud nombor 'سَبْعَةٌ' (Sab'atun)?",
+            options: ["Enam", "Tujuh", "Lapan", "Sembilan"],
             answer: 1
         },
         {
             id: "BA_AR08",
-            question: "اڤاکه ارتي نومبور 'ثَمَانِيَةٌ'؟",
-            options: ["توجوه", "لاڤن", "سمبيلن", "سڤولوه"],
+            question: "Apakah maksud nombor 'ثَمَانِيَةٌ' (Thamaaniyatun)?",
+            options: ["Tujuh", "Lapan", "Sembilan", "Sepuluh"],
             answer: 1
         },
         {
             id: "BA_AR09",
-            question: "اڤاکه ارتي نومبور 'تِسْعَةٌ'؟",
-            options: ["لاڤن", "سمبيلن", "سڤولوه", "سبلس"],
+            question: "Apakah maksud nombor 'تِسْعَةٌ' (Tis'atun)?",
+            options: ["Lapan", "Sembilan", "Sepuluh", "Sebelas"],
             answer: 1
         },
         {
             id: "BA_AR10",
-            question: "اڤاکه ارتي نومبور 'عَشَرَةٌ'؟",
-            options: ["لاڤن", "سمبيلن", "سڤولوه", "سبلس"],
+            question: "Apakah maksud nombor 'عَشَرَةٌ' ('Asyaratun)?",
+            options: ["Lapan", "Sembilan", "Sepuluh", "Sebelas"],
             answer: 2
         },
         {
             id: "BA_AR11",
-            question: "اڤاکه ارتي نومبور 'أَحَدَ عَشَرَ'؟",
-            options: ["ساتو", "سڤولوه", "سبلس", "دوا بلس"],
+            question: "Apakah maksud nombor 'أَحَدَ عَشَرَ' (Ahada 'asyara)?",
+            options: ["Satu", "Sepuluh", "Sebelas", "Dua belas"],
             answer: 2
         },
         {
             id: "BA_AR12",
-            question: "اڤاکه ارتي نومبور 'اِثْنَا عَشَرَ'؟",
-            options: ["سبلس", "دوا بلس", "دوا ڤولوه", "دوا"],
+            question: "Apakah maksud nombor 'اِثْنَا عَشَرَ' (Ithna 'asyara)?",
+            options: ["Sebelas", "Dua belas", "Dua puluh", "Dua"],
             answer: 1
         },
         {
             id: "BA_AR13",
-            question: "اڤاکه ارتي نومبور 'عِشْرُونَ'؟",
-            options: ["دوا", "دوا بلس", "دوا ڤولوه", "سراتوس"],
+            question: "Apakah maksud nombor 'عِشْرُونَ' ('Isyruuna)?",
+            options: ["Dua", "Dua belas", "Dua puluh", "Seratus"],
             answer: 2
         },
         {
             id: "BA_AR14",
-            question: "اڤاکه ارتي نومبور 'خَمْسُونَ'؟",
-            options: ["ليم", "ليم بلس", "ليم ڤولوه", "ليم راتوس"],
+            question: "Apakah maksud nombor 'خَمْسُونَ' (Khamsuuna)?",
+            options: ["Lima", "Lima belas", "Lima puluh", "Lima ratus"],
             answer: 2
         },
         {
             id: "BA_AR15",
-            question: "اڤاکه ارتي نومبور 'مِائَةٌ'؟",
-            options: ["سڤولوه", "سراتوس", "سريبو", "سجوتا"],
+            question: "Apakah maksud nombor 'مِائَةٌ' (Mi'atun)?",
+            options: ["Sepuluh", "Seratus", "Seribu", "Sejuta"],
             answer: 1
         },
         {
             id: "BA_AR16",
-            question: "اڤاکه مقصود 'يَوْمُ الأَحَدِ'؟",
-            options: ["هاري اثنين", "هاري احد", "هاري جمعة", "هاري سبت"],
+            question: "Apakah maksud 'يَوْمُ الأَحَدِ' (Yaumul Ahad)?",
+            options: ["Hari Isnin", "Hari Ahad", "Hari Jumaat", "Hari Sabtu"],
             answer: 1
         },
         {
             id: "BA_AR17",
-            question: "اڤاکه مقصود 'يَوْمُ الإِثْنَيْنِ'؟",
-            options: ["هاري اثنين", "هاري ثلاثاء", "هاري احد", "هاري جمعة"],
+            question: "Apakah maksud 'يَوْمُ الإِثْنَيْنِ' (Yaumul Ithnain)?",
+            options: ["Hari Isnin", "Hari Selasa", "Hari Ahad", "Hari Jumaat"],
             answer: 0
         },
         {
             id: "BA_AR18",
-            question: "اڤاکه مقصود 'يَوْمُ الثُّلَاثَاءِ'؟",
-            options: ["هاري اربعاء", "هاري ثلاثاء", "هاري خميس", "هاري اثنين"],
+            question: "Apakah maksud 'يَوْمُ الثُّلَاثَاءِ' (Yaumuth Thulaathaa')?",
+            options: ["Hari Rabu", "Hari Selasa", "Hari Khamis", "Hari Isnin"],
             answer: 1
         },
         {
             id: "BA_AR19",
-            question: "اڤاکه مقصود 'يَوْمُ الأَرْبِعَاءِ'؟",
-            options: ["هاري ثلاثاء", "هاري اربعاء", "هاري خميس", "هاري جمعة"],
+            question: "Apakah maksud 'يَوْمُ الأَرْبِعَاءِ' (Yaumul Arbi'aa')?",
+            options: ["Hari Selasa", "Hari Rabu", "Hari Khamis", "Hari Jumaat"],
             answer: 1
         },
         {
             id: "BA_AR20",
-            question: "اڤاکه مقصود 'يَوْمُ الخَمِيسِ'؟",
-            options: ["هاري خميس", "هاري جمعة", "هاري سبت", "هاري اربعاء"],
+            question: "Apakah maksud 'يَوْمُ الخَمِيسِ' (Yaumul Khamiis)?",
+            options: ["Hari Khamis", "Hari Jumaat", "Hari Sabtu", "Hari Rabu"],
             answer: 0
         },
         {
             id: "BA_AR21",
-            question: "اڤاکه مقصود 'يَوْمُ الجُمُعَةِ'؟",
-            options: ["هاري خميس", "هاري جمعة", "هاري سبت", "هاري احد"],
+            question: "Apakah maksud 'يَوْمُ الجُمُعَةِ' (Yaumul Jumu'ah)?",
+            options: ["Hari Khamis", "Hari Jumaat", "Hari Sabtu", "Hari Ahad"],
             answer: 1
         },
         {
             id: "BA_AR22",
-            question: "اڤاکه مقصود 'يَوْمُ السَّبْتِ'؟",
-            options: ["هاري جمعة", "هاري سبت", "هاري احد", "هاري اثنين"],
+            question: "Apakah maksud 'يَوْمُ السَّبْتِ' (Yaumus Sabt)?",
+            options: ["Hari Jumaat", "Hari Sabtu", "Hari Ahad", "Hari Isnin"],
             answer: 1
         },
         {
             id: "BA_AR23",
-            question: "اڤاکه مقصود 'اليَوْمَ'؟",
-            options: ["ايسوق", "سمالم", "هاري اين", "لوسا"],
+            question: "Apakah maksud 'اليَوْمَ' (Al-yauma)?",
+            options: ["Esok", "Semalam", "Hari ini", "Lusa"],
             answer: 2
         },
         {
             id: "BA_AR24",
-            question: "اڤاکه مقصود 'غَدًا'؟",
-            options: ["ايسوق", "هاري اين", "سمالم", "کلمين"],
+            question: "Apakah maksud 'غَدًا' (Ghadan)?",
+            options: ["Esok", "Hari ini", "Semalam", "Kelmarin"],
             answer: 0
         },
         {
             id: "BA_AR25",
-            question: "اڤاکه مقصود 'أَمْسِ'؟",
-            options: ["هاري اين", "ايسوق", "سمالم", "لوسا"],
+            question: "Apakah maksud 'أَمْسِ' (Amsi)?",
+            options: ["Hari ini", "Esok", "Semalam", "Lusa"],
             answer: 2
         },
         {
             id: "BA_AR26",
-            question: "اڤاکه مقصود 'أُسْبُوعٌ'؟",
-            options: ["هاري", "ميڠڬو", "بولن", "تاهون"],
+            question: "Apakah maksud 'أُسْبُوعٌ' (Usbuu'un)?",
+            options: ["Hari", "Minggu", "Bulan", "Tahun"],
             answer: 1
         },
         {
             id: "BA_AR27",
-            question: "اڤاکه مقصود 'شَهْرٌ'؟",
-            options: ["هاري", "ميڠڬو", "بولن", "تاهون"],
+            question: "Apakah maksud 'شَهْرٌ' (Syahrun)?",
+            options: ["Hari", "Minggu", "Bulan", "Tahun"],
             answer: 2
         },
         {
             id: "BA_AR28",
-            question: "اڤاکه مقصود 'سَنَةٌ'؟",
-            options: ["هاري", "ميڠڬو", "بولن", "تاهون"],
+            question: "Apakah maksud 'سَنَةٌ' (Sanatun)?",
+            options: ["Hari", "Minggu", "Bulan", "Tahun"],
             answer: 3
         },
         {
             id: "BA_AR29",
-            question: "اڤاکه مقصود 'صَبَاحٌ'؟",
-            options: ["ڤاڬي", "تڠه هاري", "ڤتڠ", "مالم"],
+            question: "Apakah maksud 'صَبَاحٌ' (Sabaahun)?",
+            options: ["Pagi", "Tengah hari", "Petang", "Malam"],
             answer: 0
         },
         {
             id: "BA_AR30",
-            question: "اڤاکه مقصود 'ظُهْرٌ'؟",
-            options: ["ڤاڬي", "تڠه هاري", "ڤتڠ", "مالم"],
+            question: "Apakah maksud 'ظُهْرٌ' (Zhuhrun)?",
+            options: ["Pagi", "Tengah hari", "Petang", "Malam"],
             answer: 1
         },
         {
             id: "BA_AR31",
-            question: "اڤاکه مقصود 'مَسَاءٌ'؟",
-            options: ["ڤاڬي", "تڠه هاري", "ڤتڠ", "مالم"],
+            question: "Apakah maksud 'مَسَاءٌ' (Masaa'un)?",
+            options: ["Pagi", "Tengah hari", "Petang", "Malam"],
             answer: 2
         },
         {
             id: "BA_AR32",
-            question: "اڤاکه مقصود 'لَيْلٌ'؟",
-            options: ["ڤاڬي", "تڠه هاري", "ڤتڠ", "مالم"],
+            question: "Apakah maksud 'لَيْلٌ' (Lailun)?",
+            options: ["Pagi", "Tengah hari", "Petang", "Malam"],
             answer: 3
         },
         {
             id: "BA_AR33",
-            question: "اڤاکه مقصود 'سَاعَةٌ'؟",
-            options: ["مينيت", "ساءت", "جام", "هاري"],
+            question: "Apakah maksud 'سَاعَةٌ' (Saa'atun)?",
+            options: ["Minit", "Saat", "Jam", "Hari"],
             answer: 2
         },
         {
             id: "BA_AR34",
-            question: "اڤاکه مقصود 'دَقِيقَةٌ'؟",
-            options: ["جام", "مينيت", "ساءت", "هاري"],
+            question: "Apakah maksud 'دَقِيقَةٌ' (Daqiiqatun)?",
+            options: ["Jam", "Minit", "Saat", "Hari"],
             answer: 1
         },
         {
             id: "BA_AR35",
-            question: "اڤاکه مقصود 'ثَانِيَةٌ'؟",
-            options: ["جام", "مينيت", "ساءت", "ميڠڬو"],
+            question: "Apakah maksud 'ثَانِيَةٌ' (Thaaniyatun)?",
+            options: ["Jam", "Minit", "Saat", "Minggu"],
             answer: 2
         },
         {
             id: "BA_AR36",
-            question: "اڤاکه مقصود سوءالن 'كَمِ السَّاعَةُ الآنَ؟'؟",
-            options: ["براڤاکه هرڬ اين؟", "ڤوکول براڤاکه سکارڠ؟", "بيلکه کامو سامڤاي؟", "براڤاکه عمور کامو؟"],
+            question: "Apakah maksud soalan 'كَمِ السَّاعَةُ الآنَ؟' (Kamis saa'atul aan)?",
+            options: ["Berapakah harga ini?", "Pukul berapakah sekarang?", "Bilakah kamu sampai?", "Berapakah umur kamu?"],
             answer: 1
         },
         {
             id: "BA_AR37",
-            question: "اڤاکه ارتي 'السَّاعَةُ الوَاحِدَةُ'؟",
-            options: ["ڤوکول ساتو", "ڤوکول دوا", "ڤوکول تيڬ", "ڤوکول امڤت"],
+            question: "Apakah erti 'السَّاعَةُ الوَاحِدَةُ' (As-saa'atul waahidah)?",
+            options: ["Pukul satu", "Pukul dua", "Pukul tiga", "Pukul empat"],
             answer: 0
         },
         {
             id: "BA_AR38",
-            question: "اڤاکه ارتي 'السَّاعَةُ الثَّانِيَةُ'؟",
-            options: ["ڤوکول ساتو", "ڤوکول دوا", "ڤوکول تيڬ", "ڤوکول امڤت"],
+            question: "Apakah erti 'السَّاعَةُ الثَّانِيَةُ' (As-saa'atuth thaaniyah)?",
+            options: ["Pukul satu", "Pukul dua", "Pukul tiga", "Pukul empat"],
             answer: 1
         },
         {
             id: "BA_AR39",
-            question: "اڤاکه ارتي 'السَّاعَةُ الثَّالِثَةُ'؟",
-            options: ["ڤوکول دوا", "ڤوکول تيڬ", "ڤوکول امڤت", "ڤوکول ليم"],
+            question: "Apakah erti 'السَّاعَةُ الثَّالِثَةُ' (As-saa'atuth thaalithah)?",
+            options: ["Pukul dua", "Pukul tiga", "Pukul empat", "Pukul lima"],
             answer: 1
         },
         {
             id: "BA_AR40",
-            question: "اڤاکه ارتي 'السَّاعَةُ الرَّابِعَةُ'؟",
-            options: ["ڤوکول تيڬ", "ڤوکول امڤت", "ڤوکول ليم", "ڤوکول انم"],
+            question: "Apakah erti 'السَّاعَةُ الرَّابِعَةُ' (As-saa'atur raabi'ah)?",
+            options: ["Pukul tiga", "Pukul empat", "Pukul lima", "Pukul enam"],
             answer: 1
         },
         {
             id: "BA_AR41",
-            question: "اڤاکه ارتي 'السَّاعَةُ الخَامِسَةُ'؟",
-            options: ["ڤوکول امڤت", "ڤوکول ليم", "ڤوکول انم", "ڤوکول توجوه"],
+            question: "Apakah erti 'السَّاعَةُ الخَامِسَةُ' (As-saa'atul khaamisah)?",
+            options: ["Pukul empat", "Pukul lima", "Pukul enam", "Pukul tujuh"],
             answer: 1
         },
         {
             id: "BA_AR42",
-            question: "اڤاکه ارتي 'السَّاعَةُ السَّادِسَةُ'؟",
-            options: ["ڤوکول ليم", "ڤوکول انم", "ڤوکول توجوه", "ڤوکول لاڤن"],
+            question: "Apakah erti 'السَّاعَةُ السَّادِسَةُ' (As-saa'atus saadisah)?",
+            options: ["Pukul lima", "Pukul enam", "Pukul tujuh", "Pukul lapan"],
             answer: 1
         },
         {
             id: "BA_AR43",
-            question: "اڤاکه مقصود 'النِّصْفُ' دالم مڽبوت وقتو؟",
-            options: ["سوکو (١٥ مينيت)", "ستڠه (٣٠ مينيت)", "تڤت", "کورڠ"],
+            question: "Apakah maksud 'النِّصْفُ' (An-nisfu) dalam menyebut waktu?",
+            options: ["Suku (15 minit)", "Setengah (30 minit)", "Tepat", "Kurang"],
             answer: 1
         },
         {
             id: "BA_AR44",
-            question: "اڤاکه مقصود 'الرُّبْعُ' دالم مڽبوت وقتو؟",
-            options: ["ستڠه (٣٠ مينيت)", "سوکو (١٥ مينيت)", "تڤت", "کورڠ"],
+            question: "Apakah maksud 'الرُّبْعُ' (Ar-rub'u) dalam menyebut waktu?",
+            options: ["Setengah (30 minit)", "Suku (15 minit)", "Tepat", "Kurang"],
             answer: 1
         },
         {
             id: "BA_AR45",
-            question: "اڤاکه ارتي 'السَّاعَةُ الثَّامِنَةُ وَالنِّصْفُ'؟",
-            options: ["ڤوکول لاڤن ستڠه", "ڤوکول توجوه ستڠه", "ڤوکول لاڤن سوکو", "ڤوکول سمبيلن ستڠه"],
+            question: "Apakah erti 'السَّاعَةُ الثَّامِنَةُ وَالنِّصْفُ' (As-saa'atuth thaaminatu wan nisf)?",
+            options: ["Pukul lapan setengah", "Pukul tujuh setengah", "Pukul lapan suku", "Pukul sembilan setengah"],
             answer: 0
         },
         {
             id: "BA_AR46",
-            question: "حروف حبوڠ 'وَ' دالم وقتو (چونتوه: وَالرُّبْعُ) برمقصود ___ .",
-            options: ["کورڠ", "لبيه", "تڤت", "ستڠه"],
+            question: "Kata hubung 'وَ' (wa) dalam waktu (Contoh: وَالرُّبْعُ) bermaksud ___ .",
+            options: ["Kurang", "Lebih", "Tepat", "Setengah"],
             answer: 1
         },
         {
             id: "BA_AR47",
-            question: "حروف 'إِلَّا' دالم وقتو (چونتوه: إِلَّا الرُّبْعَ) برمقصود ___ .",
-            options: ["لبيه", "کورڠ", "تڤت", "ستڠه"],
+            question: "Perkataan 'إِلَّا' (illa) dalam waktu (Contoh: إِلَّا الرُّبْعَ) bermaksud ___ .",
+            options: ["Lebih", "Kurang", "Tepat", "Setengah"],
             answer: 1
         },
         {
             id: "BA_AR48",
-            question: "اڤاکه ارتي 'السَّاعَةُ العَاشِرَةُ تَمَامًا'؟",
-            options: ["ڤوکول سڤولوه ستڠه", "ڤوکول سڤولوه سوکو", "ڤوکول سڤولوه تڤت", "ڤوکول سبلس تڤت"],
+            question: "Apakah erti 'السَّاعَةُ العَاشِرَةُ تَمَامًا' (As-saa'atul 'aasyiratu tamaaman)?",
+            options: ["Pukul sepuluh setengah", "Pukul sepuluh suku", "Pukul sepuluh tepat", "Pukul sebelas tepat"],
             answer: 2
         },
         {
             id: "BA_AR49",
-            question: "کلمة 'الأَوَّلُ' برمقصود ___ .",
-            options: ["ڤرتام", "کدوا", "کاتيڬ", "کأمڤت"],
+            question: "Perkataan 'الأَوَّلُ' (Al-awwalu) bermaksud ___ .",
+            options: ["Pertama", "Kedua", "Ketiga", "Keempat"],
             answer: 0
         },
         {
             id: "BA_AR50",
-            question: "کلمة 'الثَّانِي' برمقصود ___ .",
-            options: ["ڤرتام", "کدوا", "کاتيڬ", "کأمڤت"],
+            question: "Perkataan 'الثَّانِي' (Ath-thaanii) bermaksud ___ .",
+            options: ["Pertama", "Kedua", "Ketiga", "Keempat"],
             answer: 1
         }
     ]
