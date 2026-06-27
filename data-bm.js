@@ -6,8 +6,8 @@
 const malayLanguageData = {
     // 🟢 TAHAP MUDAH (+1 XP) - KATEGORI 1: KATA NAMA (50 SOALAN)
     "kata_nama": [
-        {"q": "Apakah jenis kata nama bagi perkataan 'kucing' dan 'sekolah'?", "a": "kata nama am"},
-        {"q": "Apakah jenis kata nama bagi perkataan 'Melaka' dan 'Proton Saga'?", "a": "kata nama khas"},
+        {"q": "'kucing' dan 'sekolah' adalah sejenis kata nama _____'?", "a": "am"},
+        {"q": "'Melaka' dan 'Protoh Saga' adalah sejenis kata nama _______'?", "a": "khas"},
         {"q": "Kata Nama Khas mestilah ditulis dengan huruf ___ di permulaan perkataan.", "a": "besar"},
         {"q": "Perkataan 'saya', 'kamu', dan 'dia' ialah contoh kata ganti nama ___.", "a": "diri"},
         {"q": "Kata ganti diri ketiga yang digunakan khas untuk raja atau sultan ialah ___.", "a": "baginda"},
@@ -55,7 +55,7 @@ const malayLanguageData = {
         {"q": "Kata ganti nama tunjuk 'ini' digunakan untuk benda yang berada di kedudukan ___.", "a": "dekat"},
         {"q": "Kata ganti nama tunjuk 'itu' digunakan untuk benda yang berada di kedudukan ___.", "a": "jauh"},
         {"q": "Tukar perkataan 'tupai' menjadi kata nama khas dengan menambah kata panggilan haiwan: ___ Tupai.", "a": "Sang"},
-        {"q": "Apakah jenis ganti nama bagi perkataan 'mereka'? (Kata ganti diri ___________", "a": "kata ganti diri ketiga"}
+        {"q": "Apakah jenis kata ganti nama bagi perkataan 'mereka'? (Kata ganti diri ___________", "a": "ketiga"}
     ],
 
     // 🟢 TAHAP MUDAH (+1 XP) - KATEGORI 2: KATA KERJA (50 SOALAN)
@@ -122,7 +122,7 @@ const malayLanguageData = {
         {"q": "Apakah kata adjektif bagi rasa buah peria atau ubat batuk?", "a": "pahit"},
         {"q": "Apakah kata adjektif bagi keadaan air yang telah diletakkan ketulan ais?", "a": "sejuk"},
         {"q": "Apakah perkataan lawan bagi kata adjektif 'mahal'?", "a": "murah"},
-        {"q": "Bilik tidur yang tidak dikemas selepas bangun tidur akan kelihatan ___.", "a": "sepah"},
+        {"q": "Bilik tidur yang tidak dikemas selepas bangun tidur akan kelihatan ___.", "a": "bersepah"},
         {"q": "Murid yang rajin mengulang kaji pelajaran akan menjadi ___.", "a": "bijak"},
         {"q": "Perkataan 'biru', 'putih', dan 'hitam' ialah kata adjektif jenis ___.", "a": "warna"},
         {"q": "Apakah bentuk bagi objek bola, guli, dan buah oren?", "a": "bulat"},
@@ -162,7 +162,7 @@ const malayLanguageData = {
         {"q": "Adik tidak dapat hadir ke sekolah kerana badannya ___.", "a": "sakit"},
         {"q": "Apakah kata adjektif rasa bagi sebiji cili padi?", "a": "pedas"},
         {"q": "Apakah bentuk bagi sebiji telur ayam?", "a": "bujur"},
-        {"q": "Laluan jalan di kawasan pergunungan itu kelihatan ___.", "a": "bengkang-bengkok"},
+        {"q": "Laluan jalan di kawasan pergunungan itu kelihatan bengkang-___.", "a": "bengkok"},
         {"q": "Badannya berbau ___ selepas selesai menyertai acara larian.", "a": "busuk"}
     ],
 
@@ -338,7 +338,7 @@ const malayLanguageData = {
         {"q": "Tentukan sama ada ayat 'Saya suka makan nasi ayam' ialah ayat tunggal atau majmuk?", "a": "ayat tunggal"},
         {"q": "Ayat susunan biasa dalam bahasa Melayu bermula dengan unsur ___.", "a": "subjek"},
         {"q": "Adakah ayat 'Ahmad dan Chong bermain bola' sebuah ayat tunggal?", "a": "tidak"},
-        {"q": "Ayat tunggal terdiri daripada hanya satu ___ (klausa bebas).", "a": "klausa"},
+        {"q": "Ayat tunggal terdiri daripada hanya satu ___.", "a": "klausa"},
         {"q": "Subjek dalam ayat tunggal 'Adik menangis' ialah perkataan ___.", "a": "adik"},
         {"q": "Predikat dalam ayat tunggal 'Adik menangis' ialah perkataan ___.", "a": "menangis"},
         {"q": "Adakah ayat 'Ibu memasak di dapur' sebuah ayat tunggal?", "a": "ya"},
