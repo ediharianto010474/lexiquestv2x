@@ -1066,6 +1066,7 @@ function getChatRoomId(player1, player2) {
 
 // 2. Buka kotak sembang & mula dengar mesej
 async function openChatWith(playerName) {
+    alert("Kod baru berjaya dibaca!");
     currentChatRecipient = playerName;
     
     // Buka UI kotak sembang
