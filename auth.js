@@ -1089,11 +1089,9 @@ async function openChatWith(playerName) {
     
     try {
         // GUNA 'set' dengan 'merge: true' BUKAN 'update' 
-        // Ini memastikan jika dokumen chat belum wujud, Firebase akan menciptanya terlebih dahulu tanpa memberi ralat.
         await db.collection('chats').doc(roomId).set({
             unreadFor: "" 
         }, { merge: true });
-        
     } catch (e) {
         console.error("Gagal mengemaskini status unread:", e);
     }
@@ -1101,6 +1099,9 @@ async function openChatWith(playerName) {
     // Mula dengar mesej masuk
     listenToChatMessages(playerName);
 
+    // ==========================================
+    // TAMBAHAN BARU: Auto-buka senarai Canned Chat
+    // ==========================================
     toggleQuickChat(true);
 }
 
