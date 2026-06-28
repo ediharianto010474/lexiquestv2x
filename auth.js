@@ -1082,19 +1082,20 @@ async function openChatWith(playerName) {
     chatBox.classList.add('flex');
     
     // ==========================================
-    // KEMASKINI BARU: Padam status 'unread' 
+    // KEMASKINI BARU: Padam status 'unread' dengan Selamat
     // ==========================================
     const myName = studentInfo.name;
     const roomId = getChatRoomId(myName, playerName);
     
     try {
-        // Kosongkan unreadFor supaya titik merah hilang
-        await db.collection('chats').doc(roomId).update({
+        // GUNA 'set' dengan 'merge: true' BUKAN 'update' 
+        // Ini memastikan jika dokumen chat belum wujud, Firebase akan menciptanya terlebih dahulu tanpa memberi ralat.
+        await db.collection('chats').doc(roomId).set({
             unreadFor: "" 
-        });
+        }, { merge: true });
+        
     } catch (e) {
-        // Kita abaikan jika ralat (contohnya dokumen belum pernah dicipta)
-        console.log("Dokumen chat belum wujud, tiada status unread untuk dipadam.");
+        console.error("Gagal mengemaskini status unread:", e);
     }
 
     // Mula dengar mesej masuk
