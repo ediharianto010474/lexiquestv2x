@@ -1100,6 +1100,8 @@ async function openChatWith(playerName) {
 
     // Mula dengar mesej masuk
     listenToChatMessages(playerName);
+
+    toggleQuickChat(true);
 }
 
 // 3. Fungsi Dengar Mesej (Real-time dari Firestore)
