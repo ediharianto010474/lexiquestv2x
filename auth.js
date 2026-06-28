@@ -1066,10 +1066,24 @@ function getChatRoomId(player1, player2) {
 
 // 2. Buka kotak sembang & mula dengar mesej
 async function openChatWith(playerName) {
+    console.log("=== 🕵️ DIAGNOSTIK CHAT BERMULA ===");
+    console.log("1. Nama murid ditekan:", playerName);
+
     currentChatRecipient = playerName;
     
     // Buka UI kotak sembang
     const chatBox = document.getElementById('floating-chat-box');
+    
+    console.log("2. Adakah elemen kotak chat wujud?", chatBox !== null);
+    
+    if (!chatBox) {
+        console.error("RALAT KESALAHAN: #floating-chat-box langsung tiada dalam HTML!");
+        return; // Hentikan fungsi jika kotak tak wujud
+    }
+
+    console.log("3. Kelas CSS asal kotak:", chatBox.className);
+    console.log("4. Siapa elemen induk (Parent) kotak ini?", chatBox.parentElement.tagName, "ID:", chatBox.parentElement.id, "Class:", chatBox.parentElement.className);
+
     const recipientNameEl = document.getElementById('chat-recipient-name');
     const bodyContainer = document.getElementById('chat-body-container');
     const minimizeBtn = document.getElementById('btn-minimize-chat');
@@ -1081,28 +1095,34 @@ async function openChatWith(playerName) {
     chatBox.classList.remove('hidden');
     chatBox.classList.add('flex');
     
-    // ==========================================
+    console.log("5. Kelas CSS selepas 'hidden' dibuang:", chatBox.className);
+
+    // Semak kedudukan fizikal di skrin (Adakah saiznya 0 atau di luar skrin?)
+    const rect = chatBox.getBoundingClientRect();
+    console.log("6. Kedudukan kotak di skrin (X,Y,Width,Height):", `Lebar: ${rect.width}px, Tinggi: ${rect.height}px, Top: ${rect.top}, Bottom: ${rect.bottom}`);
+
     // KEMASKINI BARU: Padam status 'unread' dengan Selamat
-    // ==========================================
     const myName = studentInfo.name;
     const roomId = getChatRoomId(myName, playerName);
     
     try {
-        // GUNA 'set' dengan 'merge: true' BUKAN 'update' 
         await db.collection('chats').doc(roomId).set({
             unreadFor: "" 
         }, { merge: true });
+        console.log("7. ✅ Berjaya padam 'unread' di Firebase.");
     } catch (e) {
-        console.error("Gagal mengemaskini status unread:", e);
+        console.error("❌ Gagal mengemaskini status unread:", e);
     }
 
     // Mula dengar mesej masuk
     listenToChatMessages(playerName);
+    console.log("8. Fungsi listenToChatMessages sedang berjalan.");
 
-    // ==========================================
-    // TAMBAHAN BARU: Auto-buka senarai Canned Chat
-    // ==========================================
+    // Auto-buka senarai Canned Chat
+    console.log("9. Mengarahkan toggleQuickChat(true) untuk buka menu...");
     toggleQuickChat(true);
+    
+    console.log("=== 🏁 DIAGNOSTIK CHAT TAMAT ===");
 }
 
 // 3. Fungsi Dengar Mesej (Real-time dari Firestore)
