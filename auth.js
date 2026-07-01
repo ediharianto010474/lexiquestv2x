@@ -26,10 +26,18 @@ window.onload = async () => {
     const savedSchool = sessionStorage.getItem('playerSchool');
 
     if (savedName && savedClass && savedSchool) {
+        
+        // 🔥 KEMASKINI BARU: Hasilkan ID dan simpan terus ke dalam memori!
+        const generatedDocId = `${savedSchool.toUpperCase()}_${savedClass.toUpperCase()}_${savedName.toUpperCase()}`.replace(/\s+/g, '_');
+        
+        // Wujudkan pembolehubah global supaya sistem LTE mudah baca
+        window.currentUserId = generatedDocId; 
+
         studentInfo = { 
             name: savedName.toUpperCase(), 
             class: savedClass.toUpperCase(), 
-            school: savedSchool.toUpperCase()
+            school: savedSchool.toUpperCase(),
+            docId: generatedDocId // <-- INI AKAN MENYELESAIKAN MASALAH LTE KITA!
         };
         
         await fetchPlayerData(); // <-- Sistem tarik data dari Firestore di sini
@@ -94,8 +102,8 @@ function triggerGameHooks() {
     // ---> 🟢 KOD STATUS MASA LOG MASUK (DIBETULKAN ID) <---
     // ==========================================
     if (typeof studentInfo !== 'undefined' && studentInfo.name) {
-        const docId = `${studentInfo.school}_${studentInfo.class}_${studentInfo.name}`.replace(/\s+/g, '_');
-        db.collection("players").doc(docId).set({
+        // Kita boleh guna terus studentInfo.docId yang kita buat tadi!
+        db.collection("players").doc(studentInfo.docId).set({
             currentStatus: "idle"
         }, { merge: true }).catch(e => console.log("Ralat kemaskini status online:", e));
     }
@@ -1074,9 +1082,6 @@ async function openChatWith(playerName) {
     const bodyContainer = document.getElementById('chat-body-container');
     const minimizeBtn = document.getElementById('btn-minimize-chat');
     
-    // Keselamatan tambahan jika kotak gagal dimuatkan
-    if (!chatBox) return; 
-
     recipientNameEl.innerText = playerName;
     bodyContainer.classList.remove('hidden');
     minimizeBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
@@ -1091,21 +1096,18 @@ async function openChatWith(playerName) {
     const roomId = getChatRoomId(myName, playerName);
     
     try {
+        // GUNA 'set' dengan 'merge: true' BUKAN 'update' 
+        // Ini memastikan jika dokumen chat belum wujud, Firebase akan menciptanya terlebih dahulu tanpa memberi ralat.
         await db.collection('chats').doc(roomId).set({
             unreadFor: "" 
         }, { merge: true });
+        
     } catch (e) {
-        // Log ini dikekalkan sedikit hanya untuk menangkap ralat database/Firebase
         console.error("Gagal mengemaskini status unread:", e);
     }
 
     // Mula dengar mesej masuk
     listenToChatMessages(playerName);
-
-    // ==========================================
-    // TAMBAHAN BARU: Auto-buka senarai Canned Chat
-    // ==========================================
-    toggleQuickChat(true);
 }
 
 // 3. Fungsi Dengar Mesej (Real-time dari Firestore)
