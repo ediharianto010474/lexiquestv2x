@@ -3103,64 +3103,40 @@ function initGame(type) {
                 <input type="hidden" class="game-input" data-answer="${jawapanTeks}" value="">
             `;
         } 
-else if (item.options && Array.isArray(item.options)) {
+        else if (item.options && Array.isArray(item.options)) {
             // ====================================================================
-            // 🟢 BUTANG MCQ DINAMIK (SOKONG RTL JAWI & LTR RUMI)
+            // 🟢 MAGIS BUTANG MCQ (UNTUK PAI & BA - SOKONGAN JAWI RTL)
             // ====================================================================
-         
-            // Senarai kategori yang guna Jawi/Arab (Perlu RTL)
-            const rtlCategories = ["aqidah", "ibadah", "sirah", "akhlak", "mufrodat", "qawaid", "hiwar", "arqam"];
-            const isRTL = rtlCategories.includes(type);
             let butangPilihanHTML = '';
             item.options.forEach((opt, optIndex) => {
-                // Reka bentuk butang (checkbox/radio) - Kedudukan butang bergantung pada isRTL
                 butangPilihanHTML += `
-                    <label class="block p-4 mb-3 border-2 border-gray-100 rounded-xl cursor-pointer hover:bg-indigo-50 hover:border-indigo-300 transition-all flex items-center ${isRTL ? 'flex-row-reverse gap-4' : 'gap-4'}">
-                        <input type="radio" name="soalan_${index}" value="${optIndex}" onchange="document.getElementById('hidden_jawapan_${index}').value = this.value" class="w-6 h-6 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
-                        <span class="flex-1 text-xl font-bold text-gray-800 ${isRTL ? 'text-right' : 'text-left'}">${opt}</span>
+                    <label class="block p-4 mb-3 border-2 border-gray-100 rounded-xl cursor-pointer hover:bg-indigo-50 hover:border-indigo-300 transition-all flex items-center gap-4">
+                        <input type="radio" name="soalan_${index}" value="${optIndex}" onchange="document.getElementById('hidden_jawapan_${index}').value = this.value" class="w-6 h-6 text-indigo-600 focus:ring-indigo-500 ml-2 cursor-pointer">
+                        <span class="flex-1 text-xl font-bold text-gray-800">${opt}</span>
                     </label>
                 `;
             });
 
-            // Susunan Nombor & Teks Soalan (Kiri atau Kanan)
-            if (isRTL) {
-                // FORMAT JAWI/ARAB (RTL)
-                div.innerHTML = `
-                    <div dir="rtl" class="text-right">
-                        <p class="font-bold text-indigo-900 mb-5 text-2xl leading-relaxed">${soalanTeks} .${index + 1}</p>
-                        <div class="space-y-2 mt-4">
-                            ${butangPilihanHTML}
-                        </div>
-                        <input type="hidden" id="hidden_jawapan_${index}" class="game-input" data-answer="${jawapanTeks}" value="">
+            div.innerHTML = `
+                <div dir="rtl" class="text-right">
+                    <p class="font-bold text-indigo-900 mb-5 text-2xl leading-relaxed">${soalanTeks} .${index + 1}</p>
+                    <div class="space-y-2 mt-4">
+                        ${butangPilihanHTML}
                     </div>
-                `;
-            } else {
-
-                // FORMAT RUMI/PJK/LAIN-LAIN (LTR)
-                div.innerHTML = `
-                    <div dir="ltr" class="text-left">
-                        <p class="font-bold text-indigo-900 mb-5 text-xl leading-relaxed">${index + 1}. ${soalanTeks}</p>
-                        <div class="space-y-2 mt-4">
-                            ${butangPilihanHTML}
-                        </div>
-                        <input type="hidden" id="hidden_jawapan_${index}" class="game-input" data-answer="${jawapanTeks}" value="">
-                    </div>
-                `;
-           }
+                    <input type="hidden" id="hidden_jawapan_${index}" class="game-input" data-answer="${jawapanTeks}" value="">
+                </div>
+            `;
         } 
         else {
-            // ====================================================================
-            // 🟡 FORMAT FILL IN THE BLANKS (Taip Jawapan)
-            // ====================================================================
+            // Format Biasa (Taip Jawapan)
             div.innerHTML = `
-                <div class="text-left">
-                    <p class="font-bold text-gray-700 mb-3 text-lg">${index + 1}. ${soalanTeks}</p>
-                    <input type="text" class="game-input w-full p-4 rounded-xl bg-gray-50 border-2 border-gray-200 outline-none focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 transition-all font-bold text-lg" placeholder="Taip jawapan anda di sini..." data-answer="${jawapanTeks}">
-                </div>
+                <p class="font-bold text-gray-700 mb-3">${index + 1}. ${soalanTeks}</p>
+                <input type="text" class="game-input w-full p-3 rounded-lg bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-indigo-400" placeholder="Taip jawapan anda di sini..." data-answer="${jawapanTeks}">
             `;
         }
         container.appendChild(div);
     });
+
 
 // ==========================================
     // 4. PENGURUSAN MASA (DINAMIK GLOBAL)
@@ -5424,63 +5400,67 @@ function initLTE() {
 // 🔥 FIREBASE: KEMASKINI PROGRES HARI TERKUMPUL LTE (KALIS SPAM)
 // ============================================================================
 async function updateLteProgress() {
-    // 1. Semak jika ada event aktif yang memerlukan syarat "hari terkumpul"
     if (!currentActiveEvent || !currentActiveEvent.requiredDays) {
-        return; // Keluar jika tiada event atau event itu jenis kekal (macam XP boost)
+        return; 
     }
 
-    if (!currentUserId) {
+    let myUserId = null;
+    if (typeof currentUserId !== 'undefined' && currentUserId) myUserId = currentUserId;
+    else if (firebase.auth().currentUser) myUserId = firebase.auth().currentUser.uid;
+    else if (typeof studentInfo !== 'undefined' && studentInfo.uid) myUserId = studentInfo.uid;
+    else if (typeof studentInfo !== 'undefined' && studentInfo.docId) myUserId = studentInfo.docId;
+    else if (localStorage.getItem('studentId')) myUserId = localStorage.getItem('studentId');
+    else if (typeof studentInfo !== 'undefined' && studentInfo.name) myUserId = studentInfo.name;
+
+    if (!myUserId) {
         console.warn("⚠️ [LTE] Tiada ID murid dikesan. Gagal mengemas kini progres.");
         return;
     }
 
-    // 2. Dapatkan tarikh hari ini dalam format standard "YYYY-MM-DD"
-    // (Guna format ini supaya tepat dan tidak dipengaruhi oleh waktu jam/minit)
     const hariIni = new Date().toISOString().split('T')[0]; 
-    
-    // 🔍 UNKUK TESTING SAHAJA (Jika Cikgu guna tarikh Julai palsu semalam):
-    // const hariIni = "2026-07-15"; 
-
-    const userRef = doc(db, "users", currentUserId);
 
     try {
-        // Ambil data terkini murid dari Firestore
-        const userSnap = await getDoc(userRef);
-        
-        if (!userSnap.exists()) return;
+        // 🔥 PEMBETULAN KRITIKAL: Tukar "users" kepada "players"
+        let userRef = firebase.firestore().collection("players").doc(myUserId);
+        let userSnap = await userRef.get();
+
+        let isExists = typeof userSnap.exists === 'function' ? userSnap.exists() : userSnap.exists;
+
+        // JIKA GAGAL: Cari guna Query Nama dalam koleksi "players"
+        if (!isExists && typeof studentInfo !== 'undefined' && studentInfo.name) {
+            const querySnapshot = await firebase.firestore().collection("players").where("name", "==", studentInfo.name).get();
+            if (!querySnapshot.empty) {
+                userRef = querySnapshot.docs[0].ref; 
+                userSnap = querySnapshot.docs[0];    
+                isExists = true;
+            }
+        }
+
+        if (!isExists) return; 
 
         const userData = userSnap.data();
-        // Ambil objek lte_progress sedia ada (jika belum ada, buat objek kosong)
         let lteProgress = userData.lte_progress || { activeEventName: "", cumulativeDays: 0, lastPlayedDate: "" };
 
-        // 3. LOGIK AUTOMATIK: Jika nama event bertukar (masuk bulan baharu)
         if (lteProgress.activeEventName !== currentActiveEvent.name) {
             console.log(`♻️ [LTE] Acara baharu dikesan (${currentActiveEvent.name}). Me-reset kaunter progres murid.`);
             lteProgress.activeEventName = currentActiveEvent.name;
             lteProgress.cumulativeDays = 1;
             lteProgress.lastPlayedDate = hariIni;
-
-            // Simpan terus ke Firestore
-            await updateDoc(userRef, { lte_progress: lteProgress });
+            await userRef.update({ lte_progress: lteProgress });
             console.log("✅ [LTE] Progres bulan baharu berjaya dimulakan: 1 Hari.");
             return;
         }
 
-        // 4. LOGIK KALIS SPAM: Semak jika murid sudah main hari ini
         if (lteProgress.lastPlayedDate === hariIni) {
             console.log("🛡️ [LTE] Murid sudah bermain hari ini. Progres hari terkumpul tidak ditambah (Anti-Spam).");
             return;
         }
 
-        // 5. TANGKAP PROGRES: Jika hari baharu, tambah +1 hari
         lteProgress.cumulativeDays += 1;
         lteProgress.lastPlayedDate = hariIni;
-
-        // Kemaskini ke Firestore
-        await updateDoc(userRef, { lte_progress: lteProgress });
+        await userRef.update({ lte_progress: lteProgress });
         console.log(`🎉 [LTE] Tahniah! Progres meningkat: ${lteProgress.cumulativeDays} / ${currentActiveEvent.requiredDays} Hari.`);
 
-        // 6. LOGIK BONUS: Semak jika murid baru sahaja mencapai sasaran hari hari ini!
         if (lteProgress.cumulativeDays === currentActiveEvent.requiredDays) {
             triggerLteRewardCelebration(currentActiveEvent.name);
         }
@@ -5490,7 +5470,7 @@ async function updateLteProgress() {
     }
 }
 
-// Fungsi gembira apabila hadiah berjaya dicapai! (Boleh pakai SweetAlert2 Cikgu yang dah pulih tu)
+// Fungsi gembira apabila hadiah berjaya dicapai!
 function triggerLteRewardCelebration(eventName) {
     if (typeof Swal !== 'undefined') {
         Swal.fire({
@@ -5509,11 +5489,9 @@ function triggerLteRewardCelebration(eventName) {
 // FUNGSI POP-UP MODAL LTE (UI) - VERSI REALTIME FIRESTORE
 // ============================================================================
 
-// Fungsi apabila widget LTE ditekan (VERSI BACA DATA FIRESTORE)
 async function handleWidgetClick() {
     if (!currentActiveEvent) return;
 
-    // Ambil elemen HTML pop-up
     const modal = document.getElementById('lte-info-modal');
     const titleDOM = document.getElementById('modal-lte-title');
     const descDOM = document.getElementById('modal-lte-desc');
@@ -5522,45 +5500,59 @@ async function handleWidgetClick() {
     const progressText = document.getElementById('modal-lte-progress-text');
     const progressBar = document.getElementById('modal-lte-progress-bar');
 
-    // 1. Tetapkan Tajuk & Ikon Utama
     titleDOM.innerText = currentActiveEvent.name;
-    
     iconDOM.innerText = currentActiveEvent.rewardType.includes('badge') ? "🏅" : 
                         currentActiveEvent.rewardType.includes('avatar') ? "🖼️" : 
                         currentActiveEvent.rewardType.includes('title') ? "🎖️" : "🔥";
 
-    // 2. Semak jenis acara (Adakah ia berasaskan hari terkumpul?)
     if (currentActiveEvent.requiredDays) {
-        // --- INI ACARA BERASASKAN HARI ---
         descDOM.innerText = `Log masuk dan selesaikan permainan selama ${currentActiveEvent.requiredDays} hari sepanjang tempoh acara untuk menuntut ganjaran istimewa ini!`;
         progressSection.classList.remove('hidden');
-
-        // Set paparan awal kepada "Memuatkan" sementara menunggu Firebase
         progressText.innerText = `Memuatkan...`;
         progressBar.style.width = "0%";
 
-        if (typeof currentUserId !== 'undefined' && currentUserId) {
-            try {
-                // Minta Firebase baca data murid ini
-                const userSnap = await getDoc(doc(db, "users", currentUserId));
-                let realDays = 0;
+        let myUserId = null;
+        let realDays = 0;
 
-                if (userSnap.exists()) {
-                    const userData = userSnap.data();
+        if (typeof currentUserId !== 'undefined' && currentUserId) myUserId = currentUserId;
+        else if (firebase.auth().currentUser) myUserId = firebase.auth().currentUser.uid;
+        else if (typeof studentInfo !== 'undefined' && studentInfo.uid) myUserId = studentInfo.uid;
+        else if (typeof studentInfo !== 'undefined' && studentInfo.docId) myUserId = studentInfo.docId;
+        else if (localStorage.getItem('studentId')) myUserId = localStorage.getItem('studentId');
+        else if (typeof studentInfo !== 'undefined' && studentInfo.name) myUserId = studentInfo.name;
+
+        if (myUserId) {
+            try {
+                // 🔥 PEMBETULAN KRITIKAL: Tukar "users" kepada "players"
+                let userSnap = await firebase.firestore().collection("players").doc(myUserId).get();
+                let isExists = typeof userSnap.exists === 'function' ? userSnap.exists() : userSnap.exists;
+                
+                // JIKA GAGAL: Cari guna Query Nama dalam koleksi "players"
+                if (!isExists && typeof studentInfo !== 'undefined' && studentInfo.name) {
+                    console.log("🔍 [LTE UI] Mencari dokumen berdasarkan nama:", studentInfo.name);
+                    const querySnapshot = await firebase.firestore().collection("players").where("name", "==", studentInfo.name).get();
                     
-                    // Pastikan LTE Progress wujud dan namanya sama dengan event bulan ini
-                    if (userData.lte_progress && userData.lte_progress.activeEventName === currentActiveEvent.name) {
-                        realDays = userData.lte_progress.cumulativeDays || 0;
+                    if (!querySnapshot.empty) {
+                        userSnap = querySnapshot.docs[0];
+                        isExists = true;
                     }
                 }
 
-                let targetDays = currentActiveEvent.requiredDays;
-                if (realDays > targetDays) realDays = targetDays; // Hadkan bar supaya tak lebih 100%
+                if (isExists) {
+                    const userData = userSnap.data();
+                    
+                    if (userData.lte_progress && userData.lte_progress.activeEventName === currentActiveEvent.name) {
+                        realDays = userData.lte_progress.cumulativeDays || 0;
+                    }
+                } else {
+                    throw new Error("Dokumen murid tidak dijumpai di Firestore.");
+                }
 
-                // Kemaskini teks pop-up dengan jumlah hari sebenar
+                let targetDays = currentActiveEvent.requiredDays;
+                if (realDays > targetDays) realDays = targetDays;
+
                 progressText.innerText = `${realDays} / ${targetDays} Hari`;
                 
-                // Kira peratusan bar & animasikan
                 let percent = (realDays / targetDays) * 100;
                 setTimeout(() => {
                     progressBar.style.width = `${percent}%`;
@@ -5571,24 +5563,20 @@ async function handleWidgetClick() {
                 progressText.innerText = "Gagal memuatkan data.";
             }
         } else {
-            progressText.innerText = "Ralat: ID Murid tidak dikesan.";
+            progressText.innerText = "Ralat: ID Murid gagal dikesan.";
         }
     } else {
-        // --- INI ACARA BIASA (Contoh: XP Boost, Coins Boost) ---
         descDOM.innerText = "Acara global sedang berlangsung! Nikmati kelebihan ganjaran istimewa ini secara automatik sepanjang tempoh acara.";
         progressSection.classList.add('hidden');
     }
 
-    // 3. Tunjukkan Kotak Modal
     modal.classList.remove('hidden');
 }
 
-// Fungsi tutup modal (Kekal Sama)
 function closeLteModal() {
     const modal = document.getElementById('lte-info-modal');
     if (modal) {
         modal.classList.add('hidden');
-        // Reset lebar bar ke 0% supaya animasi berjalan semula bila dibuka kali seterusnya
         const progressBar = document.getElementById('modal-lte-progress-bar');
         if (progressBar) progressBar.style.width = "0%";
     }
