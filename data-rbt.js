@@ -267,7 +267,6 @@ const rbtData = {
         {"q": "Peluang kerjaya masa hadapan dalam bidang teknologi maklumat (IT) yang tugasnya membina aplikasi dan atur cara program digital dipanggil sebagai ___?", "options": ["Jurutera", "Pengaturcara", "Pereka", "Pelukis"], "a": 1}
     ],
         
-{
     "teknologi_rumah_tangga": [
         {"q": "Proses mencantumkan dua keping fabrik atau lebih menggunakan benang dan jarum dikenali sebagai seni ___?", "options": ["sulaman", "jahitan", "tenunan", "anyaman"], "a": 1},
         {"q": "Alatan tajam yang mempunyai lubang kecil pada pangkalnya untuk memasukkan benang dipanggil ___?", "a": "jarum"},
