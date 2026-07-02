@@ -3048,47 +3048,50 @@ function initGame(type) {
     const titleEl = document.getElementById('game-title');
     if (titleEl) titleEl.innerText = title;
 
-    // ==========================================
+// ==========================================
     // 3. TARIK DATA SOALAN (SEMUA SUBJEK)
     // ==========================================
     let allQuestions = [];
+    let isRTL = false; // 🟢 Tambah penanda untuk format Kanan-ke-Kiri
     
     if (typeof gameData !== 'undefined' && gameData[type]) {
-        allQuestions = [...gameData[type]]; // English
+        allQuestions = [...gameData[type]]; 
     } 
     else if (typeof mathData !== 'undefined' && mathData[type]) {
-        allQuestions = [...mathData[type]]; // Matematik
+        allQuestions = [...mathData[type]]; 
     }
     else if (typeof scienceData !== 'undefined' && scienceData[type]) {
-        allQuestions = [...scienceData[type]]; // Sains
+        allQuestions = [...scienceData[type]]; 
     }
     else if (typeof malayLanguageData !== 'undefined' && malayLanguageData[type]) {
-        allQuestions = [...malayLanguageData[type]]; // BM Baharu
+        allQuestions = [...malayLanguageData[type]]; 
     }
     else if (typeof sejarahData !== 'undefined' && sejarahData[type]) {
-        allQuestions = [...sejarahData[type]]; // Sejarah Baharu
+        allQuestions = [...sejarahData[type]]; 
     }
     else if (typeof pjkData !== 'undefined' && pjkData[type]) {
-        allQuestions = [...pjkData[type]]; // PJK Baharu
+        allQuestions = [...pjkData[type]]; 
     }
     else if (typeof pendidikanMuzikData !== 'undefined' && pendidikanMuzikData[type]) {
-        allQuestions = [...pendidikanMuzikData[type]]; // Muzik Baharu
+        allQuestions = [...pendidikanMuzikData[type]]; 
     }
     else if (typeof moralData !== 'undefined' && moralData[type]) {
-        allQuestions = [...moralData[type]]; // Moral Baharu
+        allQuestions = [...moralData[type]]; 
     }
     else if (typeof psvData !== 'undefined' && psvData[type]) {
-        allQuestions = [...psvData[type]]; // PSV Baharu
+        allQuestions = [...psvData[type]]; 
     }
     else if (typeof rbtData !== 'undefined' && rbtData[type]) {
-        allQuestions = [...rbtData[type]]; // RBT Baharu
+        allQuestions = [...rbtData[type]]; 
     }
-    // 🟢 KEMAS KINI DATA PAI & BA
+    // 🟢 SUBJEK JAWI / ARAB
     else if (typeof paiQuestions !== 'undefined' && paiQuestions[type]) {
-        allQuestions = [...paiQuestions[type]]; // PAI
+        allQuestions = [...paiQuestions[type]]; 
+        isRTL = true; // Aktifkan RTL
     }
     else if (typeof baQuestions !== 'undefined' && baQuestions[type]) {
-        allQuestions = [...baQuestions[type]]; // BA
+        allQuestions = [...baQuestions[type]]; 
+        isRTL = true; // Aktifkan RTL
     }
 
     if (allQuestions.length === 0) {
@@ -3104,7 +3107,7 @@ function initGame(type) {
         const div = document.createElement('div');
         div.className = "bg-white p-5 rounded-2xl border-l-4 border-indigo-400 shadow-sm";
         
-        // Semak format data (Sama ada format lama 'q'/'a', atau format baharu 'question'/'answer')
+        // Semak format data
         const soalanTeks = item.question || item.q;
         const jawapanTeks = item.answer !== undefined ? item.answer : item.a;
         
@@ -3122,21 +3125,26 @@ function initGame(type) {
         } 
         else if (item.options && Array.isArray(item.options)) {
             // ====================================================================
-            // 🟢 MAGIS BUTANG MCQ (UNTUK PAI & BA - SOKONGAN JAWI RTL)
+            // 🟢 MAGIS BUTANG MCQ (MENYOKONG KEDUA-DUA LTR & RTL)
             // ====================================================================
             let butangPilihanHTML = '';
             item.options.forEach((opt, optIndex) => {
                 butangPilihanHTML += `
                     <label class="block p-4 mb-3 border-2 border-gray-100 rounded-xl cursor-pointer hover:bg-indigo-50 hover:border-indigo-300 transition-all flex items-center gap-4">
-                        <input type="radio" name="soalan_${index}" value="${optIndex}" onchange="document.getElementById('hidden_jawapan_${index}').value = this.value" class="w-6 h-6 text-indigo-600 focus:ring-indigo-500 ml-2 cursor-pointer">
-                        <span class="flex-1 text-xl font-bold text-gray-800">${opt}</span>
+                        <input type="radio" name="soalan_${index}" value="${optIndex}" onchange="document.getElementById('hidden_jawapan_${index}').value = this.value" class="w-6 h-6 text-indigo-600 focus:ring-indigo-500 mx-2 cursor-pointer">
+                        <span class="flex-1 ${isRTL ? 'text-xl' : 'text-lg'} font-bold text-gray-800">${opt}</span>
                     </label>
                 `;
             });
 
+            // Guna 'isRTL' untuk ubah class dan struktur secara dinamik
+            const divDirection = isRTL ? 'dir="rtl" class="text-right"' : 'dir="ltr" class="text-left"';
+            const textSize = isRTL ? 'text-2xl' : 'text-lg';
+            const numbering = isRTL ? `${soalanTeks} .${index + 1}` : `${index + 1}. ${soalanTeks}`;
+
             div.innerHTML = `
-                <div dir="rtl" class="text-right">
-                    <p class="font-bold text-indigo-900 mb-5 text-2xl leading-relaxed">${soalanTeks} .${index + 1}</p>
+                <div ${divDirection}>
+                    <p class="font-bold text-indigo-900 mb-5 ${textSize} leading-relaxed">${numbering}</p>
                     <div class="space-y-2 mt-4">
                         ${butangPilihanHTML}
                     </div>
@@ -3146,6 +3154,7 @@ function initGame(type) {
         } 
         else {
             // Format Biasa (Taip Jawapan)
+            // ... (Kekalkan bahagian ini sama seperti asal)
             div.innerHTML = `
                 <p class="font-bold text-gray-700 mb-3">${index + 1}. ${soalanTeks}</p>
                 <input type="text" class="game-input w-full p-3 rounded-lg bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-indigo-400" placeholder="Taip jawapan anda di sini..." data-answer="${jawapanTeks}">
