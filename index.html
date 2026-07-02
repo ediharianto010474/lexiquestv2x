@@ -6,6 +6,7 @@
     <title>LexiQuest 2.0 - Firebase Edition</title>
 
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+	<link rel="manifest" href="manifest.json">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     
@@ -17,6 +18,15 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script> 
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
+	<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./service-worker.js')
+        .then(reg => console.log('Service Worker berjaya didaftarkan!', reg))
+        .catch(err => console.log('Pendaftaran Service Worker gagal:', err));
+    });
+  }
+</script>
 
     <link rel="stylesheet" href="style.css">
 </head>
