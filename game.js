@@ -1523,9 +1523,9 @@ function sediakanSoalanPertamaPemain(kodSubjek, dataLobi) {
     senaraiSoalanSukar = []; 
     senaraiSoalanMudah = []; 
     let dataKasar = null;
-    let jenisFormatObjektif = false;
+    let jenisFormatObjektif = true;
 
-    // Pastikan ID ini sama dengan ID di RTDB Cikgu
+// Pastikan ID ini sama dengan ID di RTDB Cikgu
     switch(kodSubjek) {
         case 'bm': dataKasar = typeof malayLanguageData !== 'undefined' ? malayLanguageData : null; break;
         case 'bi': dataKasar = typeof gameData !== 'undefined' ? gameData : null; break; 
@@ -1533,17 +1533,27 @@ function sediakanSoalanPertamaPemain(kodSubjek, dataLobi) {
         case 'sn': dataKasar = typeof scienceData !== 'undefined' ? scienceData : null; break;
         case 'sejarah': dataKasar = typeof sejarahData !== 'undefined' ? sejarahData : null; break;
         case 'mz': dataKasar = typeof pendidikanMuzikData !== 'undefined' ? pendidikanMuzikData : null; break;
-        case 'pjk': dataKasar = typeof pjkData !== 'undefined' ? pjkData : null; break;
+        
+        // 🔥 KEMASKINI BARU: Kenal pasti semua ID PJK dan set sebagai OBJEKTIF 🔥
+        case 'pjk': 
+        case 'pj':
+        case 'pk':
+        case 'kesihatan':
+            dataKasar = typeof pjkData !== 'undefined' ? pjkData : null; 
+            jenisFormatObjektif = true; // <--- WAJIB TAMBAH BARIS INI!
+            break;
+            
         case 'pm': dataKasar = typeof moralData !== 'undefined' ? moralData : null; break;
         case 'psv': dataKasar = typeof psvData !== 'undefined' ? psvData : null; break;
         case 'rbt': dataKasar = typeof rbtData !== 'undefined' ? rbtData : null; break;
+        
         case 'pai': 
             dataKasar = typeof paiQuestions !== 'undefined' ? paiQuestions : null; 
-            jenisFormatObjektif = true; // Tandakan subjek menggunakan format objektif
+            jenisFormatObjektif = true; 
             break;
         case 'ba': 
             dataKasar = typeof baQuestions !== 'undefined' ? baQuestions : null; 
-            jenisFormatObjektif = true; // Tandakan subjek menggunakan format objektif
+            jenisFormatObjektif = true; 
             break;
     }
     
@@ -1554,22 +1564,29 @@ function sediakanSoalanPertamaPemain(kodSubjek, dataLobi) {
         return;
     }
 
-    // Longgokkan kesemua soalan dari pelbagai kategori (campur aras)
+// Longgokkan kesemua soalan dari pelbagai kategori (campur aras)
     for (let kategori in dataKasar) {
         if (dataKasar.hasOwnProperty(kategori)) {
             let susunanKategori = dataKasar[kategori];
-            let senaraiDiproses = [];
-
-            if (jenisFormatObjektif) {
-                // Kekalkan struktur array options, tetapi petakan indeks jawapan ke parameter 'a'
-                senaraiDiproses = susunanKategori.map(item => ({
-                    q: item.question,
-                    options: item.options, // Simpan array pilihan jawapan [A, B, C, D]
-                    a: item.answer         // Simpan indeks jawapan yang betul (0, 1, 2, atau 3)
-                }));
-            } else {
-                senaraiDiproses = susunanKategori; // Subjek biasa kekal format {q, a}
-            }
+            
+            // 🔥 KOD BARU: Sistem Auto-Kesan Format Soalan (MCQ / Struktur) 🔥
+            let senaraiDiproses = susunanKategori.map(item => {
+                // Jika soalan ini ada 'options' (Format Objektif A,B,C,D)
+                if (item.options && Array.isArray(item.options)) {
+                    return {
+                        q: item.question || item.q, // Ambil 'question', jika tiada ambil 'q'
+                        options: item.options,
+                        a: item.answer !== undefined ? item.answer : item.a
+                    };
+                } 
+                // Jika soalan ini TIADA 'options' (Format Struktur/Subjektif)
+                else {
+                    return {
+                        q: item.q || item.question,
+                        a: item.a || item.answer
+                    };
+                }
+            });
 
             senaraiSoalanSemasa = senaraiSoalanSemasa.concat(senaraiDiproses);
             
