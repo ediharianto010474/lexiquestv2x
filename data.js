@@ -186,57 +186,507 @@ grammar: [
         { q: "The chicken soup is hot ____ to drink.", a: "enough" }
     ],
 
-    architect: [
-        { q: "although / heavily / it / was / raining / they / football / played", a: "although it was raining heavily they played football." },
-        { q: "has / the / been / since / reading / she / morning / book", a: "she has been reading the book since morning|she has been reading the book since morning." },
-        { q: "to / looking / forward / we / grandmother / visiting / are / our", a: "we are looking forward to visiting our grandmother." },
-        { q: "left / train / reached / the / by / station / had / the / time / we", a: "by the time we reached the station the train had left." },
-        { q: "to / prefer / television / I / watching / reading / books", a: "i prefer watching television to reading books|i prefer reading books to watching television.|i prefer watching television to reading books." },
-        { q: "beautiful / gave / red / me / a / dress / mother / my", a: "my mother gave me a beautiful red dress|my mother gave me a beautiful red dress." },
-        { q: "who / standing / tree / under / the / the / is / boy / brother / my / is", a: "the boy who is standing under the tree is my brother." },
-        { q: "as / as / attending / headmaster / well / is / the / meeting / teachers / the", a: "the headmaster as well as the teachers is attending the meeting|the headmaster as well as the teachers is attending the meeting." },
-        { q: "tired / he / the / finished / was / he / although / marathon", a: "although he was tired he finished the marathon." },
-        { q: "window / strong / was / broken / wind / by / the / the", a: "the window was broken by the strong wind." },
-        { q: "of / boys / his / wallet / lost / one / the / has", a: "one of the boys has lost his wallet|one of the boys has lost his wallet." },
-        { q: "either / going / Ali / Abu / or / represent / to / is / school / the", a: "either abu or ali is going to represent the school|either ali or abu is going to represent the school.|either abu or ali is going to represent the school." },
-        { q: "homework / not / have / finished / yet / their / they", a: "they have not finished their homework yet." },
-        { q: "of / because / postponed / heavy / was / rain / match / the / the", a: "the match was postponed because of the heavy rain." },
-        { q: "you / please / could / direction / tell / nearest / me / hospital / the / to / the", a: "could you please tell me the direction to the nearest hospital|could you please tell me the direction to the nearest hospital?" },
-        { q: "had / money / would / enough / buy / I / I / if / that / computer", a: "if i had enough money i would buy that computer." },
-        { q: "interesting / was / that / fell / book / the / asleep / not / I / reading / while", a: "while reading that book i fell asleep was not interesting|the book was not interesting that i fell asleep while reading|i fell asleep while reading the book that was not interesting" },
-        { q: "dictionary / I / looking / have / for / been / my / everywhere / bilingual", a: "|i have been looking for my bilingual dictionary everywhere." },
-        { q: "competition / won / who / girl / the / the / sister / is / my", a: "the girl who won the competition is my sister." },
-        { q: "comfortable / staying / hotel / very / we / a / at / are / in / town / the", a: "we are staying at a very comfortable hotel in the town." },
-        { q: "never / seen / such / beautiful / I / have / a / sunrise / before", a: "i have never seen such a beautiful sunrise before." },
-        { q: "carefully / you / across / must / look / before / walking / the / street", a: "you must look carefully before walking across the street." },
-        { q: "traditional / dressed / the / dancers / costumes / were / in / colourful", a: "the dancers were dressed in colourful traditional costumes." },
-        { q: "waiting / bus / stop / since / I / for / have / been / the / morning / at", a: "i have been waiting at the bus stop for the morning since|i have been waiting at the bus stop since morning|i have been waiting at the bus stop since morning." },
-        { q: "cake / baked / kitchen / chocolate / my / delicious / sister / a / the / in", a: "my sister baked a delicious chocolate cake in the kitchen." },
-        { q: "successfully / mountain / climbers / the / reached / peak / of / the / the", a: "the mountain climbers successfully reached the peak of the mountain." },
-        { q: "project / science / group / completing / their / students / the / are / together", a: "the students are completing their group science project together." },
-        { q: "remember / turn / off / the / you / leave / lights / to / before / room / the", a: "remember to turn off the lights before you leave the room." },
-        { q: "celebrated / championship / team / the / winning / victory / their / after / the", a: "the team celebrated their victory after winning the championship." },
-        { q: "gracefully / the / performing / stage / on / dancers / beautiful / are / the", a: "the beautiful dancers are performing gracefully on the stage." },
-        { q: "dangerous / swim / river / is / in / that / it / to / deep", a: "it is dangerous to swim in that deep river." },
-        { q: "heavily / raining / it / started / suddenly / while / walking / home / we / were", a: "while we were walking home it suddenly started raining heavily" },
-        { q: "important / healthy / to / eat / exercise / food / and / regularly / is / it", a: "it is important to eat healthy food and exercise regularly." },
-        { q: "exciting / vacation / during / family / the / our / had / an / holidays / school", a: "our family had an exciting vacation during the school holidays." },
-        { q: "carefully / the / instructions / reading / before / exam / starting / the / read", a: "read the instructions carefully before starting the exam." },
-        { q: "museum / historical / visited / the / artifacts / learn / to / students / about / the", a: "the students visited the museum to learn about historical artifacts." },
-        { q: "decorated / hall / beautifully / annual / the / dinner / was / for / the", a: "the hall was beautifully decorated for the annual dinner." },
-        { q: "surprisingly / managed / difficult / solve / he / puzzle / to / the / very / quickly", a: "surprisingly he managed to solve the difficult puzzle very quickly." },
-        { q: "participating / students / many / activities / are / school / the / in / extracurricular", a: "many students are participating in the school extracurricular activities." },
-        { q: "library / quiet / rules / observe / must / the / everyone / in / and / keep", a: "everyone must observe the rules and keep quiet in the library." },
-        { q: "confidently / delivered / speech / the / head / boy / morning / assembly / the / during", a: "the head boy confidently delivered the speech during the morning assembly." },
-        { q: "environment / responsibility / our / to / protect / clean / the / keep / it / and / is", a: "it is our responsibility to protect the environment and keep it clean." },
-        { q: "definitely / attend / will / farewell / party / teacher's / beloved / our / we", a: "we will definitely attend our beloved teacher's farewell party." },
-        { q: "unfortunately / cancelled / due / heavy / thunderstorm / outdoor / was / the / event / to", a: "unfortunately the outdoor event was cancelled due to heavy thunderstorm." },
-        { q: "volunteers / collected / the / beach / rubbish / cleaning / campaign / along / during / the", a: "the volunteers collected rubbish along the beach during the cleaning campaign." },
-        { q: "incredible / showed / magician / some / audience / tricks / amazed / the / to / the", a: "the magician showed some incredible tricks to the amazed audience." },
-        { q: "carefully / chosen / representing / athletes / were / school / the / in / tournament / the", a: "the athletes representing the school in the tournament were carefully chosen." },
-        { q: "enthusiastic / cheering / loudly / supporters / team / for / their / favourite / were / the", a: "the enthusiastic supporters were cheering loudly for their favourite team." },
-        { q: "traditional / recipes / passed / generation / from / down / to / generation / been / have", a: "traditional recipes have been passed down from generation to generation." },
-        { q: "responsible / citizens / rules / obey / the / always / country / of / the / good / and", a: "good and responsible citizens always obey the rules of the country." }
+architect: [
+        { 
+            q: "although / heavily / it / was / raining / they / football / played", 
+            options: [
+                "Although it was raining heavily they played football.",
+                "They played football although raining it was heavily.",
+                "Although heavily it was raining football they played.",
+                "They football played although it was raining heavily."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "has / the / been / since / reading / she / morning / book", 
+            options: [
+                "She reading the book has been since morning.",
+                "She has been reading the book since morning.",
+                "Since morning the book she has been reading.",
+                "The book has been reading she since morning."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "to / looking / forward / we / grandmother / visiting / are / our", 
+            options: [
+                "We are looking forward to visiting our grandmother.",
+                "We are visiting our grandmother to looking forward.",
+                "Our grandmother are looking forward to visiting we.",
+                "Looking forward we are to visiting our grandmother."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "left / train / reached / the / by / station / had / the / time / we", 
+            options: [
+                "We reached the station by the time the train had left.",
+                "The train had left by the time we reached the station.",
+                "By the time we reached the station the train had left.",
+                "By the time the train had left we reached the station."
+            ], 
+            a: 2 
+        },
+        { 
+            q: "to / prefer / television / I / watching / reading / books", 
+            options: [
+                "I prefer watching television to reading books.",
+                "I prefer watching to reading books television.",
+                "I watching television prefer reading books to.",
+                "Television prefer I to watching reading books."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "beautiful / gave / red / me / a / dress / mother / my", 
+            options: [
+                "My beautiful mother gave me a red dress.",
+                "My mother gave me a beautiful red dress.",
+                "A beautiful red dress my mother gave me.",
+                "Me gave a beautiful red dress my mother."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "who / standing / tree / under / the / the / is / boy / brother / my / is", 
+            options: [
+                "The boy is my brother who is standing under the tree.",
+                "The boy who is standing under the tree is my brother.",
+                "Who is standing under the tree the boy is my brother.",
+                "My brother is the boy who standing under the tree is."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "as / as / attending / headmaster / well / is / the / meeting / teachers / the", 
+            options: [
+                "The headmaster as well as the teachers is attending the meeting.",
+                "The teachers as well as the headmaster are attending the meeting.",
+                "The headmaster is attending the meeting as well as the teachers.",
+                "The meeting is attending the headmaster as well as the teachers."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "tired / he / the / finished / was / he / although / marathon", 
+            options: [
+                "He finished the marathon although he was tired.",
+                "Although he finished the marathon he was tired.",
+                "Although he was tired he finished the marathon.",
+                "He was tired although he finished the marathon."
+            ], 
+            a: 2 
+        },
+        { 
+            q: "window / strong / was / broken / wind / by / the / the", 
+            options: [
+                "The strong wind was broken by the window.",
+                "The window was broken by the strong wind.",
+                "The window broken was by the strong wind.",
+                "By the strong wind the window broken was."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "of / boys / his / wallet / lost / one / the / has", 
+            options: [
+                "One of the boys has lost his wallet.",
+                "The boys has lost one of his wallet.",
+                "One of his wallet has lost the boys.",
+                "His wallet has lost one of the boys."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "either / going / Ali / Abu / or / represent / to / is / school / the", 
+            options: [
+                "Either Ali or Abu is going to represent the school.",
+                "Either Ali or Abu are going to represent the school.",
+                "Ali or Abu is going to represent either the school.",
+                "To represent the school is either Ali or Abu going."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "homework / not / have / finished / yet / their / they", 
+            options: [
+                "They yet have not finished their homework.",
+                "They have not finished their homework yet.",
+                "Their homework have not finished they yet.",
+                "They have finished not their homework yet."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "of / because / postponed / heavy / was / rain / match / the / the", 
+            options: [
+                "The heavy rain was postponed because of the match.",
+                "Because of the match the heavy rain was postponed.",
+                "The match was postponed because of the heavy rain.",
+                "The match because of the heavy rain was postponed."
+            ], 
+            a: 2 
+        },
+        { 
+            q: "you / please / could / direction / tell / nearest / me / hospital / the / to / the", 
+            options: [
+                "Could you please tell me the direction to the nearest hospital?",
+                "Could you tell me please the nearest direction to hospital?",
+                "The nearest hospital could you please tell me the direction to?",
+                "Please could you tell direction to the me nearest hospital?"
+            ], 
+            a: 0 
+        },
+        { 
+            q: "had / money / would / enough / buy / I / I / if / that / computer", 
+            options: [
+                "I would buy that computer if I had enough money.",
+                "If I had enough money I would buy that computer.",
+                "If I would buy that computer I had enough money.",
+                "I had enough money if I would buy that computer."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "interesting / was / that / fell / book / the / asleep / not / I / reading / while", 
+            options: [
+                "I fell asleep while reading the book that was not interesting.",
+                "The book was reading while I fell asleep not interesting.",
+                "While reading that book I fell asleep was not interesting.",
+                "I was reading that book not interesting while fell asleep."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "dictionary / I / looking / have / for / been / my / everywhere / bilingual", 
+            options: [
+                "I have looking been for my bilingual dictionary everywhere.",
+                "Everywhere I looking have been for my bilingual dictionary.",
+                "I have been looking for my bilingual dictionary everywhere.",
+                "My bilingual dictionary have been looking for I everywhere."
+            ], 
+            a: 2 
+        },
+        { 
+            q: "competition / won / who / girl / the / the / sister / is / my", 
+            options: [
+                "The girl who won the competition is my sister.",
+                "The sister who won the competition is my girl.",
+                "Who won the competition the girl is my sister.",
+                "My sister is the girl who the competition won."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "comfortable / staying / hotel / very / we / a / at / are / in / town / the", 
+            options: [
+                "We are staying in the town at a very comfortable hotel.",
+                "We are staying at a very comfortable hotel in the town.",
+                "A very comfortable hotel we are staying at in the town.",
+                "In the town we are staying at very comfortable a hotel."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "never / seen / such / beautiful / I / have / a / sunrise / before", 
+            options: [
+                "I have never seen such a beautiful sunrise before.",
+                "Never I have seen before such a beautiful sunrise.",
+                "I have seen never before such a beautiful sunrise.",
+                "Such a beautiful sunrise I have never seen before."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "carefully / you / across / must / look / before / walking / the / street", 
+            options: [
+                "Before walking you must look carefully across the street.",
+                "You must look carefully before walking across the street.",
+                "You must walk carefully across the street before looking.",
+                "Across the street you must look carefully before walking."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "traditional / dressed / the / dancers / costumes / were / in / colourful", 
+            options: [
+                "The dancers were dressed in colourful traditional costumes.",
+                "The colourful traditional costumes were dressed in dancers.",
+                "In colourful traditional costumes the dancers dressed were.",
+                "The dancers dressed in colourful traditional costumes were."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "waiting / bus / stop / since / I / for / have / been / the / morning / at", 
+            options: [
+                "I have been waiting since morning at the bus stop.",
+                "I have waiting been at the bus stop since morning.",
+                "I have been waiting at the bus stop since morning.",
+                "At the bus stop since morning I have waiting been."
+            ], 
+            a: 2 
+        },
+        { 
+            q: "cake / baked / kitchen / chocolate / my / delicious / sister / a / the / in", 
+            options: [
+                "My sister baked a delicious chocolate cake in the kitchen.",
+                "A delicious chocolate cake baked my sister in the kitchen.",
+                "In the kitchen my sister a delicious chocolate cake baked.",
+                "My sister in the kitchen baked a chocolate delicious cake."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "successfully / mountain / climbers / the / reached / peak / of / the / the", 
+            options: [
+                "The mountain climbers successfully reached the peak.",
+                "The climbers successfully reached the mountain peak.",
+                "Successfully the mountain climbers reached the peak.",
+                "Reached the peak successfully the mountain climbers."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "project / science / group / completing / their / students / the / are / together", 
+            options: [
+                "Together the students completing their group science project are.",
+                "The students are completing their group science project together.",
+                "Their group science project are completing the students together.",
+                "The students together completing are their group science project."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "remember / turn / off / the / you / leave / lights / to / before / room / the", 
+            options: [
+                "Remember to turn off the lights before you leave the room.",
+                "Before you leave the room remember turn off the lights to.",
+                "You remember to turn off the lights before leave the room.",
+                "Turn off the lights remember to before you leave the room."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "celebrated / championship / team / the / winning / victory / their / after / the", 
+            options: [
+                "After winning the championship the team their victory celebrated.",
+                "The team celebrated their victory after winning the championship.",
+                "The team their victory celebrated after winning the championship.",
+                "Winning the championship after the team celebrated their victory."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "gracefully / the / performing / stage / on / dancers / beautiful / are / the", 
+            options: [
+                "The beautiful dancers are performing gracefully on the stage.",
+                "On the stage the beautiful dancers gracefully performing are.",
+                "The dancers beautiful are performing gracefully on the stage.",
+                "Performing gracefully on the stage are the dancers beautiful."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "dangerous / swim / river / is / in / that / it / to / deep", 
+            options: [
+                "To swim in that deep river dangerous it is.",
+                "It is dangerous to swim in that deep river.",
+                "That deep river is dangerous to swim in it.",
+                "It is swim to dangerous in that deep river."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "heavily / raining / it / started / suddenly / while / walking / home / we / were", 
+            options: [
+                "While we were walking home it suddenly started raining heavily.",
+                "It suddenly started raining heavily while we walking home were.",
+                "Suddenly it started raining heavily while we were home walking.",
+                "We were walking home while it suddenly started raining heavily."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "important / healthy / to / eat / exercise / food / and / regularly / is / it", 
+            options: [
+                "To eat healthy food and exercise regularly it is important.",
+                "It is important to eat healthy food and exercise regularly.",
+                "Healthy food to eat and exercise regularly is it important.",
+                "It is regularly important to eat healthy food and exercise."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "exciting / vacation / during / family / the / our / had / an / holidays / school", 
+            options: [
+                "Our family had an exciting vacation during the school holidays.",
+                "During the school holidays an exciting vacation our family had.",
+                "Our family during the school holidays had an exciting vacation.",
+                "An exciting vacation our family had during the school holidays."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "carefully / the / instructions / reading / before / exam / starting / the / read", 
+            options: [
+                "Before starting the exam read carefully the instructions.",
+                "Read the instructions carefully before starting the exam.",
+                "Reading the instructions carefully before start the exam.",
+                "The instructions read carefully before starting the exam."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "museum / historical / visited / the / artifacts / learn / to / students / about / the", 
+            options: [
+                "The students visited the museum to learn about historical artifacts.",
+                "To learn about historical artifacts the students visited the museum.",
+                "The students to learn about historical artifacts visited the museum.",
+                "Visited the museum the students to learn about historical artifacts."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "decorated / hall / beautifully / annual / the / dinner / was / for / the", 
+            options: [
+                "For the annual dinner the hall beautifully was decorated.",
+                "The hall was beautifully decorated for the annual dinner.",
+                "Beautifully the hall was decorated for the annual dinner.",
+                "The annual dinner was beautifully decorated for the hall."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "surprisingly / managed / difficult / solve / he / puzzle / to / the / very / quickly", 
+            options: [
+                "Surprisingly he managed to solve the difficult puzzle very quickly.",
+                "He managed surprisingly to solve very quickly the difficult puzzle.",
+                "To solve the difficult puzzle very quickly he managed surprisingly.",
+                "Surprisingly difficult puzzle he managed to solve very quickly."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "participating / students / many / activities / are / school / the / in / extracurricular", 
+            options: [
+                "In the school extracurricular activities many students are participating.",
+                "Many students are participating in the school extracurricular activities.",
+                "Many students participating are in the school extracurricular activities.",
+                "Extracurricular activities are participating in the many school students."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "library / quiet / rules / observe / must / the / everyone / in / and / keep", 
+            options: [
+                "Everyone must observe the rules and keep quiet in the library.",
+                "In the library everyone must keep quiet and observe rules.",
+                "Everyone must keep quiet and rules observe in the library.",
+                "Observe the rules everyone must and keep quiet in the library."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "confidently / delivered / speech / the / head / boy / morning / assembly / the / during", 
+            options: [
+                "During the morning assembly the head boy confidently delivered speech.",
+                "The head boy confidently delivered the speech during the morning assembly.",
+                "The head boy speech confidently delivered during the morning assembly.",
+                "Confidently the head boy delivered during the morning assembly speech."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "environment / responsibility / our / to / protect / clean / the / keep / it / and / is", 
+            options: [
+                "To protect the environment and keep it clean is our responsibility.",
+                "It is our responsibility to protect the environment and keep it clean.",
+                "Our responsibility is to protect the environment and keep it clean.",
+                "It is to protect the environment and keep it clean our responsibility."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "definitely / attend / will / farewell / party / teacher's / beloved / our / we", 
+            options: [
+                "We will definitely attend our beloved teacher's farewell party.",
+                "Our beloved teacher's farewell party we will definitely attend.",
+                "We definitely will attend our beloved teacher's farewell party.",
+                "Definitely we will attend our beloved teacher's farewell party."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "unfortunately / cancelled / due / heavy / thunderstorm / outdoor / was / the / event / to", 
+            options: [
+                "Due to heavy thunderstorm unfortunately the outdoor event was cancelled.",
+                "Unfortunately the outdoor event was cancelled due to heavy thunderstorm.",
+                "The outdoor event was unfortunately cancelled due to heavy thunderstorm.",
+                "Unfortunately due to heavy thunderstorm the outdoor event cancelled was."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "volunteers / collected / the / beach / rubbish / cleaning / campaign / along / during / the", 
+            options: [
+                "The volunteers collected rubbish along the beach during the cleaning campaign.",
+                "During the cleaning campaign along the beach the volunteers collected rubbish.",
+                "The volunteers during the cleaning campaign collected rubbish along the beach.",
+                "Rubbish along the beach was collected by the volunteers during cleaning campaign."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "incredible / showed / magician / some / audience / tricks / amazed / the / to / the", 
+            options: [
+                "To the amazed audience the magician showed some incredible tricks.",
+                "The magician showed some incredible tricks to the amazed audience.",
+                "Some incredible tricks the magician showed to the amazed audience.",
+                "The amazed audience showed some incredible tricks to the magician."
+            ], 
+            a: 1 
+        },
+        { 
+            q: "carefully / chosen / representing / athletes / were / school / the / in / tournament / the", 
+            options: [
+                "The athletes representing the school in the tournament were carefully chosen.",
+                "Carefully chosen were the athletes representing the school in tournament.",
+                "The athletes were carefully chosen representing the school in tournament.",
+                "In the tournament the athletes representing the school carefully chosen were."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "enthusiastic / cheering / loudly / supporters / team / for / their / favourite / were / the", 
+            options: [
+                "The enthusiastic supporters were cheering loudly for their favourite team.",
+                "Loudly cheering for their favourite team were the enthusiastic supporters.",
+                "The enthusiastic supporters for their favourite team were cheering loudly.",
+                "Their favourite team were cheering loudly for the enthusiastic supporters."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "traditional / recipes / passed / generation / from / down / to / generation / been / have", 
+            options: [
+                "Traditional recipes have been passed down from generation to generation.",
+                "From generation to generation traditional recipes have passed down been.",
+                "Traditional recipes have passed down been from generation to generation.",
+                "Have been passed down from generation to generation traditional recipes."
+            ], 
+            a: 0 
+        },
+        { 
+            q: "responsible / citizens / rules / obey / the / always / country / of / the / good / and", 
+            options: [
+                "Good and responsible citizens always obey the rules of the country.",
+                "The rules of the country always obey good and responsible citizens.",
+                "Always obey the rules of the country good and responsible citizens.",
+                "Good and responsible citizens obey always the rules of the country."
+            ], 
+            a: 0 
+        }
     ],
 
 pastTense: [
